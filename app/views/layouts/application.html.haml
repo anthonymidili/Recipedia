@@ -9,5 +9,12 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
-  %body
-    = yield
+  %body{class: content_for(:background_layout)}
+    #wrap
+      -# = render 'layouts/top_bar'
+
+      #main
+        -# = render 'notifications/flash_messages'
+        = yield
+
+    = render 'layouts/footer'

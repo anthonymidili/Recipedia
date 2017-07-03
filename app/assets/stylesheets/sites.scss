@@ -1,9 +1,11 @@
-body {
+/* use provide(:background_layout, 'custom_layout_name') to add custom layouts to different pages */
+body.homepage {
   background-color: #d8eccf;
 }
 
 #cover {
   h1 {
     text-align: center;
+    font-family: 'Rock Show Whiplash', 'sans-serif';
   }
 }

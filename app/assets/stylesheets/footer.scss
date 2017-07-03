@@ -1,0 +1,26 @@
+html, body {height: 100%;}
+
+#wrap {min-height: 100%;}
+
+#main {padding-bottom: 20px;} /* must be same height as the footer */
+
+footer {
+  position: relative;
+  margin-top: -20px; /* negative value of footer height */
+  height: 20px;
+  clear: both;
+
+  #style_footer {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #adbda6;
+    padding: 1.25rem;
+    background: #adbda6;
+    color: #e7fbde;
+
+    span.italic_text {
+      font-style: italic;
+      display: inline;
+    }
+  }
+}
