@@ -2,10 +2,10 @@
   font-family: 'Rock Show Whiplash';
   src: font-url('RockShowWhiplash.ttf') format('truetype');
 }
-$title_font: 'Rock Show Whiplash', 'sans-serif';
+$title-font: 'Rock Show Whiplash', 'sans-serif';
 
 @font-face {
   font-family: 'FHA Cond French';
   src: font-url('FHACondFrenchNC.otf') format('opentype');
 }
-$main_font: 'FHA Cond French', 'monospace';
+$main-font: 'FHA Cond French', 'monospace';

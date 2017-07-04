@@ -1,0 +1,19 @@
+.top-bar
+  .title-bar-left
+    .title-bar-title
+      = link_to "The Tattooed Housewife", root_path
+  .title-bar-right
+    %span{data: {hide_for: 'medium', responsive_toggle: 'responsive-menu'}}
+      %span.menu-icon{data: {toggle: true}}
+  #responsive-menu
+    .top-bar-right
+      %ul.menu.mainmenu.vertical.medium-horizontal{data: {responsive_menu: 'accordion medium-dropdown'}}
+        %li= link_to 'Home', root_path
+        %li= link_to 'Recipes', recipes_path
+
+        -# dropdown menu
+        -# %li
+        -#   = link_to 'dropdown link', '#', remote: true
+        -#   %ul.menu.vertical
+        -#     %li= link_to 'link#1', '#'
+        -#     %li= link_to 'link#2', '#'

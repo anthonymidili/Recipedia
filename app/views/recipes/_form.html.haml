@@ -1,0 +1,11 @@
+= form_for @recipe do |f|
+  = render 'notifications/error_messages', object: f.object
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+  .actions
+    = f.submit 'Save'

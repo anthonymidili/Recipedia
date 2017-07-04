@@ -1,0 +1,28 @@
+.top-bar {
+  height: 68px;
+  margin-bottom: 30px;
+  /* add style to title font */
+  .title-bar-title {
+    font-size: 1.6em;
+    font-weight: normal;
+    font-family: $title-font;
+  }
+
+  /* make menu icon larger and easier to click */
+  span.menu-icon {
+    padding-left: 3em;
+    margin-right: 0.5em;
+  }
+
+  /* link colors */
+  a {
+    color: $tattoo-yellow;
+    &:hover {
+      color: $tattoo-dark-yellow;
+    }
+
+    &::after {
+      border-color: $tattoo-yellow transparent transparent;
+    }
+  }
+}

@@ -2,21 +2,19 @@ html, body {height: 100%;}
 
 #wrap {min-height: 100%;}
 
-#main {padding-bottom: 20px;} /* must be same height as the footer */
+#main {padding-bottom: 146px;} /* must be same height as the footer or add more for padding */
 
 footer {
   position: relative;
-  margin-top: -20px; /* negative value of footer height */
-  height: 20px;
+  margin-top: -116px; /* negative value of footer height */
+  height: 116px;
   clear: both;
 
   #style_footer {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #adbda6;
-    padding: 1.25rem;
-    background: #adbda6;
-    color: #e7fbde;
+    border: 2px solid $footer-background;
+    padding: 25px;
+    background: $footer-background;
+    color: $tattoo-pale-green;
 
     span.italic_text {
       font-style: italic;
