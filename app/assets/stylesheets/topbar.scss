@@ -18,7 +18,7 @@
   a {
     color: $tattoo-yellow;
     &:hover {
-      color: $tattoo-dark-yellow;
+      color: darken($tattoo-yellow, 20%);
     }
 
     &::after {

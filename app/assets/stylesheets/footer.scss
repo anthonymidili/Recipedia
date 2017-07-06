@@ -11,10 +11,10 @@ footer {
   clear: both;
 
   #style_footer {
-    border: 2px solid $footer-background;
+    border: 2px solid darken($tattoo-dark-green, 30%);
     padding: 25px;
-    background: $footer-background;
-    color: $tattoo-pale-green;
+    background: darken($tattoo-dark-green, 30%);
+    color: $tattoo-dark-green;
 
     span.italic_text {
       font-style: italic;
