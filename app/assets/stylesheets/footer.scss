@@ -1,8 +1,12 @@
 html, body {height: 100%;}
 
-#wrap {min-height: 100%;}
+#wrap {
+  min-height: 100%;
+  /* add space between content and footer */
+  padding-bottom: 30px;
+}
 
-#main {padding-bottom: 146px;} /* must be same height as the footer or add more for padding */
+#main {padding-bottom: 116px;} /* must be same height as the footer or add more for padding */
 
 footer {
   position: relative;
@@ -11,10 +15,11 @@ footer {
   clear: both;
 
   #style_footer {
-    border: 2px solid darken($tattoo-dark-green, 30%);
+    height: 100%;
+    border: 2px solid $tattoo-footer-background;
     padding: 25px;
-    background: darken($tattoo-dark-green, 30%);
-    color: $tattoo-dark-green;
+    background: $tattoo-footer-background;
+    color: $tattoo-pale-green;
 
     span.italic_text {
       font-style: italic;

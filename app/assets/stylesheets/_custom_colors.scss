@@ -1,5 +1,6 @@
 /* custom colors */
 $tattoo-pale-green: #e7fbde;
-$tattoo-medium-pale-green: #93a08d;
-$tattoo-dark-green: darken($tattoo-medium-pale-green, 15%);
+$tattoo-dark-green: #6c7a66;
 $tattoo-yellow: #ffda17;
+$tattoo-topbar-background: darken($tattoo-dark-green, 20%);
+$tattoo-footer-background: $tattoo-dark-green;

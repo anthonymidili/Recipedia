@@ -1,6 +1,5 @@
 .top-bar {
   height: 68px;
-  margin-bottom: 30px;
   /* add style to title font */
   .title-bar-title {
     font-size: 1.6em;
@@ -25,4 +24,9 @@
       border-color: $tattoo-yellow transparent transparent;
     }
   }
+}
+
+/* add space between topbar and content */
+#main {
+  padding-top: 30px;
 }
