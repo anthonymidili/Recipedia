@@ -11,6 +11,10 @@
       %b Description:
       = @recipe.description
 
+    %p
+      %b Assigned Categories:
+      = @recipe.category_names
+
     = link_to 'Edit', edit_recipe_path(@recipe)
     \|
     = link_to 'Back', recipes_path

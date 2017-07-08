@@ -6,8 +6,11 @@
         - @category.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions
-    = f.submit 'Save'
+  .row
+    .small-12.columns
+      = f.label :name
+      = f.text_field :name
+
+  .row
+    .small-12.columns
+      = f.submit class: 'button'
