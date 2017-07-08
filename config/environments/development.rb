@@ -52,6 +52,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # Merge rails into puma's logs
-  config.logger = Logger.new(STDOUT)
+  # Merge rails into puma's logs which breaks css when css is modified.
+  # config.logger = Logger.new(STDOUT)
+  # or run [tail -f log/development.log] in terminal.
 end

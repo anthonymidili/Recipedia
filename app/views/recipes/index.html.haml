@@ -19,7 +19,7 @@
           %tr
             %td= recipe.name
             %td= recipe.description
-            %td= recipe.category_names
+            %td= links_to_categories(recipe)
             %td= link_to 'Show', recipe
             %td= link_to 'Edit', edit_recipe_path(recipe)
             %td= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' }
