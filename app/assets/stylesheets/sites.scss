@@ -21,3 +21,10 @@ ul.simple {
 .center_text {
   text-align: center;
 }
+
+a.black_link {
+  color: black;
+  &:hover {
+    color: lighten(black, 20%)
+  }
+}

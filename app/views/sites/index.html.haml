@@ -1,15 +1,15 @@
 - provide(:background_layout, 'homepage')
 
-#cover
-  .row
-    .small-12.small-centered.columns
-      %h1 The Tattooed
-      %h1 Housewife's Cookbook
-  .row
-    .medium-6.large-4.small-centered.columns
-      = image_tag 'cover.jpg'
+= link_to categories_path, class: 'black_link' do
+  #cover
+    .row
+      .small-12.small-centered.columns
+        %h1 The Tattooed
+        %h1 Housewife's Cookbook
+    .row
+      .medium-6.large-4.small-centered.columns
+        = image_tag 'cover.jpg'
 
-.row
-  .small-12.columns
-    = link_to categories_path do
+  .row
+    .small-12.columns
       %h1.center_text ENTER
