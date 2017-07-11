@@ -23,4 +23,14 @@
 
   .row
     .small-12.columns
+      #ingredients
+        = f.fields_for :ingredients do |ingredient|
+          = render 'ingredient_fields', f: ingredient
+        .links
+          = link_to_add_association 'add ingredient', f, :ingredients
+
+  %br/
+
+  .row
+    .small-12.columns
       = f.submit class: 'button'

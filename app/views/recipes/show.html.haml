@@ -20,6 +20,10 @@
       %b Assigned Categories:
       = links_to_categories(@recipe)
 
+    %p
+      %b Ingredients:
+      = @recipe.ingredients_list
+
     = link_to 'Home', categories_path
     \|
     = link_to 'Recipes', recipes_path

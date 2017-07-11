@@ -1,0 +1,13 @@
+.nested-fields
+  .row
+    .small-3.columns
+      = f.label :name
+      = f.text_field :name
+    .small-3.columns
+      = f.label :amount
+      = f.text_field :amount
+    .small-3.columns
+      = f.label :unit
+      = f.text_field :unit
+    .small-3.columns
+      = link_to_remove_association "remove ingredient", f
