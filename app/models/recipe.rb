@@ -6,6 +6,8 @@ class Recipe < ApplicationRecord
   validates :description, presence: true
   validate :check_box_presence
 
+  scope :by_name, -> { order(name: :asc) }
+
 private
 
   def check_box_presence

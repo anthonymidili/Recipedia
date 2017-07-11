@@ -4,8 +4,15 @@
   .small-12.columns
     %h1 Listing categories
 
-    = render @categories
+    = render @categories.in_use
 
-    %br
+    - if @categories.not_used.any?
+      %div
+        = link_to 'More categories', '#', class: 'toggle hideShow', remote: true
+        .hidden.hideShow
+          = link_to 'Hide', '#', class: 'toggle', remote: true
+          = render @categories.not_used
+
+    %br/
 
     = link_to 'New Category', new_category_path

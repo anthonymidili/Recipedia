@@ -5,5 +5,6 @@ class Category < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   scope :in_use, -> { includes(:recipes).where.not(recipes: { id: nil }) }
+  scope :not_used, -> { includes(:recipes).where(recipes: { id: nil }) }
   scope :list_names, -> { all.map(&:name).join(', ') }
 end

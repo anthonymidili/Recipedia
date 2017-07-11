@@ -28,3 +28,14 @@ a.black_link {
     color: lighten(black, 20%)
   }
 }
+
+.hidden {
+  display: none;
+}
+
+/* Display Kaminari pagination links inline */
+nav.pagination {
+  span {
+    display: inline-block;
+  }
+}
