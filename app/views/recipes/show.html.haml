@@ -2,6 +2,13 @@
 
 .row
   .small-12.columns
+    .float-right
+      = link_to 'Edit', edit_recipe_path(@recipe)
+      or
+      = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
+      Recipe
+.row
+  .small-12.columns
     %p
       %b Name:
       = @recipe.name
@@ -13,6 +20,6 @@
       %b Assigned Categories:
       = links_to_categories(@recipe)
 
-    = link_to 'Edit', edit_recipe_path(@recipe)
+    = link_to 'Home', categories_path
     \|
-    = link_to 'Back', recipes_path
+    = link_to 'Recipes', recipes_path
