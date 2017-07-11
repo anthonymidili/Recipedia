@@ -1,0 +1,11 @@
+.nested-fields
+  .callout-on-small-only
+    .row
+      .small-6.medium-5.columns
+        = f.label :item
+        = f.text_field :item
+      .small-6.medium-4.columns
+        = f.label :quantity
+        = f.text_field :quantity
+      .medium-3.columns
+        = link_to_remove_association 'remove', f, class: 'hollow button inline-button-on-medium alert expanded'

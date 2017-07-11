@@ -1,0 +1,10 @@
+.row
+  .small-12.columns
+    %h5 Ingredients
+    #ingredients
+      = f.fields_for :ingredients do |ingredient|
+        = render 'ingredients/ingredient_fields', f: ingredient
+      .links
+        = link_to_add_association 'add an ingredient', f, :ingredients,
+        partial: 'ingredients/ingredient_fields', class: 'button hollow'
+    %hr/

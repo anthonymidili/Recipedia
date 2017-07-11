@@ -1,7 +1,6 @@
 class Ingredient < ApplicationRecord
   belongs_to :recipe
 
-  validates :name, presence: true
-  validates :amount, presence: true
-  validates :unit, presence: true
+  validates :item, presence: true
+  validates :quantity, presence: true
 end

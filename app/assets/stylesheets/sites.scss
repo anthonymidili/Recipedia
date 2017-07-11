@@ -39,3 +39,16 @@ nav.pagination {
     display: inline-block;
   }
 }
+
+.callout-on-small-only {
+  @include  breakpoint(small down) {
+    @include callout;
+  }
+}
+
+.inline-button-on-medium {
+  @include breakpoint(medium) {
+    height: 2.4375rem;
+    margin-top: 1.55rem;
+  }
+}

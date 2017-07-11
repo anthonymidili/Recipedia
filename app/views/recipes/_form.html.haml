@@ -20,16 +20,9 @@
       %ul.menu.simple
         = f.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
           %li= b.label(data:{value: b.value}) { b.check_box + b.text }
+      %hr/
 
-  .row
-    .small-12.columns
-      #ingredients
-        = f.fields_for :ingredients do |ingredient|
-          = render 'ingredient_fields', f: ingredient
-        .links
-          = link_to_add_association 'add ingredient', f, :ingredients
-
-  %br/
+  = render 'ingredients/fields_for_form', f: f
 
   .row
     .small-12.columns

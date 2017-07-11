@@ -12,7 +12,7 @@ class Recipe < ApplicationRecord
   scope :by_name, -> { order(name: :asc) }
 
   def ingredients_list
-    ingredients.map(&:name).join(', ')
+    ingredients.map(&:item).join(', ')
   end
 
 private
