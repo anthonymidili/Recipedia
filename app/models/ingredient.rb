@@ -3,4 +3,6 @@ class Ingredient < ApplicationRecord
 
   validates :item, presence: true
   validates :quantity, presence: true
+
+  scope :by_order, -> { order(created_at: :asc) }
 end

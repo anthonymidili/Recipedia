@@ -24,6 +24,11 @@
       %b Ingredients:
       = @recipe.ingredients_list
 
+    %p
+      %b Steps:
+      = render @recipe.steps.by_order
+
+
     = link_to 'Home', categories_path
     \|
     = link_to 'Recipes', recipes_path

@@ -1,0 +1,10 @@
+.row
+  .small-12.columns
+    %h5 Steps
+    #ingredients
+      = f.fields_for :steps, f.object.steps.by_order do |step|
+        = render 'steps/step_fields', f: step
+      .links
+        = link_to_add_association 'add a step', f, :steps,
+        partial: 'steps/step_fields', class: 'button hollow'
+    %hr/

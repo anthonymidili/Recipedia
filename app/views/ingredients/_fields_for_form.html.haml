@@ -2,7 +2,7 @@
   .small-12.columns
     %h5 Ingredients
     #ingredients
-      = f.fields_for :ingredients do |ingredient|
+      = f.fields_for :ingredients, f.object.ingredients.by_order do |ingredient|
         = render 'ingredients/ingredient_fields', f: ingredient
       .links
         = link_to_add_association 'add an ingredient', f, :ingredients,
