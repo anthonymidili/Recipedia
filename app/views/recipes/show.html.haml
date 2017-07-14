@@ -16,13 +16,17 @@
       %b Assigned Categories:
       = links_to_categories(@recipe)
 
-    %p
-      %b Ingredients:
-      = @recipe.ingredients_list
+    .callout
+      %h3 Ingredients:
+      - @recipe.parts.each do |part|
+        %h4= part.name
+        = render part.ingredients
 
-    %p
-      %b Steps:
-      = render @recipe.steps.by_order
+    .callout
+      %h3 Steps:
+      - @recipe.parts.each do |part|
+        %h4= part.name
+        = render part.steps.by_order
 
 
     = link_to 'Home', categories_path

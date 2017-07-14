@@ -6,4 +6,8 @@ class Part < ApplicationRecord
 
   has_many :steps, dependent: :destroy
   accepts_nested_attributes_for :steps, reject_if: :all_blank, allow_destroy: true
+
+  def ingredients_list
+    ingredients.map(&:item).join(', ')
+  end
 end

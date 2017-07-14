@@ -13,10 +13,6 @@ class Recipe < ApplicationRecord
 
   scope :by_name, -> { order(name: :asc) }
 
-  def ingredients_list
-    ingredients.map(&:item).join(', ')
-  end
-
 private
 
   def check_box_presence
