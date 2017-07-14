@@ -1,0 +1,12 @@
+.nested-fields
+  .callout-on-small-only
+    .row
+      .small-12.medium-5.columns
+        = f.label :name
+        = f.text_field :name
+      .medium-3.columns
+        = link_to_remove_association 'remove part', f, class: 'hollow button inline-button-on-medium alert expanded'
+
+    = render 'ingredients/fields_for_form', f: f
+
+    = render 'steps/fields_for_form', f: f

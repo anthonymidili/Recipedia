@@ -9,12 +9,8 @@
       Recipe
 .row
   .small-12.columns
-    %p
-      %b Name:
-      = @recipe.name
-    %p
-      %b Description:
-      = @recipe.description
+    %h1= @recipe.name
+    %p.callout= @recipe.description
 
     %p
       %b Assigned Categories:

@@ -22,9 +22,7 @@
           %li= b.label(data:{value: b.value}) { b.check_box + b.text }
       %hr/
 
-  = render 'ingredients/fields_for_form', f: f
-
-  = render 'steps/fields_for_form', f: f
+  = render 'parts/fields_for_form', f: f
 
   .row
     .small-12.columns

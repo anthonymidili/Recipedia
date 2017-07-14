@@ -70,7 +70,8 @@ private
   # Never trust parameters from the scary internet, only allow the white list through.
   def recipe_params
     params.require(:recipe).permit(:name, :description, category_ids: [],
-                                   ingredients_attributes: [:id, :item, :quantity, :_destroy],
-                                   steps_attributes: [:id, :description, :_destroy])
+                                   parts_attributes: [:id, :name, :_destroy,
+                                                      ingredients_attributes: [:id, :item, :quantity, :_destroy],
+                                                      steps_attributes: [:id, :description, :_destroy]])
   end
 end
