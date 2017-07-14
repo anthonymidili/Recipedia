@@ -1,10 +1,10 @@
 .row
   .small-12.columns
-    %h5 Parts
+    %h5 Recipe Parts
     #ingredients
       = f.fields_for :parts, f.object.parts do |part|
         = render 'parts/part_fields', f: part
       .links
-        = link_to_add_association 'add a part', f, :parts,
+        = link_to_add_association 'add a part to your recipe', f, :parts,
         partial: 'parts/part_fields', class: 'button hollow'
     %hr/

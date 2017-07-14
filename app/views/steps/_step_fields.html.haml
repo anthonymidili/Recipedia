@@ -3,6 +3,6 @@
     .row
       .small-12.medium-9.columns
         = f.label :description
-        = f.text_area :description, rows: 2
+        = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F'
       .medium-3.columns
         = link_to_remove_association 'remove', f, class: 'hollow button inline-button-on-medium alert expanded'

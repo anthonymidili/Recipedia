@@ -1,26 +1,26 @@
 = form_for @recipe do |f|
   = render 'notifications/error_messages', object: f.object
 
-  .row
-    .small-12.columns
-      = f.label :name
-      = f.text_field :name
+  .callout
+    .row
+      .small-12.columns
+        = f.label :name
+        = f.text_field :name, placeholder: 'Apple Pie'
 
-  .row
-    .small-12.columns
-      = f.label :description
-      = f.text_area :description
+    .row
+      .small-12.columns
+        = f.label :description
+        = f.text_area :description, placeholder: 'The best apple pie you will ever eat.'
 
-  .row
-    .small-12.columns
-      %label
-        Select all categories that apply or
-        = succeed '.' do
-          = link_to 'create more', new_category_path
-      %ul.menu.simple
-        = f.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
-          %li= b.label(data:{value: b.value}) { b.check_box + b.text }
-      %hr/
+    .row
+      .small-12.columns
+        %label
+          Select all categories that apply or
+          = succeed '.' do
+            = link_to 'create more', new_category_path
+        %ul.menu.simple
+          = f.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
+            %li= b.label(data:{value: b.value}) { b.check_box + b.text }
 
   = render 'parts/fields_for_form', f: f
 

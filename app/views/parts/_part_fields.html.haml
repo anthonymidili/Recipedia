@@ -1,9 +1,9 @@
 .nested-fields
-  .callout-on-small-only
+  .callout
     .row
       .small-12.medium-9.columns
-        = f.label :name
-        = f.text_field :name
+        = f.label :name, 'Recipe parts name'
+        = f.text_field :name, placeholder: 'Pie Crust'
       .medium-3.columns
         = link_to_remove_association 'remove part', f, class: 'hollow button inline-button-on-medium alert expanded'
 

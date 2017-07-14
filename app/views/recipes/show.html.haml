@@ -10,23 +10,26 @@
 .row
   .small-12.columns
     %h1= @recipe.name
-    %p.callout= @recipe.description
+    = @recipe.description
+    %hr/
 
     %p
       %b Assigned Categories:
       = links_to_categories(@recipe)
 
+    %h3 Ingredients:
     .callout
-      %h3 Ingredients:
       - @recipe.parts.each do |part|
         %h4= part.name
-        = render part.ingredients
+        = render part.ingredients.by_order
+        %br/
 
+    %h3 Steps:
     .callout
-      %h3 Steps:
       - @recipe.parts.each do |part|
         %h4= part.name
         = render part.steps.by_order
+        %br/
 
 
     = link_to 'Home', categories_path
