@@ -28,7 +28,10 @@
     .callout
       - @recipe.parts.each do |part|
         %h4= part.name
-        = render part.steps.by_order
+        - part.steps.by_order.each_with_index do |step, index |
+          %span.red_text= "#{index += 1}."
+          = step.description
+          %br/
         %br/
 
 
