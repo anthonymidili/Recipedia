@@ -1,6 +1,7 @@
-.row
-  .small-12.columns
-    = link_to category do
-      .callout
-        = category.name
-        .float-right= category.recipes.count
+.small-12.medium-6.columns.end
+  = link_to category do
+    .callout{style: "background-image: url(#{category.image_url(:banner)}); height: 150px; background-position: center;"}
+      .callout-text
+        %h5
+          = category.name
+          .float-right= category.recipes.count

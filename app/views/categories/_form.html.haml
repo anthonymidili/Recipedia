@@ -1,10 +1,24 @@
 = form_for @category do |f|
   = render 'notifications/error_messages', object: f.object
 
+  = f.hidden_field :image, value: f.object.cached_image_data
   .row
-    .small-12.columns
+    .small-6.columns
       = f.label :name
       = f.text_field :name
+
+    .small-6.columns
+      = f.label :image
+      = f.file_field :image
+
+  .row
+    .small-12.columns
+      - if f.object.image_data?
+        = image_tag f.object.image_url(:large)
+        .row
+          .small-12.columns
+            Remove attachment:
+            = f.check_box :remove_image
 
   .row
     .small-12.columns

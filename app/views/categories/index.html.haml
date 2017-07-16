@@ -4,15 +4,19 @@
   .small-12.columns
     %h1 Listing categories
 
-    = render @categories.in_use
+    .row
+      = render @categories.in_use
 
     - if @categories.not_used.any?
-      %div
-        = link_to 'More categories', '#', class: 'toggle hideShow', remote: true
-        .hidden.hideShow
-          = link_to 'Hide', '#', class: 'toggle', remote: true
-          = render @categories.not_used
+      .row
+        .small-12.columns
+          %div
+            = link_to 'More categories', '#', class: 'toggle hideShow', remote: true
+            .hidden.hideShow
+              = link_to 'Hide', '#', class: 'toggle', remote: true
+              .row
+                = render @categories.not_used
 
-    %br/
-
+.row
+  .small-12.columns
     = link_to 'New Category', new_category_path

@@ -8,6 +8,8 @@
 .row
   .small-12.columns
     %h1= @category.name
+    - if @category.image_data?
+      %p= image_tag @category.image_url(:banner)
 
     = render @category.recipes
 
