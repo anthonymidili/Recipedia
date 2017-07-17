@@ -1,7 +1,7 @@
 .small-12.medium-6.columns.end
   = link_to category do
     .callout{style: "background-image: url(#{category.image_url(:banner)}); height: 150px; background-position: center;"}
-      .callout-text
+      .highlight-text
         %h5
           = category.name
           .float-right= category.recipes.count
