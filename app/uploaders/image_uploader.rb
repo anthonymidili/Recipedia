@@ -2,6 +2,7 @@ require 'image_processing/mini_magick'
 
 class ImageUploader < Shrine
   include ImageProcessing::MiniMagick
+  plugin :pretty_location
   plugin :processing
   plugin :versions
   plugin :determine_mime_type

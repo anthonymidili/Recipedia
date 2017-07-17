@@ -9,7 +9,7 @@
         = f.text_field :name, placeholder: 'Apple Pie'
 
       .medium-6.columns
-        = f.label :image
+        = f.label :image, 'Upload image (landscape for best results)'
         = f.file_field :image
 
     .row
@@ -20,10 +20,10 @@
     .row
       .small-12.columns
         - if f.object.image_data?
-          = image_tag f.object.image_url(:large)
+          = image_tag f.object.image_url(:medium)
           .row
             .small-12.columns
-              Remove attachment:
+              Remove image:
               = f.check_box :remove_image
 
     .row

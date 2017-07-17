@@ -8,11 +8,11 @@
       = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
       Recipe
 .row
-  .medium-6.columns
+  .medium-7.columns
     %h1= @recipe.name
     = @recipe.description
-  .medium-6.columns
-    = image_tag @recipe.image_url(:large) if @recipe.image_data?
+  .medium-5.columns
+    .center= image_tag @recipe.image_url(:large), class: 'max-image-height' if @recipe.image_data?
 
 .row
   .small-12.columns

@@ -18,7 +18,7 @@ ul.simple {
   margin-bottom: 20px;
 }
 
-.center-text {
+.center {
   text-align: center;
 }
 
@@ -65,4 +65,8 @@ nav.pagination {
   @include callout;
   height: 150px;
   background-position: center;
+}
+
+.max-image-height {
+  max-height: 400px;
 }
