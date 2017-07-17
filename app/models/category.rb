@@ -2,8 +2,6 @@ class Category < ApplicationRecord
   has_many :categorizations, dependent: :destroy
   has_many :recipes, through: :categorizations
 
-  include ImageUploader::Attachment.new(:image)
-
   validates :name, presence: true, uniqueness: true
 
   scope :in_use, -> { includes(:recipes).where.not(recipes: { id: nil }) }

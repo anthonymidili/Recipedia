@@ -4,27 +4,11 @@
   .small-12.columns
     %h1 Listing recipes
 
-    %table
-      %thead
-        %tr
-          %th Name
-          %th Description
-          %th Categories
-          %th
-          %th
-          %th
+.row
+  = render @recipes
 
-      %tbody
-        - @recipes.each do |recipe|
-          %tr
-            %td= recipe.name
-            %td= recipe.description
-            %td= links_to_categories(recipe)
-            %td= link_to 'Show', recipe
-            %td= link_to 'Edit', edit_recipe_path(recipe)
-            %td= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' }
-
+.row
+  .small-12.columns
     = paginate @recipes
-    %br
-
+    %br/
     = link_to 'New Recipe', new_recipe_path

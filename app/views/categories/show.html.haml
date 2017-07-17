@@ -10,8 +10,8 @@
     %h1.center= @category.name
 
 .row
-  = render @category.recipes
+  = render @category.recipes.by_name
 
 .row
   .small-12.columns
-    = link_to 'Back', categories_path
+    = link_to 'Home', categories_path

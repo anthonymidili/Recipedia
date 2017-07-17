@@ -14,6 +14,7 @@ class Recipe < ApplicationRecord
   validate :check_box_presence
 
   scope :by_name, -> { order(name: :asc) }
+  scope :by_created, -> { order(created_at: :desc) }
   scope :last_with_image, -> { where.not(image_data: nil).last }
 
 private

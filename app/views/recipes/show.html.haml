@@ -8,6 +8,12 @@
       = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
       Recipe
 .row
+  .small-12.columns
+    %p
+      %b Assigned Categories:
+      = links_to_categories(@recipe)
+
+.row
   .medium-7.columns
     %h1= @recipe.name
     = @recipe.description
@@ -16,12 +22,6 @@
 
 .row
   .small-12.columns
-    %hr/
-
-    %p
-      %b Assigned Categories:
-      = links_to_categories(@recipe)
-
     %h3 Ingredients:
     .callout
       - @recipe.parts.each do |part|
