@@ -1,5 +1,5 @@
-.row
-  .small-12.columns
-    = link_to recipe do
-      .callout
+.medium-6.columns.end
+  = link_to recipe do
+    .banner{style: "#{background_banner(recipe)}"}
+      .highlight-text
         = "#{recipe.name} - #{recipe.description}"

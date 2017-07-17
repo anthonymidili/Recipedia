@@ -18,11 +18,11 @@ ul.simple {
   margin-bottom: 20px;
 }
 
-.center_text {
+.center-text {
   text-align: center;
 }
 
-a.black_link {
+a.black-link {
   color: black;
   &:hover {
     color: lighten(black, 20%)
@@ -59,4 +59,10 @@ nav.pagination {
 
 .highlight-text {
   text-shadow: 2px 2px 10px white, -2px -2px 10px white, 2px -2px 10px white, -2px 2px 10px white;
+}
+
+.banner {
+  @include callout;
+  height: 150px;
+  background-position: center;
 }

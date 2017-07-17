@@ -1,6 +1,6 @@
 .small-12.medium-6.columns.end
   = link_to category do
-    .callout{style: "background-image: url(#{category.image_url(:banner)}); height: 150px; background-position: center;"}
+    .banner{style: "#{background_banner(category.recipes.last_with_image)}"}
       .highlight-text
         %h5
           = category.name

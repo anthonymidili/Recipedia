@@ -2,7 +2,7 @@ class Category < ApplicationRecord
   has_many :categorizations, dependent: :destroy
   has_many :recipes, through: :categorizations
 
-  include ImageUploader[:image]
+  include ImageUploader::Attachment.new(:image)
 
   validates :name, presence: true, uniqueness: true
 

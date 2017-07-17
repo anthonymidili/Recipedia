@@ -6,11 +6,12 @@
       = link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' }
       Category
 .row
+  .medium-6.small-centered.columns
+    %h1.center-text= @category.name
+
+.row
+  = render @category.recipes
+
+.row
   .small-12.columns
-    %h1= @category.name
-    - if @category.image_data?
-      %p= image_tag @category.image_url(:banner)
-
-    = render @category.recipes
-
     = link_to 'Back', categories_path
