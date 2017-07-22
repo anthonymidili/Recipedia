@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.by_created.page(params[:page])
+    @recipes = Recipe.newest_to_oldest.page(params[:page])
   end
 
   # GET /recipes/1

@@ -4,7 +4,8 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.oldest_to_newest
+    @used_recipes = []
   end
 
   # GET /categories/1

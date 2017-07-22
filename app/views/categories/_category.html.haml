@@ -1,7 +1,8 @@
 .small-12.medium-6.columns.end
   = link_to category do
-    .banner{style: "#{background_banner(category.recipes.last_with_image)}"}
+    .banner{style: "#{background_banner(category.recipes.unique_image(@used_recipes).last_with_image)}"}
       .highlight-text
         %h5
           = category.name
           .float-right= category.recipes.count
+- @used_recipes << category.recipes.unique_image(@used_recipes).last_with_image
