@@ -45,6 +45,8 @@ gem 'kaminari', '~> 1.0.1'
 
 gem 'cocoon', '~> 1.2.10'
 
+gem 'devise', '~> 4.3.0'
+
 # shrine
 gem 'shrine'
 gem 'image_processing'

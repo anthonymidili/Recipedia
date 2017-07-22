@@ -27,7 +27,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -52,7 +52,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # Merge rails into puma's logs which breaks css when css is modified.
-  # config.logger = Logger.new(STDOUT)
-  # or run [tail -f log/development.log] in terminal.
+  # Devise mailer
+  config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL') { 'localhost:3000' } }
 end
