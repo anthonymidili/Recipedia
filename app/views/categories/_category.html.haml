@@ -5,4 +5,4 @@
         %h5
           = category.name
           .float-right= category.recipes.count
-- @used_recipes << category.recipes.unique_image(@used_recipes).last_with_image
+- @used_recipes << category.recipes.unique_image(@used_recipes).last_with_image.try(:id)
