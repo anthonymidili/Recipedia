@@ -2,6 +2,8 @@ class Category < ApplicationRecord
   has_many :categorizations, dependent: :destroy
   has_many :recipes, through: :categorizations
 
+  belongs_to :user
+
   validates :name, presence: true, uniqueness: true
 
   scope :oldest_to_newest, -> { order(created_at: :asc) }
