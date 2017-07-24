@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_many :recipes
   has_many :categories
+
+  validates :name, presence: true
 end
