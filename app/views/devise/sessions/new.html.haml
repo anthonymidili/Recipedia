@@ -1,24 +1,19 @@
 .row
   .medium-6.medium-centered.columns
-    %h2 Log in
+    %h1 Log in
 
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      .field
-        = f.label :email
-        %br/
-        = f.email_field :email, autofocus: true
+      = f.label :email
+      = f.email_field :email, autofocus: true
 
-      .field
-        = f.label :password
-        %br/
-        = f.password_field :password, autocomplete: 'off'
+      = f.label :password
+      = f.password_field :password, autocomplete: 'off'
 
       - if devise_mapping.rememberable?
-        .field
-          = f.check_box :remember_me
-          = f.label :remember_me
+        = f.check_box :remember_me
+        = f.label :remember_me
 
-      .actions
-        = f.submit 'Log in'
+      %br/
+      = f.submit 'Log in', class: 'button'
 
     = render 'devise/shared/links'

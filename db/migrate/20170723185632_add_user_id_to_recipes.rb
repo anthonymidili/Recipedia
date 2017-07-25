@@ -3,7 +3,7 @@ class AddUserIdToRecipes < ActiveRecord::Migration[5.1]
     add_column :recipes, :user_id, :integer
     add_column :categories, :user_id, :integer
 
-    user = User.find_or_create_by(name: 'Anthony', email: 'tonywinslow@yahoo.com') do |u|
+    user = User.find_or_create_by(username: 'Anthony', email: 'tonywinslow@yahoo.com') do |u|
       u.password = 'password'
       u.password_confirmation = 'password'
     end

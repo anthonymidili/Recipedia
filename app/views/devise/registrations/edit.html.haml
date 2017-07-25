@@ -1,48 +1,41 @@
 .row
   .medium-6.medium-centered.columns
-    %h2
-      Edit
-      = resource_name.to_s.humanize
+    %h1 User Settings
 
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
       = render 'notifications/error_messages', object: f.object
 
-      .field
-        = f.label :name
-        = f.text_field :name, autofocus: true
+      = f.label :username
+      = f.text_field :username, autofocus: true
 
-      .field
-        = f.label :email
-        = f.email_field :email
+      = f.label :email
+      = f.email_field :email
 
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
         %div
           Currently waiting confirmation for:
           = resource.unconfirmed_email
 
-      .field
+      %h5 Change your password
+      .callout
         %lable
-          Password
+          New password
           %i (leave blank if you don't want to change it)
           - if @minimum_password_length
             %br/
             %em
               = @minimum_password_length
               characters minimum
-          = f.password_field :password, autocomplete: 'off'
+        = f.password_field :password, autocomplete: 'off'
 
-
-      .field
-        = f.label :password_confirmation
+        = f.label :password_confirmation, 'New password confirmation'
         = f.password_field :password_confirmation, autocomplete: 'off'
 
-      .field
-        = f.label :current_password
-        %i (we need your current password to confirm your changes)
-        = f.password_field :current_password, autocomplete: 'off'
+      = f.label :current_password
+      %i (we need your current password to confirm your changes)
+      = f.password_field :current_password, autocomplete: 'off'
 
-      .actions
-        = f.submit 'Update'
+      = f.submit 'Update', class: 'button'
 
     -# %h3 Cancel my account
     -#
