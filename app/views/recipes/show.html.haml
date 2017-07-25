@@ -1,12 +1,14 @@
 - provide(:title, @recipe.name)
 
-.row
-  .small-12.columns
-    .float-right
-      = link_to 'Edit', edit_recipe_path(@recipe)
-      or
-      = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
-      Recipe
+- if @recipe.user == current_user
+  .row
+    .small-12.columns
+      .float-right
+        = link_to 'Edit', edit_recipe_path(@recipe)
+        or
+        = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
+        your Recipe
+
 .row
   .small-12.columns
     %p
@@ -40,6 +42,6 @@
         %br/
 
 
-    = link_to 'Home', categories_path
+    = link_to 'Categories', categories_path
     \|
     = link_to 'Recipes', recipes_path

@@ -2,8 +2,9 @@
   .small-12.columns
     .float-right
       = link_to 'Edit', edit_category_path(@category)
-      or
-      = link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' }
+      - unless @category.recipes.any?
+        or
+        = link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' }
       Category
 .row
   .medium-6.small-centered.columns
@@ -16,4 +17,4 @@
   .small-12.columns
     = paginate @recipes
     %br/
-    = link_to 'Home', categories_path
+    = link_to 'Categories', categories_path
