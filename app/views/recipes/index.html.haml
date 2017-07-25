@@ -2,7 +2,11 @@
 
 .row
   .small-12.columns
-    %h1 Listing recipes
+    = link_to 'Search recipes by categories', categories_path
+    .float-right= link_to 'Add a recipe', new_recipe_path
+.row
+  .small-12.columns
+    %h1 Latest Recipes
 
 .row
   = render @recipes
@@ -10,5 +14,3 @@
 .row
   .small-12.columns
     = paginate @recipes
-    %br/
-    = link_to 'New Recipe', new_recipe_path

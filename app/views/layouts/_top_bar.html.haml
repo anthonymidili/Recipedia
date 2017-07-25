@@ -8,7 +8,6 @@
   #responsive-menu
     .top-bar-right
       %ul.menu.mainmenu.vertical.medium-horizontal{data: {responsive_menu: 'accordion medium-dropdown'}}
-        %li= link_to 'Categories', categories_path
         %li= link_to 'Recipes', recipes_path
         - if user_signed_in?
           %li= link_to 'User settings', edit_user_registration_path
