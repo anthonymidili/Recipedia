@@ -2,6 +2,10 @@
 
 .row
   .small-12.columns
+    .float-right= link_to 'Create a new category', new_category_path
+
+.row
+  .small-12.columns
     %h1 Categories
 
 .row
@@ -15,8 +19,3 @@
         = link_to 'Hide', '#', class: 'toggle', remote: true
         .row
           = render @categories.not_used
-
-.row
-  .small-12.columns
-    %br/
-    = link_to 'New Category', new_category_path
