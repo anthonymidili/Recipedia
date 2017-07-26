@@ -1,7 +1,7 @@
 .top-bar
   .title-bar-left
     .title-bar-title
-      = link_to "The Tattooed Housewife", root_path
+      = link_to "Secret Ingredient", root_path
   .title-bar-right
     %span{data: {hide_for: 'medium', responsive_toggle: 'responsive-menu'}}
       %span.menu-icon{data: {toggle: true}}
@@ -10,8 +10,14 @@
       %ul.menu.mainmenu.vertical.medium-horizontal{data: {responsive_menu: 'accordion medium-dropdown'}}
         %li= link_to 'Recipes', recipes_path
         - if user_signed_in?
-          %li= link_to 'User settings', edit_user_registration_path
-          %li= link_to 'Sign out', destroy_user_session_path, method: :delete
+          %li
+            = link_to edit_user_registration_path do
+              User
+              %i.fi-widget
+          %li
+            = link_to destroy_user_session_path, method: :delete do
+              %i.fi-torso
+              %i.fi-arrow-right
         - else
           %li= link_to 'Sign in', new_user_session_path
 

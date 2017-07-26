@@ -40,6 +40,7 @@ gem 'haml', '~> 5.0.1'
 gem 'haml-rails', '~> 1.0.0'
 
 gem 'foundation-rails', '~> 6.3.0'
+gem 'foundation-icons-sass-rails'
 
 gem 'kaminari', '~> 1.0.1'
 

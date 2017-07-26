@@ -6,12 +6,12 @@ html, body {height: 100%;}
   padding-bottom: 30px;
 }
 
-#main {padding-bottom: 116px;} /* must be same height as the footer or add more for padding */
+#main {padding-bottom: 125px;} /* must be same height as the footer or add more for padding */
 
 footer {
   position: relative;
-  margin-top: -116px; /* negative value of footer height */
-  height: 116px;
+  margin-top: -125px; /* negative value of footer height */
+  height: 125px;
   clear: both;
 
   #style_footer {
