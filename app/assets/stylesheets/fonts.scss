@@ -8,4 +8,16 @@ $title-font: 'Rock Show Whiplash', 'sans-serif';
   font-family: 'FHA Cond French';
   src: font-url('FHACondFrenchNC.otf') format('opentype');
 }
-$main-font: 'FHA Cond French', 'monospace';
+$jmain-font: 'FHA Cond French', 'monospace';
+
+@font-face {
+  font-family: 'Back To Black Bold';
+  src: font-url('BackToBlackBold.ttf') format('truetype');
+}
+$app-title-font: 'Back To Black Bold', 'sans-serif';
+
+@font-face {
+  font-family: 'Munson Roman';
+  src: font-url('Munson_Roman.otf') format('opentype');
+}
+$main-font: 'Munson Roman', 'monospace';
