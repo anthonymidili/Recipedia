@@ -1,4 +1,3 @@
-# Tattooed Housewife
+# Recipe Swap
 
-Digitizing and globalizing an awesome cookbook written by a 
-tattooed housewife that can cook and bake her ass off.
+Making it easy to share recipes.
