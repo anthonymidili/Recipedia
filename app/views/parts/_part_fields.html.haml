@@ -1,11 +1,14 @@
 .nested-fields
   .callout
     .row
-      .small-12.medium-9.columns
+      .medium-push-6.medium-6.columns
+        .inline-icon
+          = link_to_remove_association f, class: 'red-text' do
+            %i.fa.fa-trash
+            Remove Recipe Part
+      .medium-pull-6.medium-6.columns
         = f.label :name, 'Recipe parts name'
         = f.text_field :name, placeholder: 'Pie Crust'
-      .medium-3.columns
-        = link_to_remove_association 'remove part', f, class: 'hollow button inline-button-on-medium alert expanded'
 
     = render 'ingredients/fields_for_form', f: f
 

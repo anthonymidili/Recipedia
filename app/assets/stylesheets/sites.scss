@@ -70,3 +70,16 @@ nav.pagination {
 .max-image-height {
   max-height: 400px;
 }
+
+.inline-large-icon {
+  @include breakpoint(medium) {
+    font-size: 1.5rem;
+    margin-top: 1.55rem;
+  }
+}
+
+.inline-icon {
+  @include breakpoint(medium) {
+    margin-top: 1.35rem;
+  }
+}

@@ -1,8 +1,13 @@
 .nested-fields
   .callout-on-small-only
     .row
-      .small-12.medium-9.columns
+      .medium-1.medium-push-11.columns
+        .inline-large-icon
+          = link_to_remove_association f, class: 'red-text' do
+            %i.fa.fa-trash
+            %span.show-for-small-only
+              Remove
+
+      .medium-11.medium-pull-1.columns
         = f.label :description
         = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F'
-      .medium-3.columns
-        = link_to_remove_association 'remove', f, class: 'hollow button inline-button-on-medium alert expanded'

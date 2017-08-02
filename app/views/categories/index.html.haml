@@ -2,7 +2,14 @@
 
 .row
   .small-12.columns
-    .float-right= link_to 'Create a new category', new_category_path
+    = link_to recipes_path do
+      %i.fa.fa-list
+      Browse latest recipes
+
+    .float-right
+      = link_to new_category_path do
+        %i.fa.fa-plus-circle
+        Create a new category
 
 .row
   .small-12.columns

@@ -8,7 +8,7 @@
         %label
           Check all categories that apply or
           = succeed '.' do
-            = link_to 'create more', new_category_path
+            = link_to 'create your own', new_category_path
         %ul.menu.simple
           = f.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
             %li= b.label(data:{value: b.value}) { b.check_box + b.text }
@@ -30,7 +30,6 @@
             .small-12.columns
               = f.check_box :remove_image
               = f.label :remove_image
-
 
   = render 'parts/fields_for_form', f: f
 

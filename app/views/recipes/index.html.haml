@@ -2,10 +2,14 @@
 
 .row
   .small-12.columns
-    = link_to 'Browse recipes by categories', categories_path
-    .float-right= link_to 'Add a recipe', new_recipe_path
-%br/
+    = link_to categories_path do
+      %i.fa.fa-list
+      Browse recipes by categories
 
+    .float-right
+      = link_to new_recipe_path do
+        %i.fa.fa-plus-circle
+        Add a recipe
 .row
   .small-12.columns
     %h1 Latest Recipes
