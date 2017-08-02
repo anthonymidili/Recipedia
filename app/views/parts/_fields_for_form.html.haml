@@ -5,6 +5,7 @@
       = f.fields_for :parts, f.object.parts do |part|
         = render 'parts/part_fields', f: part
       .links
-        = link_to_add_association 'add a part to your recipe', f, :parts,
-        partial: 'parts/part_fields', class: 'button hollow'
+        = link_to_add_association f, :parts, partial: 'parts/part_fields' do
+          %i.fa.fa-plus-circle
+          Add a part to your recipe
     %hr/

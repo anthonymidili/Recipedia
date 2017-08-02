@@ -5,5 +5,7 @@
       = f.fields_for :ingredients, f.object.ingredients.by_order do |ingredient|
         = render 'ingredients/ingredient_fields', f: ingredient
       .links
-        = link_to_add_association 'add an ingredient', f, :ingredients,
-        partial: 'ingredients/ingredient_fields', class: 'button hollow'
+        = link_to_add_association f, :ingredients, partial: 'ingredients/ingredient_fields' do
+          %i.fa.fa-plus-circle
+          Add an ingredient
+    %br/
