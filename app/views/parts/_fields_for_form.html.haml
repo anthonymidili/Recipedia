@@ -1,6 +1,8 @@
 .row
   .small-12.columns
-    %h5 Recipe Parts
+    %h5
+      Recipe Parts
+      %small.dark (if this is a single part recipe, the part name will not be displayed)
     #ingredients
       = f.fields_for :parts, f.object.parts do |part|
         = render 'parts/part_fields', f: part

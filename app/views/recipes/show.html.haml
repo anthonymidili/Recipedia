@@ -18,9 +18,14 @@
 .row
   .medium-7.columns
     %h1= @recipe.name
-    %p
-      %b Swapper:
-      = @recipe.user.username
+    %ul.menu.simple
+      %li
+        %b Swapper:
+        = @recipe.user.username
+      - if @recipe.source
+        %li
+          %b Source:
+          = @recipe.source
     %p
       = @recipe.description
   .medium-5.columns
@@ -31,15 +36,17 @@
     %h4 Ingredients:
     .callout
       - @recipe.parts.each do |part|
-        %h4= part.name
-        = render part.ingredients.by_order
+        - if @recipe.parts.count > 1
+          %h4= part.name
+        = render part.ingredients
         %br/
 
     %h4 Steps:
     .callout
       - @recipe.parts.each do |part|
-        %h4= part.name
-        - part.steps.by_order.each_with_index do |step, index |
+        - if @recipe.parts.count > 1
+          %h4= part.name
+        - part.steps.each_with_index do |step, index|
           %span.red-text= "#{index += 1}."
           = step.description
           %br/

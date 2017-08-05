@@ -66,11 +66,12 @@ nav.pagination {
   height: 150px;
   background-position: center;
   overflow: hidden;
+}
 
-  small {
-    color: black;
-    font-size: 60%;
-  }
+small.dark {
+  color: $black;
+  font-size: 60%;
+  white-space: nowrap;
 }
 
 .max-image-height {
