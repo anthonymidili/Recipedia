@@ -18,20 +18,24 @@
 .row
   .medium-7.columns
     %h1= @recipe.name
-    = @recipe.description
+    %p
+      %b Swapper:
+      = @recipe.user.username
+    %p
+      = @recipe.description
   .medium-5.columns
     .center= image_tag @recipe.image_url(:large), class: 'max-image-height' if @recipe.image_data?
 
 .row
   .small-12.columns
-    %h3 Ingredients:
+    %h4 Ingredients:
     .callout
       - @recipe.parts.each do |part|
         %h4= part.name
         = render part.ingredients.by_order
         %br/
 
-    %h3 Steps:
+    %h4 Steps:
     .callout
       - @recipe.parts.each do |part|
         %h4= part.name

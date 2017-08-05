@@ -65,6 +65,12 @@ nav.pagination {
   @include callout;
   height: 150px;
   background-position: center;
+  overflow: hidden;
+
+  small {
+    color: black;
+    font-size: 60%;
+  }
 }
 
 .max-image-height {

@@ -11,7 +11,7 @@ class Recipe < ApplicationRecord
 
   include ImageUploader::Attachment.new(:image)
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :description, presence: true
   validate :check_box_presence
 

@@ -2,4 +2,11 @@
   = link_to recipe do
     .banner{style: "#{background_banner(recipe)}"}
       .highlight-text
-        = "#{recipe.name} - #{recipe.description}"
+        %h4
+          = recipe.name
+          %small
+            (
+            Swapper:
+            = recipe.user.username
+            )
+        = recipe.description
