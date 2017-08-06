@@ -20,9 +20,9 @@
     %h1= @recipe.name
     %ul.menu.simple
       %li
-        %b Swapper:
+        %b Posted by:
         = @recipe.user.username
-      - if @recipe.source
+      - if @recipe.source?
         %li
           %b Source:
           = @recipe.source

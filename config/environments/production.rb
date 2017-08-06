@@ -90,5 +90,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Devise mailer
-  config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL') { 'localhost:3000' } }
+  config.action_mailer.default_url_options = { host: ENV.fetch('DEFAULT_URL') { 'indierecipes.org' } }
 end
