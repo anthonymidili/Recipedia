@@ -14,10 +14,16 @@ $jmain-font: 'FHA Cond French', 'monospace';
   font-family: 'Back To Black Bold';
   src: font-url('BackToBlackBold.ttf') format('truetype');
 }
-$app-title-font: 'Back To Black Bold', 'sans-serif';
+$kapp-title-font: 'Back To Black Bold', 'sans-serif';
 
 @font-face {
   font-family: 'Munson Roman';
   src: font-url('Munson_Roman.otf') format('opentype');
 }
 $main-font: 'Munson Roman', 'monospace';
+
+@font-face {
+  font-family: 'Blessed Day';
+  src: font-url('BlessedDay.otf') format('opentype');
+}
+$app-title-font: 'Blessed Day', 'sans-serif';
