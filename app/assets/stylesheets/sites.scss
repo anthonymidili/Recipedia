@@ -1,6 +1,7 @@
 /* use provide(:background_layout, 'custom_layout_name') to add custom layouts to different pages */
 body {
-  background: $tattoo-pale-green url('paisley-background.jpg');
+  background-color: $tattoo-pale-green;
+  background-image: url('paisley-background.jpg');
 }
 
 h1, h2, h3, h4 {
