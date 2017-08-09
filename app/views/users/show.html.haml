@@ -1,0 +1,13 @@
+.row
+  .small-12.columns
+    %h1
+      #{@user.username}'s Cookbook
+
+    %h4 Submitted Recipes
+.row
+  = render @user.recipes
+
+.row
+  .small-12.columns
+    %h4 Favorites
+    %p listing favorite recipes coming soon...
