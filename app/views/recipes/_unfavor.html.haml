@@ -1,0 +1,3 @@
+= form_for current_user.find_favoitisum(recipe), html: {method: :delete} do |f|
+  = f.hidden_field :recipe_id
+  = f.button 'Unfavor', class: 'button alert'

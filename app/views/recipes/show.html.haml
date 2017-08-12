@@ -14,7 +14,8 @@
     %p
       %b Assigned Categories:
       = links_to_categories(@recipe)
-
+    %p
+      = render 'recipes/favor_form', recipe: @recipe
 .row
   .medium-7.columns
     %h1= @recipe.name

@@ -4,8 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :recipes
+  has_many :favoritisms, dependent: :destroy
+  has_many :recipes, through: :favoritisms
+
   has_many :categories
+  has_many :recipes
 
   validates :username, presence: true, uniqueness: true
+
+  def find_favoitisum(recipe)
+    favoritisms.find_by(recipe: recipe)
+  end
 end
