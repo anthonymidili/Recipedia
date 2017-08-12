@@ -1,5 +1,4 @@
-- unless current_user == recipe.user
-  - if current_user.find_favoitisum(recipe)
-    = render 'recipes/unfavor', recipe: recipe
-  - else
-    = render 'recipes/favor', recipe: recipe
+- if current_user.find_favoitisum(recipe)
+  = render 'recipes/unfavor', recipe: recipe
+- else
+  = render 'recipes/favor', recipe: recipe
