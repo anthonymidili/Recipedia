@@ -1,3 +1,5 @@
 = form_for current_user.favoritisms.build(recipe_id: recipe.id) do |f|
   = f.hidden_field :recipe_id
-  = f.submit 'Favorite', class: 'button'
+  = f.button do
+    %i.fa.fa-heart-o
+    Add to Favorites

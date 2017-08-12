@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def find_favoitisum(recipe)
     favoritisms.find_by(recipe: recipe)
   end
+
+  def favorite_recipes
+    favoritisms.map(&:recipe)
+  end
 end

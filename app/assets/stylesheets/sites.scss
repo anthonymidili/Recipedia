@@ -80,6 +80,10 @@ small.dark {
   max-height: 400px;
 }
 
+.large-icon {
+  font-size: 1.5rem;
+}
+
 .inline-large-icon {
   @include breakpoint(medium) {
     font-size: 1.5rem;
