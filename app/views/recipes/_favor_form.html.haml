@@ -1,6 +1,5 @@
-- unless current_user == @recipe.user
-  #follow_form
-    - if current_user.find_favoitisum(recipe)
-      = render 'recipes/unfavor', recipe: recipe
-    - else
-      = render 'recipes/favor', recipe: recipe
+#favor_form
+  - if current_user.find_favoritism(recipe)
+    = render 'recipes/unfavor', recipe: recipe
+  - else
+    = render 'recipes/favor', recipe: recipe

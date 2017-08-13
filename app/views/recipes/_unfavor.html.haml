@@ -1,4 +1,4 @@
-= form_for current_user.find_favoitisum(recipe), html: {method: :delete}, remote: true do |f|
+= form_for current_user.find_favoritism(recipe), html: {method: :delete}, remote: true do |f|
   = f.hidden_field :recipe_id
   = f.button do
     %i.red-text.fa.fa-heart

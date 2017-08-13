@@ -16,7 +16,8 @@
       = links_to_categories(@recipe)
 .row
   .medium-7.columns
-    %h5= render 'recipes/favor_form', recipe: @recipe
+    - unless current_user == @recipe.user
+      %h5= render 'recipes/favor_form', recipe: @recipe
     %h1
       = @recipe.name
     %ul.menu.simple

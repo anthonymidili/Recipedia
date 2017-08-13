@@ -13,7 +13,7 @@ class FavoritismsController < ApplicationController
   end
 
   def destroy
-    current_user.find_favoitisum(@recipe).destroy
+    current_user.find_favoritism(@recipe).destroy
     respond_to do |format|
       format.html { redirect_to @recipe }
       format.js

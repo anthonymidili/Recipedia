@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
-  def find_favoitisum(recipe)
+  def find_favoritism(recipe)
     favoritisms.find_by(recipe: recipe)
   end
 
