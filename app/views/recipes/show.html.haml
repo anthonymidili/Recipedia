@@ -16,7 +16,7 @@
       = links_to_categories(@recipe)
 .row
   .medium-7.columns
-    - unless current_user == @recipe.user
+    - if signed_in? && current_user != @recipe.user
       %h5= render 'recipes/favor_form', recipe: @recipe
     %h1
       = @recipe.name
