@@ -2,6 +2,7 @@
 body {
   background-image: image-url('paisley-bg-image.jpg');
   background-color: $tattoo-pale-green;
+  min-width: 300px;
 }
 
 h1, h2, h3, h4 {
@@ -10,9 +11,9 @@ h1, h2, h3, h4 {
 
 #cover {
   h1 {
-    text-align: center;
     font-family: $app-title-font;
     font-size: 5.5em;
+    margin-bottom: -10px;
   }
 }
 
