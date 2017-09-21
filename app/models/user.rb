@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+
+  before_save :set_slug
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,5 +20,17 @@ class User < ApplicationRecord
 
   def favorite_recipes
     favoritisms.map(&:recipe)
+  end
+
+  # Use :slug in params instead of :id
+  def to_param
+    slug
+  end
+
+private
+
+  # Setter
+  def set_slug
+    self.slug = username.parameterize
   end
 end
