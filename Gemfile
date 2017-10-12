@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # jQuery
 gem 'jquery-rails', '~> 4.3.1'
 gem 'jquery-turbolinks', '~> 2.1.0'
+gem 'jquery-ui-rails', '~> 6.0.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

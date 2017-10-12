@@ -41,3 +41,14 @@
         -#   %ul.menu.vertical
         -#     %li= link_to 'link#1', '#'
         -#     %li= link_to 'link#2', '#'
+
+.row
+  .medium-8.columns.medium-centered
+    = form_tag nil, method: :get do
+      .ui-widget
+        .input-group
+          %span.input-group-label
+            %i.fa.fa-search
+          = text_field_tag :search, nil, class: 'input-group-field'
+          .input-group-button
+            = submit_tag 'Search Recipes', name: nil, class: 'button secondary'
