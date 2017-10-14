@@ -1,0 +1,10 @@
+.row
+  .medium-8.columns.medium-centered
+    = form_tag recipes_path, method: :get do
+      .ui-widget
+        .input-group
+          %span.input-group-label
+            %i.fa.fa-search
+          = text_field_tag :search, params[:search], class: 'input-group-field', data: { autocomplete_source: search_recipes_path }
+          .input-group-button
+            = submit_tag 'Search Recipes', name: nil, class: 'button secondary'

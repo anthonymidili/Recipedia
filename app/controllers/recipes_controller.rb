@@ -6,7 +6,12 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.newest_to_oldest.page(params[:page])
+    @recipes =
+      if params[:search]
+        Recipe.newest_to_oldest.filtered_by(params[:search]).page(params[:page])
+      else
+        Recipe.newest_to_oldest.page(params[:page])
+      end
   end
 
   # GET /recipes/1
@@ -62,6 +67,11 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    @recipes = Recipe.filtered_by(params[:term])
+    render json: @recipes.pluck(:name)
   end
 
 private

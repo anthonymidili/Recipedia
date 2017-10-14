@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   get 'sites/index'
 
-  resources :recipes
+  resources :recipes do
+    collection do
+      get :search
+    end
+  end
 
   resources :categories
 

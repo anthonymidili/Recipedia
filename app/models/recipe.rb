@@ -24,6 +24,7 @@ class Recipe < ApplicationRecord
   scope :newest_to_oldest, -> { order(created_at: :desc) }
   scope :unique_image, -> (used_recipes) { where.not(id: used_recipes) }
   scope :last_with_image, -> { where.not(image_data: nil).last }
+  scope :filtered_by, -> (term) { where('name like ?', "%#{term}%") }
 
 private
 
