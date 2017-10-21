@@ -18,6 +18,16 @@
   .medium-7.columns
     - if signed_in? && current_user != @recipe.user
       %h5= render 'recipes/favor_form', recipe: @recipe
+    - else
+      = link_to new_user_session_path do
+        %i.fa.fa-sign-in
+        Log in
+      or
+      = link_to new_user_registration_path do
+        %i.fa.fa-user-plus
+        Sign up
+      to Add to Favorites
+
     %h1
       = @recipe.name
     %ul.menu.simple
