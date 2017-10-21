@@ -43,7 +43,7 @@ gem 'haml-rails', '~> 1.0.0'
 gem 'foundation-rails', '~> 6.3.0'
 gem 'font-awesome-rails'
 
-gem 'kaminari', '~> 1.0.1'
+gem 'kaminari', '~> 1.1.0'
 
 gem 'cocoon', '~> 1.2.10'
 
