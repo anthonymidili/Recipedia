@@ -18,7 +18,7 @@
   .medium-7.columns
     - if signed_in? && current_user != @recipe.user
       %h5= render 'recipes/favor_form', recipe: @recipe
-    - else
+    - elsif !signed_in?
       = link_to new_user_session_path do
         %i.fa.fa-sign-in
         Log in
