@@ -43,7 +43,7 @@ gem 'haml-rails', '~> 1.0.0'
 gem 'foundation-rails', '~> 6.3.0'
 gem 'font-awesome-rails'
 
-gem 'kaminari', '~> 1.1.0'
+gem 'kaminari', '~> 1.1.1'
 
 gem 'cocoon', '~> 1.2.10'
 
@@ -75,4 +75,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-ruby '2.4.1'
+ruby '2.4.2'

@@ -542,18 +542,18 @@ GEM
       turbolinks
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    kaminari (1.1.0)
+    kaminari (1.1.1)
       activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.1.0)
-      kaminari-activerecord (= 1.1.0)
-      kaminari-core (= 1.1.0)
-    kaminari-actionview (1.1.0)
+      kaminari-actionview (= 1.1.1)
+      kaminari-activerecord (= 1.1.1)
+      kaminari-core (= 1.1.1)
+    kaminari-actionview (1.1.1)
       actionview
-      kaminari-core (= 1.1.0)
-    kaminari-activerecord (1.1.0)
+      kaminari-core (= 1.1.1)
+    kaminari-activerecord (1.1.1)
       activerecord
-      kaminari-core (= 1.1.0)
-    kaminari-core (1.1.0)
+      kaminari-core (= 1.1.1)
+    kaminari-core (1.1.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -681,7 +681,7 @@ DEPENDENCIES
   jquery-rails (~> 4.3.1)
   jquery-turbolinks (~> 2.1.0)
   jquery-ui-rails (~> 6.0.1)
-  kaminari (~> 1.1.0)
+  kaminari (~> 1.1.1)
   listen (>= 3.0.5, < 3.2)
   mini_magick
   pg (~> 0.18)
@@ -696,7 +696,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.4.1p111
+   ruby 2.4.2p198
 
 BUNDLED WITH
    1.16.0.pre.3
