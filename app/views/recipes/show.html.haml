@@ -1,32 +1,35 @@
 - provide(:title, @recipe.name)
 
-- if @recipe.user == current_user
+.hide-on-print
+  - if @recipe.user == current_user
+    .row
+      .small-12.columns
+        .float-right
+          = link_to 'Edit', edit_recipe_path(@recipe)
+          or
+          = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
+          your Recipe
+
   .row
     .small-12.columns
-      .float-right
-        = link_to 'Edit', edit_recipe_path(@recipe)
-        or
-        = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
-        your Recipe
+      %p
+        %b Assigned Categories:
+        = links_to_categories(@recipe)
 
 .row
-  .small-12.columns
-    %p
-      %b Assigned Categories:
-      = links_to_categories(@recipe)
-.row
   .medium-7.columns
-    - if signed_in? && current_user != @recipe.user
-      %h5= render 'recipes/favor_form', recipe: @recipe
-    - elsif !signed_in?
-      = link_to new_user_session_path do
-        %i.fa.fa-sign-in
-        Log in
-      or
-      = link_to new_user_registration_path do
-        %i.fa.fa-user-plus
-        Sign up
-      to Add to Favorites
+    .hide-on-print
+      - if signed_in? && current_user != @recipe.user
+        %h5= render 'recipes/favor_form', recipe: @recipe
+      - elsif !signed_in?
+        = link_to new_user_session_path do
+          %i.fa.fa-sign-in
+          Log in
+        or
+        = link_to new_user_registration_path do
+          %i.fa.fa-user-plus
+          Sign up
+        to Add to Favorites
 
     %h1
       = @recipe.name
@@ -65,4 +68,5 @@
           %br/
         %br/
 
-    = link_to 'Recipes', recipes_path
+    .hide-on-print
+      = link_to 'Recipes', recipes_path

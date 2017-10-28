@@ -1,14 +1,14 @@
+.app-name {
+  font-size: 2.6em;
+  font-weight: normal;
+  font-family: $app-title-font;
+}
+
 .top-bar {
   height: 68px;
   /* add style to title font */
   .title-bar-left {
     margin-top: -0.8rem;
-  }
-
-  .title-bar-title {
-    font-size: 2.6em;
-    font-weight: normal;
-    font-family: $app-title-font;
   }
 
   /* make menu icon larger and easier to click */
