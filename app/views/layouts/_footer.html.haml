@@ -1,11 +1,9 @@
 %footer
   #style_footer
     .row
-      .small-12.columns
-        .float-left
-          Brought to you by
-          %h4
-            The Tin Foil Hat Company
-
+      .medium-5.columns
+        = link_to 'https://ttfh.co', target: '_blank' do
+          = image_tag 'TinFoilHat.svg'
+      .medium-7.columns
         .float-right
           %span.italic_text v-0.2.3

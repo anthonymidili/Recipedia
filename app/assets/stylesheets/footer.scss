@@ -1,3 +1,5 @@
+$footer-size: 186px;
+
 html, body {height: 100%;}
 
 #wrap {
@@ -6,16 +8,16 @@ html, body {height: 100%;}
   padding-bottom: 30px;
 }
 
-#main {padding-bottom: 125px;} /* must be same height as the footer or add more for padding */
+#main {padding-bottom: $footer-size;} /* must be same height as the footer or add more for padding */
 
 footer {
   position: relative;
-  margin-top: -125px; /* negative value of footer height */
-  height: 125px;
+  margin-top: -$footer-size; /* negative value of footer height */
+  min-height: $footer-size;
   clear: both;
 
   #style_footer {
-    height: 100%;
+    min-height: $footer-size;
     border: 2px solid $tattoo-footer-background;
     padding: 25px;
     background: $tattoo-footer-background;
