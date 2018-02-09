@@ -5,7 +5,7 @@
     %meta{:content => 'width=device-width, initial-scale=1.0', :name => 'viewport'}/
 
     = favicon_link_tag('favicon.png')
-    %title= content_for?(:title) ? "Recopedia | #{yield(:title)}" : 'Recopedia'
+    %title= content_for?(:title) ? "Recipedia | #{yield(:title)}" : 'Recipedia'
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
