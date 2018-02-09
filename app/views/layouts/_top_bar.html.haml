@@ -5,35 +5,34 @@
   .title-bar-right
     %span{data: {hide_for: 'medium', responsive_toggle: 'responsive-menu'}}
       %span.menu-icon{data: {toggle: true}}
-  #responsive-menu
-    .top-bar-right
-      %ul.menu.mainmenu.vertical.medium-horizontal{data: {responsive_menu: 'accordion medium-dropdown'}}
+  #responsive-menu.top-bar-right
+    %ul.menu.mainmenu.vertical.medium-horizontal{data: {responsive_menu: 'accordion medium-dropdown'}}
+      %li
+        = link_to recipes_path do
+          %i.fa.fa-cutlery
+          Recipes
+      - if user_signed_in?
         %li
-          = link_to recipes_path do
-            %i.fa.fa-cutlery
-            Recipes
-        - if user_signed_in?
-          %li
-            = link_to user_path(current_user) do
-              %i.fa.fa-book
-              Cookbook
-          %li
-            = link_to edit_user_registration_path do
-              %i.fa.fa-cog
-              User
-          %li
-            = link_to destroy_user_session_path, method: :delete do
-              %i.fa.fa-sign-out
-              Sign out
-        - else
-          %li
-            = link_to new_user_session_path do
-              %i.fa.fa-sign-in
-              Log in
-          %li
-            = link_to new_user_registration_path do
-              %i.fa.fa-user-plus
-              Sign up
+          = link_to user_path(current_user) do
+            %i.fa.fa-book
+            Cookbook
+        %li
+          = link_to edit_user_registration_path do
+            %i.fa.fa-cog
+            User
+        %li
+          = link_to destroy_user_session_path, method: :delete do
+            %i.fa.fa-sign-out
+            Sign out
+      - else
+        %li
+          = link_to new_user_session_path do
+            %i.fa.fa-sign-in
+            Log in
+        %li
+          = link_to new_user_registration_path do
+            %i.fa.fa-user-plus
+            Sign up
 
         -# dropdown menu
         -# %li

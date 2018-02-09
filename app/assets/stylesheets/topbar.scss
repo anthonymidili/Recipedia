@@ -2,13 +2,12 @@
   font-size: 2.6em;
   font-weight: normal;
   font-family: $app-title-font;
+  white-space: nowrap;
 }
 
 .top-bar {
-  height: 68px;
-  /* add style to title font */
-  .title-bar-left {
-    margin-top: -0.8rem;
+  .accordion-menu {
+    background-color: lighten($tattoo-topbar-background, 10%);
   }
 
   /* make menu icon larger and easier to click */
