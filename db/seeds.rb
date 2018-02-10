@@ -5,7 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-user = User.find_by(email: 'tonywinslow@yahoo.com')
+user = User.find_or_create_by(username: 'Anthony', email: 'tonywinslow@yahoo.com') do |u|
+  u.password = 'password'
+  u.password_confirmation = 'password'
+end
 
 user.categories.find_or_create_by(name: 'Appetizers')
 user.categories.find_or_create_by(name: 'Breakfast & Brunch')
