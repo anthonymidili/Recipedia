@@ -19,10 +19,13 @@ class ImageUploader < Shrine
 
   process(:store) do |io|
     original = io.download
+    pipeline = ImageProcessing::MiniMagick.source(original)
 
-    size_800 = resize_to_limit(original, 800, 800) { |cmd| cmd.auto_orient } # orient rotated images
-    size_400 = resize_to_limit(size_800,  400, 400)
-    size_150 = resize_to_fill(size_800, 800, 150)
+    size_800 = pipeline.resize_to_limit!(800, 800)
+    size_400 = pipeline.resize_to_limit!(400, 400)
+    size_150 = pipeline.resize_to_fill!(800, 150)
+
+    original.close!
 
     {original: io, large: size_800, medium: size_400, banner: size_150}
   end
