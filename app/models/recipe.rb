@@ -13,7 +13,7 @@ class Recipe < ApplicationRecord
 
   belongs_to :user
 
-  include ImageUploader::Attachment.new(:image)
+  # include ImageUploader::Attachment.new(:image)
 
   validates :name, presence: true
   validates :description, presence: true

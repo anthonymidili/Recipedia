@@ -52,11 +52,11 @@ gem 'cocoon', '~> 1.2.10'
 gem 'devise', '~> 4.4.1'
 
 # shrine
-gem 'shrine'
-gem 'image_processing'
-gem 'mini_magick'
-gem 'fastimage'
-gem 'aws-sdk'
+# gem 'shrine'
+# gem 'image_processing'
+# gem 'mini_magick'
+# gem 'fastimage'
+# gem 'aws-sdk'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
