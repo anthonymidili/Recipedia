@@ -11,6 +11,8 @@ class Recipe < ApplicationRecord
   has_many :parts, dependent: :destroy
   accepts_nested_attributes_for :parts, allow_destroy: true
 
+  has_one_attached :image
+
   belongs_to :user
 
   # include ImageUploader::Attachment.new(:image)

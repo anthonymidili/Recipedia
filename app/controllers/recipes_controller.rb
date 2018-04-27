@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/new
   def new
-    @recipe = Recipe.new
+    @recipe = current_user.recipes.new
   end
 
   # GET /recipes/1/edit
@@ -31,8 +31,8 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
-    @recipe.user = current_user
+    @recipe = current_user.recipes.new(recipe_params)
+    set_recipe_image
 
     respond_to do |format|
       if @recipe.save
@@ -48,6 +48,8 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
+    set_recipe_image
+
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
@@ -62,6 +64,7 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1
   # DELETE /recipes/1.json
   def destroy
+    @recipe.image.purge
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
@@ -83,6 +86,10 @@ private
   def set_user_recipe
     @recipe = current_user.recipes.find_by(id: params[:id])
     redirect_to root_path unless @recipe
+  end
+
+  def set_recipe_image
+    @recipe.image.attach(params[:recipe][:image]) if @recipe && params[:recipe][:image]
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -6,8 +6,8 @@ module RecipesHelper
   end
 
   def background_banner(object)
-    if object.try(:image_data?)
-      "background-image: url(#{object.image_url(:banner)});"
+    if object.try(:image).try(:attached?)
+      "background-image: url(#{url_for(object.image)});"
     end
   end
 end

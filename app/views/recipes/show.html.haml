@@ -45,7 +45,7 @@
     %p
       = @recipe.description
   .medium-5.columns
-    .center= image_tag @recipe.image_url(:large), class: 'max-image-height' if @recipe.image_data?
+    .center= image_tag @recipe.image, class: 'max-image-height' if @recipe.image.attached?
 
 .row
   .small-12.columns
