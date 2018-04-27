@@ -25,7 +25,7 @@
 
       .medium-6.columns
         = f.label :image, 'Upload image (landscape for best results)'
-        = f.file_field :image
+        = f.file_field :image, direct_upload: true
 
         - if f.object.image.attached?
           = image_tag f.object.image

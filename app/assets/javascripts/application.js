@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery-ui/widgets/autocomplete
 //= require cocoon
+//= require activestorage
 //= require foundation
 //= require turbolinks
 //= require_tree .
