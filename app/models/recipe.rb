@@ -1,6 +1,4 @@
 class Recipe < ApplicationRecord
-  after_commit :process_image, on: [:create, :update]
-
   has_many :favoritisms, dependent: :destroy
   has_many :users, through: :favoritisms
 
@@ -15,8 +13,6 @@ class Recipe < ApplicationRecord
   has_one_attached :image
 
   belongs_to :user
-
-  # include ImageUploader::Attachment.new(:image)
 
   validates :name, presence: true
   validates :description, presence: true
@@ -41,9 +37,5 @@ private
     if parts_count > 1 && parts_count != parts_name_count
       errors.add(:base, 'Must name recipe parts if more than 1')
     end
-  end
-
-  def process_image
-    ProcessImageJob.perform_later self if image.attached?
   end
 end

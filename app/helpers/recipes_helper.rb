@@ -7,7 +7,16 @@ module RecipesHelper
 
   def background_banner(object)
     if object.try(:image).try(:attached?)
-      "background-image: url(#{url_for(object.image)});"
+      "background-image: url(#{url_for(object.image) if object.image.attached?});"
     end
+  end
+
+  def medium_image(image)
+    image.variant(combine_options: {
+      auto_orient: true,
+      gravity: "center",
+      resize: "400x400^",
+      crop: "400x400+0+0"
+      })
   end
 end

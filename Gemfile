@@ -53,8 +53,8 @@ gem 'devise', '~> 4.4.1'
 
 # shrine
 # gem 'shrine'
-gem 'image_processing'
 gem 'mini_magick'
+# gem 'image_processing'
 # gem 'fastimage'
 gem 'aws-sdk-s3', require: false
 gem 'sidekiq', '~> 5.1.0'
