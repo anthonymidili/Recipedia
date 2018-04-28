@@ -89,7 +89,9 @@ private
   end
 
   def set_recipe_image
-    @recipe.image.attach(params[:recipe][:image]) if @recipe && params[:recipe][:image]
+    if @recipe && params[:recipe][:image]
+      @recipe.image.attach(params[:recipe][:image])
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
