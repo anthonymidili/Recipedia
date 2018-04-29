@@ -28,7 +28,7 @@
         = f.file_field :image, direct_upload: true
 
         - if f.object.image.attached?
-          = image_tag f.object.image
+          = image_tag large_image(f.object.image)
           -# .row
           -#   .small-12.columns
           -#     = f.check_box :remove_image

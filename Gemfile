@@ -54,11 +54,11 @@ gem 'devise', '~> 4.4.1'
 # shrine
 # gem 'shrine'
 gem 'mini_magick'
-# gem 'image_processing'
+gem 'image_processing'
 # gem 'fastimage'
 gem 'aws-sdk-s3', require: false
-gem 'sidekiq', '~> 5.1.0'
-gem 'redis-rails', '~> 5.0.2'
+# gem 'sidekiq', '~> 5.1.0'
+# gem 'redis-rails', '~> 5.0.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

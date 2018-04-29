@@ -36,7 +36,6 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.save
-        ProcessImageJob.perform_later @recipe if @recipe.image.attached?
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
       else
@@ -53,7 +52,6 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if @recipe.update(recipe_params)
-        ProcessImageJob.perform_later @recipe if @recipe.image.attached?
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -66,7 +64,7 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1
   # DELETE /recipes/1.json
   def destroy
-    @recipe.image.purge_later if @recipe.image.attached?
+    @recipe.image.purge if @recipe.image.attached?
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
