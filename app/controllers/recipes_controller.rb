@@ -32,7 +32,7 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = current_user.recipes.new(recipe_params)
-    set_recipe_image
+    @recipe.image.attach(recipe_params[:image])
 
     respond_to do |format|
       if @recipe.save
@@ -48,7 +48,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
-    set_recipe_image
+    @recipe.image.attach(params[:recipe][:image])
 
     respond_to do |format|
       if @recipe.update(recipe_params)
@@ -64,7 +64,7 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1
   # DELETE /recipes/1.json
   def destroy
-    @recipe.image.purge if @recipe.image.attached?
+    # @recipe.image.purge if @recipe.image.attached?
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
@@ -88,15 +88,9 @@ private
     redirect_to root_path unless @recipe
   end
 
-  def set_recipe_image
-    if @recipe && params[:recipe][:image]
-      @recipe.image.attach(params[:recipe][:image])
-    end
-  end
-
   # Never trust parameters from the scary internet, only allow the white list through.
   def recipe_params
-    params.require(:recipe).permit(:name, :description, :source, :image, :remove_image, category_ids: [],
+    params.require(:recipe).permit(:name, :description, :source, :image, category_ids: [],
                                    parts_attributes: [:id, :name, :_destroy,
                                                       ingredients_attributes: [:id, :item, :quantity, :_destroy],
                                                       steps_attributes: [:id, :description, :_destroy]])
