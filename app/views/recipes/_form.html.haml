@@ -24,7 +24,8 @@
 
       .medium-6.columns
         = f.label :image, 'Upload image (landscape for best results)'
-        = f.file_field :image, direct_upload: true
+        = f.file_field :image, direct_upload: true,
+        accept: 'image/png,image/gif,image/jpeg'
 
         - if f.object.image.attached?
           = image_tag medium_image(f.object.image)
