@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create,:edit, :update, :destroy]
   before_action :set_recipe, only: [:show]
   before_action :set_user_recipe, only: [:edit, :update, :destroy]
+  rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
 
   # GET /recipes
   # GET /recipes.json
@@ -21,7 +22,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/new
   def new
-    @recipe = current_user.recipes.new
+    @recipe = current_user.recipes.build
   end
 
   # GET /recipes/1/edit
@@ -31,16 +32,19 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = current_user.recipes.new(recipe_params)
-    @recipe.image.attach(recipe_params[:image])
+    ActiveRecord::Base.transaction do
+      @recipe = current_user.recipes.build(recipe_params)
+      @recipe.image.attach(recipe_params[:image])
 
-    respond_to do |format|
-      if @recipe.save
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
-        format.json { render :show, status: :created, location: @recipe }
-      else
-        format.html { render :new }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @recipe.save
+          format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
+          format.json { render :show, status: :created, location: @recipe }
+        else
+          @recipe.image.purge
+          format.html { render :new }
+          format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -64,7 +68,6 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1
   # DELETE /recipes/1.json
   def destroy
-    # @recipe.image.purge if @recipe.image.attached?
     @recipe.destroy
     respond_to do |format|
       format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
@@ -86,6 +89,10 @@ private
   def set_user_recipe
     @recipe = current_user.recipes.find_by(id: params[:id])
     redirect_to root_path unless @recipe
+  end
+
+  def cleanup_image
+    recipe_params.delete(:image)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
