@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
-    @recipe.image.attach(params[:recipe][:image])
+    @recipe.image.attach(params[:recipe][:image]) if params[:recipe][:image].present?
 
     respond_to do |format|
       if @recipe.update(recipe_params)
