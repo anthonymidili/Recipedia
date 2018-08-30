@@ -7,11 +7,11 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 5.2.1'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -49,7 +49,7 @@ gem 'kaminari', '~> 1.1.1'
 
 gem 'cocoon', '~> 1.2.10'
 
-gem 'devise', '~> 4.4.1'
+gem 'devise', '~> 4.5.0'
 
 # shrine
 # gem 'shrine'
@@ -64,7 +64,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Shim to load environment variables from .env
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '~> 2.5.0'
 end
 
 group :development do
