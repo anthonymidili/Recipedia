@@ -43,6 +43,7 @@ gem 'haml', '~> 5.0.1'
 gem 'haml-rails', '~> 1.0.0'
 
 gem 'foundation-rails', '~> 6.4.1'
+gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
 
 gem 'kaminari', '~> 1.1.1'
