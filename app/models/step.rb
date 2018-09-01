@@ -6,7 +6,7 @@ class Step < ApplicationRecord
 
   validates :description, presence: true
 
-  default_scope -> { order(created_at: :asc) }
+  default_scope -> { order(step_order: :asc) }
 
   private
 

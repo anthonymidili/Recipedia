@@ -9,5 +9,10 @@
               Remove
 
       .medium-11.medium-pull-1.columns
-        = f.label :description
-        = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F'
+        .row
+          .small-3.medium-2.columns
+            = f.label :step_order
+            = f.text_field :step_order
+          .small-9.medium-10.columns
+            = f.label :description
+            = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_28_104958) do
+ActiveRecord::Schema.define(version: 2018_09_01_033121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2018_04_28_104958) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "part_id", null: false
+    t.integer "step_order", null: false
     t.index ["part_id"], name: "index_steps_on_part_id"
     t.index ["recipe_id"], name: "index_steps_on_recipe_id"
   end
