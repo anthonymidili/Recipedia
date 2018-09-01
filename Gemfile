@@ -57,7 +57,7 @@ gem 'devise', '~> 4.5.0'
 gem 'mini_magick'
 gem 'image_processing'
 # gem 'fastimage'
-gem 'aws-sdk-s3', require: false
+gem 'aws-sdk', '~> 3'
 # gem 'sidekiq', '~> 5.1.0'
 # gem 'redis-rails', '~> 5.0.2'
 
