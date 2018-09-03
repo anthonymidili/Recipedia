@@ -63,8 +63,8 @@
       - @recipe.parts.each do |part|
         - if @recipe.parts.count > 1
           %h4= part.name
-        - part.steps.each do |step|
-          %span.red-text= "#{step.step_order}."
+        - part.steps.each_with_index do |step, index|
+          %span.red-text= "#{index += 1}."
           = step.description
           %br/
         %br/
