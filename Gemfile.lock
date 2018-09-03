@@ -856,7 +856,7 @@ DEPENDENCIES
   haml-rails (~> 1.0.0)
   image_processing
   jbuilder (~> 2.5)
-  jquery-rails (~> 4.3.1)
+  jquery-rails (~> 4.3, >= 4.3.3)
   jquery-turbolinks (~> 2.1.0)
   jquery-ui-rails (~> 6.0.1)
   kaminari (~> 1.1.1)
