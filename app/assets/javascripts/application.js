@@ -14,7 +14,7 @@
 //= require rails-ujs
 //= require jquery_ujs
 //= require jquery-ui/widgets/autocomplete
-//= require jQuery-ui/widgets/sortable
+//= require jquery-ui/widgets/sortable
 //= require cocoon
 //= require activestorage
 //= require foundation
