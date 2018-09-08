@@ -113,3 +113,12 @@ small.dark {
   background: $tattoo-pale-green;
   border: 1px solid black;
 }
+
+.switch {
+  & input:checked ~ .switch-paddle::after {
+    left: 4.75rem !important;
+  }
+    .switch-paddle {
+      width: 7rem !important;
+    }
+}

@@ -9,9 +9,9 @@ class RecipesController < ApplicationController
   def index
     @recipes =
       if params[:search]
-        Recipe.newest_to_oldest.filtered_by(params[:search]).page(params[:page])
+        Recipe.by_published.newest_to_oldest.filtered_by(params[:search]).page(params[:page])
       else
-        Recipe.newest_to_oldest.page(params[:page])
+        Recipe.by_published.newest_to_oldest.page(params[:page])
       end
   end
 
@@ -78,7 +78,7 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @recipes = Recipe.filtered_by(params[:term])
+    @recipes = Recipe.by_published.filtered_by(params[:term])
     render json: @recipes.pluck(:name)
   end
 
@@ -99,7 +99,7 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def recipe_params
-    params.require(:recipe).permit(:name, :description, :source, :image, category_ids: [],
+    params.require(:recipe).permit(:name, :description, :source, :image, :published, category_ids: [],
                                    parts_attributes: [:id, :name, :_destroy,
                                                       ingredients_attributes: [:id, :item, :quantity, :_destroy],
                                                       steps_attributes: [:id, :description, :step_order, :_destroy]])

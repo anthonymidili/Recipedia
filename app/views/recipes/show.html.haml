@@ -33,16 +33,16 @@
 
     %h1
       = @recipe.name
-    %ul.menu.simple
-      %li
-        %span
-          %b Posted by:
-          = link_to @recipe.user.username, user_path(@recipe.user)
-      - if @recipe.source?
-        %li
-          %b Source:
-          = @recipe.source
     %p
+      %b Posted by:
+      = link_to @recipe.user.username, user_path(@recipe.user)
+    - if @recipe.source?
+      %p
+        %b Source:
+        = @recipe.source
+    %p
+      %b Description:
+      %br/
       = @recipe.description
   .medium-5.columns
     .center= image_tag medium_image(@recipe.image),

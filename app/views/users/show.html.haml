@@ -1,11 +1,20 @@
 .row
   .small-12.columns
+    .float-right
+      = link_to new_recipe_path do
+        %i.fa.fa-plus-circle
+        Add a recipe
     %h1
       #{@user.username}'s Cookbook
 
+    - if @user == current_user && @user.recipes.by_unpublished.any?
+      %h4 Unpublished Drafts
+      .row
+        = render @user.recipes.by_unpublished
+
     %h4 Submitted Recipes
-.row
-  = render @user.recipes
+    .row
+      = render @user.recipes.by_published
 
 .row
   .small-12.columns

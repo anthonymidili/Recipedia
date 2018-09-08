@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @recipes = @category.recipes.by_name.page(params[:page])
+    @recipes = @category.recipes.by_published.by_name.page(params[:page])
   end
 
   # GET /categories/new

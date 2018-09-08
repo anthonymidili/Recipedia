@@ -19,6 +19,8 @@ class Recipe < ApplicationRecord
   validate :check_box_presence
   validate :name_on_parts
 
+  scope :by_published, -> { where(published: true) }
+  scope :by_unpublished, -> { where(published: false) }
   scope :by_name, -> { order(name: :asc) }
   scope :newest_to_oldest, -> { order(created_at: :desc) }
   scope :unique_image, -> (used_recipes) { where.not(id: used_recipes) }

@@ -7,7 +7,7 @@ class Category < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   scope :oldest_to_newest, -> { order(created_at: :asc) }
-  scope :in_use, -> { includes(:recipes).where.not(recipes: { id: nil }) }
+  scope :in_use, -> { includes(:recipes).where.not(recipes: { id: nil, published: false }) }
   scope :not_used, -> { includes(:recipes).where(recipes: { id: nil }) }
   scope :list_names, -> { all.map(&:name).join(', ') }
 end

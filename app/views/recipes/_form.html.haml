@@ -38,4 +38,9 @@
 
   .row
     .small-12.columns
+      .switch.large
+        = f.check_box :published, id: 'published', class: 'switch-input'
+        = f.label :published, class: 'switch-paddle', for: 'published' do
+          %span.switch-active{"aria-hidden" => "true"} Publish
+          %span.switch-inactive{"aria-hidden" => "true"} Draft
       = f.submit class: 'button'
