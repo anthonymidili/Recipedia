@@ -50,24 +50,26 @@
 
 .row
   .small-12.columns
-    %h4 Ingredients:
-    .callout
-      - @recipe.parts.each do |part|
-        - if @recipe.parts.count > 1
-          %h4= part.name
-        = render part.ingredients
-        %br/
-
-    %h4 Steps:
-    .callout
-      - @recipe.parts.each do |part|
-        - if @recipe.parts.count > 1
-          %h4= part.name
-        - part.steps.each_with_index do |step, index|
-          %span.red-text= "#{index += 1}."
-          = step.description
+    - if @recipe.ingredients.any?
+      %h4 Ingredients:
+      .callout
+        - @recipe.parts.each do |part|
+          - if @recipe.parts.count > 1
+            %h4= part.name
+          = render part.ingredients
           %br/
-        %br/
+
+    - if @recipe.steps.any?
+      %h4 Steps:
+      .callout
+        - @recipe.parts.each do |part|
+          - if @recipe.parts.count > 1
+            %h4= part.name
+          - part.steps.each_with_index do |step, index|
+            %span.red-text= "#{index += 1}."
+            = step.description
+            %br/
+          %br/
 
     .hide-on-print
       = link_to 'Recipes', recipes_path
