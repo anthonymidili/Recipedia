@@ -23,10 +23,12 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = current_user.recipes.build
+    @recipe.parts.build
   end
 
   # GET /recipes/1/edit
   def edit
+    @recipe.parts.build if @recipe.parts.blank?
   end
 
   # POST /recipes

@@ -4,7 +4,7 @@
       Recipe Parts
       %small.dark (if this is a single part recipe, the part name will not be displayed)
     .parts
-      = f.fields_for :parts, f.object.parts do |part|
+      = f.fields_for :parts do |part|
         = render 'parts/part_fields', f: part
       .links
         = link_to_add_association f, :parts, partial: 'parts/part_fields' do

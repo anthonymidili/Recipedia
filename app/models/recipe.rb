@@ -8,7 +8,7 @@ class Recipe < ApplicationRecord
   has_many :steps, dependent: :destroy
 
   has_many :parts, dependent: :destroy
-  accepts_nested_attributes_for :parts, allow_destroy: true
+  accepts_nested_attributes_for :parts, reject_if: :all_blank, allow_destroy: true
 
   has_one_attached :image
 
