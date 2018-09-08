@@ -104,7 +104,11 @@ small.dark {
 .slide {
   text-align: center;
   @include breakpoint(medium) {
-    margin-top: 1.9rem;
+    margin-top: 30px;
+    height: 50px;
+    i {
+      padding-top: 14px;
+    }
   }
   background: $tattoo-pale-green;
   border: 1px solid black;

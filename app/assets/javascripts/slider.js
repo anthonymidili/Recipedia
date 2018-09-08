@@ -9,6 +9,7 @@ document.addEventListener("turbolinks:load", function() {
 
   function makeSlidable() {
     $('.all-slides').sortable({
+      handle: ".slide",
       update: function(event, ui) {
         updateStepValues();
       }

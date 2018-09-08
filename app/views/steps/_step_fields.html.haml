@@ -10,12 +10,12 @@
 
       .medium-11.medium-pull-1.columns
         .row
-          .medium-2.large-2.columns
-            = f.label :step_order
-            = f.number_field :step_order, class: 'stepOrderField', readonly: true
           .medium-2.large-1.columns
             .slide
               %i.fa.fa-arrows-v
+          .medium-2.large-2.columns
+            = f.label :step_order
+            = f.number_field :step_order, class: 'stepOrderField', readonly: true
           .medium-8.large-9.columns
             = f.label :description
             = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F'
