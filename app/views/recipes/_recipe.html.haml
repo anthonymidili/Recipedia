@@ -2,11 +2,17 @@
   = link_to recipe do
     .banner{style: "#{background_banner(recipe)}"}
       .highlight-text
+        .float-right
+          - if recipe.favoritisms.count > 0
+            .red-text
+              %i.fa.fa-heart
+              = recipe.favoritisms.count
         %h4
           = recipe.name
-          %small.dark
-            (
-            posted by:
-            = recipe.user.username
-            )
+        %small
+          (
+          posted by:
+          = recipe.user.username
+          )
+        %br/
         = recipe.description

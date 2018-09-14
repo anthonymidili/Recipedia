@@ -2,7 +2,7 @@
   .small-12.columns
     %h5
       Recipe Parts
-      %small.dark (if this is a single part recipe, the part name will not be displayed)
+      %small.dark-text (if this is a single part recipe, the part name will not be displayed)
     .parts
       = f.fields_for :parts do |part|
         = render 'parts/part_fields', f: part

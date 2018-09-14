@@ -61,6 +61,16 @@ nav.pagination {
 
 .red-text {
   color: red;
+  a {
+    color: red;
+    &:hover {
+      color: darken(red, 20%);
+    }
+  }
+}
+
+.dark-text {
+  color: black;
 }
 
 .highlight-text {
@@ -72,12 +82,9 @@ nav.pagination {
   height: 150px;
   background-position: center;
   overflow: hidden;
-}
-
-small.dark {
-  color: $black;
-  font-size: 60%;
-  white-space: nowrap;
+  h4 {
+    margin-bottom: -0.1em;
+  }
 }
 
 .max-image-height {
@@ -121,4 +128,10 @@ small.dark {
     .switch-paddle {
       width: 7rem !important;
     }
+}
+
+ul.inline {
+  span {
+    display: inline-block;
+  }
 }

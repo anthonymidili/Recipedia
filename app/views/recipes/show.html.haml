@@ -29,13 +29,15 @@
         = link_to new_user_registration_path do
           %i.fa.fa-user-plus
           Sign up
-        to Add to Favorites
-
+        to
+        %i.red-text.fa.fa-heart
+        add to favorites
     %h1
       = @recipe.name
-    %p
+    %span.recipe_stats= render 'recipes/stats', recipe: @recipe
+    = link_to user_path(@recipe.user) do
       %b Posted by:
-      = link_to @recipe.user.username, user_path(@recipe.user)
+      = @recipe.user.username
     - if @recipe.source?
       %p
         %b Source:
