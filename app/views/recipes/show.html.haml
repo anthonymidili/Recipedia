@@ -19,22 +19,20 @@
 .row
   .medium-7.columns
     .hide-on-print
-      - if signed_in? && current_user != @recipe.user
-        %h5= render 'recipes/favor_form', recipe: @recipe
-      - elsif !signed_in?
-        = link_to new_user_session_path do
-          %i.fa.fa-sign-in
-          Log in
-        or
-        = link_to new_user_registration_path do
-          %i.fa.fa-user-plus
-          Sign up
-        to
-        %i.red-text.fa.fa-heart
-        add to favorites
+      %h5
+        - if signed_in? && current_user != @recipe.user
+          = render 'recipes/favor_form', recipe: @recipe
+        - elsif !signed_in?
+          = link_to log_in_recipe_path(@recipe) do
+            %i.fa.fa-sign-in
+            Log in to
+            %i.red-text.fa.fa-heart
+            add to favorites
+      .recipe_stats
+        = render 'recipes/stats', recipe: @recipe
+
     %h1
       = @recipe.name
-    %span.recipe_stats= render 'recipes/stats', recipe: @recipe
     = link_to user_path(@recipe.user) do
       %b Posted by:
       = @recipe.user.username
@@ -74,4 +72,4 @@
           %br/
 
     .hide-on-print
-      = link_to 'Recipes', recipes_path
+      = link_to 'All Recipes', recipes_path

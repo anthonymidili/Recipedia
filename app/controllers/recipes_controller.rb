@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create,:edit, :update, :destroy]
-  before_action :set_recipe, only: [:show]
+  before_action :authenticate_user!, only: [:new, :create,:edit, :update, :destroy, :log_in]
+  before_action :set_recipe, only: [:show, :log_in]
   before_action :set_user_recipe, only: [:edit, :update, :destroy]
   rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
 
@@ -80,6 +80,10 @@ class RecipesController < ApplicationController
   def search
     @recipes = Recipe.by_published.filtered_by(params[:term])
     render json: @recipes.pluck(:name)
+  end
+
+  def log_in
+    redirect_to @recipe
   end
 
 private
