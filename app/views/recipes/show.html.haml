@@ -19,7 +19,7 @@
 .row
   .medium-7.columns
     .hide-on-print
-      %h5
+      %h4
         - if signed_in? && current_user != @recipe.user
           = render 'recipes/favor_form', recipe: @recipe
         - elsif !signed_in?
