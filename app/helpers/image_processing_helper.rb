@@ -5,7 +5,7 @@ module ImageProcessingHelper
       gravity: "center",
       resize: "800x800^",
       crop: "800x800+0+0"
-      }).processed.service_url
+      }) # .processed.service_url
   end
 
   def medium_image(image)
@@ -14,7 +14,7 @@ module ImageProcessingHelper
       gravity: "center",
       resize: "400x400^",
       crop: "400x400+0+0"
-      }).processed.service_url
+      }) # .processed.service_url
   end
 
   def banner_image(image)
@@ -23,6 +23,6 @@ module ImageProcessingHelper
       gravity: "center",
       resize: "800x150^",
       crop: "800x150+0+0"
-      }).processed.service_url
+      }) # .processed.service_url
   end
 end
