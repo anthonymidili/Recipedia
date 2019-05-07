@@ -20,7 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -40,7 +40,7 @@ gem 'bootsnap', require: false
 # gem 'capistrano-rails', group: :development
 
 gem 'haml', '~> 5.0.1'
-gem 'haml-rails', '~> 1.0.0'
+gem 'haml-rails', '~> 2.0.0'
 
 gem 'foundation-rails', '~> 6.5.3'
 gem 'autoprefixer-rails'
@@ -50,7 +50,7 @@ gem 'kaminari', '~> 1.1.1'
 
 gem 'cocoon', '~> 1.2.10'
 
-gem 'devise', '~> 4.5.0'
+gem 'devise', '~> 4.6.2'
 
 # shrine
 # gem 'shrine'
@@ -65,7 +65,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Shim to load environment variables from .env
-  gem 'dotenv-rails', '~> 2.6.0'
+  gem 'dotenv-rails', '~> 2.7.2'
 end
 
 group :development do
@@ -81,4 +81,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-ruby '2.6.0'
+ruby '2.6.3'
