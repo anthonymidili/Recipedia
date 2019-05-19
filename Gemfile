@@ -39,7 +39,7 @@ gem 'bootsnap', require: false
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'haml', '~> 5.0.1'
+gem 'haml', '~> 5.1.0'
 gem 'haml-rails', '~> 2.0.0'
 
 gem 'foundation-rails', '~> 6.5.3'

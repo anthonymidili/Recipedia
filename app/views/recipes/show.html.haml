@@ -2,22 +2,22 @@
 
 .hide-on-print
   - if @recipe.user == current_user
-    .row
-      .small-12.columns
+    .grid-x
+      .small-12.cell
         .float-right
           = link_to 'Edit', edit_recipe_path(@recipe)
           or
           = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
           your Recipe
 
-  .row
-    .small-12.columns
+  .grid-x
+    .small-12.cell
       %p
         %b Assigned Categories:
         = links_to_categories(@recipe)
 
-.row
-  .medium-7.columns
+.grid-x
+  .medium-7.cell
     .hide-on-print
       %h4
         - if signed_in? && current_user != @recipe.user
@@ -44,12 +44,12 @@
       %b Description:
       %br/
       = @recipe.description
-  .medium-5.columns
+  .medium-5.cell
     .center= image_tag medium_image(@recipe.image),
     class: 'max-image-height' if @recipe.image.attached?
 
-.row
-  .small-12.columns
+.grid-x
+  .small-12.cell
     - if @recipe.ingredients.any?
       %h4 Ingredients:
       .callout

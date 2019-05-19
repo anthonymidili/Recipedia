@@ -2,8 +2,8 @@
   = render 'notifications/error_messages', object: f.object
 
   .callout
-    .row
-      .small-12.columns
+    .grid-x
+      .small-12.cell
         %label
           It's important to check all categories that apply to make it easy for others to find or
           = succeed '.' do
@@ -11,8 +11,8 @@
         %ul.menu.simple
           = f.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
             %li= b.label(data:{value: b.value}) { b.check_box + b.text }
-    .row
-      .medium-6.columns
+    .grid-x
+      .medium-6.cell
         = f.label :name
         = f.text_field :name, placeholder: 'Apple Pie'
         %br/
@@ -22,22 +22,22 @@
         = f.label :source, 'Be sure to give credit where credit is due. Name the recipe source'
         = f.text_field :source, placeholder: 'cookbook, website or person'
 
-      .medium-6.columns
+      .medium-6.cell
         = f.label :image, 'Upload image (landscape for best results)'
         = f.file_field :image, direct_upload: true,
         accept: 'image/png,image/gif,image/jpeg'
 
         - if f.object.image.attached?
           = image_tag medium_image(f.object.image)
-          -# .row
-          -#   .small-12.columns
+          -# .grid-x
+          -#   .small-12.cell
           -#     = f.check_box :remove_image
           -#     = f.label :remove_image
 
   #parts= render 'parts/fields_for_form', f: f
 
-  .row
-    .small-12.columns
+  .grid-x
+    .small-12.cell
       %b Publish
       recipe or save
       as

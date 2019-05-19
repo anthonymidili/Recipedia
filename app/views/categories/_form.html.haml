@@ -1,11 +1,11 @@
 = form_for @category do |f|
   = render 'notifications/error_messages', object: f.object
 
-  .row
-    .small-6.columns
+  .grid-x
+    .small-6.cell
       = f.label :name
       = f.text_field :name
 
-  .row
-    .small-12.columns
+  .grid-x
+    .small-12.cell
       = f.submit class: 'button'

@@ -8,7 +8,13 @@ html, body {height: 100%;}
   padding-bottom: 30px;
 }
 
-#main {padding-bottom: $footer-size;} /* must be same height as the footer or add more for padding */
+#main {
+  padding-bottom: $footer-size; /* must be same height as the footer or add more for padding */
+  @include xy-grid-container;
+  .grid-x {
+    @extend .grid-margin-x; /* Use grid-margin-x by default */
+  }
+}
 
 footer {
   position: relative;

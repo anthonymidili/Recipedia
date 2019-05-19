@@ -1,7 +1,7 @@
 - provide(:title, 'Categories')
 
-.row
-  .small-12.columns
+.grid-x
+  .small-12.cell
     = link_to recipes_path do
       %i.fa.fa-list
       Browse latest recipes
@@ -11,18 +11,18 @@
         %i.fa.fa-plus-circle
         Create a new category
 
-.row
-  .small-12.columns
+.grid-x
+  .small-12.cell
     %h1 Browse Categories
 
-.row
+.grid-x
   = render @categories.in_use
 
 - if @categories.not_used.any?
-  .row
-    .small-12.columns
+  .grid-x
+    .small-12.cell
       = link_to 'More categories', '#', class: 'toggle hideShow', remote: true
       .hidden.hideShow
         = link_to 'Hide', '#', class: 'toggle', remote: true
-        .row
+        .grid-x
           = render @categories.not_used

@@ -1,7 +1,7 @@
 - provide(:title, 'Recipes')
 
-.row
-  .small-12.columns
+.grid-x
+  .small-12.cell
     = link_to categories_path do
       %i.fa.fa-list
       Browse recipes by categories
@@ -10,13 +10,13 @@
       = link_to new_recipe_path do
         %i.fa.fa-plus-circle
         Add a recipe
-.row
-  .small-12.columns
+.grid-x
+  .small-12.cell
     %h1 Latest Recipes
 
-.row
+.grid-x
   = render @recipes
 
-.row
-  .small-12.columns
+.grid-x
+  .small-12.cell
     = paginate @recipes

@@ -1,12 +1,12 @@
 .nested-fields
   .callout
-    .row
-      .medium-push-6.medium-6.columns
+    .grid-x
+      .small-order-1.medium-order-2.medium-6.cell
         .inline-icon
           = link_to_remove_association f, class: 'red-text' do
             %i.fa.fa-trash
             Remove Recipe Part
-      .medium-pull-6.medium-6.columns
+      .small-order-2.medium-order-1.medium-6.cell
         = f.label :name, 'Recipe part name (optional for single part recipes)'
         = f.text_field :name, placeholder: 'Pie Crust'
 

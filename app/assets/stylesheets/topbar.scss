@@ -54,4 +54,5 @@
 
 #search-box {
   padding-top: 1em;
+  @include xy-grid-container;
 }

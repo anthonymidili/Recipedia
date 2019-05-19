@@ -1,5 +1,5 @@
-.row
-  .medium-6.medium-centered.columns
+.grid-x.center
+  .medium-6.cell
     %h1 Resend unlock instructions
 
     = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|

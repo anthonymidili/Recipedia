@@ -1,21 +1,21 @@
 .nested-fields
   .callout-on-small-only
-    .row
-      .medium-1.medium-push-11.columns
+    .grid-x
+      .medium-1.small-order-1.medium-order-2.cell
         .inline-large-icon
           = link_to_remove_association f, class: 'red-text' do
             %i.fa.fa-trash
             %span.show-for-small-only
               Remove
 
-      .medium-11.medium-pull-1.columns
-        .row
-          .medium-2.large-1.columns
+      .medium-11.small-order-2.medium-order-1.cell
+        .grid-x
+          .medium-2.large-1.cell
             .slide
               %i.fa.fa-arrows-v
-          .medium-2.large-2.columns
+          .medium-2.large-2.cell
             = f.label :step_order
             = f.number_field :step_order, class: 'stepOrderField', readonly: true
-          .medium-8.large-9.columns
+          .medium-8.large-9.cell
             = f.label :description
             = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F'

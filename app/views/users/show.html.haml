@@ -1,5 +1,5 @@
-.row
-  .small-12.columns
+.grid-x
+  .small-12.cell
     .float-right
       = link_to new_recipe_path do
         %i.fa.fa-plus-circle
@@ -9,15 +9,15 @@
 
     - if @user == current_user && @user.recipes.by_unpublished.any?
       %h4 Unpublished Drafts
-      .row
+      .grid-x
         = render @user.recipes.by_unpublished
 
     %h4 Submitted Recipes
-    .row
+    .grid-x
       = render @user.recipes.by_published
 
-.row
-  .small-12.columns
+.grid-x
+  .small-12.cell
     %h4 Favorites
-.row
+.grid-x
   = render @user.favoritisms.map(&:recipe)

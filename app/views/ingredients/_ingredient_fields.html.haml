@@ -1,15 +1,15 @@
 .nested-fields
   .callout-on-small-only
-    .row
-      .medium-1.medium-push-11.columns
+    .grid-x
+      .medium-1.small-order-1.medium-order-3.cell
         .inline-large-icon
           = link_to_remove_association f, class: 'red-text' do
             %i.fa.fa-trash
             %span.show-for-small-only
               Remove
-      .medium-5.medium-pull-1.columns
+      .medium-5.small-order-2.medium-order-2.cell
         = f.label :quantity
         = f.text_field :quantity, placeholder: '1 cup'
-      .medium-6.medium-pull-1.columns
+      .medium-6.small-order-3.medium-order-1.cell
         = f.label :item
         = f.text_field :item, placeholder: 'all-purpose flour '
