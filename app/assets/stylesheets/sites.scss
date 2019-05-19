@@ -8,16 +8,23 @@ h1, h2, h3, h4 {
   font-family: $main-font;
 }
 
-#cover {
-  .title {
-    font-family: $app-title-font;
-    font-size: 5.5em;
-    margin-bottom: -20px;
-  }
-  img {
-    display: block;
-    margin: auto;
-  }
+.title {
+  font-family: $app-title-font;
+  font-size: 8em;
+  text-shadow:
+  2px 2px 2px white,
+  -2px -2px 2px white,
+  -2px 2px 2px white,
+  2px -2px 2px white;
+  background-image: url('spice.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 20px;
+}
+
+.messages .callout {
+  margin-bottom: 20px;
 }
 
 ul.simple {

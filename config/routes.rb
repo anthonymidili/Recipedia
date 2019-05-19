@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  root 'sites#index'
+  root 'recipes#index'
 
   devise_for :users
-
-  get 'sites/index'
 
   resources :recipes do
     collection do

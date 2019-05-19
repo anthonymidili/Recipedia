@@ -6,6 +6,7 @@
 }
 
 .top-bar {
+  margin-bottom: 20px;
   .accordion-menu {
     background-color: lighten($tattoo-topbar-background, 10%);
   }
@@ -45,14 +46,4 @@
   i {
     margin: 0 !important;
   }
-}
-
-/* add space between topbar and content */
-#main {
-  padding-top: 30px;
-}
-
-#search-box {
-  padding-top: 1em;
-  @include xy-grid-container;
 }
