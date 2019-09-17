@@ -15,12 +15,15 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+// cocoon js
 import "cocoon-js"
+
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery")
+
 // jQuery ui setup.
 require('webpack-jquery-ui/autocomplete')
 require('webpack-jquery-ui/sortable')
@@ -32,7 +35,7 @@ $(document).on('turbolinks:load', function() {
   $(document).foundation()
 });
 // Foundation css setup.
-// require("foundation-sites/dist/css/foundation")
+require("foundation-sites/dist/css/foundation")
 
 // Custom JavaScripts.
 import 'packs/autocomplete'
@@ -40,3 +43,9 @@ import 'packs/direct_uploads'
 import 'packs/sites'
 import 'packs/slider'
 import 'packs/touch_punch'
+
+// stylesheets
+import 'src/application'
+
+// images and fonts.
+require.context('../images', true)
