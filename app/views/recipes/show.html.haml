@@ -24,7 +24,7 @@
           = render 'recipes/favor_form', recipe: @recipe
         - elsif !signed_in?
           = link_to log_in_recipe_path(@recipe) do
-            %i.fa.fa-sign-in
+            %i.fa.fa-sign-in-alt
             Log in to
             %i.red-text.fa.fa-heart
             add to favorites
