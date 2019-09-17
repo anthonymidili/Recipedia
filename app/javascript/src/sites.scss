@@ -1,5 +1,5 @@
 body {
-  background-image: image-url('paisley-bg-image.jpg');
+  background-image: url('../images/paisley-bg-image.jpg');
   background-color: $tattoo-pale-green;
   min-width: 300px;
 }
@@ -16,7 +16,7 @@ h1, h2, h3, h4 {
   -2px -2px 2px white,
   -2px 2px 2px white,
   2px -2px 2px white;
-  background-image: image-url('spice.jpg');
+  background-image: url('../images/spice.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -122,10 +122,12 @@ nav.pagination {
 .slide {
   text-align: center;
   @include breakpoint(medium) {
-    margin-top: 30px;
+    margin-top: 20px;
     height: 50px;
-    i {
-      padding-top: 14px;
+    svg.large {
+      height: 20px;
+      width: 20px;
+      margin-top: 15px;
     }
   }
   background: $tattoo-pale-green;

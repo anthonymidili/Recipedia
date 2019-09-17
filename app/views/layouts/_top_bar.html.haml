@@ -9,7 +9,7 @@
     %ul.menu.mainmenu.vertical.medium-horizontal{data: {responsive_menu: 'accordion medium-dropdown'}}
       %li
         = link_to recipes_path do
-          %i.fa.fa-cutlery
+          %i.fa.fa-utensils
           Recipes
       - if user_signed_in?
         %li
@@ -22,12 +22,12 @@
             User
         %li
           = link_to destroy_user_session_path, method: :delete do
-            %i.fa.fa-sign-out
+            %i.fa.fa-sign-out-alt
             Sign out
       - else
         %li
           = link_to new_user_session_path do
-            %i.fa.fa-sign-in
+            %i.fa.fa-sign-in-alt
             Log in
         %li
           = link_to new_user_registration_path do

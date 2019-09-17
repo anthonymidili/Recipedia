@@ -18,13 +18,14 @@
 // cocoon js
 import "cocoon-js"
 
+// Rails.
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("jquery")
 
-// jQuery ui setup.
+// jQuery and jQuery ui setup.
+require("jquery")
 require('webpack-jquery-ui/autocomplete')
 require('webpack-jquery-ui/sortable')
 
@@ -44,8 +45,12 @@ import 'packs/sites'
 import 'packs/slider'
 import 'packs/touch_punch'
 
-// stylesheets
+// Custom stylesheets.
 import 'src/application'
 
 // images and fonts.
 require.context('../images', true)
+
+// fontawesome setup.
+import '@fortawesome/fontawesome-free/js/all'
+import '@fortawesome/fontawesome-free/css/all'

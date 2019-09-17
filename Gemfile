@@ -23,10 +23,6 @@ gem 'bootsnap', require: false
 
 gem 'haml-rails', '~> 2.0.0'
 
-gem 'foundation-rails', '~> 6.5.3'
-gem 'autoprefixer-rails'
-gem 'font-awesome-rails'
-
 gem 'kaminari', '~> 1.1.1'
 
 # For webpacker, you must use the cocoon gem with the yarn package cocoon-js.
