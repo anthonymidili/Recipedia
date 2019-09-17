@@ -15,28 +15,21 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-// cocoon js
-import "cocoon-js"
-
-// Rails.
+// Rails setup.
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-// jQuery and jQuery ui setup.
-require("jquery")
-require('webpack-jquery-ui/autocomplete')
-require('webpack-jquery-ui/sortable')
+// jQuery ui setup.
+import Autocomplete from 'webpack-jquery-ui/autocomplete'
+import Sortable from 'webpack-jquery-ui/sortable'
 
-// Foundation js setup.
-import 'foundation-sites'
-Foundation.addToJquery($)
+// Foundation setup.
+import Foundation from 'foundation-sites'
 $(document).on('turbolinks:load', function() {
   $(document).foundation()
 });
-// Foundation css setup.
-require("foundation-sites/dist/css/foundation")
 
 // Custom JavaScripts.
 import 'packs/autocomplete'
@@ -54,3 +47,6 @@ require.context('../images', true)
 // fontawesome setup.
 import '@fortawesome/fontawesome-free/js/all'
 import '@fortawesome/fontawesome-free/css/all'
+
+// cocoon js setup.
+import "cocoon-js"
