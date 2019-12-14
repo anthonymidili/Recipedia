@@ -19,7 +19,7 @@
         = f.label :description
         = f.text_area :description, placeholder: 'The best apple pie you will ever eat.', rows: '2'
         %br/
-        = f.label :source, 'Be sure to give credit where credit is due. Name the recipe source'
+        = f.label :source, "(Give credit where credit is due) Name the recipe's source"
         = f.text_field :source, placeholder: 'cookbook, website or person'
 
       .medium-6.cell
@@ -42,9 +42,8 @@
       recipe or save
       as
       %b Draft
-      %br/
       so recipe is
-      only visable to you
+      only visable to you in your cookbook
       .switch.large
         = f.check_box :published, id: 'published', class: 'switch-input'
         = f.label :published, class: 'switch-paddle', for: 'published' do
