@@ -1,9 +1,5 @@
 source 'https://rubygems.org'
-
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
 
@@ -29,6 +25,8 @@ gem 'image_processing'
 gem 'aws-sdk', '~> 3'
 
 gem 'webpacker', '~> 4.x'
+
+gem 'hirb'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
