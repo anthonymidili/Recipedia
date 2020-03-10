@@ -1,0 +1,7 @@
+%h1 Editing review
+
+= render 'form', recipe: @recipe, review: @review
+
+= link_to 'Show', [@recipe, @review]
+\|
+= link_to 'Back', recipe_reviews_path(@recipe)

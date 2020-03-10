@@ -71,5 +71,9 @@
             %br/
           %br/
 
+.grid-x
+  .small-12.cell
     .hide-on-print
       = link_to 'All Recipes', recipes_path
+
+      = render 'reviews/reviews', recipe: @recipe, review: @review

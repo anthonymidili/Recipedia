@@ -1,0 +1,7 @@
+%p
+  %b Body:
+  = @review.body
+
+= link_to 'Edit', edit_recipe_review_path(@recipe, @review)
+\|
+= link_to 'Back', recipe_reviews_path(@recipe)

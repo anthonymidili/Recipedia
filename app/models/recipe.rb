@@ -6,6 +6,7 @@ class Recipe < ApplicationRecord
   has_many :categories, through: :categorizations
   has_many :ingredients, dependent: :destroy
   has_many :steps, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   has_many :parts, dependent: :destroy
   accepts_nested_attributes_for :parts, reject_if: :all_blank, allow_destroy: true

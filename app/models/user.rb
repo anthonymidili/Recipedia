@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   has_many :categories
   has_many :recipes
+  has_many :reviews, foreign_key: 'author_id', dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
 

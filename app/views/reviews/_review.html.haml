@@ -1,0 +1,18 @@
+- if review.persisted?
+  -# - if correct_user?(review.author)
+  -#   .float-right
+  -#     %ul.menu
+  -#       %li
+  -#         = link_to [:edit, recipe, review], title: 'Edit' do
+  -#           = fa_icon 'edit', text: 'Edit'
+  -#       %li
+  -#         = link_to [recipe, review], method: :delete,
+  -#         data: { confirm: 'Are you sure.' },
+  -#         class: 'delete_link', title: 'Delete' do
+  -#           = fa_icon 'trash'
+  .li
+    = link_to review.author.username, review.author, class: 'user_badge'
+    %span.timestamp
+      posted #{time_ago_in_words(review.created_at)} ago
+    .callout
+      = simple_format(review.body, class: 'content')

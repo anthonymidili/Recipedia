@@ -1,0 +1,8 @@
+= form_with model: [recipe, review], id: 'review_form', local: false do |f|
+  = render 'notifications/error_messages', object: f.object
+
+  .field
+    = f.label :body, 'What did you think?'
+    = f.text_area :body, rows: 3
+  .actions
+    = f.submit class: 'button'
