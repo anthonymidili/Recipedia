@@ -1,9 +1,13 @@
 .grid-x
   .cell
     %h4#reviews_header Reviews
-.grid-x
-  .cell
-    .callout= render 'reviews/form', recipe: recipe, review: review
+    - if user_signed_in?
+      .callout= render 'reviews/form', recipe: recipe, review: review
+    - else
+      %p
+        = link_to log_in_recipe_path(@recipe) do
+          %i.fa.fa-sign-in-alt
+          Log in to create a review
 - if recipe.reviews
   %ul#reviews.menu.vertical
     = render recipe.reviews

@@ -39,16 +39,13 @@ ul.simple {
   justify-content: center;
 }
 
-a.black-link {
-  color: black;
-  &:hover {
-    color: lighten(black, 20%)
-  }
-}
-
 .user_badge {
-  padding: 0 5px 0 0 !important;
+  padding: 3px 5px !important;
+  border-left: 8px solid #c9f1b8;
+  margin-right: 5px;
   display: unset !important;
+  font-size: 110%;
+  background-color: #efefef;
 }
 
 .hidden {
@@ -77,16 +74,16 @@ nav.pagination {
 
 .red-text {
   color: red;
-  a {
-    color: red;
-    &:hover {
-      color: darken(red, 20%);
-    }
-  }
+}
+a.red-text:hover {
+  color: darken(red, 20%);
 }
 
-.dark-text {
+.black-text {
   color: black;
+}
+a.black-text:hover {
+  color: lighten(black, 20%)
 }
 
 .highlight-text {
@@ -159,4 +156,9 @@ ul.edit_menu {
   @include breakpoint(medium) {
     justify-content: flex-end;
   }
+}
+
+.timestamp {
+  font-size: 90%;
+  color: #656262;
 }

@@ -1,21 +1,21 @@
 - if review.persisted?
   %li{id: "review_#{review.id}"}
-    .grid-x
-      .cell.medium-8
-        = link_to review.author.username, review.author, class: 'user_badge'
-        %span.timestamp
-          posted #{time_ago_in_words(review.created_at)} ago
-      .cell.medium-4
-        - if is_author?(review.author)
-          %ul.edit_menu
-            %li
-              = link_to [:edit, review.recipe, review], title: 'Edit' do
-                %i.fas.fa-edit
-                Edit
-            %li
-              = link_to [review.recipe, review], method: :delete,
-              data: { confirm: 'Are you sure.' }, remote: true,
-              class: 'red-text', title: 'Delete' do
-                %i.fas.fa-trash
     .callout
+      .grid-x
+        .cell.medium-8
+          = link_to review.author.username, review.author, class: 'user_badge'
+          %span.timestamp
+            posted #{time_ago_in_words(review.created_at)} ago
+        .cell.medium-4
+          - if is_author?(review.author)
+            %ul.edit_menu
+              %li
+                = link_to [:edit, review.recipe, review], title: 'Edit' do
+                  %i.fas.fa-edit
+                  Edit
+              %li
+                = link_to [review.recipe, review], method: :delete,
+                data: { confirm: 'Are you sure.' }, remote: true,
+                class: 'red-text', title: 'Delete' do
+                  %i.fas.fa-trash
       = simple_format(review.body, class: 'content')

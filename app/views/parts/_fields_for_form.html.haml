@@ -2,7 +2,7 @@
   .small-12.cell
     %h5
       Recipe Parts
-      %small.dark-text (if this is a single part recipe, the part name will not be displayed)
+      %small.black-text (if this is a single part recipe, the part name will not be displayed)
     .parts
       = f.fields_for :parts do |part|
         = render 'parts/part_fields', f: part
