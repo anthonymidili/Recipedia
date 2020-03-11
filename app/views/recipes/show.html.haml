@@ -1,6 +1,22 @@
 - provide(:title, @recipe.name)
 
 .hide-on-print
+  .grid-x
+    .cell
+      .ul.menu.float-right.pad-bottom
+        .likely
+          %li.twitter Tweet
+          %li.facebook Share
+          %li.pinterest{data: { media: "#{image_tag(@recipe.image) if @recipe.image.attached?}" }} Pin
+          %li.telegram Send
+          %li.email.likely__widget
+            = mail_to nil,
+            subject: "Recipedia | #{@recipe.user.username}'s #{@recipe.name}",
+            body: "Go checkout #{@recipe.user.username}'s #{@recipe.name} on Recipedia. \n \n #{recipe_url(@recipe)}" do
+              %span.likely__icon
+                %i.fas.fa-envelope
+              %span.likely__button
+                Email
   - if is_author?(@recipe.user)
     .grid-x
       .small-12.cell
@@ -10,11 +26,11 @@
           = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
           your Recipe
 
-  .grid-x
-    .small-12.cell
-      %p
-        %b Assigned Categories:
-        = links_to_categories(@recipe)
+.grid-x
+  .small-12.cell
+    %p
+      %b Assigned Categories:
+      = links_to_categories(@recipe)
 
 .grid-x
   .medium-7.cell
@@ -39,10 +55,9 @@
       %p
         %b Source:
         = @recipe.source
-    %p
-      %b Description:
-      %br/
-      = @recipe.description
+    %br/
+    %b Description:
+    = simple_format(@recipe.description)
   .medium-5.cell
     .center= image_tag medium_image(@recipe.image),
     class: 'max-image-height' if @recipe.image.attached?

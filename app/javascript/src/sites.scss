@@ -39,6 +39,10 @@ ul.simple {
   justify-content: center;
 }
 
+.pad-bottom {
+  margin-bottom: 5px !important;
+}
+
 .user_badge {
   padding: 3px 5px !important;
   border-left: 8px solid #c9f1b8;
@@ -161,4 +165,24 @@ ul.edit_menu {
 .timestamp {
   font-size: 90%;
   color: #656262;
+}
+
+// Add links to ilyabirman-likely share button.
+.email.likely__widget {
+  &:hover {
+    background-color: #b9f4bb;
+  }
+  vertical-align: top;
+  a {
+    padding: 0;
+    height: 22px;
+    span {
+      font-size: 14px;
+      height: 22px !important;
+      &.likely__button {
+        padding-top: 4px !important;
+        color: black !important;
+      }
+    }
+  }
 }

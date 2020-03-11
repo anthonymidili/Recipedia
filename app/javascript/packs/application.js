@@ -50,3 +50,8 @@ import '@fortawesome/fontawesome-free/css/all'
 
 // cocoon js setup.
 import "cocoon-js"
+
+// https://github.com/NikolayRys/Likely (share buttons)
+import "ilyabirman-likely/release/likely.js"
+import "ilyabirman-likely/release/likely.css"
+import 'packs/likely_share_button'

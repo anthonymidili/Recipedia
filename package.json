@@ -17,6 +17,7 @@
     "coffee-loader": "^0.9.0",
     "coffeescript": "1.12.7",
     "foundation-sites": "^6.5.3",
+    "ilyabirman-likely": "^2.4.0",
     "jquery": "^3.4.1",
     "turbolinks": "^5.2.0",
     "webpack": "^4.40.2",
