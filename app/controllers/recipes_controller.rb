@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create,:edit, :update, :destroy, :log_in]
-  before_action :set_recipe, only: [:show, :log_in]
-  before_action :set_user_recipe, only: [:edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :log_in]
+  before_action :deny_access!,
+  unless: -> { is_author?(@recipe.user) }, only: [:edit, :update, :destroy]
   rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
 
   # GET /recipes
@@ -91,11 +92,6 @@ private
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
     @recipe = Recipe.find(params[:id])
-  end
-
-  def set_user_recipe
-    @recipe = current_user.recipes.find_by(id: params[:id])
-    redirect_to root_path unless @recipe
   end
 
   def cleanup_image

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_09_111522) do
+ActiveRecord::Schema.define(version: 2020_03_11_010048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2020_03_09_111522) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.string "source"
-    t.boolean "published", default: false
+    t.boolean "published", default: true
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 

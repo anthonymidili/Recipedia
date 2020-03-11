@@ -1,7 +1,7 @@
 - provide(:title, @recipe.name)
 
 .hide-on-print
-  - if @recipe.user == current_user
+  - if is_author?(@recipe.user)
     .grid-x
       .small-12.cell
         .float-right
@@ -20,7 +20,7 @@
   .medium-7.cell
     .hide-on-print
       %h4
-        - if signed_in? && current_user != @recipe.user
+        - if signed_in? && !is_author?(@recipe.user)
           = render 'recipes/favor_form', recipe: @recipe
         - elsif !signed_in?
           = link_to log_in_recipe_path(@recipe) do

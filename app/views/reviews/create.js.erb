@@ -1,1 +1,4 @@
-$("#reviews").prepend("<%= j render(@review) %>");
+// Add created review.
+$("#reviews").prepend("<%= j render @review %>");
+// Clear review text area.
+document.getElementById("review_body").value = "";

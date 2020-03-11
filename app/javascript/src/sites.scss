@@ -153,3 +153,10 @@ ul.inline {
     display: inline-block;
   }
 }
+
+ul.edit_menu {
+  @include menu-base;
+  @include breakpoint(medium) {
+    justify-content: flex-end;
+  }
+}
