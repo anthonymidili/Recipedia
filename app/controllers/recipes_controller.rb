@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
   before_action :deny_access!,
   unless: -> { is_author?(@recipe.user) }, only: [:edit, :update, :destroy]
   rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
+  before_action :set_meta_tags, only: [:show]
 
   # GET /recipes
   # GET /recipes.json
@@ -104,5 +105,20 @@ private
                                    parts_attributes: [:id, :name, :_destroy,
                                                       ingredients_attributes: [:id, :item, :quantity, :_destroy],
                                                       steps_attributes: [:id, :description, :step_order, :_destroy]])
+  end
+
+  def set_meta_tags
+    set_meta_tags title: @recipe.name,
+      description: @recipe.description,
+      keywords: @recipe.categories.list_names,
+      image_src: (rails_blob_url(@recipe.image) if @recipe.image.attached?),
+      twitter: {
+        card:  "photo",
+        image: {
+          _:      (rails_blob_url(@recipe.image) if @recipe.image.attached?),
+          width:  100,
+          height: 100,
+        }
+      }
   end
 end
