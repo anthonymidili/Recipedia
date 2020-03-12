@@ -3,4 +3,4 @@ User-agent: *
 Disallow: *
 Allow: /recipes
 
-Sitemap: https://recipedia.ttfh.co/public/sitemap.xml
+Sitemap: https://recipedia.ttfh.co/sitemap.xml
