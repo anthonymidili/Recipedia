@@ -19,9 +19,11 @@ gem 'kaminari', '~> 1.2.0'
 # For webpacker, you must use the cocoon gem with the yarn package cocoon-js.
 gem 'cocoon', '~> 1.2.10'
 gem 'devise', '~> 4.7.1'
+# https://github.com/kpumuk/meta-tags to make site search engine friendly.
+gem 'meta-tags', '~> 2.13.0'
 
-gem 'mini_magick'
-gem 'image_processing'
+gem 'mini_magick', '~> 4.10.1'
+gem 'image_processing', '~> 1.10.3'
 gem 'aws-sdk', '~> 3'
 
 gem 'webpacker', '~> 4.x'
@@ -41,7 +43,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'listen', '~> 3.2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 2.1.0'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
