@@ -19,6 +19,6 @@ Rails.application.routes.draw do
 
   resources :favoritisms, only: [:create, :destroy]
 
-  get 'sitemap.xml.gz', to: 'sites#sitemap', format: :xml
+  get 'public/sitemap.xml.gz', to: 'sites#sitemap', format: :xml
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
