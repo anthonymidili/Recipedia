@@ -21,6 +21,7 @@ gem 'cocoon', '~> 1.2.10'
 gem 'devise', '~> 4.7.1'
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
 gem 'meta-tags', '~> 2.13.0'
+gem 'sitemap_generator'
 
 gem 'mini_magick', '~> 4.10.1'
 gem 'image_processing', '~> 1.10.3'
