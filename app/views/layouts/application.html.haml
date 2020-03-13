@@ -4,7 +4,7 @@
     %meta{:charset => 'utf-8'}/
     %meta{:content => 'width=device-width, initial-scale=1.0', :name => 'viewport'}/
 
-    = display_meta_tags site: 'Recipedia'
+    = display_meta_tags
 
     = favicon_link_tag asset_pack_path('media/images/favicon.png')
     %title= content_for?(:title) ? "Recipedia | #{yield(:title)}" : 'Recipedia'

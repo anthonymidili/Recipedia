@@ -108,8 +108,7 @@ private
   end
 
   def set_meta_tag_options
-    set_meta_tags title: @recipe.name,
-      description: @recipe.description,
+    set_meta_tags description: @recipe.description,
       keywords: @recipe.categories.list_names,
       image_src: (rails_blob_url(@recipe.image) if @recipe.image.attached?),
       twitter: {
