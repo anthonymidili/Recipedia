@@ -113,12 +113,10 @@ private
       keywords: @recipe.categories.list_names,
       image_src: (rails_blob_url(@recipe.image) if @recipe.image.attached?),
       twitter: {
-        card:  "photo",
-        image: {
-          _:      (rails_blob_url(@recipe.image) if @recipe.image.attached?),
-          width:  100,
-          height: 100,
-        }
+        card:  "summary_large_image",
+        title: @recipe.name,
+        description: @recipe.description,
+        image: (rails_blob_url(@recipe.image) if @recipe.image.attached?)
       }
   end
 end
