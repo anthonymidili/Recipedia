@@ -116,7 +116,7 @@ private
         title: @recipe.name,
         description: @recipe.description,
         image: {
-          _: (rails_blob_url(@recipe.image) if @recipe.image.attached?),
+          _: (@recipe.image.service_url if @recipe.image.attached?),
           width: 400,
           height: 400
         }
@@ -126,7 +126,11 @@ private
         description: @recipe.description,
         type: 'website',
         secure_url: recipe_url(@recipe),
-        image: (rails_blob_url(@recipe.image) if @recipe.image.attached?)
+        image: {
+          _: (@recipe.image.service_url if @recipe.image.attached?),
+          width: 400,
+          height: 400
+        }
       }
   end
 end

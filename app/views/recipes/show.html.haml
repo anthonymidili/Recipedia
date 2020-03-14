@@ -7,7 +7,7 @@
         .likely
           %li.twitter Tweet
           %li.facebook Share
-          %li.pinterest{data: { media: "#{rails_blob_url(@recipe.image) if @recipe.image.attached?}" }} Pin
+          %li.pinterest{data: { media: "#{@recipe.image.service_url if @recipe.image.attached?}" }} Pin
           %li.telegram Send
           %li.email.likely__widget
             = mail_to nil,
