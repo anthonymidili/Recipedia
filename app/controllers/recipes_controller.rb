@@ -115,7 +115,6 @@ private
         card:  "summary",
         title: @recipe.name,
         description: @recipe.description,
-        url: recipe_url(@recipe),
         image: {
           _: (rails_blob_url(@recipe.image) if @recipe.image.attached?),
           width: 400,
@@ -126,7 +125,7 @@ private
         title: @recipe.name,
         description: @recipe.description,
         type: 'website',
-        url: recipe_url(@recipe),
+        secure_url: recipe_url(@recipe),
         image: (rails_blob_url(@recipe.image) if @recipe.image.attached?)
       }
   end
