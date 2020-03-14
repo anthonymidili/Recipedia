@@ -112,12 +112,24 @@ private
       description: @recipe.description,
       keywords: @recipe.categories.list_names,
       twitter: {
-        card:  "summary"
+        card:  "summary",
+        title: @recipe.name,
+        description: @recipe.description,
+        url: recipe_url(@recipe),
+        secure_url: recipe_url(@recipe),
+        image: {
+          _: (@recipe.image.service_url if @recipe.image.attached?),
+          sucure_url: (@recipe.image.service_url if @recipe.image.attached?),
+          width: 400,
+          height: 400,
+          type: (@recipe.image.blob.content_type if @recipe.image.attached?)
+        }
       },
       og: {
         title: @recipe.name,
         description: @recipe.description,
         type: 'website',
+        url: recipe_url(@recipe),
         secure_url: recipe_url(@recipe),
         image: {
           _: (@recipe.image.service_url if @recipe.image.attached?),
