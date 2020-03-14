@@ -108,22 +108,21 @@ private
   end
 
   def set_meta_tag_options
-    set_meta_tags description: @recipe.description,
+    set_meta_tags reverse: true,
+      description: @recipe.description,
       keywords: @recipe.categories.list_names,
-      image_src: (rails_blob_url(@recipe.image) if @recipe.image.attached?),
       twitter: {
-        card:  "summary_large_image",
+        card:  "summary",
         title: @recipe.name,
         description: @recipe.description,
         image: (rails_blob_url(@recipe.image) if @recipe.image.attached?)
       },
       og: {
-        type: 'website',
         title: @recipe.name,
-        url: recipe_url(@recipe),
         description: @recipe.description,
+        type: 'website',
+        url: recipe_url(@recipe),
         image: (rails_blob_url(@recipe.image) if @recipe.image.attached?)
-
       }
   end
 end
