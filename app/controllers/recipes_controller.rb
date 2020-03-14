@@ -115,6 +115,7 @@ private
         card:  "summary",
         title: @recipe.name,
         description: @recipe.description,
+        url: recipe_url(@recipe),
         image: (rails_blob_url(@recipe.image) if @recipe.image.attached?)
       },
       og: {
