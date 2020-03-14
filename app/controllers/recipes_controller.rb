@@ -112,14 +112,7 @@ private
       description: @recipe.description,
       keywords: @recipe.categories.list_names,
       twitter: {
-        card:  "summary",
-        title: @recipe.name,
-        description: @recipe.description,
-        image: {
-          _: (@recipe.image.service_url if @recipe.image.attached?),
-          width: 400,
-          height: 400
-        }
+        card:  "summary"
       },
       og: {
         title: @recipe.name,
@@ -128,8 +121,10 @@ private
         secure_url: recipe_url(@recipe),
         image: {
           _: (@recipe.image.service_url if @recipe.image.attached?),
+          sucure_url: (@recipe.image.service_url if @recipe.image.attached?),
           width: 400,
-          height: 400
+          height: 400,
+          type: (@recipe.image.blob.content_type if @recipe.image.attached?)
         }
       }
   end
