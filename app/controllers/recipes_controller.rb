@@ -113,10 +113,17 @@ private
       image_src: (rails_blob_url(@recipe.image) if @recipe.image.attached?),
       twitter: {
         card:  "summary_large_image",
-        creator: @recipe.user.username,
         title: @recipe.name,
         description: @recipe.description,
         image: (rails_blob_url(@recipe.image) if @recipe.image.attached?)
+      },
+      og: {
+        type: 'website',
+        title: @recipe.name,
+        url: recipe_url(@recipe),
+        description: @recipe.description,
+        image: (rails_blob_url(@recipe.image) if @recipe.image.attached?)
+
       }
   end
 end
