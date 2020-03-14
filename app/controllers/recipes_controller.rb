@@ -116,7 +116,11 @@ private
         title: @recipe.name,
         description: @recipe.description,
         url: recipe_url(@recipe),
-        image: (rails_blob_url(@recipe.image) if @recipe.image.attached?)
+        image: {
+          _: (rails_blob_url(@recipe.image) if @recipe.image.attached?),
+          width: 400,
+          height: 400
+        }
       },
       og: {
         title: @recipe.name,
