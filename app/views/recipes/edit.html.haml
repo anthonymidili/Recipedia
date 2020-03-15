@@ -6,6 +6,6 @@
 
     = render 'form'
 
-    = link_to 'Show', @recipe
-    \|
-    = link_to 'Recipes', recipes_path
+    %ul.nav-links
+      %li= link_to 'Back', @recipe
+      %li= link_to 'All Recipes', recipes_path

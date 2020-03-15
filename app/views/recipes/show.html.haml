@@ -35,14 +35,13 @@
 .grid-x
   .medium-7.cell
     .hide-on-print
-      %h4
-        - if user_signed_in? && !is_author?(@recipe.user)
-          = render 'recipes/favor_form', recipe: @recipe
-        - elsif !user_signed_in?
-          = link_to log_in_recipe_path(@recipe) do
-            %i.fa.fa-sign-in-alt
-            Log in to add to favorites
-            %i.red-text.fa.fa-heart
+      - if user_signed_in? && !is_author?(@recipe.user)
+        %h4= render 'recipes/favor_form', recipe: @recipe
+      - elsif !user_signed_in?
+        = link_to log_in_recipe_path(@recipe) do
+          %i.fa.fa-sign-in-alt
+          Log in to add to favorites
+          %i.red-text.fa.fa-heart
       .recipe_stats
         = render 'recipes/stats', recipe: @recipe
 
@@ -88,6 +87,7 @@
 .grid-x
   .small-12.cell
     .hide-on-print
-      = link_to 'All Recipes', recipes_path
+      %ul.menu.nav-links
+        %li= link_to 'All Recipes', recipes_path
 
       = render 'reviews/reviews', recipe: @recipe, review: @review

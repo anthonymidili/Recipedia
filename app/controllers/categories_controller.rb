@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create,:edit, :update, :destroy]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :category_in_use?, only: [:update, :destroy]
 
   # GET /categories
   # GET /categories.json
@@ -61,14 +62,10 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    if @category.recipes.any?
-      redirect_to @category, alert: "Can't destroy a category that recipes are using. Remove recipes from this category and try again."
-    else
-      @category.destroy
-      respond_to do |format|
-        format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-        format.json { head :no_content }
-      end
+    @category.destroy
+    respond_to do |format|
+      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
@@ -76,6 +73,13 @@ private
   # Use callbacks to share common setup or constraints between actions.
   def set_category
     @category = Category.find(params[:id])
+  end
+
+  def category_in_use?
+    if @category.in_use?
+      redirect_to @category, alert: "Can't edit a category that recipes are using."
+      return
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

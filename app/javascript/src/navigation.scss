@@ -1,0 +1,28 @@
+ul.nav-links {
+  @include menu-base;
+  background-color: #cbe2c05c;
+  border-color: #cbe2c0;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 12px;
+  padding: 0 20px 0 20px;
+  margin: 20px 0 20px 0;
+
+  li:not(:first-child) {
+    margin-left: 60px;
+  }
+
+  a {
+    @include button;
+    border-radius: 14px;
+    font-weight: bold;
+    @include button-style(#6c7a66, #77a563, #fefefe);
+    margin: 14px 0 16px 0;
+    box-shadow: 2px 2px 8px black;
+
+    // Custom colors.
+    &.alert {
+      background-color: red;
+    }
+  }
+}

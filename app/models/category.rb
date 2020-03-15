@@ -10,4 +10,8 @@ class Category < ApplicationRecord
   scope :in_use, -> { includes(:recipes).where.not(recipes: { id: nil, published: false }) }
   scope :not_used, -> { includes(:recipes).where(recipes: { id: nil }) }
   scope :list_names, -> { all.map(&:name).join(', ') }
+
+  def in_use?
+    recipes.any?
+  end
 end

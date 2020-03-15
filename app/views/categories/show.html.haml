@@ -1,11 +1,11 @@
 .grid-x
   .small-12.cell
-    .float-right
-      = link_to 'Edit', edit_category_path(@category)
-      - unless @category.recipes.any?
+    - unless @category.in_use?
+      .float-right
+        = link_to 'Edit', edit_category_path(@category)
         or
         = link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' }
-      Category
+        Category
 .grid-x.center
   .medium-6.cell
     %h1.center= @category.name
@@ -16,5 +16,6 @@
 .grid-x
   .small-12.cell
     = paginate @recipes
-    %br/
-    = link_to 'Categories', categories_path
+
+    %ul.menu.nav-links
+      %li= link_to 'Categories', categories_path

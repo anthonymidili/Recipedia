@@ -6,7 +6,7 @@
       Last Modified
       = @category.updated_at.strftime('%m-%d-%Y')
       by
-      = @category.user.username
+      = link_to @category.user.username, @category.user
 .grid-x
   .small-12.cell
     %h1
@@ -14,6 +14,6 @@
 
     = render 'form'
 
-    = link_to 'Categories', categories_path
-    \|
-    = link_to 'Show', @category
+    %ul.menu.nav-links
+      %li= link_to 'Back', @category
+      %li= link_to 'All Categories', categories_path
