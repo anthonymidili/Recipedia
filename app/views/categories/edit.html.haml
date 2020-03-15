@@ -12,8 +12,8 @@
     %h1
       Editing category
 
-    = render 'form'
+    = render 'form', category: @category
 
-    %ul.menu.nav-links
+    %ul.nav-links
       %li= link_to 'Back', @category
       %li= link_to 'All Categories', categories_path

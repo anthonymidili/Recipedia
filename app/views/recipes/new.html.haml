@@ -4,7 +4,7 @@
   .small-12.cell
     %h1 New recipe
 
-    = render 'form'
+    = render 'form', recipe: @recipe
 
-    %ul.menu.nav-links
+    %ul.nav-links
       %li= link_to 'All Recipes', recipes_path

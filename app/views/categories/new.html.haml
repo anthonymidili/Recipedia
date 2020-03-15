@@ -8,7 +8,7 @@
 
     %h1 New category
 
-    = render 'form'
+    = render 'form', category: @category
 
     %ul.nav-links
       %li= link_to 'Back', categories_path

@@ -1,16 +1,15 @@
-= form_with model: @recipe, local: true do |f|
+= form_with model: recipe, local: true do |f|
   = render 'notifications/error_messages', object: f.object
-
   .callout
     .grid-x
-      .small-12.cell
+      .cell
         %label
           It's important to check all categories that apply to make it easy for others to find or
           = succeed '.' do
             = link_to 'create your own', new_category_path, method: :get, data: { confirm: 'All unsaved changes will be lost.' }
-        %ul.menu.simple
-          = f.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
-            %li= b.label(data:{value: b.value}) { b.check_box + b.text }
+        %ul#check_boxes.menu.simple
+          = f.collection_check_boxes :category_ids, Category.all, :id, :name do |category|
+            = render 'categories/check_box', category: category
     .grid-x
       .medium-6.cell
         = f.label :name
@@ -29,10 +28,10 @@
 
         - if f.object.image.attached?
           = image_tag medium_image(f.object.image)
-          -# .grid-x
-          -#   .small-12.cell
-          -#     = f.check_box :remove_image
-          -#     = f.label :remove_image
+          .grid-x
+            .small-12.cell
+              = f.check_box :remove_image, id: 'recipe_remove_image'
+              = f.label :remove_image, for: 'recipe_remove_image'
 
   #parts= render 'parts/fields_for_form', f: f
 

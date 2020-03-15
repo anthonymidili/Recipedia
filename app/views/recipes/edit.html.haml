@@ -4,7 +4,7 @@
   .small-12.cell
     %h1 Editing recipe
 
-    = render 'form'
+    = render 'form', recipe: @recipe
 
     %ul.nav-links
       %li= link_to 'Back', @recipe
