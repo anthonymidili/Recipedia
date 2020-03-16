@@ -1,15 +1,22 @@
 - provide(:title, 'Categories')
 
 .grid-x
-  .small-12.cell
-    = link_to recipes_path do
-      %i.fa.fa-list
-      Browse latest recipes
-
-    .float-right
-      = link_to new_category_path do
-        %i.fa.fa-plus-circle
-        Create a new category
+  .medium-5.cell
+    %ul.menu
+      %li
+        = link_to recipes_path do
+          %i.fa.fa-list
+          Browse latest recipes
+  .medium-7.cell
+    %ul.menu.align-right
+      %li
+        = link_to new_category_path do
+          %i.fa.fa-plus-circle
+          Create a new category
+      %li
+        = link_to new_recipe_path do
+          %i.fa.fa-plus-circle
+          Add a recipe
 
 .grid-x
   .small-12.cell

@@ -1,5 +1,6 @@
 = form_with model: category, local: true do |f|
   = render 'notifications/error_messages', object: f.object
+  = hidden_field_tag(:return_to, @recipe.id) if @recipe
 
   .grid-x
     .small-6.cell

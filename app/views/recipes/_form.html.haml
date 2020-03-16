@@ -6,10 +6,11 @@
         %label
           It's important to check all categories that apply to make it easy for others to find or
           = succeed '.' do
-            = link_to 'create your own', new_category_path, method: :get, data: { confirm: 'All unsaved changes will be lost.' }
+            = link_to 'create your own', new_category_path(return_to: "#{f.object.id}"), data: { confirm: 'All unsaved changes will be lost.' }
         %ul#check_boxes.menu.simple
           = f.collection_check_boxes :category_ids, Category.all, :id, :name do |category|
-            = render 'categories/check_box', category: category
+            %li{id: "category_check_box_#{category.value}"}
+              = category.label(data: { value: category.value }) { category.check_box + category.text }
     .grid-x
       .medium-6.cell
         = f.label :name

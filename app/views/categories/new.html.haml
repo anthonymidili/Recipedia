@@ -11,4 +11,8 @@
     = render 'form', category: @category
 
     %ul.nav-links
-      %li= link_to 'Back', categories_path
+      %li
+        - if @recipe
+          = link_to 'Back To Editing Recipe', edit_recipe_path(@recipe)
+        - else
+          = link_to 'Back', categories_path
