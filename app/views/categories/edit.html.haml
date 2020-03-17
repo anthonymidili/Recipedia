@@ -9,8 +9,11 @@
       = link_to @category.user.username, @category.user
 .grid-x
   .small-12.cell
-    %h1
-      Editing category
+    %p
+      %b Available Categories:
+      = @categories.list_names
+
+    %h1 Editing category
 
     = render 'form', category: @category
 

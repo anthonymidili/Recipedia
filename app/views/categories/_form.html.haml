@@ -1,12 +1,12 @@
-= form_with model: category, local: true do |f|
+-# if (remote) is not set, return true. if (remote = true), return false.
+-# local false means use xhr's(js) and don't leave the page the same as remote true.
+= form_with model: category, local: (!remote ||= false) do |f|
   = render 'notifications/error_messages', object: f.object
   = hidden_field_tag(:return_to, @recipe.id) if @recipe
 
   .grid-x
-    .small-6.cell
-      = f.label :name
-      = f.text_field :name
-
-  .grid-x
-    .small-12.cell
-      = f.submit class: 'button'
+    .medium-8.large-6.cell
+      .input-group
+        %span.input-group-label= f.label :name
+        = f.text_field :name, class: 'input-group-field'
+        .input-group-button= f.submit class: 'button'

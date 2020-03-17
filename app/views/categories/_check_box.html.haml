@@ -1,0 +1,7 @@
+%li{id: "category_check_box_#{category.id}"}
+  = label_tag "check_box_#{category.id}" do
+    = check_box_tag "recipe[category_ids][]",
+    category.id,
+    recipe ? recipe.categories.include?(category) : false,
+    id: "check_box_#{category.id}"
+    = category.name
