@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  resources :users, only: [:show]
+  resources :users, only: [:show, :edit, :update]
 
   resources :favoritisms, only: [:create, :destroy]
 

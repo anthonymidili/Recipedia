@@ -186,3 +186,18 @@ ul.edit_menu {
     }
   }
 }
+
+.green-background {
+  background-color: #cbe2c05c;
+  border-color: #cbe2c0;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 12px;
+  padding: 0 20px 0 20px !important;
+  margin: 20px 0 20px 0 !important;
+}
+
+.header-background, h1 {
+  @extend .green-background;
+  width: fit-content;
+}

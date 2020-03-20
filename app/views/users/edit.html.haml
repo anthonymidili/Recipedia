@@ -1,0 +1,20 @@
+- provide(:title, 'edit Avatar')
+
+.grid-x
+  .cell
+    %h1 Edit your avatar
+
+    = form_with model: @user, remote: false do |f|
+      .grid-x
+        .cell
+          = f.label :avatar
+          = f.file_field :avatar, direct_upload: true,
+          accept: 'image/png,image/gif,image/jpeg'
+      - if f.object.avatar.attached?
+        .grid-x
+          .cell
+            = image_tag avatar_image(f.object.avatar, 300)
+        %br/
+      .grid-x
+        .cell
+          = f.submit class: 'button'

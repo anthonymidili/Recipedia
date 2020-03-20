@@ -6,9 +6,9 @@
         or
         = link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' }
         Category
-.grid-x.center
-  .medium-6.cell
-    %h1.center= @category.name
+.grid-x
+  .cell
+    %h1= @category.name
 
 .grid-x
   = render @recipes

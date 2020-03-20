@@ -4,20 +4,27 @@
       = link_to new_recipe_path do
         %i.fa.fa-plus-circle
         Add a recipe
-    %h1
-      #{@user.username}'s Cookbook
-
-    - if @user == current_user && @user.recipes.by_unpublished.any?
+    %h1 #{@user.username}'s Cookbook
+    - if @user.avatar.attached?
+      = link_to edit_user_path(@user) do
+        = image_tag avatar_image(@user.avatar, 150)
+    - else
+      = link_to 'Add an avatar', edit_user_path(@user)
+- if @user == current_user && @user.recipes.by_unpublished.any?
+  .grid-x
+    .small-12.cell
       %h4 Unpublished Drafts
       .grid-x
         = render @user.recipes.by_unpublished
-
-    %h4 Submitted Recipes
-    .grid-x
-      = render @user.recipes.by_published
-
-.grid-x
-  .small-12.cell
-    %h4 Favorites
-.grid-x
-  = render @user.favoritisms.map(&:recipe)
+- if @user.recipes.by_published.any?
+  .grid-x
+    .small-12.cell
+      %h4 Submitted Recipes
+      .grid-x
+        = render @user.recipes.by_published
+- if @user.favorite_recipes.any?
+  .grid-x
+    .small-12.cell
+      %h4 Favorites
+      .grid-x
+        = render @user.favorite_recipes

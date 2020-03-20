@@ -7,6 +7,6 @@
   .grid-x
     .medium-8.large-6.cell
       .input-group
-        %span.input-group-label= f.label :name
+        %span.input-group-label= f.label :name, 'Category name'
         = f.text_field :name, class: 'input-group-field'
         .input-group-button= f.submit class: 'button'

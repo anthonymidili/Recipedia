@@ -33,8 +33,14 @@
   /* link colors */
   a {
     color: $tattoo-yellow;
+    span.info-text {
+      color: #f6f6f6;
+    }
     &:hover {
       color: darken($tattoo-yellow, 20%);
+      span.info-text {
+        color: #f27474;
+      }
     }
 
     &::after {

@@ -16,6 +16,8 @@
           = link_to user_path(current_user) do
             %i.fa.fa-book
             My cookbook
+            - if current_user.recipes.by_unpublished.any?
+              %span.info-text= pluralize(current_user.recipes.by_unpublished.count, 'draft')
         %li
           = link_to edit_user_registration_path do
             %i.fa.fa-cog

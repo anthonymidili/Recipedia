@@ -1,7 +1,7 @@
-= render 'categories/form', category: @category, remote: true
-= form_with model: recipe, local: true do |f|
-  = render 'notifications/error_messages', object: f.object
-  .callout
+.callout
+  = render 'categories/form', category: @category, remote: true
+  = form_with model: recipe, local: true do |f|
+    = render 'notifications/error_messages', object: f.object
     .grid-x
       .cell
         %label
@@ -39,19 +39,19 @@
               = f.check_box :remove_image, id: 'recipe_remove_image'
               = f.label :remove_image, for: 'recipe_remove_image'
 
-  #parts= render 'parts/fields_for_form', f: f
+    #parts= render 'parts/fields_for_form', f: f
 
-  .grid-x
-    .small-12.cell
-      %b Publish
-      recipe or save
-      as
-      %b Draft
-      so recipe is
-      only visable to you in your cookbook
-      .switch.large
-        = f.check_box :published, id: 'published', class: 'switch-input'
-        = f.label :published, class: 'switch-paddle', for: 'published' do
-          %span.switch-active{"aria-hidden" => "true"} Publish
-          %span.switch-inactive{"aria-hidden" => "true"} Draft
-      = f.submit class: 'button'
+    .grid-x
+      .small-12.cell
+        %b Publish
+        recipe or save
+        as
+        %b Draft
+        so recipe is
+        only visable to you in your cookbook
+        .switch.large
+          = f.check_box :published, id: 'published', class: 'switch-input'
+          = f.label :published, class: 'switch-paddle', for: 'published' do
+            %span.switch-active{"aria-hidden" => "true"} Publish
+            %span.switch-inactive{"aria-hidden" => "true"} Draft
+        = f.submit class: 'button'

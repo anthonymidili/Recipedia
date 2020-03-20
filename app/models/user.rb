@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :recipes
   has_many :reviews, foreign_key: 'author_id', dependent: :destroy
 
+  has_one_attached :avatar
+
   validates :username, presence: true, uniqueness: true
 
   def find_favoritism(recipe)

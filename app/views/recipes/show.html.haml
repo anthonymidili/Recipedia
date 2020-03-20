@@ -45,8 +45,7 @@
       .recipe_stats
         = render 'recipes/stats', recipe: @recipe
 
-    %h1
-      = @recipe.name
+    %h1= @recipe.name
     = link_to user_path(@recipe.user) do
       %b Posted by:
       = @recipe.user.username
