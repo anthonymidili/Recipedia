@@ -8,7 +8,8 @@ const webpack = require('webpack')
 environment.plugins.prepend('Provide',
   new webpack.ProvidePlugin({
     $: 'jquery',
-    jQuery: 'jquery'
+    jQuery: 'jquery',
+    Autolinker: 'autolinker/dist/Autolinker'
   })
 )
 const config = environment.toWebpackConfig()

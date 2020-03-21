@@ -55,7 +55,7 @@
         = @recipe.source
     %br/
     %b Description:
-    = simple_format(@recipe.description)
+    .autolinks= simple_format(@recipe.description)
   .medium-5.cell
     .center= image_tag medium_image(@recipe.image),
     class: 'max-image-height' if @recipe.image.attached?

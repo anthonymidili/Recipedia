@@ -18,4 +18,6 @@
                 data: { confirm: 'Are you sure.' }, remote: true,
                 class: 'red-text', title: 'Delete' do
                   %i.fas.fa-trash
-      = simple_format(review.body, class: 'content')
+      .grid-x
+        .cell
+          .autolinks= simple_format(review.body, class: 'content')

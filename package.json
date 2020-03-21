@@ -13,6 +13,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
+    "autolinker": "^3.13.0",
     "cocoon-js": "^0.0.5",
     "coffee-loader": "^0.9.0",
     "coffeescript": "1.12.7",

@@ -201,3 +201,8 @@ ul.edit_menu {
   @extend .green-background;
   width: fit-content;
 }
+
+.menu .autolink-link {
+  display: unset;
+  padding: 0;
+}
