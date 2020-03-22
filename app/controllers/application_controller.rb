@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   include UsersHelper
+  include MetaTagsHelper
 
   def deny_access!
     redirect_to root_path

@@ -6,7 +6,8 @@ class RecipesController < ApplicationController
   before_action :set_category, only: [:new, :create, :edit, :update]
   before_action :remove_image, only: [:update]
   rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
-  before_action :set_meta_tag_options, only: [:show]
+  before_action :set_root_meta_tag_options, only: [:index]
+  before_action :set_recipe_meta_tag_options, only: [:show]
 
   # GET /recipes
   # GET /recipes.json
@@ -117,37 +118,7 @@ private
                                                       steps_attributes: [:id, :description, :step_order, :_destroy]])
   end
 
-  def set_meta_tag_options
-    set_meta_tags reverse: true,
-      description: @recipe.description,
-      keywords: @recipe.categories.list_names,
-      twitter: {
-        card:  "summary",
-        title: @recipe.name,
-        description: @recipe.description,
-        url: recipe_url(@recipe),
-        secure_url: recipe_url(@recipe),
-        image: {
-          _: (@recipe.image.service_url if @recipe.image.attached?),
-          sucure_url: (@recipe.image.service_url if @recipe.image.attached?),
-          width: 400,
-          height: 400,
-          type: (@recipe.image.blob.content_type if @recipe.image.attached?)
-        }
-      },
-      og: {
-        title: @recipe.name,
-        description: @recipe.description,
-        type: 'website',
-        url: recipe_url(@recipe),
-        secure_url: recipe_url(@recipe),
-        image: {
-          _: (@recipe.image.service_url if @recipe.image.attached?),
-          sucure_url: (@recipe.image.service_url if @recipe.image.attached?),
-          width: 400,
-          height: 400,
-          type: (@recipe.image.blob.content_type if @recipe.image.attached?)
-        }
-      }
+  def set_recipe_meta_tag_options
+    recipe_meta_tag_options(@recipe)
   end
 end
