@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_055716) do
+ActiveRecord::Schema.define(version: 2020_03_22_180955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_03_21_055716) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_favoritisms_on_recipe_id"
+    t.index ["user_id", "recipe_id"], name: "index_favoritisms_on_user_id_and_recipe_id", unique: true
     t.index ["user_id"], name: "index_favoritisms_on_user_id"
   end
 
@@ -99,6 +100,16 @@ ActiveRecord::Schema.define(version: 2020_03_21_055716) do
     t.string "source"
     t.boolean "published", default: true
     t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "followed_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["user_id", "followed_id"], name: "index_relationships_on_user_id_and_followed_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -151,6 +162,8 @@ ActiveRecord::Schema.define(version: 2020_03_21_055716) do
   add_foreign_key "infos", "users"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "parts", "recipes"
+  add_foreign_key "relationships", "users"
+  add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "reviews", "recipes"
   add_foreign_key "reviews", "users", column: "author_id"
   add_foreign_key "steps", "recipes"
