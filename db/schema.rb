@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_010048) do
+ActiveRecord::Schema.define(version: 2020_03_21_055716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -61,6 +61,14 @@ ActiveRecord::Schema.define(version: 2020_03_11_010048) do
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_favoritisms_on_recipe_id"
     t.index ["user_id"], name: "index_favoritisms_on_user_id"
+  end
+
+  create_table "infos", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_infos_on_user_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -140,6 +148,7 @@ ActiveRecord::Schema.define(version: 2020_03_11_010048) do
   add_foreign_key "categorizations", "recipes"
   add_foreign_key "favoritisms", "recipes"
   add_foreign_key "favoritisms", "users"
+  add_foreign_key "infos", "users"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "parts", "recipes"
   add_foreign_key "reviews", "recipes"

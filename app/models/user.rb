@@ -13,9 +13,18 @@ class User < ApplicationRecord
   has_many :recipes
   has_many :reviews, foreign_key: 'author_id', dependent: :destroy
 
+  has_one :info, dependent: :destroy
+  accepts_nested_attributes_for :info
+
   has_one_attached :avatar
 
+  attr_accessor :remove_avatar
+
   validates :username, presence: true, uniqueness: true
+
+  def info
+    super || build_info
+  end
 
   def find_favoritism(recipe)
     favoritisms.find_by(recipe: recipe)

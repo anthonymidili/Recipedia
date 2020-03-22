@@ -3,7 +3,9 @@
     .callout
       .grid-x
         .cell.medium-8
-          = link_to review.author.username, review.author, class: 'user_badge'
+          = link_to review.author, class: 'user-badge' do
+            = image_tag avatar_image(review.author.avatar, 35) if review.author.avatar.attached?
+            = review.author.username
           %span.timestamp
             posted #{time_ago_in_words(review.created_at)} ago
         .cell.medium-4

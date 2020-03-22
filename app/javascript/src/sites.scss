@@ -43,13 +43,14 @@ ul.simple {
   margin-bottom: 5px !important;
 }
 
-.user_badge {
+.user-badge {
   padding: 3px 5px !important;
   border-left: 8px solid #c9f1b8;
   margin-right: 5px;
   display: unset !important;
   font-size: 110%;
   background-color: #efefef;
+  height: 35px;
 }
 
 .hidden {
@@ -195,14 +196,31 @@ ul.edit_menu {
   border-radius: 12px;
   padding: 0 20px 0 20px !important;
   margin: 20px 0 20px 0 !important;
+  img {
+    padding: 0 0 20px 0;
+  }
 }
 
 .header-background, h1 {
   @extend .green-background;
   width: fit-content;
+  &.no-background {
+    background-color: unset;
+    border-style: unset;
+  }
 }
 
 .menu .autolink-link {
   display: unset;
   padding: 0;
+}
+
+.default-avatar-300 {
+  width: 300px !important;
+  height: 300px !important;
+}
+
+.default-avatar-150 {
+  width: 150px !important;
+  height: 150px !important;
 }

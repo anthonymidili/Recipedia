@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :remove_avatar, only: [:update]
 
   def show
   end
@@ -8,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.avatar.attach(user_params[:avatar]) if user_params && user_params[:avatar]
+    @user.avatar.attach(user_params[:avatar]) if user_params[:avatar]
 
     respond_to do |format|
       if user_params && @user.update(user_params)
@@ -28,6 +30,11 @@ private
   end
 
   def user_params
-    params.require(:user).permit(:avatar) if params[:user]
+    params.require(:user).permit(:avatar, :remove_avatar,
+      info_attributes: [:id, :body, :_destroy])
+  end
+
+  def remove_avatar
+    @user.avatar.purge if user_params[:remove_avatar] == "1"
   end
 end

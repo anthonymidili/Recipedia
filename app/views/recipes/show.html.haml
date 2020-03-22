@@ -47,13 +47,14 @@
 
     %h1= @recipe.name
     = link_to user_path(@recipe.user) do
-      %b Posted by:
-      = @recipe.user.username
+      = image_tag avatar_image(@recipe.user.avatar, 150) if @recipe.user.avatar.attached?
+      %p
+        %b Posted by:
+        = @recipe.user.username
     - if @recipe.source?
       %p
         %b Source:
         = @recipe.source
-    %br/
     %b Description:
     .autolinks= simple_format(@recipe.description)
   .medium-5.cell
