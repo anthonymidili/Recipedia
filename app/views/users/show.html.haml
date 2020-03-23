@@ -7,10 +7,11 @@
 .grid-x
   .cell.small-12
     .green-background
-      .float-right
-        = link_to edit_user_path(@user) do
-          %i.fas.fa-edit
-          Edit about you
+      - if is_author?(@user)
+        .float-right
+          = link_to edit_user_path(@user) do
+            %i.fas.fa-edit
+            Edit about you
       %h1.no-background #{@user.username}'s Cookbook
       .grid-x
         .cell.medium-4.large-3
@@ -20,6 +21,7 @@
                 = image_tag avatar_image(@user.avatar, 150)
             - else
               %i.fas.fa-user.default-avatar-150
+            = render 'relationships/form', other_user: @user
         - if @user.info
           .cell.medium-8.large-9
             .autolinks= simple_format(@user.info.body)

@@ -47,6 +47,10 @@ class User < ApplicationRecord
     slug
   end
 
+  def following?(other_user)
+    relationships.find_by(followed: other_user)
+  end
+
 private
 
   # Setter

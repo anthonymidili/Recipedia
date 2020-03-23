@@ -1,0 +1,5 @@
+= form_with model: current_user.following?(other_user), method: :delete, local: true do |f|
+  = render 'notifications/error_messages', object: f.object
+
+  .actions
+    = f.submit 'Unfollow', class: 'button secondary'

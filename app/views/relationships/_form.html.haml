@@ -1,0 +1,6 @@
+- unless is_author?(other_user)
+  %div{id: "follow_form_for_#{other_user.id}"}
+    - if current_user.following?(other_user)
+      = render 'relationships/unfollow', other_user: other_user
+    - else
+      = render 'relationships/follow', other_user: other_user

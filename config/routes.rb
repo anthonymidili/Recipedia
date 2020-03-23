@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :favoritisms, only: [:create, :destroy]
 
+  resources :relationships, only: [:create, :destroy]
+
   get 'sitemap.xml', to: 'sites#sitemap', format: :xml
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
