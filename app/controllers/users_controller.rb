@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update]
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update, :log_in]
+  before_action :set_user, only: [:show, :edit, :update, :log_in]
   before_action :remove_avatar, only: [:update]
   before_action :deny_access!,
   unless: -> { is_author?(@user) }, only: [:edit, :update]
@@ -23,6 +23,10 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def log_in
+    redirect_to @user
   end
 
 private

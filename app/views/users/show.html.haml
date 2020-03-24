@@ -21,7 +21,7 @@
               = image_tag avatar_image(@user.avatar, 150)
             - else
               %i.fas.fa-user.default-avatar-150
-            = render 'relationships/stats', profile_user: @user
+            = render 'users/stats', profile_user: @user
         - if @user.info
           .cell.medium-7.large-9
             = render 'relationships/form', profile_user: @user

@@ -1,0 +1,9 @@
+#profile-stats
+  .stat
+    %span#followers_count
+      = profile_user.followers.count
+    followers
+  .stat
+    %span#following_count
+      = profile_user.following.count
+    following

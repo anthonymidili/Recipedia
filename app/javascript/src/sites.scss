@@ -222,6 +222,7 @@ ul.edit_menu {
 }
 
 .default-avatar-150 {
+  @include thumbnail;
   width: 150px !important;
   height: 150px !important;
 }
@@ -229,7 +230,7 @@ ul.edit_menu {
 #profile-stats {
   border-top: solid 1px darken($tattoo-dark-green, 10%);
   padding-bottom: 20px;
-  .stats {
+  .stat {
     display: inline;
     color: darken($tattoo-dark-green, 10%);
     font-size: 90%;

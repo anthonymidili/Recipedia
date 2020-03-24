@@ -1,1 +1,2 @@
 $("#follow_form_for_<%= @profile_user.id %>").html("<%= j render 'relationships/follow', profile_user: @profile_user %>");
+$("#followers_count").html("<%= @profile_user.followers.count %>");

@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      get :log_in
+    end
+  end
 
   resources :favoritisms, only: [:create, :destroy]
 
