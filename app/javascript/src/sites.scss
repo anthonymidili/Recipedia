@@ -207,6 +207,7 @@ ul.edit_menu {
   &.no-background {
     background-color: unset;
     border-style: unset;
+    width: unset;
   }
 }
 
@@ -223,4 +224,17 @@ ul.edit_menu {
 .default-avatar-150 {
   width: 150px !important;
   height: 150px !important;
+}
+
+#profile-stats {
+  border-top: solid 1px darken($tattoo-dark-green, 10%);
+  padding-bottom: 20px;
+  .stats {
+    display: inline;
+    color: darken($tattoo-dark-green, 10%);
+    font-size: 90%;
+    &:not(:first-child) {
+      padding-left: 30px;
+    }
+  }
 }
