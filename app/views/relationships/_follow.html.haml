@@ -1,4 +1,4 @@
-= form_with model: current_user.relationships.build, local: true do |f|
+= form_with model: current_user.relationships.build, local: false do |f|
   = render 'notifications/error_messages', object: f.object
   = f.hidden_field :followed_id, value: other_user.id
 

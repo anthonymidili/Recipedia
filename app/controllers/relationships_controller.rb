@@ -1,16 +1,18 @@
 class RelationshipsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_relationship, only: [:show, :edit, :update, :destroy]
+  before_action :set_relationship, only: [:destroy]
 
   # POST /relationships
   # POST /relationships.json
   def create
     @relationship = current_user.relationships.new(relationship_params)
+    @other_user = @relationship.followed
 
     respond_to do |format|
       if @relationship.save
         format.html { redirect_to @relationship.followed, notice: 'Relationship was successfully created.' }
-        format.json { render :show, status: :created, location: @relationship }
+        format.json { render :show, status: :created, location: @relationship.followed }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @relationship.errors, status: :unprocessable_entity }
@@ -21,11 +23,13 @@ class RelationshipsController < ApplicationController
   # DELETE /relationships/1
   # DELETE /relationships/1.json
   def destroy
-    other_user = User.find_by(id: @relationship.followed)
+    @other_user = User.find_by(id: @relationship.followed)
     @relationship.destroy
+    
     respond_to do |format|
-      format.html { redirect_to other_user, notice: 'Relationship was successfully destroyed.' }
+      format.html { redirect_to @other_user, notice: 'Relationship was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 

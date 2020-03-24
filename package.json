@@ -12,7 +12,7 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.2.2",
+    "@rails/webpacker": "5.0.0",
     "autolinker": "^3.13.0",
     "cocoon-js": "^0.0.5",
     "coffee-loader": "^0.9.0",
@@ -26,7 +26,7 @@
     "what-input": "^5.2.3"
   },
   "devDependencies": {
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.10.3"
   },
   "engines": {
     "node": "13.11.0",

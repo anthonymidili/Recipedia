@@ -29,7 +29,7 @@ gem 'mini_magick', '~> 4.10.1'
 gem 'image_processing', '~> 1.10.3'
 gem 'aws-sdk', '~> 3'
 
-gem 'webpacker', '~> 4.x'
+gem 'webpacker', '~> 5.x'
 
 gem 'hirb'
 
