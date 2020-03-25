@@ -1,5 +1,5 @@
-= form_for current_user.favoritisms.build(recipe_id: recipe.id), remote: true do |f|
+= form_with model: current_user.favoritisms.build(recipe_id: recipe.id), local: false do |f|
   = f.hidden_field :recipe_id
-  = f.button do
+  = f.button class: 'favor_form_button' do
     %i.red-text.far.fa-heart
     Add to Favorites

@@ -263,3 +263,10 @@ ul.user-list {
     }
   }
 }
+
+.favor_form_button {
+  &:hover {
+    padding: 1px 5px;
+    background-color: #ffda1766;
+  }
+}
