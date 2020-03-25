@@ -6,7 +6,7 @@ class RelationshipsController < ApplicationController
   # POST /relationships.json
   def create
     @relationship = current_user.relationships.new(relationship_params)
-    @profile_user = @relationship.followed
+    @user = @relationship.followed
 
     respond_to do |format|
       if @relationship.save
@@ -23,11 +23,11 @@ class RelationshipsController < ApplicationController
   # DELETE /relationships/1
   # DELETE /relationships/1.json
   def destroy
-    @profile_user = User.find_by(id: @relationship.followed)
+    @user = @relationship.followed
     @relationship.destroy
 
     respond_to do |format|
-      format.html { redirect_to @profile_user, notice: 'Relationship was successfully destroyed.' }
+      format.html { redirect_to @user, notice: 'Relationship was successfully destroyed.' }
       format.json { head :no_content }
       format.js
     end

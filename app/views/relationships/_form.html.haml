@@ -1,10 +1,10 @@
-- unless is_author?(profile_user)
-  %div{id: "follow_form_for_#{profile_user.id}"}
+- unless is_author?(user)
+  %div{id: "follow_form_for_#{user.id}"}
     - if !user_signed_in?
-      = button_to log_in_user_path(profile_user), class: "hollow button secondary", method: :get do
+      = button_to log_in_user_path(user), class: "hollow button secondary", method: :get do
         %i.fa.fa-sign-in-alt
         Log in to follow
-    - elsif current_user.following?(profile_user)
-      = render 'relationships/unfollow', profile_user: profile_user
+    - elsif current_user.following?(user)
+      = render 'relationships/unfollow', user: user
     - else
-      = render 'relationships/follow', profile_user: profile_user
+      = render 'relationships/follow', user: user

@@ -3,31 +3,7 @@
 .grid-x
   .cell
     %h1 About you
-
-    = form_with model: @user, remote: false do |f|
-      .grid-x
-        .cell
-          = f.label :avatar
-          = f.file_field :avatar, direct_upload: true,
-          accept: 'image/png,image/gif,image/jpeg'
-      .grid-x
-        .cell.medium-4
-          %p
-            - if f.object.avatar.attached?
-              = image_tag avatar_image(f.object.avatar, 300)
-              .grid-x
-                .small-12.cell
-                  = f.check_box :remove_avatar, id: 'user_remove_image'
-                  = f.label :remove_avatar, for: 'user_remove_image'
-            - else
-              %i.fas.fa-user.default-avatar-300
-        .cell.medium-8
-          = f.fields_for :info do |info_f|
-            = info_f.label :body
-            = info_f.text_area :body, rows: 10
-      .grid-x
-        .cell
-          = f.submit class: 'button'
+    = render 'form', user: @user
 .grid-x
   .small-12.cell
     %ul.nav-links

@@ -1,0 +1,9 @@
+.profile-stats{id: "profile_stats_#{user.id}"}
+  = link_to followers_user_path(user), class: 'stat' do
+    %span{id: "followers_count_#{user.id}"}
+      = user.followers.count
+    followers
+  = link_to following_user_path(user), class: 'stat' do
+    %span{id: "following_count_#{user.id}"}
+      = user.following.count
+    following

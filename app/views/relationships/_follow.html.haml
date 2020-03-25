@@ -1,6 +1,6 @@
 = form_with model: current_user.relationships.build, local: false do |f|
   = render 'notifications/error_messages', object: f.object
-  = f.hidden_field :followed_id, value: profile_user.id
+  = f.hidden_field :followed_id, value: user.id
 
   .actions
     = f.submit 'Follow', class: 'button'
