@@ -42,8 +42,7 @@
           %i.fa.fa-sign-in-alt
           Log in to add to favorites
           %i.red-text.fa.fa-heart
-      .recipe_stats
-        = render 'recipes/stats', recipe: @recipe
+      .recipe_likes= render 'recipes/likes', recipe: @recipe
 
     %h1= @recipe.name
     = link_to user_path(@recipe.user) do
@@ -51,6 +50,7 @@
       %p
         %b Posted by:
         = @recipe.user.username
+    .hide-on-print= render 'relationships/form', user: @recipe.user, recipe: @recipe
     - if @recipe.source?
       %p
         %b Source:
@@ -84,9 +84,9 @@
             %br/
           %br/
 
-.grid-x
-  .small-12.cell
-    .hide-on-print
+.hide-on-print
+  .grid-x
+    .small-12.cell
       %ul.nav-links
         %li= link_to 'All Recipes', recipes_path
 
