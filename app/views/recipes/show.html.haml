@@ -42,7 +42,7 @@
           %i.fa.fa-sign-in-alt
           Log in to add to favorites
           %i.red-text.fa.fa-heart
-      .recipe_likes= render 'recipes/likes', recipe: @recipe
+      #recipe_likes_count= render 'recipes/likes_count', recipe: @recipe
 
     %h1= @recipe.name
     = link_to user_path(@recipe.user) do

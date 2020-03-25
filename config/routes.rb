@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     member do
       get :log_in
+      get :likes
     end
   end
 

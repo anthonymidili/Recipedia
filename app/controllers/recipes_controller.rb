@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :log_in]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :log_in]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :log_in, :likes]
   before_action :deny_access!,
   unless: -> { is_author?(@recipe.user) }, only: [:edit, :update, :destroy]
   before_action :set_category, only: [:new, :create, :edit, :update]
@@ -90,6 +90,9 @@ class RecipesController < ApplicationController
 
   def log_in
     redirect_to @recipe
+  end
+
+  def likes
   end
 
 private

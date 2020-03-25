@@ -1,6 +1,6 @@
 class Recipe < ApplicationRecord
   has_many :favoritisms, dependent: :destroy
-  has_many :users, through: :favoritisms
+  has_many :liked_users, through: :favoritisms, source: :user
 
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
