@@ -1,0 +1,12 @@
+.grid-x
+  .cell
+    .green-background
+      .center-text
+        %h1.no-background= user.username
+        = link_to @user, class: 'black-text' do
+          - if @user.avatar.attached?
+            = image_tag avatar_image(user.avatar, 150)
+          - else
+            %i.fas.fa-user.default-avatar-150
+        = render 'users/stats', profile_user: user
+        = render 'relationships/form', profile_user: user

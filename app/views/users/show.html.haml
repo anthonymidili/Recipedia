@@ -17,15 +17,15 @@
       .grid-x
         .cell.medium-5.large-3
           .center-text
-            - if @user.avatar.attached?
-              = image_tag avatar_image(@user.avatar, 150)
-            - else
-              %i.fas.fa-user.default-avatar-150
+            = link_to @user, class: 'black-text' do
+              - if @user.avatar.attached?
+                = image_tag avatar_image(@user.avatar, 150)
+              - else
+                %i.fas.fa-user.default-avatar-150
             = render 'users/stats', profile_user: @user
-        - if @user.info
-          .cell.medium-7.large-9
-            = render 'relationships/form', profile_user: @user
-            .autolinks= simple_format(@user.info.body)
+        .cell.medium-7.large-9
+          = render 'relationships/form', profile_user: @user
+          .autolinks= simple_format(@user.info.body) if @user.info
 - if @user == current_user && @user.recipes.by_unpublished.any?
   .grid-x
     .small-12.cell

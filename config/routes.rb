@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update] do
     member do
       get :log_in
+      get :followers
+      get :following
     end
   end
 

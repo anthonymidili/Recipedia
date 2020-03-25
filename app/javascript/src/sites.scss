@@ -227,6 +227,13 @@ ul.edit_menu {
   height: 150px !important;
 }
 
+.default-avatar-50 {
+  @include thumbnail;
+  margin: 0 20px 0 0;
+  width: 50px !important;
+  height: 50px !important;
+}
+
 #profile-stats {
   border-top: solid 1px darken($tattoo-dark-green, 10%);
   padding-bottom: 20px;
@@ -234,8 +241,25 @@ ul.edit_menu {
     display: inline;
     color: darken($tattoo-dark-green, 10%);
     font-size: 90%;
+    font-weight: bold;
     &:not(:first-child) {
       padding-left: 30px;
+    }
+    &:hover {
+      color: darken($tattoo-dark-green, 30%);
+    }
+    span {
+      font-size: 120%;
+    }
+  }
+}
+
+ul.user-list {
+  a {
+    padding: 0;
+    color: black;
+    img {
+      padding-right: 20px;
     }
   }
 }

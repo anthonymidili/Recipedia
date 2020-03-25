@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :log_in]
-  before_action :set_user, only: [:show, :edit, :update, :log_in]
+  before_action :set_user, only: [:show, :edit, :update, :log_in, :followers, :following]
   before_action :remove_avatar, only: [:update]
   before_action :deny_access!,
   unless: -> { is_author?(@user) }, only: [:edit, :update]
@@ -27,6 +27,12 @@ class UsersController < ApplicationController
 
   def log_in
     redirect_to @user
+  end
+
+  def followers
+  end
+
+  def following
   end
 
 private

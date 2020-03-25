@@ -1,9 +1,9 @@
 #profile-stats
-  .stat
+  = link_to followers_user_path(profile_user), class: 'stat' do
     %span#followers_count
       = profile_user.followers.count
     followers
-  .stat
+  = link_to following_user_path(profile_user), class: 'stat' do
     %span#following_count
       = profile_user.following.count
     following

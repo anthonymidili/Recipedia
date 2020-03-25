@@ -1,0 +1,12 @@
+%li
+  %hr/
+  .grid-x
+    .cell.small-6
+      = link_to user do
+        - if user.avatar.attached?
+          = image_tag avatar_image(user.avatar, 50)
+        - else
+          %i.fas.fa-user.default-avatar-50
+        = user.username
+    .cell.small-6
+      .float-right= render 'relationships/form', profile_user: user
