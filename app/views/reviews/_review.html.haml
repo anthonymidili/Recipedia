@@ -3,13 +3,13 @@
     .callout
       .grid-x
         .cell.medium-8
-          = link_to review.author, class: 'user-badge' do
-            = image_tag avatar_image(review.author.avatar, 35) if review.author.avatar.attached?
-            = review.author.username
+          = link_to review.user, class: 'user-badge' do
+            = image_tag avatar_image(review.user.avatar, 35) if review.user.avatar.attached?
+            = review.user.username
           %span.timestamp
             posted #{time_ago_in_words(review.created_at)} ago
         .cell.medium-4
-          - if is_author?(review.author)
+          - if is_author?(review.user)
             %ul.edit_menu
               %li
                 = link_to [:edit, review.recipe, review], title: 'Edit' do

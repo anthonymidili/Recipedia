@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :set_recipe
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :deny_access!,
-  unless: -> { is_author?(@review.author) }, only: [:edit, :update, :destroy]
+  unless: -> { is_author?(@review.user) }, only: [:edit, :update, :destroy]
 
   # GET /reviews/1/edit
   def edit
@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @review = @recipe.reviews.new(review_params)
-    @review.author = current_user
+    @review.user = current_user
 
     respond_to do |format|
       if @review.save
