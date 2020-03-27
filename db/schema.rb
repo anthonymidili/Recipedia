@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_22_180955) do
+ActiveRecord::Schema.define(version: 2020_03_26_104010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -83,6 +83,20 @@ ActiveRecord::Schema.define(version: 2020_03_22_180955) do
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "notifiable_type", null: false
+    t.bigint "notifiable_id", null: false
+    t.bigint "notifier_id", null: false
+    t.bigint "recipient_id", null: false
+    t.string "action", null: false
+    t.boolean "is_read", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
+    t.index ["notifier_id"], name: "index_notifications_on_notifier_id"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
+  end
+
   create_table "parts", force: :cascade do |t|
     t.string "name"
     t.bigint "recipe_id", null: false
@@ -114,12 +128,12 @@ ActiveRecord::Schema.define(version: 2020_03_22_180955) do
 
   create_table "reviews", force: :cascade do |t|
     t.bigint "recipe_id", null: false
-    t.bigint "author_id", null: false
+    t.bigint "user_id", null: false
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["author_id"], name: "index_reviews_on_author_id"
     t.index ["recipe_id"], name: "index_reviews_on_recipe_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "steps", force: :cascade do |t|
@@ -161,10 +175,12 @@ ActiveRecord::Schema.define(version: 2020_03_22_180955) do
   add_foreign_key "favoritisms", "users"
   add_foreign_key "infos", "users"
   add_foreign_key "ingredients", "recipes"
+  add_foreign_key "notifications", "users", column: "notifier_id"
+  add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "parts", "recipes"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "reviews", "recipes"
-  add_foreign_key "reviews", "users", column: "author_id"
+  add_foreign_key "reviews", "users"
   add_foreign_key "steps", "recipes"
 end

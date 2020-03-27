@@ -24,6 +24,8 @@ class User < ApplicationRecord
   has_one :info, dependent: :destroy
   accepts_nested_attributes_for :info, reject_if: :all_blank, allow_destroy: true
 
+  has_many :notifications, foreign_key: 'recipient_id', dependent: :destroy
+
   has_one_attached :avatar
 
   attr_accessor :remove_avatar

@@ -11,6 +11,8 @@ class Recipe < ApplicationRecord
   has_many :parts, dependent: :destroy
   accepts_nested_attributes_for :parts, reject_if: :all_blank, allow_destroy: true
 
+  has_many :notifications, as: :notifiable, dependent: :destroy
+
   has_one_attached :image
 
   belongs_to :user
