@@ -1,4 +1,6 @@
 class Recipe < ApplicationRecord
+  after_commit :notifiy_followers, on: [:create]
+
   has_many :favoritisms, dependent: :destroy
   has_many :liked_users, through: :favoritisms, source: :user
 
@@ -43,6 +45,14 @@ private
     parts_name_count = self.parts.map(&:name).reject(&:empty?).count
     if parts_count > 1 && parts_count != parts_name_count
       errors.add(:base, 'Must name recipe parts if more than 1')
+    end
+  end
+
+  def notifiy_followers
+    recipients = user.followers
+
+    recipients.each do |recipient|
+      NotifiyUserJob.perform_later(self, recipient, "created a new recipe")
     end
   end
 end

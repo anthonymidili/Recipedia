@@ -24,20 +24,20 @@ gem 'meta-tags', '~> 2.13.0'
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
-
+# Active Storage file processing and storage.
 gem 'mini_magick', '~> 4.10.1'
 gem 'image_processing', '~> 1.10.3'
 gem 'aws-sdk', '~> 3'
-
+# Active Job backgrounding.
+gem 'sidekiq', '~> 6.0.6'
+# Webpack.
 gem 'webpacker', '~> 5.x'
-
+# Console tables.
 gem 'hirb'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Shim to load environment variables from .env
-  gem 'dotenv-rails', '~> 2.7.2'
 end
 
 group :development do

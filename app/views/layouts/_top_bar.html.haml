@@ -26,6 +26,9 @@
           = link_to destroy_user_session_path, method: :delete do
             %i.fa.fa-sign-out-alt
             Sign out
+        %li
+          = link_to '#' do
+            = Notification.all.count
       - else
         %li
           = link_to new_user_session_path do

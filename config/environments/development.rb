@@ -32,7 +32,7 @@ Rails.application.configure do
   config.active_storage.service = :amazon
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :sidekiq
+  config.active_job.queue_adapter     = :sidekiq
   # config.active_job.queue_name_prefix = "recipedia_production"
 
   # Don't care if the mailer can't send.
