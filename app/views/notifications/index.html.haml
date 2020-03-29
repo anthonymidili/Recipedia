@@ -1,0 +1,14 @@
+- provide :title, 'Notifications'
+
+.grid-x
+  .cell
+    %h1 Notifications
+    .callout
+      - if @notifications.by_unread.any?
+        %p#unread_notifications UNREAD
+        %ul#notifications.menu.vertical
+          = render @notifications.by_unread
+      - if @notifications.by_read.any?
+        %p#read_notifications EARLIER
+        %ul#notifications.menu.vertical
+          = render @notifications.by_read

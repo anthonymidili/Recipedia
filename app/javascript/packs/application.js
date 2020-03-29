@@ -36,6 +36,7 @@ import Autolinker from 'autolinker'
 // Custom JavaScripts.
 import 'packs/autocomplete'
 import 'packs/direct_uploads'
+import 'packs/notifications'
 import 'packs/sites'
 import 'packs/slider'
 import 'packs/touch_punch'

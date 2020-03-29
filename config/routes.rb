@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notifications/index'
   root 'recipes#index'
 
   devise_for :users
@@ -27,6 +28,13 @@ Rails.application.routes.draw do
   resources :favoritisms, only: [:create, :destroy]
 
   resources :relationships, only: [:create, :destroy]
+
+  resources :notifications, only: [:index] do
+    collection do
+      patch :mark_as_read
+      get :unread_count
+    end
+  end
 
   get 'sitemap.xml', to: 'sites#sitemap', format: :xml
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

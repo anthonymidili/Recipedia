@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  after_commit :notifiy_followers
+  after_commit :notifiy_followers, on: [:create, :update]
 
   has_many :favoritisms, dependent: :destroy
   has_many :liked_users, through: :favoritisms, source: :user
