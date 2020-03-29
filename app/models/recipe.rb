@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  after_commit :notifiy_followers, on: [:create]
+  after_commit :notifiy_followers
 
   has_many :favoritisms, dependent: :destroy
   has_many :liked_users, through: :favoritisms, source: :user
@@ -49,10 +49,23 @@ private
   end
 
   def notifiy_followers
-    recipients = user.followers
-
-    recipients.each do |recipient|
-      NotifiyUserJob.perform_later(self, recipient, "created a new recipe")
+    if published
+      recipients = user.followers.by_unnotified(self)
+      create_notifications(recipients)
+      # future mail_notifications(recipients)
     end
   end
+
+  def create_notifications(recipients)
+    recipients.each do |recipient|
+      if published
+        NotifiyUserJob.perform_later(self, recipient, "created a new recipe")
+      end
+    end
+  end
+
+  # future
+  # def mail_notifications(recipients)
+  #   # bulk mail
+  # end
 end

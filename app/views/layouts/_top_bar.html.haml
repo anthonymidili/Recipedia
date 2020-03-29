@@ -18,17 +18,25 @@
             My cookbook
             - if current_user.recipes.by_unpublished.any?
               %span.info-text= pluralize(current_user.recipes.by_unpublished.count, 'draft')
-        %li
-          = link_to edit_user_registration_path do
-            %i.fa.fa-cog
-            User
-        %li
-          = link_to destroy_user_session_path, method: :delete do
-            %i.fa.fa-sign-out-alt
-            Sign out
+        -# Placeholder
         %li
           = link_to '#' do
-            = Notification.all.count
+            %i.fas.fa-bell
+            %span.info-text= current_user.notifications.count
+        -# dropdown menu
+        %li
+          = link_to '#', remote: true do
+            %i.fas.fa-user
+            user
+          %ul.menu.vertical
+            %li
+              = link_to edit_user_registration_path do
+                %i.fa.fa-cog
+                User
+            %li
+              = link_to destroy_user_session_path, method: :delete do
+                %i.fa.fa-sign-out-alt
+                Sign out
       - else
         %li
           = link_to new_user_session_path do

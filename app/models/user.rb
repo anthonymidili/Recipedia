@@ -32,6 +32,13 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  scope :by_notified, -> (notifiable) {
+    includes(:notifications).where(notifications: { notifiable_id: notifiable } )
+  }
+  scope :by_unnotified, -> (notifiable) {
+    where.not(id: by_notified(notifiable))
+  }
+
   def info
     super || build_info
   end

@@ -31,6 +31,10 @@
   }
 
   /* link colors */
+  li.is-active > a {
+    color: darken($tattoo-yellow, 20%) !important;
+  }
+
   a {
     color: $tattoo-yellow;
     span.info-text {
@@ -44,7 +48,7 @@
     }
 
     &::after {
-      border-color: $tattoo-yellow transparent transparent;
+      border-color: $tattoo-yellow transparent transparent !important;
     }
   }
 
