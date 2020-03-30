@@ -1,10 +1,9 @@
 class Review < ApplicationRecord
-  after_commit NotifyFollowers, on: [:create]
+  after_commit NotifyUsers, on: [:create]
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   belongs_to :recipe
   belongs_to :user
-
-  has_many :notifications, as: :notifiable, dependent: :destroy
 
   default_scope { order(created_at: :desc) }
 

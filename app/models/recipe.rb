@@ -1,5 +1,6 @@
 class Recipe < ApplicationRecord
-  after_commit NotifyFollowers, on: [:create, :update], if: :published
+  after_commit NotifyUsers, on: [:create, :update], if: :published
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   has_many :favoritisms, dependent: :destroy
   has_many :liked_users, through: :favoritisms, source: :user
@@ -12,8 +13,6 @@ class Recipe < ApplicationRecord
 
   has_many :parts, dependent: :destroy
   accepts_nested_attributes_for :parts, reject_if: :all_blank, allow_destroy: true
-
-  has_many :notifications, as: :notifiable, dependent: :destroy
 
   has_one_attached :image
 

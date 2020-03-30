@@ -1,4 +1,4 @@
-class NotifyFollowers
+class NotifyUsers
   class << self
     def after_commit(notifiable)
       recipients = recipients(notifiable)
@@ -26,6 +26,8 @@ class NotifyFollowers
         recipients = notifiable.recipe.reviews.map(&:user)
         recipients << notifiable.recipe.user
         (recipients - [notifiable.user]).uniq
+      when 'Relationship'
+        [notifiable.followed]
       end
     end
 
@@ -35,6 +37,8 @@ class NotifyFollowers
         "ADDED a new recipe - #{notifiable.name}"
       when 'Review'
         "REVIEWED a recipe - #{notifiable.recipe.name}"
+      when 'Relationship'
+        "started FOLLOWING you"
       end
     end
   end
