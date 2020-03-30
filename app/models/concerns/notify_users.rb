@@ -28,6 +28,8 @@ class NotifyUsers
         (recipients - [notifiable.user]).uniq
       when 'Relationship'
         [notifiable.followed]
+      when 'Favoritism'
+        [notifiable.recipe.user]
       end
     end
 
@@ -36,9 +38,11 @@ class NotifyUsers
       when 'Recipe'
         "ADDED a new recipe - #{notifiable.name}"
       when 'Review'
-        "REVIEWED a recipe - #{notifiable.recipe.name}"
+        "REVIEWED recipe #{notifiable.recipe.name}"
       when 'Relationship'
         "started FOLLOWING you"
+      when 'Favoritism'
+        "ADDED #{notifiable.recipe.name} to their favorites"
       end
     end
   end
