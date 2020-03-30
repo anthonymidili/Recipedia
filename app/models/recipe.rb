@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  after_commit :notifiy_followers, on: [:create, :update]
+  after_commit NotifyFollowers, on: [:create, :update]
 
   has_many :favoritisms, dependent: :destroy
   has_many :liked_users, through: :favoritisms, source: :user
@@ -47,25 +47,4 @@ private
       errors.add(:base, 'Must name recipe parts if more than 1')
     end
   end
-
-  def notifiy_followers
-    if published
-      recipients = user.followers.by_unnotified(self)
-      create_notifications(recipients)
-      # future mail_notifications(recipients)
-    end
-  end
-
-  def create_notifications(recipients)
-    recipients.each do |recipient|
-      if published
-        NotifiyUserJob.perform_later(self, recipient, "created a new recipe")
-      end
-    end
-  end
-
-  # future
-  # def mail_notifications(recipients)
-  #   # bulk mail
-  # end
 end
