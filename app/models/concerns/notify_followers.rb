@@ -1,30 +1,41 @@
 class NotifyFollowers
-  def self.after_commit(notifiable)
-    if notifiable.published
-      recipients = notifiable.user.followers.by_unnotified(notifiable)
+  class << self
+    def after_commit(notifiable)
+      recipients = recipients(notifiable)
       create_notifications(notifiable, recipients)
       # future mail_notifications(notifiable, recipients)
     end
-  end
 
-private
+  private
 
-  def self.create_notifications(notifiable, recipients)
-    recipients.each do |recipient|
-      if notifiable.published
+    def create_notifications(notifiable, recipients)
+      recipients.each do |recipient|
         NotifiyUserJob.perform_later(notifiable, recipient, action_statement(notifiable))
       end
     end
-  end
 
-  # def self.mail_notifications(notifiable, recipients)
-  #   # bulk mail
-  # end
+    # def mail_notifications(notifiable, recipients)
+    #   # bulk mail
+    # end
 
-  def self.action_statement(notifiable)
-    case notifiable.class.name
-    when 'Recipe'
-      'added a new recipe'
+    def recipients(notifiable)
+      case notifiable.class.name
+      when 'Recipe'
+        notifiable.user.followers.by_unnotified(notifiable)
+      when 'Review'
+        recipients = notifiable.recipe.reviews.map(&:user)
+        recipients << notifiable.recipe.user
+        (recipients - [notifiable.user]).uniq
+      end
+    end
+
+    def action_statement(notifiable)
+      case notifiable.class.name
+      when 'Recipe'
+        "ADDED a new recipe - #{notifiable.name}"
+      when 'Review'
+        "REVIEWED a recipe - #{notifiable.recipe.name}"
+      end
     end
   end
 end

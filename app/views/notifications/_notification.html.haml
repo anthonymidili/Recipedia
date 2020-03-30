@@ -2,7 +2,6 @@
   = link_to notification.notifier, class: 'user-badge' do
     = image_tag avatar_image(notification.notifier.avatar, 35) if notification.notifier.avatar.attached?
     = notification.notifier.username
-  \-
-  = link_to notification.action, notification.notifiable
+  = link_to_notifiable(notification.notifiable, notification.action)
   .timestamp
     #{time_ago_in_words(notification.created_at)} ago
