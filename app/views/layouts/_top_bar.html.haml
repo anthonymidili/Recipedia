@@ -21,7 +21,7 @@
         %li
           = link_to notifications_path do
             %i.fas.fa-bell
-            %span#unread_count.info-text{data: {unread_count: current_user.notifications.unread_count}}
+            %span.info-text#unread_count= current_user.notifications.unread_count
         -# dropdown menu
         %li
           = link_to '#', remote: true do

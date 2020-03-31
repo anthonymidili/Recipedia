@@ -1,1 +1,2 @@
-setUnreadCount.setCount(<%= @unread_notifications_count %>);
+$("#unread_count").text("<%= @unread_notifications_count %>");
+setUnreadCount.poll();
