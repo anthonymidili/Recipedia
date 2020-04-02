@@ -97,13 +97,27 @@ a.black-text:hover {
 
 .banner {
   @include callout;
-  height: 150px;
-  background-position: center;
+  padding: 0;
+  position: relative;
+  height: 180px;
   overflow: hidden;
+  img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    object-fit: cover;
+  }
+  .content {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+  }
   h4 {
     margin-bottom: -0.1em;
   }
 }
+
 
 .max-image-height {
   max-height: 400px;

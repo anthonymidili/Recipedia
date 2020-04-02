@@ -1,18 +1,20 @@
 .medium-6.cell.end
   = link_to recipe do
-    .banner{style: "#{background_banner(recipe)}"}
-      .highlight-text
-        .float-right
-          - if recipe.favoritisms.count > 0
+    -# .banner{style: "#{background_banner(recipe)}"}
+    .banner
+      = image_tag banner_image(recipe.image) if recipe.image.attached?
+      .highlight-text.content
+
+        - if recipe.favoritisms.count > 0
+          .float-right
             .red-text
               %i.fa.fa-heart
               = recipe.liked_users.count
-        %h4
-          = recipe.name
+        %h4= recipe.name
         %small
           (
           posted by:
           = recipe.user.username
           )
-        %br/
-        = recipe.description
+        %p
+          = recipe.description
