@@ -41,8 +41,7 @@ module MetaTagsHelper
         url: recipe_url(recipe),
         secure_url: recipe_url(recipe),
         image: {
-          _: (recipe.image.service_url if recipe.image.attached?),
-          sucure_url: (recipe.image.service_url if recipe.image.attached?),
+          _: image_url(recipe),
           width: 400,
           height: 400,
           type: (recipe.image.blob.content_type if recipe.image.attached?)
@@ -55,12 +54,21 @@ module MetaTagsHelper
         url: recipe_url(recipe),
         secure_url: recipe_url(recipe),
         image: {
-          _: (recipe.image.service_url if recipe.image.attached?),
-          sucure_url: (recipe.image.service_url if recipe.image.attached?),
+          _: image_url(recipe),
           width: 400,
           height: 400,
           type: (recipe.image.blob.content_type if recipe.image.attached?)
         }
       }
+  end
+
+  private
+
+  def image_url(recipe)
+    image_url = recipe.image.service_url if recipe.image.attached?
+    if image_url
+      image_url.slice! "https://s3.amazonaws.com/"
+      "http://" + image_url
+    end
   end
 end
