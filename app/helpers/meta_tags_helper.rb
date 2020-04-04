@@ -67,11 +67,6 @@ module MetaTagsHelper
   private
 
   def image_url(recipe)
-    rails_blob_path recipe.image if recipe.image.attached?
-    # image_url = recipe.image.service_url if recipe.image.attached?
-    # if image_url
-    #   image_url.slice! "s3.amazonaws.com/"
-    #   image_url
-    # end
+    image_url = recipe.image.service_url if recipe.image.attached?
   end
 end
