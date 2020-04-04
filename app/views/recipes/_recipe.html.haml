@@ -1,6 +1,5 @@
 .medium-6.cell.end
   = link_to recipe do
-    -# .banner{style: "#{background_banner(recipe)}"}
     .banner
       = image_tag banner_image(recipe.image) if recipe.image.attached?
       .highlight-text.content

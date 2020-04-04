@@ -58,9 +58,10 @@
     %b Description:
     .autolinks= simple_format(@recipe.description)
   .medium-5.cell
-    .center= image_tag medium_image(@recipe.image),
-    class: 'max-image-height' if @recipe.image.attached?
-
+    .center
+      - if @recipe.image.attached?
+        = link_to rails_blob_path @recipe.image, class: 'max-image-height' do
+          = image_tag medium_image(@recipe.image)
 .grid-x
   .small-12.cell
     - if @recipe.ingredients.any?
