@@ -7,6 +7,7 @@ class NotificationsController < ApplicationController
 
   def mark_as_read
     @notifications = current_user.notifications.by_unread.mark_as_read
+    @unread_notifications_count = current_user.notifications.unread_count
     respond_to do |format|
       format.js
     end

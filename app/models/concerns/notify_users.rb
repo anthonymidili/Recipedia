@@ -3,7 +3,7 @@ class NotifyUsers
     def after_commit(notifiable)
       recipients = recipients(notifiable)
       create_notifications(notifiable, recipients)
-      # future mail_notifications(notifiable, recipients)
+      mail_notifications(notifiable, recipients)
     end
 
   private
@@ -14,9 +14,12 @@ class NotifyUsers
       end
     end
 
-    # def mail_notifications(notifiable, recipients)
-    #   # bulk mail
-    # end
+    def mail_notifications(notifiable, recipients)
+      if recipients.any?
+        NotifiyUsersMailer.activity(notifiable, notifiable.user, recipients.pluck(:email),
+          action_statement(notifiable)).deliver_later
+      end
+    end
 
     def recipients(notifiable)
       case notifiable.class.name
