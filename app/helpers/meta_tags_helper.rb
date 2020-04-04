@@ -67,8 +67,8 @@ module MetaTagsHelper
   def image_url(recipe)
     image_url = recipe.image.service_url if recipe.image.attached?
     if image_url
-      image_url.slice! "https://s3.amazonaws.com/"
-      "http://" + image_url
+      image_url.slice! "s3.amazonaws.com/"
+      image_url
     end
   end
 end
