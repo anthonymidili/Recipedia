@@ -1,6 +1,5 @@
 class NotifiyUsersMailer < ApplicationMailer
   # requires 'notifications_helper' and includes NotificationsHelper
-  include NotificationsHelper
   helper :notifications
 
   # Subject can be set in your I18n file at config/locales/en.yml
