@@ -1,0 +1,27 @@
+- provide :title, 'Notification defaults'
+
+.grid-x
+  .cell
+    %h1 Notification defaults
+
+    = form_with model: @notification_default,
+    url: update_defaults_notifications_path, local: true do |f|
+      = render 'notifications/error_messages', object: f.object
+
+      .field
+        = f.check_box :receive_email, id: 'receive_email'
+        = f.label :receive_email, for: 'receive_email'
+      .field
+        = f.check_box :recipe_created, id: 'recipe_created'
+        = f.label :recipe_created, for: 'recipe_created'
+      .field
+        = f.check_box :review_created, id: 'review_created'
+        = f.label :review_created, for: 'review_created'
+      .field
+        = f.check_box :follows_you, id: 'follows_you'
+        = f.label :follows_you, for: 'follows_you'
+      .field
+        = f.check_box :recipe_favored, id: 'recipe_favored'
+        = f.label :recipe_favored, for: 'recipe_favored'
+      .actions
+        = f.submit class: 'button'

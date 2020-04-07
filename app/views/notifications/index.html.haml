@@ -3,6 +3,7 @@
 .grid-x
   .cell
     %h1 Notifications
+    = link_to 'Notification settings', defaults_notifications_path
     .callout
       - if @notifications.by_unread.any?
         %p#unread_notifications UNREAD

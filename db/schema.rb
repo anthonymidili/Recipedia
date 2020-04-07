@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_29_060336) do
+ActiveRecord::Schema.define(version: 2020_04_07_034038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -81,6 +81,18 @@ ActiveRecord::Schema.define(version: 2020_03_29_060336) do
     t.bigint "part_id", null: false
     t.index ["part_id"], name: "index_ingredients_on_part_id"
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
+  end
+
+  create_table "notification_defaults", force: :cascade do |t|
+    t.boolean "receive_email", default: true
+    t.boolean "recipe_created", default: true
+    t.boolean "review_created", default: true
+    t.boolean "follows_you", default: true
+    t.boolean "recipe_favored", default: true
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notification_defaults_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -175,6 +187,7 @@ ActiveRecord::Schema.define(version: 2020_03_29_060336) do
   add_foreign_key "favoritisms", "users"
   add_foreign_key "infos", "users"
   add_foreign_key "ingredients", "recipes"
+  add_foreign_key "notification_defaults", "users"
   add_foreign_key "notifications", "users", column: "notifier_id"
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "parts", "recipes"

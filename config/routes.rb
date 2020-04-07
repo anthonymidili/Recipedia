@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     collection do
       patch :mark_as_read
       get :unread_count
+      get :defaults
+      patch :update_defaults
     end
   end
 
