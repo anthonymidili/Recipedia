@@ -20,27 +20,27 @@ class NotificationsController < ApplicationController
     end
   end
 
-  def defaults
-    @notification_default = current_user.notification_default || current_user.create_notification_default
+  def settings
+    @notification_setting = current_user.notification_setting || current_user.create_notification_setting
   end
 
-  def update_defaults
-    @notification_default = current_user.notification_default
+  def update_settings
+    @notification_setting = current_user.notification_setting
     respond_to do |format|
-      if @notification_default.update(notification_default_params)
-        format.html { redirect_to defaults_notifications_path, notice: 'Notification defaults were successfully updated.' }
-        format.json { render :default, status: :ok, location: defaults_notifications_path }
+      if @notification_setting.update(notification_setting_params)
+        format.html { redirect_to settings_notifications_path, notice: 'Notification settings were successfully updated.' }
+        format.json { render :setting, status: :ok, location: settings_notifications_path }
       else
-        format.html { render :default }
-        format.json { render json: @notification_default.errors, status: :unprocessable_entity }
+        format.html { render :setting }
+        format.json { render json: @notification_setting.errors, status: :unprocessable_entity }
       end
     end
   end
 
   private
 
-  def notification_default_params
-    params.require(:notification_default).permit(:receive_email, :recipe_created,
+  def notification_setting_params
+    params.require(:notification_setting).permit(:receive_email, :recipe_created,
       :review_created, :follows_you, :recipe_favored)
   end
 end

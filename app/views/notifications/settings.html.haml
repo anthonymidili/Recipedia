@@ -1,11 +1,11 @@
-- provide :title, 'Notification defaults'
+- provide :title, 'Notification settings'
 
 .grid-x
   .cell
-    %h1 Notification defaults
+    %h1 Notification settings
 
-    = form_with model: @notification_default,
-    url: update_defaults_notifications_path, local: true do |f|
+    = form_with model: @notification_setting,
+    url: update_settings_notifications_path, local: true do |f|
       = render 'notifications/error_messages', object: f.object
 
       .field

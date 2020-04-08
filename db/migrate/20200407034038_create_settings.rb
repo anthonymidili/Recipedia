@@ -1,6 +1,6 @@
-class CreateDefaults < ActiveRecord::Migration[6.0]
+class CreateSettings < ActiveRecord::Migration[6.0]
   def change
-    create_table :notification_defaults do |t|
+    create_table :notification_settings do |t|
       t.boolean :receive_email, default: true
       t.boolean :recipe_created, default: true
       t.boolean :review_created, default: true
