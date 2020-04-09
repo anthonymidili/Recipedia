@@ -2,8 +2,10 @@ class NotifyUsers
   class << self
     def after_commit(notifiable)
       recipients = recipients(notifiable)
-      create_notifications(notifiable, recipients)
-      mail_notifications(notifiable, recipients)
+      if recipients.any?
+        mail_notifications(notifiable, recipients)
+        create_notifications(notifiable, recipients)
+      end
     end
 
   private
@@ -15,16 +17,15 @@ class NotifyUsers
     end
 
     def mail_notifications(notifiable, recipients)
-      if recipients.any?
-        NotifiyUsersMailer.activity(notifiable, notifiable.user, recipients.pluck(:email),
-          action_statement(notifiable)).deliver_later
-      end
+      recipients_email = recipients.recipients_email
+      NotifiyUsersMailer.activity(notifiable, notifiable.user, recipients_email,
+        action_statement(notifiable)).deliver_later
     end
 
     def recipients(notifiable)
       case notifiable.class.name
       when 'Recipe'
-        notifiable.user.followers.by_unnotified(notifiable)
+        notifiable.user.followers.by_unnotified(notifiable) if notifiable.published
       when 'Review'
         recipients = notifiable.recipe.reviews.map(&:user)
         recipients << notifiable.recipe.user

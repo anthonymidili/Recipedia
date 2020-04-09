@@ -34,11 +34,18 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
   scope :by_notified, -> (notifiable) {
-    includes(:notifications).where(notifications: { notifiable_id: notifiable } )
+    includes(:notifications).where(notifications: { notifiable_id: notifiable })
   }
-  scope :by_unnotified, -> (notifiable) {
-    where.not(id: by_notified(notifiable))
+  scope :by_unnotified, -> (notifiable) { where.not(id: by_notified(notifiable)) }
+  scope :recent, -> {
+    time_range = (Time.current - 1.week)..Time.current
+    includes(:notifications).where(notifications: { created_at: time_range })
   }
+  scope :receive_email, -> {
+    includes(:notification_setting).where(notification_settings: {id: nil}).
+    or(includes(:notification_setting).where(notification_settings: {receive_email: true}))
+  }
+  scope :recipients_email, -> { recent.receive_email.map(&:email) }
 
   def info
     super || build_info
