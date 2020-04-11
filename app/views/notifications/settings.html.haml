@@ -5,12 +5,13 @@
     %h1 Notification settings
 
     = form_with model: @notification_setting,
-    url: update_settings_notifications_path, local: true do |f|
+    url: update_settings_notifications_path, id: 'notification_settings', local: true do |f|
       = render 'notifications/error_messages', object: f.object
 
       .field
         = f.check_box :receive_email, id: 'receive_email'
         = f.label :receive_email, for: 'receive_email'
+      %hr/
       .field
         = f.check_box :recipe_created, id: 'recipe_created'
         = f.label :recipe_created, for: 'recipe_created'
@@ -23,5 +24,6 @@
       .field
         = f.check_box :recipe_favored, id: 'recipe_favored'
         = f.label :recipe_favored, for: 'recipe_favored'
+      %br/
       .actions
         = f.submit class: 'button'

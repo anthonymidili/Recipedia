@@ -36,3 +36,13 @@ en:
         avatar: 'Your avatar'
       info:
         body: 'About you'
+      notification_setting:
+        receive_email: "Receive one email, notifyings you that someone one
+        has made one of the changes below. You will not receive another email until
+        all your notifications are marked as read or until the next day when another
+        notification is made (if any)."
+        recipe_created: "Someone you are following publishes a recipe."
+        review_created: "Someone posts a review on either your recipe or a recipe
+        you have reviewed."
+        follows_you: "Someone starts following you."
+        recipe_favored: "Someone adds your recipe to thier cookbook."
