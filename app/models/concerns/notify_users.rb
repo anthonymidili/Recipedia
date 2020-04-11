@@ -12,8 +12,10 @@ class NotifyUsers
 
     def mail_notifications(notifiable, recipients)
       recipients_email = recipients.recipients_email(notifiable)
-      NotifiyUsersMailer.activity(notifiable, notifiable.user, recipients_email,
-        action_statement(notifiable)).deliver_later
+      if recipients_email.any?
+        NotifiyUsersMailer.activity(notifiable, notifiable.user,
+          recipients_email, action_statement(notifiable)).deliver_later
+      end
     end
 
     def create_notifications(notifiable, recipients)
