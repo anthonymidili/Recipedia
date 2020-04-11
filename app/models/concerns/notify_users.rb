@@ -10,16 +10,16 @@ class NotifyUsers
 
   private
 
+    def mail_notifications(notifiable, recipients)
+      recipients_email = recipients.recipients_email(notifiable)
+      NotifiyUsersMailer.activity(notifiable, notifiable.user, recipients_email,
+        action_statement(notifiable)).deliver_later
+    end
+
     def create_notifications(notifiable, recipients)
       recipients.each do |recipient|
         NotifiyUserJob.perform_later(notifiable, recipient, action_statement(notifiable))
       end
-    end
-
-    def mail_notifications(notifiable, recipients)
-      recipients_email = recipients.recipients_email
-      NotifiyUsersMailer.activity(notifiable, notifiable.user, recipients_email,
-        action_statement(notifiable)).deliver_later
     end
 
     def recipients(notifiable)
@@ -27,13 +27,11 @@ class NotifyUsers
       when 'Recipe'
         notifiable.user.followers.by_unnotified(notifiable) if notifiable.published
       when 'Review'
-        recipients = notifiable.recipe.reviews.map(&:user)
-        recipients << notifiable.recipe.user
-        (recipients - [notifiable.user]).uniq
+        User.by_reviewers(notifiable)
       when 'Relationship'
-        [notifiable.followed]
+        User.where(id: notifiable.followed)
       when 'Favoritism'
-        [notifiable.recipe.user]
+        User.where(id: notifiable.recipe.user)
       end
     end
 

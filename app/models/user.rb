@@ -33,19 +33,34 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  # Finds users who received a notification about the notifiable.
   scope :by_notified, -> (notifiable) {
     includes(:notifications).where(notifications: { notifiable_id: notifiable })
   }
+  # Finds users who did not receive a notification about the notifiable.
   scope :by_unnotified, -> (notifiable) { where.not(id: by_notified(notifiable)) }
-  scope :recent, -> {
-    time_range = (Time.current - 1.week)..Time.current
-    includes(:notifications).where(notifications: { created_at: time_range })
+  # Finds users who reviewed a recipe, owns the recipe and removes the notifier user.
+  scope :by_reviewers, -> (notifiable) {
+    includes(recipes: { reviews: :user }).
+    where(recipes: { reviews: { user: notifiable.recipe.reviews.map(&:user) }}).
+    where.not(id: notifiable.user)
   }
-  scope :receive_email, -> {
-    includes(:notification_setting).where(notification_settings: {id: nil}).
-    or(includes(:notification_setting).where(notification_settings: {receive_email: true}))
+  # Only email users that want to be.
+  scope :recipients_email, -> (notifiable) { receive_email(notifiable).remove_recently_unread.map(&:email) }
+  # Check users notification settings.
+  scope :receive_email, -> (notifiable) {
+    includes(:notification_setting).where(notification_settings: { id: nil }).
+    or(includes(:notification_setting).where(notification_settings: { receive_email: true }).
+    where(notification_settings: { receive_notification_type(notifiable) => true }))
   }
-  scope :recipients_email, -> { recent.receive_email.map(&:email) }
+  # Finds all users that have received notifications that are unread in the past week.
+  scope :by_recently_unread, -> {
+    time_range = Time.current.beginning_of_day..Time.current.end_of_day
+    includes(:notifications).where(notifications: { created_at: time_range }).
+    where(notifications: { is_read: false })
+  }
+  # Remove any users that were recently notified.
+  scope :remove_recently_unread, -> { where.not(id: by_recently_unread) }
 
   def info
     super || build_info
@@ -73,5 +88,18 @@ private
   # Setter
   def set_slug
     self.slug = username.parameterize
+  end
+
+  def self.receive_notification_type(notifiable)
+    case notifiable.class.name
+    when 'Recipe'
+      :recipe_created
+    when 'Review'
+      :review_created
+    when 'Relationship'
+      :follows_you
+    when 'Favoritism'
+      :recipe_favored
+    end
   end
 end
