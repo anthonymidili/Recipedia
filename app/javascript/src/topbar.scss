@@ -56,4 +56,9 @@
   i {
     margin: 0 !important;
   }
+
+  /* Move dropdown infront of alert box close button. */
+  .is-dropdown-submenu {
+    z-index: 11;
+  }
 }
