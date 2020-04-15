@@ -1,6 +1,6 @@
 {
   "name": "Recipedia",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Lets share recipes.",
   "main": "index.js",
   "repository": "recipedia.ttfh.co",
