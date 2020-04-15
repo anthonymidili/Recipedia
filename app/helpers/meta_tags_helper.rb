@@ -45,7 +45,7 @@ module MetaTagsHelper
           secure_url: image_url(recipe),
           width: 400,
           height: 400,
-          type: (recipe.image.blob.content_type if recipe.image.attached?)
+          type: (recipe.images.first.blob.content_type if recipe.images.attached?)
         }
       },
       og: {
@@ -59,7 +59,7 @@ module MetaTagsHelper
           secure_url: image_url(recipe),
           width: 400,
           height: 400,
-          type: (recipe.image.blob.content_type if recipe.image.attached?)
+          type: (recipe.images.first.blob.content_type if recipe.images.attached?)
         }
       }
   end
@@ -67,6 +67,6 @@ module MetaTagsHelper
   private
 
   def image_url(recipe)
-    image_url = recipe.image.service_url if recipe.image.attached?
+    image_url = recipe.images.first.service_url if recipe.images.attached?
   end
 end

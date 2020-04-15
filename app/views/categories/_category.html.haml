@@ -1,10 +1,10 @@
 .small-12.medium-6.cell
   = link_to category do
     .banner
-      - recipe_with_image = category.recipes.unique_image(@used_recipes).last_with_image
-      = image_tag banner_image(recipe_with_image.image) if recipe_with_image.present?
+      - @recipe_with_image = category.recipes.last_with_image(@used_recipes)
+      = image_tag banner_image(@recipe_with_image.try(:images).try(:first)) if @recipe_with_image.try(:images).try(:attached?)
       .highlight-text.content
         %h5
           = category.name
           .float-right= category.recipes.by_published.count
-- @used_recipes << category.recipes.unique_image(@used_recipes).last_with_image.try(:id)
+- @used_recipes << @recipe_with_image.try(:id)

@@ -7,7 +7,7 @@
         .likely
           %li.twitter Tweet
           %li.facebook Share
-          %li.pinterest{data: { media: "#{@recipe.image.service_url if @recipe.image.attached?}" }} Pin
+          %li.pinterest{data: { media: "#{@recipe.images.first.service_url if @recipe.images.attached?}" }} Pin
           %li.telegram Send
           %li.email.likely__widget
             = mail_to nil,
@@ -59,9 +59,10 @@
     .autolinks= simple_format(@recipe.description)
   .medium-5.cell
     .center
-      - if @recipe.image.attached?
-        = link_to rails_blob_path @recipe.image, class: 'max-image-height' do
-          = image_tag medium_image(@recipe.image)
+      - if @recipe.images.attached?
+        - @recipe.images.each do |image|
+          = link_to rails_blob_path image, class: 'max-image-height' do
+            = image_tag medium_image(image)
 .grid-x
   .small-12.cell
     - if @recipe.ingredients.any?

@@ -5,7 +5,7 @@ class RecipesController < ApplicationController
   unless: -> { is_author?(@recipe.user) }, only: [:edit, :update, :destroy]
   before_action :set_category, only: [:new, :create, :edit, :update]
   before_action :remove_image, only: [:update]
-  rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
+  # rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
   before_action :set_root_meta_tag_options, only: [:index]
   before_action :set_recipe_meta_tag_options, only: [:show]
 
@@ -42,14 +42,14 @@ class RecipesController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @recipe = current_user.recipes.build(recipe_params)
-      @recipe.image.attach(recipe_params[:image])
+      # @recipe.image.attach(recipe_params[:image])
 
       respond_to do |format|
         if @recipe.save
           format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
           format.json { render :show, status: :created, location: @recipe }
         else
-          @recipe.image.purge
+          # @recipe.image.purge
           format.html { render :new }
           format.json { render json: @recipe.errors, status: :unprocessable_entity }
         end
@@ -60,7 +60,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
-    @recipe.image.attach(params[:recipe][:image]) if params[:recipe][:image].present?
+    @recipe.images.attach(params[:recipe][:images]) if params[:recipe][:images].present?
 
     respond_to do |format|
       if @recipe.update(recipe_params)
@@ -115,7 +115,7 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def recipe_params
-    params.require(:recipe).permit(:name, :description, :source, :image, :published, :remove_image, category_ids: [],
+    params.require(:recipe).permit(:name, :description, :source, :published, :remove_image, images: [], category_ids: [],
                                    parts_attributes: [:id, :name, :_destroy,
                                                       ingredients_attributes: [:id, :item, :quantity, :_destroy],
                                                       steps_attributes: [:id, :description, :step_order, :_destroy]])

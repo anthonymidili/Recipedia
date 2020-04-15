@@ -14,7 +14,7 @@ class Recipe < ApplicationRecord
   has_many :parts, dependent: :destroy
   accepts_nested_attributes_for :parts, reject_if: :all_blank, allow_destroy: true
 
-  has_one_attached :image
+  has_many_attached :images
 
   belongs_to :user
 
@@ -29,8 +29,8 @@ class Recipe < ApplicationRecord
   scope :by_unpublished, -> { where(published: false) }
   scope :by_name, -> { order(name: :asc) }
   scope :newest_to_oldest, -> { order(created_at: :desc) }
-  scope :unique_image, -> (used_recipes) { where.not(id: used_recipes) }
-  scope :last_with_image, -> { select { |r| r.image.attached? } .last }
+  scope :unique_images, -> (used_recipes) { where.not(id: used_recipes) }
+  scope :last_with_image, -> (used_recipes) { (unique_images(used_recipes).with_attached_images.where.not(active_storage_attachments: { record_id: nil })).last }
   scope :filtered_by, -> (term) { where('name ILIKE :search', search: "%#{term}%") }
 
 private

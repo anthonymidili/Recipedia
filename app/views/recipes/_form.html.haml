@@ -28,16 +28,17 @@
         = f.text_field :source, placeholder: 'cookbook, website or person'
 
       .medium-6.cell
-        = f.label :image, 'Upload image (landscape for best results)'
-        = f.file_field :image, direct_upload: true,
+        = f.label :images, 'Upload image (landscape for best results)'
+        = f.file_field :images, direct_upload: true,
         accept: 'image/png,image/gif,image/jpeg'
 
-        - if f.object.image.attached?
-          = image_tag medium_image(f.object.image)
-          .grid-x
-            .small-12.cell
-              = f.check_box :remove_image, id: 'recipe_remove_image'
-              = f.label :remove_image, for: 'recipe_remove_image'
+        - if f.object.images.attached?
+          - f.object.images.each do |image|
+            = image_tag medium_image(image)
+            .grid-x
+              .small-12.cell
+                = f.check_box :remove_image, id: 'recipe_remove_image'
+                = f.label :remove_image, for: 'recipe_remove_image'
 
     #parts= render 'parts/fields_for_form', f: f
 
