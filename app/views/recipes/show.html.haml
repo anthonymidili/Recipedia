@@ -60,9 +60,12 @@
   .medium-5.cell
     .center
       - if @recipe.images.attached?
+        = link_to rails_blob_path @image, class: 'max-image-height' do
+          = image_tag medium_image(@image)
+        %br/
         - @recipe.images.each do |image|
-          = link_to rails_blob_path image, class: 'max-image-height' do
-            = image_tag medium_image(image)
+          = link_to recipe_path(@recipe, image: image) do
+            = image_tag avatar_image(image, 80)
 .grid-x
   .small-12.cell
     - if @recipe.ingredients.any?

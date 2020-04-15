@@ -23,6 +23,7 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
+    @image = @recipe.images.find_by(id: params[:image]) || @recipe.images.first if @recipe.images.attached?
     @review = @recipe.reviews.new
   end
 
@@ -106,7 +107,8 @@ private
   end
 
   def remove_image
-    @recipe.image.purge if recipe_params[:remove_image] == "1"
+    @images = @recipe.images.where(id: recipe_params[:remove_images])
+    @images.purge_later if @images
   end
 
   def cleanup_image
@@ -115,7 +117,7 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def recipe_params
-    params.require(:recipe).permit(:name, :description, :source, :published, :remove_image, images: [], category_ids: [],
+    params.require(:recipe).permit(:name, :description, :source, :published, remove_images: [], images: [], category_ids: [],
                                    parts_attributes: [:id, :name, :_destroy,
                                                       ingredients_attributes: [:id, :item, :quantity, :_destroy],
                                                       steps_attributes: [:id, :description, :step_order, :_destroy]])

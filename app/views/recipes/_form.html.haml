@@ -37,8 +37,8 @@
             = image_tag medium_image(image)
             .grid-x
               .small-12.cell
-                = f.check_box :remove_image, id: 'recipe_remove_image'
-                = f.label :remove_image, for: 'recipe_remove_image'
+                = f.check_box :remove_images, { multiple: true, id: "recipe_remove_image_#{image.id}" }, image.id, false
+                = f.label :remove_images, for: "recipe_remove_image_#{image.id}"
 
     #parts= render 'parts/fields_for_form', f: f
 

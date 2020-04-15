@@ -18,7 +18,7 @@ class Recipe < ApplicationRecord
 
   belongs_to :user
 
-  attr_accessor :remove_image
+  attr_accessor :remove_images
 
   validates :name, presence: true
   validates :description, presence: true
