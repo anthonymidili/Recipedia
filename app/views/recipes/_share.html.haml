@@ -1,0 +1,16 @@
+.grid-x
+  .cell
+    .ul.menu.float-right.pad-bottom
+      .likely
+        %li.twitter Tweet
+        %li.facebook Share
+        %li.pinterest{data: { media: "#{recipe.images.first.service_url if recipe.images.attached?}" }} Pin
+        %li.telegram Send
+        %li.email.likely__widget
+          = mail_to nil,
+          subject: "Recipedia | #{recipe.user.username}'s #{recipe.name}",
+          body: "Go checkout #{recipe.user.username}'s #{recipe.name} on Recipedia. \n \n #{recipe_url(recipe)}" do
+            %span.likely__icon
+              %i.fas.fa-envelope
+            %span.likely__button
+              Email
