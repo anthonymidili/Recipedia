@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   before_action :deny_access!,
   unless: -> { is_author?(@recipe.user) }, only: [:edit, :update, :destroy]
   before_action :set_category, only: [:new, :create, :edit, :update]
-  before_action :remove_image, only: [:update]
+  before_action :remove_image, only: [:update_image]
   # rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
   before_action :set_root_meta_tag_options, only: [:index]
   before_action :set_recipe_meta_tag_options, only: [:show]
@@ -123,10 +123,6 @@ private
   def remove_image
     @images = @recipe.images.where(id: recipe_params[:remove_images])
     @images.purge_later if @images
-  end
-
-  def cleanup_image
-    recipe_params.delete(:image)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

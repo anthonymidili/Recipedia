@@ -3,12 +3,11 @@
     .medium-6.cell
       = render 'notifications/error_messages', object: f.object
       = f.label :images, 'Upload image (landscape for best results)'
-      = f.file_field :images, direct_upload: true,
-      accept: 'image/png,image/gif,image/jpeg'
+      = f.file_field :images, direct_upload: true, accept: 'image/png,image/gif,image/jpeg'
       %p
-        = f.submit 'Update Images', class: 'button'
-        %br/
-        = link_to 'Finished editing', @recipe, class: 'button secondary'
+        %ul.menu
+          %li.pad-right= f.submit 'Update Images', class: 'button'
+          %li= link_to 'Finished editing', @recipe, class: 'button secondary'
 
     - if f.object.images.attached?
       - f.object.images.each do |image|
@@ -17,5 +16,6 @@
             = image_tag medium_image(image)
             - if is_author?(@recipe.user)
               %br/
-              = f.check_box :remove_images, { multiple: true, id: "recipe_remove_image_#{image.id}" }, image.id, false
+              = f.check_box :remove_images,
+              { multiple: true, id: "recipe_remove_image_#{image.id}" }, image.id, false
               = f.label :remove_image, for: "recipe_remove_image_#{image.id}"
