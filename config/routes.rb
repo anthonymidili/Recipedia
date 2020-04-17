@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     member do
       get :log_in
       get :likes
+      get :upload_image
+      patch :update_image
     end
   end
 

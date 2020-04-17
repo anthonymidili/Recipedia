@@ -17,28 +17,15 @@
         -#   = f.collection_check_boxes :category_ids, Category.all, :id, :name do |category|
         -#     %li= category.label(data: { value: category.value }) { category.check_box + category.text }
     .grid-x
-      .medium-6.cell
+      .medium-6.cell.small-order-1.medium-order-1
         = f.label :name
         = f.text_field :name, placeholder: 'Apple Pie'
-        %br/
+      .small-12.cell.small-order-2.medium-order-3
         = f.label :description
-        = f.text_area :description, placeholder: 'The best apple pie you will ever eat.', rows: '2'
-        %br/
+        = f.text_area :description, placeholder: 'The best apple pie you will ever eat.', rows: '5'
+      .medium-6.cell.small-order-3.medium-order-2
         = f.label :source, "(Give credit where credit is due) Name the recipe's source"
         = f.text_field :source, placeholder: 'cookbook, website or person'
-
-      .medium-6.cell
-        = f.label :images, 'Upload image (landscape for best results)'
-        = f.file_field :images, direct_upload: true,
-        accept: 'image/png,image/gif,image/jpeg'
-
-        - if f.object.images.attached?
-          - f.object.images.each do |image|
-            = image_tag medium_image(image)
-            .grid-x
-              .small-12.cell
-                = f.check_box :remove_images, { multiple: true, id: "recipe_remove_image_#{image.id}" }, image.id, false
-                = f.label :remove_images, for: "recipe_remove_image_#{image.id}"
 
     #parts= render 'parts/fields_for_form', f: f
 

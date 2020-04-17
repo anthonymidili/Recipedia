@@ -48,6 +48,7 @@
         = link_to rails_blob_path @image, class: 'max-image-height' do
           = image_tag medium_image(@image)
         %br/
+        = link_to 'add image', upload_image_recipe_path(@recipe)
         - @recipe.images.each do |image|
           = link_to recipe_path(@recipe, image: image) do
             = image_tag avatar_image(image, 80)

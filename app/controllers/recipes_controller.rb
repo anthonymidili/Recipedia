@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :log_in]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :log_in, :likes]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :log_in, :likes, :upload_image, :update_image]
   before_action :deny_access!,
   unless: -> { is_author?(@recipe.user) }, only: [:edit, :update, :destroy]
   before_action :set_category, only: [:new, :create, :edit, :update]
@@ -8,6 +8,7 @@ class RecipesController < ApplicationController
   # rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
   before_action :set_root_meta_tag_options, only: [:index]
   before_action :set_recipe_meta_tag_options, only: [:show]
+  rescue_from ActionController::ParameterMissing, with: :no_image_uploaded
 
   # GET /recipes
   # GET /recipes.json
@@ -43,14 +44,12 @@ class RecipesController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @recipe = current_user.recipes.build(recipe_params)
-      # @recipe.image.attach(recipe_params[:image])
 
       respond_to do |format|
         if @recipe.save
           format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
           format.json { render :show, status: :created, location: @recipe }
         else
-          # @recipe.image.purge
           format.html { render :new }
           format.json { render json: @recipe.errors, status: :unprocessable_entity }
         end
@@ -61,8 +60,6 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
-    @recipe.images.attach(params[:recipe][:images]) if params[:recipe][:images].present?
-
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
@@ -96,6 +93,23 @@ class RecipesController < ApplicationController
   def likes
   end
 
+  def upload_image
+  end
+
+  def update_image
+    @recipe.images.attach(params[:recipe][:images]) if params[:recipe][:images].present?
+
+    respond_to do |format|
+      if @recipe.update(recipe_params)
+        format.html { redirect_to upload_image_recipe_path(@recipe), notice: 'Images were successfully updated.' }
+        format.json { render :update_image, status: :ok, location: upload_image_recipe_path(@recipe) }
+      else
+        format.html { render :update_image }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 private
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
@@ -121,6 +135,10 @@ private
                                    parts_attributes: [:id, :name, :_destroy,
                                                       ingredients_attributes: [:id, :item, :quantity, :_destroy],
                                                       steps_attributes: [:id, :description, :step_order, :_destroy]])
+  end
+
+  def no_image_uploaded
+    redirect_to upload_image_recipe_path(@recipe), notice: 'No image uploaded.'
   end
 
   def set_recipe_meta_tag_options
