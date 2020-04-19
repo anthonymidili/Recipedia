@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_034038) do
+ActiveRecord::Schema.define(version: 2020_04_18_192158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -117,6 +117,15 @@ ActiveRecord::Schema.define(version: 2020_04_07_034038) do
     t.index ["recipe_id"], name: "index_parts_on_recipe_id"
   end
 
+  create_table "recipe_images", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipe_id"], name: "index_recipe_images_on_recipe_id"
+    t.index ["user_id"], name: "index_recipe_images_on_user_id"
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.citext "name"
     t.text "description"
@@ -191,6 +200,8 @@ ActiveRecord::Schema.define(version: 2020_04_07_034038) do
   add_foreign_key "notifications", "users", column: "notifier_id"
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "parts", "recipes"
+  add_foreign_key "recipe_images", "recipes"
+  add_foreign_key "recipe_images", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "reviews", "recipes"

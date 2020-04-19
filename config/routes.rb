@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get :log_in
       get :likes
       get :upload_image
-      patch :update_image
+      post :create_image
     end
   end
 

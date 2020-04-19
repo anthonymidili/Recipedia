@@ -44,15 +44,15 @@
     .autolinks= simple_format(@recipe.description)
   .medium-5.cell
     .center
-      - if @recipe.images.attached?
-        = link_to rails_blob_path @image, class: 'max-image-height' do
-          = image_tag medium_image(@image)
+      - if @recipe_image && @recipe_image.image.attached?
+        = link_to rails_blob_path @recipe_image.image, class: 'max-image-height' do
+          = image_tag medium_image(@recipe_image.image)
       %br/
       = link_to 'add image', upload_image_recipe_path(@recipe)
-      - if @recipe.images.attached?
-        - @recipe.images.each do |image|
-          = link_to recipe_path(@recipe, image: image) do
-            = image_tag avatar_image(image, 80)
+      - @recipe.recipe_images.each do |recipe_image|
+        - if recipe_image.image.attached?
+          = link_to recipe_path(@recipe, image: recipe_image) do
+            = image_tag avatar_image(recipe_image.image, 80)
 .grid-x
   .small-12.cell
     - if @recipe.ingredients.any?

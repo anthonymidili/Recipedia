@@ -14,11 +14,14 @@ class Recipe < ApplicationRecord
   has_many :parts, dependent: :destroy
   accepts_nested_attributes_for :parts, reject_if: :all_blank, allow_destroy: true
 
+  has_many :recipe_images, dependent: :destroy
+
   has_many_attached :images
 
   belongs_to :user
 
   attr_accessor :remove_images
+  attr_accessor :image
 
   validates :name, presence: true
   validates :description, presence: true
