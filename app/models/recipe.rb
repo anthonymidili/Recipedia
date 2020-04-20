@@ -20,9 +20,6 @@ class Recipe < ApplicationRecord
 
   belongs_to :user
 
-  attr_accessor :remove_images
-  attr_accessor :image
-
   validates :name, presence: true
   validates :description, presence: true
   validate :check_box_presence
@@ -33,7 +30,9 @@ class Recipe < ApplicationRecord
   scope :by_name, -> { order(name: :asc) }
   scope :newest_to_oldest, -> { order(created_at: :desc) }
   scope :unique_images, -> (used_recipes) { where.not(id: used_recipes) }
-  scope :last_with_image, -> (used_recipes) { (unique_images(used_recipes).with_attached_images.where.not(active_storage_attachments: { record_id: nil })).last }
+  scope :last_with_image, -> (used_recipes) {
+    (unique_images(used_recipes).includes(:recipe_images).where.not(recipe_images: { id: nil })).last 
+  }
   scope :filtered_by, -> (term) { where('name ILIKE :search', search: "%#{term}%") }
 
 private

@@ -1,7 +1,8 @@
 .medium-6.cell.end
   = link_to recipe do
     .banner
-      = image_tag banner_image(recipe.images.first) if recipe.images.attached?
+      - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
+        = image_tag banner_image(recipe.recipe_images.first.image)
       .highlight-text.content
 
         - if recipe.favoritisms.count > 0

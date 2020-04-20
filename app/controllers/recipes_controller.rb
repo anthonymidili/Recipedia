@@ -1,14 +1,11 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :log_in]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :log_in, :likes, :upload_image, :create_image]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :log_in, :likes]
   before_action :deny_access!,
   unless: -> { is_author?(@recipe.user) }, only: [:edit, :update, :destroy]
   before_action :set_category, only: [:new, :create, :edit, :update]
-  before_action :remove_image, only: [:create_image]
-  # rescue_from Aws::S3::Errors::NoSuchKey, with: :cleanup_image
   before_action :set_root_meta_tag_options, only: [:index]
   before_action :set_recipe_meta_tag_options, only: [:show]
-  rescue_from ActionController::ParameterMissing, with: :no_image_uploaded
 
   # GET /recipes
   # GET /recipes.json
@@ -93,26 +90,6 @@ class RecipesController < ApplicationController
   def likes
   end
 
-  def upload_image
-  end
-
-  def create_image
-    if recipe_params[:image].present?
-      @recipe_image = @recipe.recipe_images.build(recipe_params)
-      @recipe_image.user = current_user
-    end
-
-    respond_to do |format|
-      if @recipe_image && @recipe_image.save
-        format.html { redirect_to upload_image_recipe_path(@recipe), notice: 'Images were successfully updated.' }
-        format.json { render :upload_image, status: :ok, location: upload_image_recipe_path(@recipe) }
-      else
-        format.html { render :upload_image }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
 private
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
@@ -123,21 +100,12 @@ private
     @category = Category.new
   end
 
-  def remove_image
-    @recipe_images = @recipe.recipe_images.where(id: recipe_params[:remove_images])
-    @recipe_images.destroy_all if @recipe_images
-  end
-
   # Never trust parameters from the scary internet, only allow the white list through.
   def recipe_params
-    params.require(:recipe).permit(:name, :description, :source, :published, :image, remove_images: [], category_ids: [],
+    params.require(:recipe).permit(:name, :description, :source, :published, category_ids: [],
       parts_attributes: [:id, :name, :_destroy,
         ingredients_attributes: [:id, :item, :quantity, :_destroy],
         steps_attributes: [:id, :description, :step_order, :_destroy]])
-  end
-
-  def no_image_uploaded
-    redirect_to upload_image_recipe_path(@recipe), notice: 'No image uploaded.'
   end
 
   def set_recipe_meta_tag_options

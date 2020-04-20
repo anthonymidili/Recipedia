@@ -45,10 +45,14 @@
   .medium-5.cell
     .center
       - if @recipe_image && @recipe_image.image.attached?
+        = link_to @recipe_image.user do
+          %br/
+          posted by:
+          = @recipe_image.user.username
         = link_to rails_blob_path @recipe_image.image, class: 'max-image-height' do
-          = image_tag medium_image(@recipe_image.image)
+          .thumbnail= image_tag medium_image(@recipe_image.image)
       %br/
-      = link_to 'add image', upload_image_recipe_path(@recipe)
+      = link_to 'add image', new_recipe_recipe_image_path(@recipe)
       - @recipe.recipe_images.each do |recipe_image|
         - if recipe_image.image.attached?
           = link_to recipe_path(@recipe, image: recipe_image) do

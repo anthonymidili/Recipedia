@@ -1,19 +1,17 @@
 Rails.application.routes.draw do
-  get 'notifications/index'
   root 'recipes#index'
 
   devise_for :users
 
   resources :recipes do
     resources :reviews, only: [:create, :edit, :update, :destroy]
+    resources :recipe_images, only: [:new, :create]
     collection do
       get :search
     end
     member do
       get :log_in
       get :likes
-      get :upload_image
-      post :create_image
     end
   end
 
