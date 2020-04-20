@@ -16,8 +16,6 @@ class Recipe < ApplicationRecord
 
   has_many :recipe_images, dependent: :destroy
 
-  has_many_attached :images
-
   belongs_to :user
 
   validates :name, presence: true
@@ -31,7 +29,7 @@ class Recipe < ApplicationRecord
   scope :newest_to_oldest, -> { order(created_at: :desc) }
   scope :unique_images, -> (used_recipes) { where.not(id: used_recipes) }
   scope :last_with_image, -> (used_recipes) {
-    (unique_images(used_recipes).includes(:recipe_images).where.not(recipe_images: { id: nil })).last 
+    (unique_images(used_recipes).includes(:recipe_images).where.not(recipe_images: { id: nil })).last
   }
   scope :filtered_by, -> (term) { where('name ILIKE :search', search: "%#{term}%") }
 

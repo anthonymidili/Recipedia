@@ -4,7 +4,7 @@
       .likely
         %li.twitter Tweet
         %li.facebook Share
-        %li.pinterest{data: { media: "#{recipe.images.first.service_url if recipe.images.attached?}" }} Pin
+        %li.pinterest{data: { media: "#{recipe.recipe_images.first.image.service_url if recipe.recipe_images.try(:first).try(:image).try(:attached?)}" }} Pin
         %li.telegram Send
         %li.email.likely__widget
           = mail_to nil,

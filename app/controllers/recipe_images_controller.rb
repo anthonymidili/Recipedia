@@ -32,7 +32,10 @@ private
 
   def remove_images
     @recipe_images = @recipe.recipe_images.where(id: recipe_image_params[:remove_images])
-    @recipe_images.destroy_all if @recipe_images
+    if @recipe_images
+      # Only remove images if current_user is the recipe owner or the recipe_image owner.
+      @recipe_images.owners_only(current_user).destroy_all
+    end
   end
 
   def recipe_image_params
