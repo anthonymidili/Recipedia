@@ -3,6 +3,8 @@ module NotificationsHelper
     case notifiable.class.name
     when 'Recipe'
       link_to action, recipe_url(notifiable)
+    when 'RecipeImage'
+      link_to action, recipe_url(notifiable.recipe, image: notifiable.id)
     when 'Review'
       link_to action, recipe_url(notifiable.recipe, anchor: "review_#{notifiable.id}")
     when 'Relationship'

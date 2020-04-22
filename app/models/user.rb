@@ -39,11 +39,15 @@ class User < ApplicationRecord
   }
   # Finds users who did not receive a notification about the notifiable.
   scope :by_unnotified, -> (notifiable) { where.not(id: by_notified(notifiable)) }
+  # Finds users who uploaded an image to a recipe, owns the recipe and reomves the notifier user.
+  scope :by_uploaders, -> (notifiable) {
+    uploaders = notifiable.recipe.recipe_images.map(&:user) << notifiable.recipe.user
+    where(id: uploaders).where.not(id: notifiable.user)
+  }
   # Finds users who reviewed a recipe, owns the recipe and removes the notifier user.
   scope :by_reviewers, -> (notifiable) {
-    includes(recipes: { reviews: :user }).
-    where(recipes: { reviews: { user: notifiable.recipe.reviews.map(&:user) }}).
-    where.not(id: notifiable.user)
+    reviewers = notifiable.recipe.reviews.map(&:user) << notifiable.recipe.user
+    where(id: reviewers).where.not(id: notifiable.user)
   }
   # Only email users that want to be.
   scope :recipients_email, -> (notifiable) { receive_email(notifiable).remove_recently_unread.map(&:email) }
@@ -94,6 +98,8 @@ private
     case notifiable.class.name
     when 'Recipe'
       :recipe_created
+    when 'RecipeImage'
+      :image_uploaded
     when 'Review'
       :review_created
     when 'Relationship'

@@ -15,6 +15,8 @@ class NotifyUsers
       case notifiable.class.name
       when 'Recipe'
         notifiable.user.followers.by_unnotified(notifiable) if notifiable.published
+      when 'RecipeImage'
+        User.by_uploaders(notifiable)
       when 'Review'
         User.by_reviewers(notifiable)
       when 'Relationship'
@@ -42,6 +44,8 @@ class NotifyUsers
       case notifiable.class.name
       when 'Recipe'
         "ADDED a new recipe - #{notifiable.name}"
+      when 'RecipeImage'
+        "UPLOADED an image to recipe #{notifiable.recipe.name}"
       when 'Review'
         "REVIEWED recipe #{notifiable.recipe.name}"
       when 'Relationship'

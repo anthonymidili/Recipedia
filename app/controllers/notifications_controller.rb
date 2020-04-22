@@ -41,6 +41,6 @@ class NotificationsController < ApplicationController
 
   def notification_setting_params
     params.require(:notification_setting).permit(:receive_email, :recipe_created,
-      :review_created, :follows_you, :recipe_favored)
+      :image_uploaded, :review_created, :follows_you, :recipe_favored)
   end
 end

@@ -15,7 +15,7 @@
           .medium-3.cell
             = link_to recipe_image.user do
               %br/
-              posted by:
+              %b uploaded by:
               = recipe_image.user.username
             .thumbnail
               = image_tag medium_image(recipe_image.image)
