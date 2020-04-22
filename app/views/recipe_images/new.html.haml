@@ -20,7 +20,8 @@
             .thumbnail
               = image_tag medium_image(recipe_image.image)
               - if is_author?(@recipe.user) || is_author?(recipe_image.user)
-                %br/
-                = f.check_box :remove_images,
-                { multiple: true, id: "recipe_remove_image_#{recipe_image.id}" }, recipe_image.id, false
-                = f.label :remove_image, for: "recipe_remove_image_#{recipe_image.id}"
+                %p= link_to 'remove image', [@recipe, recipe_image], method: :delete,
+                data: { confirm: 'Are you sure?' }
+                -# = f.check_box :remove_images,
+                -# { multiple: true, id: "recipe_remove_image_#{recipe_image.id}" }, recipe_image.id, false
+                -# = f.label :remove_image, for: "recipe_remove_image_#{recipe_image.id}"

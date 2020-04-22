@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :recipes do
     resources :reviews, only: [:create, :edit, :update, :destroy]
-    resources :recipe_images, only: [:new, :create]
+    resources :recipe_images, only: [:new, :create, :destroy]
     collection do
       get :search
     end

@@ -1,7 +1,6 @@
 class RecipeImagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_recipe
-  before_action :remove_images, only: [:create]
   rescue_from ActionController::ParameterMissing, with: :no_image_uploaded
 
 
@@ -15,12 +14,24 @@ class RecipeImagesController < ApplicationController
 
     respond_to do |format|
       if @recipe_image.save
-        format.html { redirect_to new_recipe_recipe_image_path(@recipe), notice: 'Images were successfully updated.' }
+        format.html { redirect_to new_recipe_recipe_image_path(@recipe),
+          notice: 'Images were successfully updated.' }
         format.json { render :new, status: :ok, location: new_recipe_recipe_image_path(@recipe) }
       else
         format.html { render :new }
         format.json { render json: @recipe_image.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @recipe_image = @recipe.recipe_images.find_by(id: params[:id])
+    if is_author?(@recipe.user) || is_author?(@recipe_image.user)
+      @recipe_image.destroy
+      redirect_to new_recipe_recipe_image_path(@recipe),
+      notice: 'Image was successfully removed.'
+    else
+      redirect_to new_recipe_recipe_image_path(@recipe)
     end
   end
 
@@ -30,16 +41,8 @@ private
     @recipe = Recipe.find(params[:recipe_id])
   end
 
-  def remove_images
-    @recipe_images = @recipe.recipe_images.where(id: recipe_image_params[:remove_images])
-    if @recipe_images
-      # Only remove images if current_user is the recipe owner or the recipe_image owner.
-      @recipe_images.owners_only(current_user).destroy_all
-    end
-  end
-
   def recipe_image_params
-    params.require(:recipe_image).permit(:image, remove_images: [])
+    params.require(:recipe_image).permit(:image)
   end
 
   def no_image_uploaded
