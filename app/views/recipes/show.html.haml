@@ -46,7 +46,6 @@
     .center
       - if @recipe_image && @recipe_image.image.attached?
         = link_to @recipe_image.user do
-          %br/
           %b uploaded by:
           = @recipe_image.user.username
         = link_to rails_blob_path @recipe_image.image, class: 'max-image-height' do

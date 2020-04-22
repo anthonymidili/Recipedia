@@ -8,6 +8,14 @@ h1, h2, h3, h4 {
   font-family: $main-font;
 }
 
+.italic {
+  font-style: italic;
+}
+
+.small {
+  font-size: small; 
+}
+
 .title {
   font-family: $app-title-font;
   font-size: 8em;

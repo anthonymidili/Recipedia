@@ -2,26 +2,29 @@
   .grid-x
     .medium-6.cell
       = render 'notifications/error_messages', object: f.object
-      = f.label :image, 'Upload image (landscape for best results)'
-      = f.file_field :image, direct_upload: true, accept: 'image/png,image/gif,image/jpeg'
+      = f.label :image, 'Upload image'
+      .small.italic
+        Landscape for best results.
+        %br/
+        Don't leave page until upload is complete.
+      = f.file_field :image, direct_upload: true,
+      accept: 'image/png,image/gif,image/jpeg'
       %p
         %ul.menu
-          %li.pad-right= f.submit 'Update Images', class: 'button'
-          %li= link_to 'Finished editing', @recipe, class: 'button secondary'
+          %li.pad-right= f.submit 'Upload Image', class: 'button'
+          %li= link_to 'Finished Editing', @recipe, class: 'button secondary'
 
     - if @recipe.recipe_images
       - @recipe.recipe_images.each do |recipe_image|
         - if recipe_image.image.attached?
           .medium-3.cell
             = link_to recipe_image.user do
-              %br/
               %b uploaded by:
               = recipe_image.user.username
             .thumbnail
-              = image_tag medium_image(recipe_image.image)
+              %p= image_tag medium_image(recipe_image.image)
               - if is_author?(@recipe.user) || is_author?(recipe_image.user)
-                %p= link_to 'remove image', [@recipe, recipe_image], method: :delete,
+                %br/
+                = link_to 'Remove Image', [@recipe, recipe_image],
+                class: 'alert button tiny', method: :delete,
                 data: { confirm: 'Are you sure?' }
-                -# = f.check_box :remove_images,
-                -# { multiple: true, id: "recipe_remove_image_#{recipe_image.id}" }, recipe_image.id, false
-                -# = f.label :remove_image, for: "recipe_remove_image_#{recipe_image.id}"
