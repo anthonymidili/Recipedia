@@ -1,16 +1,3 @@
-global.setUnreadCount =
-  poll: ->
-    setTimeout @updateCount, 20000
-
-  updateCount: ->
-    Rails.ajax
-      url: '/notifications/unread_count.js'
-      type: 'get'
-
-jQuery ->
-  if $('#unread_count').length > 0
-    setUnreadCount.poll()
-
 clearNotifications =
   poll: ->
     setTimeout @markAsRead, 10000

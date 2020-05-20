@@ -8,5 +8,8 @@ class NotifiyUserJob < ApplicationJob
       recipient: recipient,
       action: action
     )
+
+    NotifyUserChannel.broadcast_to recipient,
+    unread_notifications_count: recipient.notifications.by_unread.count
   end
 end

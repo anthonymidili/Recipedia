@@ -13,13 +13,6 @@ class NotificationsController < ApplicationController
     end
   end
 
-  def unread_count
-    @unread_notifications_count = current_user.notifications.unread_count
-    respond_to do |format|
-      format.js
-    end
-  end
-
   def settings
     @notification_setting = current_user.notification_setting || current_user.create_notification_setting
   end
