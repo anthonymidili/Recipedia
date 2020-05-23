@@ -1,5 +1,8 @@
 class Recipe < ApplicationRecord
-  after_commit NotifyUsers, on: [:create, :update], if: :published
+  after_commit on: [:create, :update] do
+    NotifiyUsersJob.perform_later(self) if published
+  end
+
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   has_many :favoritisms, dependent: :destroy

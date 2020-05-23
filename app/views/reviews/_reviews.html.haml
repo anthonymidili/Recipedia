@@ -8,6 +8,7 @@
         = link_to log_in_recipe_path(@recipe) do
           %i.fa.fa-sign-in-alt
           Log in to create a review
-- if recipe.reviews
-  %ul#reviews.menu.vertical
-    = render recipe.reviews
+
+    - if recipe.reviews
+      %ul#reviews.menu.vertical
+        = render recipe.reviews
