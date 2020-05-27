@@ -15,4 +15,8 @@ module NotificationsHelper
       link_to 'Home',  root_url
     end
   end
+
+  def hide_if(statement)
+    "hidden" unless statement
+  end
 end

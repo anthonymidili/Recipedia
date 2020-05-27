@@ -1,0 +1,6 @@
+$("li").removeClass("is_read_false");
+$("#unread_count").text("<%= @unread_notifications_count %>");
+var notifications = document.getElementById('notifications');
+if (notifications) {
+  clearNotifications.poll();
+}

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :notifications, only: [:index] do
     collection do
+      patch :mark_as_read
       get :settings
       patch :update_settings
     end

@@ -14,9 +14,11 @@ consumer.subscriptions.create("NotifyUserChannel", {
     // Update notification bell unread count.
     $("#unread_count").text(data.unread_notifications_count);
 
-    // Perform when clearing notifications.
-    if (data.clear_notifications == true) {
-      $("li").removeClass("is_read_false");
+    // Perform when notifying user.
+    var notification_partial = data.notification_partial;
+    if (notification_partial) {
+      $("#unread_notifications").show();
+      $("#unread_notifications_list").prepend(notification_partial);
     }
   }
 });

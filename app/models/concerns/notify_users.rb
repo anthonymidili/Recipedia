@@ -35,15 +35,22 @@ private
 
   def create_notifications(notifiable, recipients)
     recipients.each do |recipient|
-      notifiable.notifications.create(
-        notifier: notifiable.user,
-        recipient: recipient,
-        action: action_statement(notifiable)
-      )
+      notification =
+        notifiable.notifications.create(
+          notifier: notifiable.user,
+          recipient: recipient,
+          action: action_statement(notifiable)
+        )
 
       NotifyUserChannel.broadcast_to recipient,
-      unread_notifications_count: recipient.notifications.unread_count
+      unread_notifications_count: recipient.notifications.unread_count,
+      notification_partial: render_notification(notification)
     end
+  end
+
+  def render_notification(notification)
+    NotificationsController.render partial: 'notifications/notification',
+    locals: { notification: notification }
   end
 
   def action_statement(notifiable)

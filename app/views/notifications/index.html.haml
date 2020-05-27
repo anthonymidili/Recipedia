@@ -4,12 +4,11 @@
   .cell
     %h1 Notifications
     = link_to 'Notification settings', settings_notifications_path
-    .callout
-      - if @notifications.by_unread.any?
-        %p#unread_notifications UNREAD
-        %ul#notifications.menu.vertical
-          = render @notifications.by_unread
+    .callout#notifications
+      %p#unread_notifications{class: hide_if(@notifications.by_unread.any?)} NEW
+      %ul#unread_notifications_list.menu.vertical
+        = render @notifications.by_unread
       - if @notifications.by_read.any?
         %p#read_notifications EARLIER
-        %ul#notifications.menu.vertical
+        %ul#read_notifications_list.menu.vertical
           = render @notifications.by_read

@@ -3,7 +3,14 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = current_user.notifications
-    MarkNotificationsAsReadJob.set(wait: 20.seconds).perform_later(current_user)
+  end
+
+  def mark_as_read
+    @notifications = current_user.notifications.by_unread.mark_as_read
+    @unread_notifications_count = current_user.notifications.unread_count
+    respond_to do |format|
+      format.js
+    end
   end
 
   def settings
