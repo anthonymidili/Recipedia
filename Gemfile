@@ -26,7 +26,7 @@ gem 'meta-tags', '~> 2.13.0'
 gem 'sitemap_generator'
 # Active Storage file processing and storage.
 gem 'mini_magick', '~> 4.10.1'
-gem 'image_processing', '~> 1.10.3'
+gem 'image_processing', '~> 1.11.0'
 gem 'aws-sdk', '~> 3'
 # Active Job backgrounding.
 gem 'sidekiq', '~> 6.0.6'
