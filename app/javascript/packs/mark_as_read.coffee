@@ -1,6 +1,6 @@
 global.clearNotifications =
   poll: ->
-    setTimeout @markAsRead, 10000
+    setTimeout @markAsRead, 20000
 
   markAsRead: ->
     Rails.ajax
