@@ -9,7 +9,8 @@ SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
   Rails.application.credentials.dig(:aws, :s3_bucket),
   aws_access_key_id: Rails.application.credentials.dig(:aws, :access_key_id),
   aws_secret_access_key: Rails.application.credentials.dig(:aws, :secret_access_key),
-  aws_region: Rails.application.credentials.dig(:aws, :region)
+  aws_region: Rails.application.credentials.dig(:aws, :region),
+  aws_endpoint: Rails.application.credentials.dig(:aws, :endpoint)
 )
 
 SitemapGenerator::Sitemap.create do
