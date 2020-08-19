@@ -7,4 +7,4 @@ Disallow:
 User-agent: *
 Disallow:
 
-Sitemap: https://recipedia.ttfh.co/sitemap.xml
+Sitemap: https://recipedia.wiki/sitemap.xml
