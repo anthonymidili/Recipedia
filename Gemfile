@@ -29,7 +29,7 @@ gem 'mini_magick', '~> 4.10.1'
 gem 'image_processing', '~> 1.11.0'
 gem 'aws-sdk', '~> 3'
 # Active Job backgrounding.
-gem 'sidekiq', '~> 6.0.6'
+gem 'sidekiq', '~> 6.1.1'
 # Webpack.
 gem 'webpacker', '~> 5.x'
 # Console tables.
