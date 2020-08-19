@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "https://recipedia.ttfh.co"
+SitemapGenerator::Sitemap.default_host = "https://recipedia.wiki"
 SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.sitemaps_host = "https://console.aws.amazon.com/s3/buckets/#{Rails.application.credentials.dig(:aws, :s3_bucket)}/?region=#{Rails.application.credentials.dig(:aws, :region)}"
 SitemapGenerator::Sitemap.public_path = 'tmp/'
