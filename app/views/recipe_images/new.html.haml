@@ -25,6 +25,7 @@
               %p= image_tag medium_image(recipe_image.image)
               - if is_author?(@recipe.user) || is_author?(recipe_image.user)
                 %br/
-                = link_to 'Remove Image', [@recipe, recipe_image],
-                class: 'alert button tiny', method: :delete,
-                data: { confirm: 'Are you sure?' }
+                .center-text
+                  = link_to 'Remove Image', [@recipe, recipe_image],
+                  class: 'alert button tiny', method: :delete,
+                  data: { confirm: 'Are you sure?' }

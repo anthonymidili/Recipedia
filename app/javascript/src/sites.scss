@@ -52,13 +52,12 @@ ul.simple {
 }
 
 .user-badge {
-  padding: 3px 5px !important;
-  border-left: 8px solid #c9f1b8;
+  padding: 3px 5px 7px !important;
   margin-right: 5px;
   display: unset !important;
   font-size: 110%;
   background-color: #efefef;
-  height: 35px;
+  height: 55px;
 }
 
 .hidden {
@@ -231,7 +230,7 @@ ul.edit_menu {
   padding: 0 20px 0 20px !important;
   margin: 20px 0 20px 0 !important;
   img {
-    padding: 0 0 20px 0;
+    margin: 0 0 20px 0;
   }
 }
 
@@ -270,6 +269,7 @@ ul.edit_menu {
   margin: 0 20px 0 0;
   width: 50px !important;
   height: 50px !important;
+  vertical-align: middle;
 }
 
 .profile-stats {
@@ -296,7 +296,7 @@ ul.user-list {
     padding: 0;
     color: black;
     img {
-      padding-right: 20px;
+      margin-right: 20px;
     }
   }
 }

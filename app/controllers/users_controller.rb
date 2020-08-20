@@ -5,6 +5,11 @@ class UsersController < ApplicationController
   before_action :deny_access!,
   unless: -> { is_author?(@user) }, only: [:edit, :update]
 
+  def index
+    @users = User.all
+    @show_info_body = true
+  end
+
   def show
   end
 

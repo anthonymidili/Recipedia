@@ -31,7 +31,7 @@
 
     %h1= @recipe.name
     = link_to user_path(@recipe.user) do
-      = image_tag avatar_image(@recipe.user.avatar, 150) if @recipe.user.avatar.attached?
+      = image_tag avatar_image(@recipe.user.avatar, 150), class: 'thumbnail' if @recipe.user.avatar.attached?
       %p
         %b Posted by:
         = @recipe.user.username
@@ -49,13 +49,13 @@
           %b uploaded by:
           = @recipe_image.user.username
         = link_to rails_blob_path @recipe_image.image, class: 'max-image-height' do
-          .thumbnail= image_tag medium_image(@recipe_image.image)
+          = image_tag medium_image(@recipe_image.image), class: 'thumbnail'
       %br/
       = link_to 'add image', new_recipe_recipe_image_path(@recipe)
       - @recipe.recipe_images.each do |recipe_image|
         - if recipe_image.image.attached?
           = link_to recipe_path(@recipe, image: recipe_image.id) do
-            = image_tag avatar_image(recipe_image.image, 80)
+            = image_tag avatar_image(recipe_image.image, 80), class: 'thumbnail'
 .grid-x
   .small-12.cell
     - if @recipe.ingredients.any?

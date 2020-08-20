@@ -11,6 +11,10 @@
         = link_to recipes_path do
           %i.fa.fa-utensils
           Recipes
+      %li
+        = link_to users_path do
+          %i.fa.fa-address-book
+          Cooks
       - if user_signed_in?
         %li
           = link_to user_path(current_user) do

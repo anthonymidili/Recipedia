@@ -33,6 +33,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  default_scope { order(username: :asc) }
   # Finds users who received a notification about the notifiable.
   scope :by_notified, -> (notifiable) {
     includes(:notifications).where(notifications: { notifiable_id: notifiable })

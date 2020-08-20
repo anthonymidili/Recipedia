@@ -1,12 +1,14 @@
 %li
   %hr/
   .grid-x
-    .cell.small-6
+    .cell.small-9.medium-7.large-9
       = link_to user do
         - if user.avatar.attached?
-          = image_tag avatar_image(user.avatar, 50)
+          = image_tag avatar_image(user.avatar, 50), class: 'thumbnail'
         - else
           %i.fas.fa-user.default-avatar-50
-        = user.username
-    .cell.small-6
+        %b= user.username
+        - if user.info.persisted? && user.info.body && @show_info_body
+          .autolinks= simple_format(truncate(user.info.body, length: 120))
+    .cell.small-3.medium-5.large-3
       .float-right= render 'relationships/form', user: user

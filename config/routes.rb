@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  resources :users, only: [:show, :edit, :update] do
+  resources :users, only: [:index, :show, :edit, :update] do
     member do
       get :log_in
       get :followers

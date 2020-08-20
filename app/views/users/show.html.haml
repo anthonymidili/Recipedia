@@ -1,3 +1,5 @@
+- provide :title, 'The Cook'
+
 .grid-x
   .small-12.cell
     .float-right
@@ -19,7 +21,7 @@
           .center-text
             = link_to @user, class: 'black-text' do
               - if @user.avatar.attached?
-                = image_tag avatar_image(@user.avatar, 150)
+                = image_tag avatar_image(@user.avatar, 150), class: 'thumbnail'
               - else
                 %i.fas.fa-user.default-avatar-150
             = render 'users/profile_stats', user: @user
