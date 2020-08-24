@@ -1,10 +1,10 @@
 module MetaTagsHelper
   def set_root_meta_tag_options
-    set_meta_tags description: "A Place to keep and share your recipes.",
+    set_meta_tags description: description,
       twitter: {
         card:  "summary",
         title: "Recipedia | Let's cook together",
-        description: "A Place to keep and share your recipes.",
+        description: description,
         url: root_url,
         secure_url: root_url,
         image: {
@@ -17,7 +17,7 @@ module MetaTagsHelper
       },
       og: {
         title: "Recipedia | Let's cook together",
-        description: "A Place to keep and share your recipes.",
+        description: description,
         type: 'website',
         url: root_url,
         secure_url: root_url,
@@ -68,5 +68,11 @@ module MetaTagsHelper
 
   def image_url(recipe)
     image_url = recipe.recipe_images.first.image.service_url if recipe.recipe_images.try(:first).try(:image).try(:attached?)
+  end
+
+  def description
+    "Making it easy to share your recipes with friends and family. Swap recipes, leave reviews, post
+    images of recipes you've tried and get notified when a cook you follow posts a new
+    recipe. Share on Twitter, Facebook, Pinterest, Telagram or email."
   end
 end
