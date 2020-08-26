@@ -5,7 +5,6 @@ class Ingredient < ApplicationRecord
   belongs_to :part
 
   validates :item, presence: true
-  validates :quantity, presence: true
 
   default_scope -> { order(created_at: :asc) }
 
