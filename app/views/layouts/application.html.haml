@@ -10,7 +10,7 @@
     = display_meta_tags
 
     = favicon_link_tag asset_pack_path('media/images/favicon.png')
-    %title= content_for?(:title) ? "Recipedia | #{yield(:title)}" : 'Recipedia'
+    %title= content_for?(:title) ? ("Recipedia | #{yield(:title)}").html_safe : 'Recipedia'
 
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': true

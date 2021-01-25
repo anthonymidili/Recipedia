@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.1'
+ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0'
@@ -21,13 +21,12 @@ gem 'kaminari', '~> 1.2.0'
 gem 'cocoon', '~> 1.2.10'
 gem 'devise', '~> 4.7.1'
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
-gem 'meta-tags', '~> 2.13.0'
+gem 'meta-tags', '~> 2.14.0'
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
 # Active Storage file processing and storage.
-gem 'mini_magick', '~> 4.10.1'
-gem 'image_processing', '~> 1.11.0'
+gem 'image_processing', '~> 1.12.1'
 gem 'aws-sdk', '~> 3'
 # Active Job backgrounding.
 gem 'sidekiq', '~> 6.1.1'
@@ -45,7 +44,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'listen', '~> 3.2.0'
+  gem 'listen', '~> 3.4.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 2.1.0'
   gem 'spring-watcher-listen', '~> 2.0.0'
