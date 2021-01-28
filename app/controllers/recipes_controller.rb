@@ -23,6 +23,11 @@ class RecipesController < ApplicationController
   def show
     @recipe_image = @recipe.recipe_images.find_by(id: params[:image]) || @recipe.recipe_images.first if @recipe.recipe_images
     @review = @recipe.reviews.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /recipes/new
