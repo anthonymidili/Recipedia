@@ -5,11 +5,15 @@ html, body {height: 100%;}
 #wrap {
   min-height: 100%;
   /* add space between content and footer */
-  padding-bottom: 30px;
+  padding-bottom: $footer-size;
 }
 
 #main {
-  padding-bottom: $footer-size; /* must be same height as the footer or add more for padding */
+  margin-bottom: 20px;
+  padding-top: 20px;
+  background-color: $main-background;
+  border: 3px solid $turquoise;
+  border-radius: 20px;
   @include xy-grid-container;
   .grid-x {
     @extend .grid-margin-x; /* Use grid-margin-x by default */
@@ -24,10 +28,10 @@ footer {
 
   #style_footer {
     min-height: $footer-size;
-    border: 2px solid $tattoo-footer-background;
+    border: 2px solid $footer-background;
     padding: 25px;
-    background: $tattoo-footer-background;
-    color: $tattoo-pale-green;
+    background: $footer-background;
+    color: $turquoise-light;
 
     span.italic_text {
       font-style: italic;

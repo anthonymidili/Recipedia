@@ -44,9 +44,12 @@
     .autolinks= simple_format(@recipe.description)
   .medium-5.cell
     .center
-      #recipe_image= render @recipe_image
+      #recipe_image= render @recipe_image if @recipe_image.try(:image).try(:attached?)
       %br/
-      = link_to 'add image', new_recipe_recipe_image_path(@recipe)
+      .no-image
+        = link_to new_recipe_recipe_image_path(@recipe), class: 'thumbnail' do
+          %i.fas.fa-plus-circle
+          Image
       - @recipe.recipe_images.each do |recipe_image|
         - if recipe_image.image.attached?
           = link_to recipe_path(@recipe, image: recipe_image.id), remote: true do

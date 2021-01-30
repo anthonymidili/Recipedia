@@ -4,17 +4,17 @@
   .medium-5.cell
     %ul.menu
       %li
-        = link_to recipes_path do
+        = link_to recipes_path, class: 'button waring' do
           %i.fa.fa-list
           Browse latest recipes
   .medium-7.cell
     %ul.menu.align-right
       %li
-        = link_to new_category_path do
+        = link_to new_category_path, class: 'button alert' do
           %i.fa.fa-plus-circle
           Create a new category
       %li
-        = link_to new_recipe_path do
+        = link_to new_recipe_path, class: 'button alert' do
           %i.fa.fa-plus-circle
           Add a recipe
 
@@ -28,8 +28,8 @@
 - if @categories.not_used.any?
   .grid-x
     .small-12.cell
-      = link_to 'More categories', '#', class: 'toggle hideShow', remote: true
+      %p= link_to 'More categories', '#', class: 'toggle hideShow', remote: true
       .hidden.hideShow
-        = link_to 'Hide', '#', class: 'toggle', remote: true
+        %p= link_to 'Hide', '#', class: 'toggle', remote: true
         .grid-x
           = render @categories.not_used

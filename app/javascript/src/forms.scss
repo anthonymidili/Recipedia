@@ -1,0 +1,20 @@
+.button {
+  color: $white;
+  background-color: $blue;
+  &:hover {
+    background-color: darken($blue, 20%);
+  }
+}
+
+form#notification_settings {
+  label {
+    display: inline;
+  }
+}
+
+.favor_form_button {
+  padding: 1px 5px;
+  &:hover {
+    background-color: $yellow;
+  }
+}

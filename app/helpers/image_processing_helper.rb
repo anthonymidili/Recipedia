@@ -1,4 +1,8 @@
 module ImageProcessingHelper
+  def large_image(image)
+    image.variant(resize_to_fill: [800, 800])
+  end
+  
   def medium_image(image)
     image.variant(resize_to_fill: [400, 400])
   end

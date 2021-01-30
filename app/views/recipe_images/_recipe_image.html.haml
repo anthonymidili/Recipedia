@@ -1,6 +1,5 @@
-- if recipe_image && recipe_image.image.attached?
-  = link_to recipe_image.user do
-    %b uploaded by:
-    = recipe_image.user.username
-  = link_to rails_blob_path recipe_image.image, class: 'max-image-height' do
-    = image_tag medium_image(recipe_image.image), class: 'thumbnail'
+= link_to recipe_image.user do
+  %b uploaded by:
+  = recipe_image.user.username
+= link_to rails_blob_path recipe_image.image, class: 'max-image-height' do
+  = image_tag large_image(recipe_image.image), class: 'thumbnail'

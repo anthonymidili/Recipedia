@@ -7,13 +7,13 @@
   .medium-6.cell
     %ul.menu
       %li
-        = link_to categories_path do
+        = link_to categories_path, class: 'button warning' do
           %i.fa.fa-list
           Browse recipes by categories
   .medium-6.cell
     %ul.menu.align-right
       %li
-        = link_to new_recipe_path do
+        = link_to new_recipe_path, class: 'button alert' do
           %i.fa.fa-plus-circle
           Add a recipe
 .grid-x

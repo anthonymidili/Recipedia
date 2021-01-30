@@ -3,12 +3,12 @@
 .grid-x
   .small-12.cell
     .float-right
-      = link_to new_recipe_path do
+      = link_to new_recipe_path, class: 'button alert' do
         %i.fa.fa-plus-circle
         Add a recipe
 .grid-x
   .cell.small-12
-    .green-background
+    .callout-transparent
       - if is_author?(@user)
         .float-right
           = link_to edit_user_path(@user) do

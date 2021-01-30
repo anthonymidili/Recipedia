@@ -1,5 +1,5 @@
 .app-name {
-  font-size: 2.6em;
+  font-size: 4em;
   font-weight: normal;
   font-family: $app-title-font;
   white-space: nowrap;
@@ -7,12 +7,22 @@
 
 .top-bar {
   margin-bottom: 20px;
-  .accordion-menu {
-    background-color: lighten($tattoo-topbar-background, 10%);
-  }
 
-  .top-bar-right .dropdown.menu > li > a {
-    background: $tattoo-topbar-background;
+  .top-bar-right {
+    /* submenu  */
+    .dropdown.menu > li > a {
+      background: $topbar-background;
+    }
+    li.is-submenu-item > a {
+      color: $topbar-background;
+      &:hover {
+        color: lighten($topbar-background, 20%)
+      }
+    }
+    /* little bar in submenu small view link to dropdown options */
+    .accordion-menu {
+      background-color: lighten($topbar-background, 5%);
+    }
   }
 
   /* make menu icon larger and easier to click */
@@ -20,35 +30,33 @@
     padding-left: 3em;
     margin-right: 0.5em;
     &::after {
-      background: $tattoo-yellow;
-      box-shadow: 0 7px 0 $tattoo-yellow, 0 14px 0 $tattoo-yellow;
+      background: $yellow;
+      box-shadow: 0 7px 0 $yellow, 0 14px 0 $yellow;
     }
     &:hover::after {
-      background: darken($tattoo-yellow, 20%);
-      box-shadow: 0 7px 0 darken($tattoo-yellow, 20%),
-      0 14px 0 darken($tattoo-yellow, 20%);
+      background: $yellow-dark;
+      box-shadow: 0 7px 0 $yellow-dark,
+      0 14px 0 $yellow-dark;
     }
   }
 
   /* link colors */
   li.is-active > a {
-    color: darken($tattoo-yellow, 20%) !important;
+    color: $yellow-dark !important;
   }
-
   a {
-    color: $tattoo-yellow;
+    color: $yellow;
     span.info-text {
       color: #f6f6f6;
     }
     &:hover {
-      color: darken($tattoo-yellow, 20%);
+      color: $yellow-dark;
       span.info-text {
         color: #f27474;
       }
     }
-
     &::after {
-      border-color: $tattoo-yellow transparent transparent !important;
+      border-color: $yellow transparent transparent !important;
     }
   }
 

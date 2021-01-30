@@ -1,6 +1,17 @@
-/* custom colors */
-$tattoo-pale-green: #e7fbde;
-$tattoo-dark-green: #6c7a66;
-$tattoo-yellow: #ffda17;
-$tattoo-topbar-background: darken($tattoo-dark-green, 20%);
-$tattoo-footer-background: $tattoo-dark-green;
+/* colors pal */
+$turquoise-light: #bcf8f9;
+$turquoise: #65edee;
+$turquoise-dark: #007c7c;
+$turquoise-ex-dark: #113536;
+$yellow: #ffed00;
+$yellow-dark: darken($yellow, 4%);
+$red: #ff0000;
+$red-dark: darken($red, 10%);
+$blue: #0072ff;
+$blue-dark: darken($blue, 10%);
+
+/* vars */
+$topbar-background: $turquoise-ex-dark;
+$topbar-submenu-background: $yellow;
+$footer-background: $turquoise-dark;
+$main-background: rgba($turquoise-light, 0.97);

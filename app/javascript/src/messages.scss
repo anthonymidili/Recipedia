@@ -1,0 +1,12 @@
+.callout {
+  &.alert {
+    background-color: $red-dark;
+    color: $white;
+    border-radius: 15px;
+  }
+  &.primary {
+    background-color: $blue-dark;
+    color: $white;
+    border-radius: 15px;
+  }
+}

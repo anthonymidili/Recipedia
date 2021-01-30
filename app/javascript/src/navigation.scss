@@ -1,6 +1,7 @@
 ul.nav-links {
   @include menu-base;
-  @extend .green-background;
+  @extend .callout-transparent;
+  padding: 0 15px 0 15px;
 
   li:not(:first-child) {
     margin-left: 60px;
@@ -8,15 +9,23 @@ ul.nav-links {
 
   a {
     @include button;
-    border-radius: 14px;
+    border-radius: 10px;
     font-weight: bold;
-    @include button-style(#6c7a66, #77a563, #fefefe);
+    @include button-style($turquoise, darken($turquoise, 20%), $black);
     margin: 14px 0 16px 0;
-    box-shadow: 2px 2px 8px black;
+    box-shadow: 2px 2px 8px $black;
 
     // Custom colors.
     &.alert {
-      background-color: red;
+      background-color: $red;
     }
   }
+}
+
+a.button {
+  border-radius: 10px;
+}
+
+.align-right .button {
+  margin-left: 20px;
 }
