@@ -11,11 +11,11 @@
           = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
           your Recipe
 
-.grid-x
-  .small-12.cell
-    %p
-      %b Assigned Categories:
-      = links_to_categories(@recipe)
+  .grid-x
+    .small-12.cell
+      %p
+        %b Assigned Categories:
+        = links_to_categories(@recipe)
 
 .grid-x
   .medium-7.cell
@@ -45,15 +45,16 @@
   .medium-5.cell
     .center
       #recipe_image= render @recipe_image if @recipe_image.try(:image).try(:attached?)
-      %br/
-      .no-image
-        = link_to new_recipe_recipe_image_path(@recipe), class: 'thumbnail' do
-          %i.fas.fa-plus-circle
-          Image
-      - @recipe.recipe_images.each do |recipe_image|
-        - if recipe_image.image.attached?
-          = link_to recipe_path(@recipe, image: recipe_image.id), remote: true do
-            = image_tag avatar_image(recipe_image.image, 80), class: 'thumbnail'
+      .hide-on-print
+        %br/
+        .add_image_link
+          = link_to new_recipe_recipe_image_path(@recipe), class: 'thumbnail' do
+            %i.fas.fa-plus-circle
+            Image
+        - @recipe.recipe_images.each do |recipe_image|
+          - if recipe_image.image.attached?
+            = link_to recipe_path(@recipe, image: recipe_image.id), remote: true do
+              = image_tag avatar_image(recipe_image.image, 80), class: 'thumbnail'
 .grid-x
   .small-12.cell
     - if @recipe.ingredients.any?

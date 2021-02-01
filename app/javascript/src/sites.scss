@@ -308,7 +308,7 @@ ul.user-list {
   display: inline;
 }
 
-.no-image {
+.add_image_link {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -321,6 +321,22 @@ ul.user-list {
     background-color: $yellow;
     &:hover {
       background-color: $yellow-dark;
+    }
+  }
+}
+
+/* Puts the image on top of an invisable, scalable, aspect ratio div. */
+#recipe_image {
+  #recipe_image_container {
+    position: relative;
+    width: 100%;
+    padding-top: calc(100% + 24px);
+    .recipe_image_card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
     }
   }
 }
