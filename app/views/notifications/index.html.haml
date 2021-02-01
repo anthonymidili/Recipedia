@@ -3,7 +3,9 @@
 .grid-x
   .cell
     %h1 Notifications
-    = link_to 'Notification settings', settings_notifications_path
+    = link_to settings_notifications_path, class: 'button warning' do
+      %i.fas.fa-cog
+      Notification settings
     .callout#notifications
       %p#unread_notifications{class: hide_if(@notifications.by_unread.any?)} NEW
       %ul#unread_notifications_list.menu.vertical

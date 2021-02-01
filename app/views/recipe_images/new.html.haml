@@ -10,6 +10,7 @@
           Don't leave page until upload is complete.
         = f.file_field :image, direct_upload: true,
         accept: 'image/png,image/gif,image/jpeg'
+        %br/
         = f.submit 'Upload Image', class: 'button'
       %p= link_to 'Finished Editing', @recipe, class: 'button warning'
 

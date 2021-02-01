@@ -9,6 +9,10 @@ class NotificationsController < ApplicationController
     @notifications = current_user.notifications.by_unread.mark_as_read
     @unread_notifications_count = current_user.notifications.unread_count
     respond_to do |format|
+      format.html {
+        redirect_to notifications_path,
+        notice: 'All notification have been marked as read.'
+      }
       format.js
     end
   end
@@ -21,7 +25,7 @@ class NotificationsController < ApplicationController
     @notification_setting = current_user.notification_setting
     respond_to do |format|
       if @notification_setting.update(notification_setting_params)
-        format.html { redirect_to settings_notifications_path, notice: 'Notification settings were successfully updated.' }
+        format.html { redirect_to notifications_path, notice: 'Notification settings were successfully updated.' }
         format.json { render :setting, status: :ok, location: settings_notifications_path }
       else
         format.html { render :setting }

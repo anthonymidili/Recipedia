@@ -7,5 +7,5 @@ class Notification < ApplicationRecord
   scope :by_unread, -> { where(is_read: false) }
   scope :by_read, -> { where(is_read: true) }
   scope :unread_count, -> { by_unread.count }
-  scope :mark_as_read, -> { update_all(is_read: true) }
+  scope :mark_as_read, -> { update_all(is_read: true) if any? }
 end

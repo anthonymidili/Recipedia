@@ -1,5 +1,7 @@
 $("li").removeClass("is_read_false");
 $("#unread_count").text("<%= @unread_notifications_count %>");
+
+// Continuously poll to clear notifications while on notifications index.
 var notifications = document.getElementById('notifications');
 if (notifications) {
   clearNotifications.poll();

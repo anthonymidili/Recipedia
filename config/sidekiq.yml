@@ -1,0 +1,11 @@
+# Setting this environment variable will greatly reduce Sidekiq's
+# memory usage and is highly recommended:
+# heroku config:set MALLOC_ARENA_MAX=2
+
+---
+:concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY") { 1 } %>
+:timeout: 25
+:queues:
+  - default
+  - mailers
+  - low_priority
