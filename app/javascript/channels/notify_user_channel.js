@@ -12,10 +12,10 @@ consumer.subscriptions.create("NotifyUserChannel", {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     // Update notification bell unread count.
-    $("#unread_count").text(data.unread_notifications_count);
+    $("#unread_count").text(data["unread_notifications_count"]);
 
     // Perform when notifying user.
-    var notification_partial = data.notification_partial;
+    const notification_partial = data["notification_partial"];
     if (notification_partial) {
       $("#unread_notifications").show();
       $("#unread_notifications_list").prepend(notification_partial);

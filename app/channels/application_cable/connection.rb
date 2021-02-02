@@ -9,8 +9,8 @@ module ApplicationCable
   protected
 
     def find_verfied_user
-      if current_user = env['warden'].user
-        current_user
+      if verified_user = env['warden'].user
+        verified_user
       else
         reject_unauthorized_connection
       end

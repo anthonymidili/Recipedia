@@ -1,6 +1,7 @@
 %h1
   #{@notifier.username} #{@action_statement}
 
-%b= link_to_notifiable(@notifiable, "Go check it out")
+%p
+  %b= link_to_notifiable(@notifiable, "Go check it out")
 
 %p= link_to "Change your notification settings", settings_notifications_url

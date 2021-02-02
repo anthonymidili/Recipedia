@@ -5,7 +5,6 @@ class NotifyUsers
       mail_notifications(notifiable, recipients)
       create_notifications(notifiable, recipients)
     end
-    CleanupNotificationsJob.perform_later
   end
 
 private
