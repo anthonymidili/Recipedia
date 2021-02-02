@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Serve websocket cable requests in-process for Passenger Standalone.
+  mount ActionCable.server => '/cable'
+
   root 'recipes#index'
 
   devise_for :users
