@@ -47,6 +47,12 @@ ul.simple {
   margin-bottom: 5px !important;
 }
 
+.profile-stats-avatar {
+  & svg, img {
+    margin-bottom: 2px !important;
+  }
+}
+
 .user-badge {
   padding: 3px 5px 7px !important;
   margin-right: 5px;
@@ -167,7 +173,7 @@ a.black-text:hover {
     }
 }
 
-ul.inline {
+.inline {
   span {
     display: inline-block;
   }
@@ -224,7 +230,7 @@ ul.edit_menu {
   background-color: unset;
   @extend .callout;
   box-shadow: 0 0 2px $black;
-  margin: 20px 0 20px 0;
+  margin-bottom: 20px;
   img {
     margin: 0 0 20px 0;
   }
@@ -266,6 +272,12 @@ h1 {
   height: 150px !important;
 }
 
+.default-avatar-100 {
+  @include thumbnail;
+  width: 100px !important;
+  height: 100px !important;
+}
+
 .default-avatar-50 {
   @include thumbnail;
   margin: 0 20px 16px 0;
@@ -278,14 +290,10 @@ h1 {
   padding-bottom: 20px;
   .stat {
     display: inline;
-    color: darken($turquoise-dark, 10%);
     font-size: 90%;
     font-weight: bold;
     &:not(:first-child) {
       padding-left: 30px;
-    }
-    &:hover {
-      color: $turquoise-ex-dark;
     }
     span {
       font-size: 120%;
@@ -308,7 +316,7 @@ ul.user-list {
   display: inline;
 }
 
-.add_image_link {
+.add-image-link {
   display: inline-block;
   text-align: center;
   vertical-align: middle;

@@ -1,60 +1,78 @@
 - provide(:title, @recipe.name)
 
 .hide-on-print
-  = render 'recipes/share', recipe: @recipe
-  - if is_author?(@recipe.user)
-    .grid-x
-      .small-12.cell
-        .float-right
-          = link_to 'Edit', edit_recipe_path(@recipe)
-          or
-          = link_to 'Destroy', @recipe, method: :delete, data: { confirm: 'Are you sure?' }
-          your Recipe
-
   .grid-x
     .small-12.cell
-      %p
+      - if is_author?(@recipe.user)
+        %ul.menu.simple.float-right
+          %li
+            = link_to edit_recipe_path(@recipe) do
+              %i.fas.fa-edit
+              Edit
+          %li
+            = link_to @recipe, class: 'red-text',
+            method: :delete, data: { confirm: 'Are you sure?' } do
+              %i.fas.fa-trash
+      = render 'recipes/share', recipe: @recipe
+  .grid-x
+    .small-12.cell
+      %p.callout-transparent
         %b Assigned Categories:
         = links_to_categories(@recipe)
-
+.grid-x
+  .cell
+    %h1.center-on-print= @recipe.name
 .grid-x
   .medium-7.cell
     .hide-on-print
-      - if user_signed_in? && !is_author?(@recipe.user)
-        %h4= render 'recipes/favor_form', recipe: @recipe
-      - elsif !user_signed_in?
-        = link_to log_in_recipe_path(@recipe) do
-          %i.fa.fa-sign-in-alt
-          Log in to add to favorites
-          %i.red-text.fa.fa-heart
-      #recipe_likes_count= render 'recipes/likes_count', recipe: @recipe
-
-    %h1= @recipe.name
-    = link_to user_path(@recipe.user) do
-      = image_tag avatar_image(@recipe.user.avatar, 150), class: 'thumbnail' if @recipe.user.avatar.attached?
-      %p
-        %b Posted by:
-        = @recipe.user.username
-    .hide-on-print= render 'relationships/form', user: @recipe.user, recipe: @recipe
+      .inline
+        %span
+          %h4
+            - if user_signed_in? && !is_author?(@recipe.user)
+              = render 'recipes/favor_form', recipe: @recipe
+            - elsif !user_signed_in?
+              = link_to log_in_recipe_path(@recipe), class: 'favor_form_button' do
+                %i.red-text.far.fa-heart
+                Add to favorites
+        %span
+          %h5
+            #recipe_likes_count= render 'recipes/likes_count', recipe: @recipe
+    .grid-x
+      .cell
+        = link_to @recipe.user do
+          %b Posted by:
+          = @recipe.user.username
+    .grid-x
+      .cell
+        = render 'users/profile_stats', user: @recipe.user, size: 100
+    .hide-on-print
+      .grid-x
+        .cell
+          = render 'relationships/form', user: @recipe.user, recipe: @recipe
     - if @recipe.source?
-      %p
-        %b Source:
-        = @recipe.source
-    %b Description:
-    .autolinks= simple_format(@recipe.description)
+      .grid-x
+        .cell
+          %p
+            %b Source:
+            = @recipe.source
+    .grid-x
+      .cell
+        %b Description:
+        .autolinks= simple_format(@recipe.description)
   .medium-5.cell
     .center
       #recipe_image= render @recipe_image if @recipe_image.try(:image).try(:attached?)
       .hide-on-print
         %br/
-        .add_image_link
-          = link_to new_recipe_recipe_image_path(@recipe), class: 'thumbnail' do
+        .add-image-link
+          = link_to new_recipe_recipe_image_path(@recipe), class: 'thumbnail stack-text' do
             %i.fas.fa-plus-circle
             Image
-        - @recipe.recipe_images.each do |recipe_image|
-          - if recipe_image.image.attached?
-            = link_to recipe_path(@recipe, image: recipe_image.id), remote: true do
-              = image_tag avatar_image(recipe_image.image, 80), class: 'thumbnail'
+        - if @recipe.recipe_images.any?
+          - @recipe.recipe_images.by_original_first.first(9).each do |recipe_image|
+            - if recipe_image.image.attached?
+              = link_to recipe_path(@recipe, image: recipe_image.id), remote: true do
+                = image_tag avatar_image(recipe_image.image, 80), class: 'thumbnail'
 .grid-x
   .small-12.cell
     - if @recipe.ingredients.any?
@@ -65,7 +83,6 @@
             %h4= part.name
           = render part.ingredients
           %br/
-
     - if @recipe.steps.any?
       %h4 Steps:
       .callout
@@ -77,11 +94,9 @@
             = step.description
             %br/
           %br/
-
 .hide-on-print
   .grid-x
     .small-12.cell
       %ul.nav-links
         %li= link_to 'All Recipes', recipes_path
-
   = render 'reviews/reviews', recipe: @recipe, review: @review

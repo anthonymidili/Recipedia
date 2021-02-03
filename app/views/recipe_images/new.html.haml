@@ -15,7 +15,7 @@
       %p= link_to 'Finished Editing', @recipe, class: 'button warning'
 
     - if @recipe.recipe_images
-      - @recipe.recipe_images.each do |recipe_image|
+      - @recipe.recipe_images.by_original_first.each do |recipe_image|
         - if recipe_image.image.attached?
           .medium-3.cell
             = link_to recipe_image.user do

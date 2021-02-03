@@ -18,6 +18,16 @@
     content: none;
   }
 
+  .center-on-print {
+    font-size: 2em;
+    text-align: center;
+
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
   /* Fixed to the bottom center of every page */
   .print-footer.hidden {
     position: fixed;

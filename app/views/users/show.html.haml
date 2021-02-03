@@ -19,12 +19,7 @@
       .grid-x
         .cell.medium-5.large-3
           .center-text
-            = link_to @user, class: 'black-text' do
-              - if @user.avatar.attached?
-                = image_tag avatar_image(@user.avatar, 150), class: 'thumbnail'
-              - else
-                %i.fas.fa-user.default-avatar-150
-            = render 'users/profile_stats', user: @user
+            = render 'users/profile_stats', user: @user, size: 150
         .cell.medium-7.large-9
           = render 'relationships/form', user: @user
           .autolinks= simple_format(@user.info.body) if @user.info
