@@ -36,6 +36,10 @@ class Recipe < ApplicationRecord
   }
   scope :filtered_by, -> (term) { where('name ILIKE :search', search: "%#{term}%") }
 
+  def published?
+    published == true
+  end
+
 private
 
   def check_box_presence

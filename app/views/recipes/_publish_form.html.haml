@@ -1,0 +1,4 @@
+= form_with model: recipe, local: false, id: "recipe_publish_form",
+class: "submitOnChange js" do |f|
+  = f.hidden_field :published, value: 'true'
+  = f.submit "Click to Publish Recipe", class: "button"

@@ -21,7 +21,9 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-    @recipe_image = @recipe.recipe_images.find_by(id: params[:image]) || @recipe.recipe_images.first if @recipe.recipe_images
+    if @recipe.recipe_images
+      @recipe_image = @recipe.recipe_images.find_by(id: params[:image]) || @recipe.recipe_images.first
+    end
     @review = @recipe.reviews.new
 
     respond_to do |format|
@@ -66,9 +68,11 @@ class RecipesController < ApplicationController
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

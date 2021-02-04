@@ -14,6 +14,10 @@
             method: :delete, data: { confirm: 'Are you sure?' } do
               %i.fas.fa-trash
       = render 'recipes/share', recipe: @recipe
+  - unless @recipe.published?
+    .grid-x
+      .cell
+        .center-text= render 'recipes/publish_form', recipe: @recipe
   .grid-x
     .small-12.cell
       %p.callout-transparent

@@ -41,6 +41,7 @@ import 'packs/sites'
 import 'packs/slider'
 import 'packs/touch_punch'
 import 'packs/autolinker'
+import 'packs/autosubmit'
 
 // Custom stylesheets.
 import 'src/application'
