@@ -9,7 +9,7 @@ ul.nav-links {
 
   a {
     @include button;
-    border-radius: 10px;
+    border-radius: 6px;
     font-weight: bold;
     @include button-style($turquoise, darken($turquoise, 20%), $black);
     margin: 14px 0 16px 0;
@@ -26,6 +26,15 @@ a.button {
   border-radius: 10px;
 }
 
-.align-right .button {
-  margin-left: 20px;
+ul.align-right {
+  @include  breakpoint(small down) {
+    justify-content: flex-start;
+    float: none;
+  }
+  li {
+    margin-bottom: 20px;
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
 }
