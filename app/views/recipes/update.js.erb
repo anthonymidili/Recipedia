@@ -1,1 +1,2 @@
 $('#recipe_publish_form').remove();
+$("#unpublished_count").text("<%= pluralize(@recipes_unpublished_count, 'draft') %>");

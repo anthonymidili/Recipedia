@@ -14,7 +14,7 @@
             method: :delete, data: { confirm: 'Are you sure?' } do
               %i.fas.fa-trash
       = render 'recipes/share', recipe: @recipe
-  - unless @recipe.published?
+  - if is_author?(@recipe.user) && !@recipe.published?
     .grid-x
       .cell
         .center-text= render 'recipes/publish_form', recipe: @recipe
