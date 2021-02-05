@@ -1,21 +1,21 @@
 - provide(:title, 'Categories')
 
 .grid-x
-  .medium-5.cell
-    = link_to recipes_path, class: 'button warning' do
-      %i.fa.fa-list
-      Browse latest recipes
-  .medium-7.cell
-    %ul.menu.align-right
+  .cell
+    %ul.nav-buttons
       %li
-        = link_to new_category_path, class: 'button alert' do
-          %i.fa.fa-plus-circle
-          Create a new category
-      %li
-        = link_to new_recipe_path, class: 'button alert' do
-          %i.fa.fa-plus-circle
-          Add a recipe
-
+        = link_to recipes_path, class: 'warning' do
+          %i.fa.fa-list
+          Browse latest recipes
+      %ul
+        %li
+          = link_to new_category_path, class: 'alert' do
+            %i.fa.fa-plus-circle
+            Create a new category
+        %li
+          = link_to new_recipe_path, class: 'alert' do
+            %i.fa.fa-plus-circle
+            Add a recipe
 .grid-x
   .small-12.cell
     %h1 Browse Categories

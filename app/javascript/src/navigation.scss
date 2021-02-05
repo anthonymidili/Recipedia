@@ -26,15 +26,33 @@ a.button {
   border-radius: 10px;
 }
 
-ul.align-right {
-  @include  breakpoint(small down) {
-    justify-content: flex-start;
-    float: none;
+ul.nav-buttons {
+  &, ul {
+    list-style-type: none;
+  }
+  &, ul, a {
+    margin: 0;
+  }
+  ul {
+    @include  breakpoint(medium) {
+      float: right;
+    }
   }
   li {
+    @include  breakpoint(medium) {
+      display: inline-block;
+    }
     margin-bottom: 20px;
-    &:not(:first-child) {
+  }
+  & > li {
+    margin-right: 20px;
+  }
+  & > ul > li {
+    @include  breakpoint(medium) {
       margin-left: 20px;
     }
+  }
+  a {
+    @extend .button;
   }
 }
