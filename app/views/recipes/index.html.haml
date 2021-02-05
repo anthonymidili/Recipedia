@@ -4,14 +4,17 @@
     .center-text
       .title Recipedia
 .grid-x
-  .small-7.cell
-    = link_to categories_path, class: 'button warning' do
-      %i.fa.fa-list
-      Browse recipes by categories
-  .small-5.cell
-    = link_to new_recipe_path, class: 'button alert float-right' do
-      %i.fa.fa-plus-circle
-      Add a recipe
+  .cell
+    %ul.nav-buttons
+      %li
+        = link_to categories_path, class: 'warning' do
+          %i.fa.fa-list
+          Browse recipes by categories
+      %ul
+        %li
+          = link_to new_recipe_path, class: 'alert' do
+            %i.fa.fa-plus-circle
+            Add a recipe
 .grid-x
   .small-12.cell
     %h1 Latest Recipes

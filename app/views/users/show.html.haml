@@ -2,20 +2,22 @@
 
 .grid-x
   .small-12.cell
-    .float-right
-      = link_to new_recipe_path, class: 'button alert' do
-        %i.fa.fa-plus-circle
-        Add a recipe
+    = link_to new_recipe_path, class: 'float-right button alert' do
+      %i.fa.fa-plus-circle
+      Add a recipe
 .grid-x
   .cell.small-12
     .callout-transparent
       - if is_author?(@user)
-        .float-right
-          = link_to edit_user_path(@user) do
-            %i.fas.fa-edit
-            Edit about you
-      .center-text
-        %h1.no-background #{@user.username}'s Cookbook
+        .grid-x
+          .cell
+            = link_to edit_user_path(@user), class: "float-right" do
+              %i.fas.fa-edit
+              Edit about you
+      .grid-x
+        .cell
+          .center-text
+            %h1.no-background #{@user.username}'s Cookbook
       .grid-x
         .cell.medium-5.large-3
           .center-text
