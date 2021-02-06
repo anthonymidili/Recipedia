@@ -13,13 +13,18 @@ form#notification_settings {
 }
 
 .favor_form_button {
-  padding: 1px 5px;
   margin-right: 20px;
   margin-bottom: 5px;
-  height: 40px;
-  width: 40px;
   border: 3px solid $yellow-dark;
   &:hover {
     background-color: $yellow;
   }
+}
+a.favor_form_button {
+  display: flex;
+  padding: 9px;
+}
+button.favor_form_button {
+  height: 40px;
+  width: 40px;
 }

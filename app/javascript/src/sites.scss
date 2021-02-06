@@ -108,6 +108,13 @@ a.black-text:hover {
   color: lighten($black, 20%)
 }
 
+.gray-text {
+  color: $dark-gray;
+}
+a.gray-text:hover {
+  color: darken($dark-gray, 20%);
+}
+
 .highlight-text {
   text-shadow: 2px 2px 2px $white, -2px -2px 2px $white, -2px 2px 2px $white, 2px -2px 2px $white,
   0 2px 2px $white, 2px 0 2px $white, 0 -2px 2px $white, -2px 0 2px $white;
@@ -184,14 +191,9 @@ a.black-text:hover {
 .inline {
   span {
     display: inline-block;
-    &.large-width {
+    &.right-on-small {
       @include  breakpoint(small only) {
-        & + span {
-          float: right;
-        }
-      }
-      @include  breakpoint(medium) {
-        width: 200px;
+        float: right;
       }
     }
   }

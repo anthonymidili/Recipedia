@@ -25,34 +25,39 @@
         = links_to_categories(@recipe)
 .grid-x
   .cell
-    %h1.center-on-print= @recipe.name
-.grid-x
-  .medium-7.cell
     .hide-on-print
       .inline
-        %span.large-width
-          %h4
+        %span
+          %h3
             - if user_signed_in? && !is_author?(@recipe.user)
               = render 'recipes/favor_form', recipe: @recipe
             - elsif !user_signed_in?
               = link_to log_in_recipe_path(@recipe), class: 'favor_form_button' do
-                %i.red-text.far.fa-heart
-        %span
-          %h4
+                %i.gray-text.far.fa-heart
+        %span.right-on-small
+          %h3
             %div{id: "recipe_likes_count_#{@recipe.id}"}
               = render 'recipes/likes_count', recipe: @recipe
-    .grid-x
-      .cell
-        = link_to @recipe.user do
-          Posted by:
-          %b= @recipe.user.username
-    .grid-x
-      .cell
-        = render 'users/profile_stats', user: @recipe.user, size: 100
-    .hide-on-print
-      .grid-x
-        .cell
-          = render 'relationships/form', user: @recipe.user, recipe: @recipe
+    %h1.center-on-print= @recipe.name
+.grid-x
+  .medium-7.cell
+    .callout-transparent
+      .center-text.left-on-print
+        .grid-x
+          .cell.large-6
+            .grid-x
+              .cell
+                = link_to @recipe.user do
+                  Posted by:
+                  %b= @recipe.user.username
+            .grid-x
+              .cell
+                = render 'users/profile_stats', user: @recipe.user, size: 100
+          .cell.large-6
+            .hide-on-print
+              .grid-x
+                .cell
+                  = render 'relationships/form', user: @recipe.user, recipe: @recipe
     - if @recipe.source?
       .grid-x
         .cell

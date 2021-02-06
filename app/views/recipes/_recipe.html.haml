@@ -16,7 +16,7 @@
                 = render 'recipes/favor_form', recipe: recipe
               - elsif !user_signed_in?
                 = link_to log_in_recipe_path(recipe), class: 'favor_form_button' do
-                  %i.red-text.far.fa-heart
+                  %i.gray-text.far.fa-heart
             %span.float-right{id: "recipe_likes_count_#{recipe.id}"}
               = render 'recipes/likes_count', recipe: recipe
       .grid-x
