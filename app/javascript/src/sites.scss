@@ -82,7 +82,7 @@ nav.pagination {
 }
 
 .callout-on-small-only {
-  @include  breakpoint(small down) {
+  @include  breakpoint(small only) {
     @include callout;
   }
 }
@@ -190,7 +190,7 @@ a.black-text:hover {
           float: right;
         }
       }
-      @include  breakpoint(mediun) {
+      @include  breakpoint(medium) {
         width: 200px;
       }
     }
