@@ -51,6 +51,13 @@ ul.simple {
   justify-content: center;
 }
 
+.center-vertical {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
 .pad-bottom {
   margin-bottom: 5px !important;
 }
