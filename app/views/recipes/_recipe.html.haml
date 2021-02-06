@@ -22,8 +22,9 @@
       .grid-x
         .cell
           = link_to recipe.user do
-            Posted by:
-            %b= recipe.user.username
+            %p
+              Posted by:
+              %b= recipe.user.username
       = link_to recipe do
         %h4= recipe.name
         .autolinks= recipe.description

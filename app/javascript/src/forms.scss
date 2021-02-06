@@ -12,15 +12,14 @@ form#notification_settings {
   }
 }
 
-.show-box {
-  .favor_form_button {
-    padding: 1px 5px;
-    margin-right: 20px;
-    height: 40px;
-    width: 40px;
-    border: 3px solid $yellow-dark;
-    &:hover {
-      background-color: $yellow;
-    }
+.favor_form_button {
+  padding: 1px 5px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  height: 40px;
+  width: 40px;
+  border: 3px solid $yellow-dark;
+  &:hover {
+    background-color: $yellow;
   }
 }

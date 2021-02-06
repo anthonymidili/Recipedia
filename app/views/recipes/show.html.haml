@@ -31,7 +31,7 @@
     .hide-on-print
       .inline
         %span.large-width
-          %h4.show-box
+          %h4
             - if user_signed_in? && !is_author?(@recipe.user)
               = render 'recipes/favor_form', recipe: @recipe
             - elsif !user_signed_in?

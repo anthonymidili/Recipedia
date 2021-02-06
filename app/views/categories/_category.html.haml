@@ -7,7 +7,7 @@
       - else
         = image_pack_tag "default_recipe_image.svg", size: "600x400"
       .highlight-text.content
-        %h5
+        %h3
           = category.name
           .float-right= category.recipes.by_published.count
       - @used_recipes << @recipe_with_image.try(:id)
