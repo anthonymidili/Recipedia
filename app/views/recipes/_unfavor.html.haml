@@ -1,5 +1,5 @@
-= form_with model: current_user.find_favoritism(recipe), html: {method: :delete}, local: false do |f|
+= form_with model: current_user.find_favoritism(recipe),
+html: {method: :delete}, local: false do |f|
   = f.hidden_field :recipe_id
   = f.button class: 'favor_form_button' do
     %i.red-text.fa.fa-heart
-    Saved to favorites

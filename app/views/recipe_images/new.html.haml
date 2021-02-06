@@ -19,8 +19,8 @@
         - if recipe_image.image.attached?
           .medium-3.cell
             = link_to recipe_image.user do
-              %b uploaded by:
-              = recipe_image.user.username
+              Uploaded by:
+              %b= recipe_image.user.username
             .thumbnail
               %p= image_tag medium_image(recipe_image.image)
               - if is_author?(@recipe.user) || is_author?(recipe_image.user)

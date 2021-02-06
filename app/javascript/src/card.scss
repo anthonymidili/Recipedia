@@ -1,0 +1,16 @@
+.recipe-card {
+  border: 1px solid $black;
+  background-color: $light-background;
+  margin-bottom: 20px;
+  .recipe-card-image {
+    .photo {
+      display: inline-block;
+      vertical-align: middle;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  .card-section {
+    height: 220px;
+  }
+}

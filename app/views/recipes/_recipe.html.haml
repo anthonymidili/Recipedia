@@ -1,20 +1,29 @@
-.medium-6.cell.end
-  = link_to recipe do
-    .banner
-      - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
-        = image_tag banner_image(recipe.recipe_images.first.image)
-      .highlight-text.content
-
-        - if recipe.favoritisms.count > 0
-          .float-right
-            .red-text
-              %i.fa.fa-heart
-              = recipe.liked_users.count
+.cell
+  .card.recipe-card
+    .recipe-card-image
+      = link_to recipe do
+        - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
+          = image_tag banner_image(recipe.recipe_images.first.image)
+        - else
+          .photo
+            = image_pack_tag('default_recipe_image.svg', size: "600x400")
+    .card-section
+      .grid-x
+        .cell
+          .inline
+            %span
+              - if user_signed_in? && !is_author?(recipe.user)
+                = render 'recipes/favor_form', recipe: recipe
+              - elsif !user_signed_in?
+                = link_to log_in_recipe_path(recipe), class: 'favor_form_button' do
+                  %i.red-text.far.fa-heart
+            %span.float-right{id: "recipe_likes_count_#{recipe.id}"}
+              = render 'recipes/likes_count', recipe: recipe
+      .grid-x
+        .cell
+          = link_to recipe.user do
+            Posted by:
+            %b= recipe.user.username
+      = link_to recipe do
         %h4= recipe.name
-        %small
-          (
-          posted by:
-          = recipe.user.username
-          )
-        %p
-          = recipe.description
+        .autolinks= recipe.description

@@ -29,17 +29,17 @@
   .grid-x
     .small-12.cell
       %h4 Unpublished Drafts
-      .grid-x
+      .grid-x.small-up-1.medium-up-2.large-up-3
         = render @user.recipes.by_unpublished
 - if @user.recipes.by_published.any?
   .grid-x
     .small-12.cell
       %h4 Submitted Recipes
-      .grid-x
+      .grid-x.small-up-1.medium-up-2.large-up-3
         = render @user.recipes.by_published
 - if @user.favorite_recipes.any?
   .grid-x
     .small-12.cell
       %h4 Favorites
-      .grid-x
+      .grid-x.small-up-1.medium-up-2.large-up-3
         = render @user.favorite_recipes

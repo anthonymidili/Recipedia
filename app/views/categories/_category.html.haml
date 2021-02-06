@@ -4,6 +4,8 @@
       - @recipe_with_image = category.recipes.last_with_image(@used_recipes)
       - if @recipe_with_image.try(:recipe_images).try(:first).try(:image).try(:attached?)
         = image_tag banner_image(@recipe_with_image.recipe_images.first.image)
+      - else
+        = image_pack_tag "default_recipe_image.svg", size: "600x400"
       .highlight-text.content
         %h5
           = category.name
