@@ -35,6 +35,7 @@ import Autolinker from 'autolinker'
 
 // Custom JavaScripts.
 import 'packs/autocomplete'
+import 'packs/autofocus_cacoon'
 import 'packs/direct_uploads'
 import 'packs/mark_as_read'
 import 'packs/sites'

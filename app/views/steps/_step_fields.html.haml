@@ -18,4 +18,5 @@
             = f.number_field :step_order, class: 'stepOrderField', readonly: true
           .medium-8.large-9.cell
             = f.label :description
-            = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F'
+            = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F',
+            class: 'autofocus-on-last'
