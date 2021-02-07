@@ -7,6 +7,12 @@ h1, h2, h3, h4 {
   font-family: $main-font;
 }
 
+h1 {
+  color: $yellow;
+  text-shadow: 2px 2px 2px $black, -2px -2px 2px $black, 2px -2px 2px $black, -2px 2px 2px $black,
+  0 2px 2px $black, 2px 0 2px $black, 0 -2px 2px $black, -2px 0 2px $black;
+}
+
 h4 {
   text-decoration: underline;
 }
@@ -273,19 +279,13 @@ ul.edit_menu {
   }
 }
 
-h1 {
-  color: $yellow;
-  text-shadow: 2px 2px 2px $black, -2px -2px 2px $black, 2px -2px 2px $black, -2px 2px 2px $black,
-  0 2px 2px $black, 2px 0 2px $black, 0 -2px 2px $black, -2px 0 2px $black;
-}
-
 .menu .autolink-link {
   display: unset;
   padding: 0;
 }
 
 .pad-right {
-  padding-right: 20px;
+  margin-right: 40px;
 }
 
 .default-avatar-300 {
