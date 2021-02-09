@@ -6,6 +6,6 @@ class NotifyUserChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
-    stop_stream_for current_user
+    stop_all_streams
   end
 end
