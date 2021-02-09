@@ -2,7 +2,8 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @notifications = current_user.notifications
+    @notifications = current_user.notifications.
+    includes(:notifiable, notifier: [avatar_attachment: :blob])
   end
 
   def mark_as_read

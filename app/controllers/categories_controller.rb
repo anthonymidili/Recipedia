@@ -7,14 +7,18 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.oldest_to_newest
+    @categories =
+      Category.includes(recipes: [recipe_images: [:user, image_attachment: :blob]]).
+      oldest_to_newest
     @used_recipes = []
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @recipes = @category.recipes.by_published.by_name.page(params[:page])
+    @recipes =
+      @category.recipes.includes(:user).
+      by_published.by_name.page(params[:page])
   end
 
   # GET /categories/new

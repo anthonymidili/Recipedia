@@ -12,9 +12,11 @@ class RecipesController < ApplicationController
   def index
     @recipes =
       if params[:search]
-        Recipe.by_published.newest_to_oldest.filtered_by(params[:search]).page(params[:page])
+        Recipe.includes(:user).by_published.newest_to_oldest.
+        filtered_by(params[:search]).page(params[:page])
       else
-        Recipe.by_published.newest_to_oldest.page(params[:page])
+        Recipe.includes(:user).by_published.newest_to_oldest.
+        page(params[:page])
       end
   end
 
@@ -103,7 +105,12 @@ class RecipesController < ApplicationController
 private
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
-    @recipe = Recipe.find(params[:id])
+    @recipe =
+      Recipe.includes(:user,
+        parts: [:ingredients, :steps],
+        reviews: [user: [avatar_attachment: :blob]],
+        recipe_images: [:user, image_attachment: :blob]).
+        find(params[:id])
   end
 
   def set_category

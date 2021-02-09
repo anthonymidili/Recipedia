@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   unless: -> { is_author?(@user) }, only: [:edit, :update]
 
   def index
-    @users = User.all
+    @users = User.includes(:info, [avatar_attachment: :blob]).all
     @show_info_body = true
   end
 
