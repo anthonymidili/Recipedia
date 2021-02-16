@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
   def show
     @recipes =
       @category.recipes.includes(:user).
-      by_published.by_name.page(params[:page])
+      by_published.by_name.page(params[:page]).per(30)
   end
 
   # GET /categories/new

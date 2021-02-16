@@ -13,10 +13,10 @@ class RecipesController < ApplicationController
     @recipes =
       if params[:search]
         Recipe.includes(:user).by_published.newest_to_oldest.
-        filtered_by(params[:search]).page(params[:page])
+        filtered_by(params[:search]).page(params[:page]).per(30)
       else
         Recipe.includes(:user).by_published.newest_to_oldest.
-        page(params[:page])
+        page(params[:page]).per(30)
       end
   end
 
