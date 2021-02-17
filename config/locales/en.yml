@@ -46,3 +46,10 @@ en:
         you have reviewed."
         follows_you: "Someone starts following you."
         recipe_favored: "Someone adds your recipe to thier cookbook."
+      recipe:
+        description: "Description (optional)"
+        source: "(Give credit where credit is due) Name the recipe's source"
+      part:
+        name: "Recipe part name (optional for single part recipes)"
+      ingredient:
+        quantity: "Quantity (optional)"

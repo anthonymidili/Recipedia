@@ -24,7 +24,7 @@
         = f.label :description
         = f.text_area :description, placeholder: 'The best apple pie you will ever eat.', rows: '5'
       .medium-6.cell.small-order-3.medium-order-2
-        = f.label :source, "(Give credit where credit is due) Name the recipe's source"
+        = f.label :source
         = f.text_field :source, placeholder: 'cookbook, website or person'
 
     #parts= render 'parts/fields_for_form', f: f

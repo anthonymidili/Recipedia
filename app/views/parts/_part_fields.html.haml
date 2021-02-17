@@ -7,7 +7,7 @@
             %i.fa.fa-trash
             Remove Recipe Part
       .small-order-2.medium-order-1.medium-6.cell
-        = f.label :name, 'Recipe part name (optional for single part recipes)'
+        = f.label :name
         = f.text_field :name, placeholder: 'Pie Crust'
 
     = render 'ingredients/fields_for_form', f: f
