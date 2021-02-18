@@ -75,12 +75,17 @@ ul.simple {
 }
 
 .user-badge {
-  padding: 3px 5px 7px !important;
+  padding: 5px !important;
   margin-right: 5px;
-  display: unset !important;
-  font-size: 110%;
+  display: inline-block !important;
+  font-size: 1.3em;
+  vertical-align: middle;
   background-color: $white;
-  height: 55px;
+  height: 35px;
+  img {
+    margin-left: -5px;
+    margin-top: -5px;
+  }
 }
 
 .hidden {
@@ -201,15 +206,8 @@ a.gray-text:hover {
     }
 }
 
-.inline {
-  span {
-    display: inline-block;
-    &.right-on-small {
-      @include  breakpoint(small only) {
-        float: right;
-      }
-    }
-  }
+.inline span {
+  display: inline-block;
 }
 
 .notifications {

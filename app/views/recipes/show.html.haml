@@ -26,18 +26,19 @@
 .grid-x
   .cell
     .hide-on-print
-      .inline
-        %span
-          %h3
+      %h3
+        %ul.menu
+          %li
             - if user_signed_in? && !is_author?(@recipe.user)
               = render 'recipes/favor_form', recipe: @recipe
             - elsif !user_signed_in?
               = link_to log_in_recipe_path(@recipe), class: 'favor_form_button' do
                 %i.gray-text.far.fa-heart
-        %span.right-on-small
-          %h3
+          %li
             %div{id: "recipe_likes_count_#{@recipe.id}"}
               = render 'recipes/likes_count', recipe: @recipe
+          %li
+            = link_to "#{pluralize(@recipe.reviews.count, "Review")}", recipe_path(@recipe, anchor: "reviews_header")
     %h1.center-on-print= @recipe.name
 .grid-x
   .medium-7.cell
