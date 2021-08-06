@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.1'
@@ -19,9 +19,9 @@ gem 'haml-rails', '~> 2.0.0'
 gem 'kaminari', '~> 1.2.0'
 # For webpacker, you must use the cocoon gem with the yarn package cocoon-js.
 gem 'cocoon', '~> 1.2.10'
-gem 'devise', '~> 4.7.1'
+gem 'devise', '~> 4.8.0'
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
-gem 'meta-tags', '~> 2.14.0'
+gem 'meta-tags', '~> 2.15.0'
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
@@ -29,7 +29,7 @@ gem 'sitemap_generator'
 gem 'image_processing', '~> 1.12.1'
 gem 'aws-sdk', '~> 3'
 # Active Job backgrounding.
-gem 'sidekiq', '~> 6.1.1'
+gem 'sidekiq', '~> 6.2.1'
 # Webpack.
 gem 'webpacker', '~> 5.x'
 # Console tables.
@@ -46,7 +46,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'listen', '~> 3.4.1'
+  gem 'listen', '~> 3.6.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 2.1.0'
   gem 'spring-watcher-listen', '~> 2.0.0'
