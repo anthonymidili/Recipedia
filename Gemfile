@@ -29,7 +29,7 @@ gem 'sitemap_generator'
 gem 'image_processing', '~> 1.12.1'
 gem 'aws-sdk', '~> 3'
 # Active Job backgrounding.
-gem 'sidekiq', '~> 6.2.1'
+gem 'sidekiq', '~> 6.4.0'
 # Webpack.
 gem 'webpacker', '~> 5.x'
 # Console tables.
