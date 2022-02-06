@@ -8,8 +8,8 @@ module MetaTagsHelper
         url: root_url,
         secure_url: root_url,
         image: {
-          _: (request.host_with_port + ActionController::Base.helpers.asset_pack_path('media/images/spice.jpg')),
-          sucure_url: (request.host_with_port + ActionController::Base.helpers.asset_pack_path('media/images/spice.jpg')),
+          _: (request.host_with_port + ActionController::Base.helpers.asset_path('spice.jpg')),
+          sucure_url: (request.host_with_port + ActionController::Base.helpers.asset_path('spice.jpg')),
           width: 600,
           height: 400,
           type: "image/jpeg"
@@ -22,8 +22,8 @@ module MetaTagsHelper
         url: root_url,
         secure_url: root_url,
         image: {
-          _: (request.host_with_port + ActionController::Base.helpers.asset_pack_path('media/images/spice.jpg')),
-          sucure_url: (request.host_with_port + ActionController::Base.helpers.asset_pack_path('media/images/spice.jpg')),
+          _: (request.host_with_port + ActionController::Base.helpers.asset_path('spice.jpg')),
+          sucure_url: (request.host_with_port + ActionController::Base.helpers.asset_path('spice.jpg')),
           width: 600,
           height: 400,
           type: "image/jpeg"
@@ -67,7 +67,7 @@ module MetaTagsHelper
   private
 
   def image_url(recipe)
-    image_url = recipe.recipe_images.first.image.service_url if recipe.recipe_images.try(:first).try(:image).try(:attached?)
+    image_url = recipe.recipe_images.first.image.url if recipe.recipe_images.try(:first).try(:image).try(:attached?)
   end
 
   def description

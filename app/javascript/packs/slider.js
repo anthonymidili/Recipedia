@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener("turbo:load", function() {
   function updateStepValues() {
     $('.all-slides').each(function(){
       $(this).find('.stepOrderField').each(function(index) {

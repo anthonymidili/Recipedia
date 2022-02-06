@@ -1,0 +1,4 @@
+web: bundle exec passenger start -p $PORT --max-pool-size $RAILS_MAX_THREADS --min-instances $RAILS_MAX_THREADS
+worker: bundle exec sidekiq -C config/sidekiq.yml
+js: yarn build --watch
+css: yarn build:css --watch

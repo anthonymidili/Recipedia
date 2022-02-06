@@ -11,7 +11,7 @@
               Edit
           %li
             = link_to @recipe, class: 'red-text',
-            method: :delete, data: { confirm: 'Are you sure?' } do
+            data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do
               %i.fas.fa-trash
       = render 'recipes/share', recipe: @recipe
   - if is_author?(@recipe.user) && !@recipe.published?
@@ -76,7 +76,7 @@
           = render @recipe_image
         - else
           .hide-on-print
-          = image_pack_tag "default_recipe_image.svg", size: "800x800",
+          = image_tag "default_recipe_image.svg", size: "800x800",
           class: "thumbnail show-for-medium"
       .hide-on-print
         %br/

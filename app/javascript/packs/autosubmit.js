@@ -1,4 +1,4 @@
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener('turbo:load', function() {
 
   $(".hideAndSubmit input[type='submit']").hide();
 

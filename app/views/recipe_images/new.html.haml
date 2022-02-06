@@ -27,5 +27,5 @@
                 %br/
                 .center-text
                   = link_to 'Remove Image', [@recipe, recipe_image],
-                  class: 'alert button tiny', method: :delete,
-                  data: { confirm: 'Are you sure?' }
+                  class: 'alert button tiny',
+                  data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }

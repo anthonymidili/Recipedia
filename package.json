@@ -7,30 +7,29 @@
   "author": "AMidili <tonywinslow@yahoo.com>",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.10.2",
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "5.2.1",
-    "autolinker": "^3.13.0",
-    "cocoon-js": "^0.0.5",
-    "coffee-loader": "^1.0.0",
-    "coffeescript": "2.5.1",
-    "foundation-sites": "^6.5.3",
-    "ilyabirman-likely": "^2.4.0",
-    "jquery": "^3.4.1",
-    "turbolinks": "^5.2.0",
-    "webpack": "^4.40.2",
-    "webpack-jquery-ui": "^2.0.1",
-    "what-input": "^5.2.3"
-  },
-  "devDependencies": {
-    "webpack-dev-server": "^3.10.3"
-  },
   "engines": {
     "yarn": "1.22.x",
     "node": "12.x",
     "npm": "7.x"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.2",
+    "@hotwired/stimulus": "^3.0.1",
+    "@hotwired/turbo-rails": "^7.1.1",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "autolinker": "^3.13.0",
+    "cocoon-js": "^0.0.5",
+    "coffeescript": "2.5.1",
+    "esbuild": "^0.14.18",
+    "foundation-sites": "^6.5.3",
+    "ilyabirman-likely": "^2.4.0",
+    "jquery": "^3.4.1",
+    "sass": "^1.49.7",
+    "what-input": "^5.2.3"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
+    "build:css": "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
 }

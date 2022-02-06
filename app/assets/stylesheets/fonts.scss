@@ -1,29 +1,29 @@
 @font-face {
   font-family: 'Rock Show Whiplash';
-  src: url('../images/fonts/RockShowWhiplash.ttf') format('truetype');
+  src: url('RockShowWhiplash.ttf') format('truetype');
 }
 $title-font: 'Rock Show Whiplash', 'sans-serif';
 
 @font-face {
   font-family: 'FHA Cond French';
-  src: url('../images/fonts/FHACondFrenchNC.otf') format('opentype');
+  src: url('FHACondFrenchNC.otf') format('opentype');
 }
 $jmain-font: 'FHA Cond French', 'monospace';
 
 @font-face {
   font-family: 'Back To Black Bold';
-  src: url('../images/fonts/BackToBlackBold.ttf') format('truetype');
+  src: url('BackToBlackBold.ttf') format('truetype');
 }
 $kapp-title-font: 'Back To Black Bold', 'sans-serif';
 
 @font-face {
   font-family: 'Munson Roman';
-  src: url('../images/fonts/Munson_Roman.otf') format('opentype');
+  src: url('Munson_Roman.otf') format('opentype');
 }
 $main-font: 'Munson Roman', 'monospace';
 
 @font-face {
   font-family: 'Blessed Day';
-  src: url('../images/fonts/BlessedDay.otf') format('opentype');
+  src: url('BlessedDay.otf') format('opentype');
 }
 $app-title-font: 'Blessed Day', 'sans-serif';

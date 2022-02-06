@@ -10,12 +10,14 @@
     -# Display media in searches and social media
     = display_meta_tags
 
-    = favicon_link_tag asset_pack_path('media/images/favicon.png')
+    = favicon_link_tag "favicon.png"
     %title= content_for?(:title) ? ("Recipedia | #{yield(:title)}").html_safe : 'Recipedia'
 
-    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': true
     = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+
   %body
     #wrap
       = render 'layouts/top_bar'

@@ -6,7 +6,7 @@
           = image_tag banner_image(recipe.recipe_images.first.image)
         - else
           .photo
-            = image_pack_tag('default_recipe_image.svg', size: "600x400")
+            = image_tag('default_recipe_image.svg', size: "600x400")
     .card-section
       .grid-x
         .cell

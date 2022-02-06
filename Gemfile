@@ -32,8 +32,11 @@ gem 'image_processing', '~> 1.12.1'
 gem 'aws-sdk', '~> 3'
 # Active Job backgrounding.
 gem 'sidekiq', '~> 6.4.0'
-# Webpack.
-gem 'webpacker', '~> 5.x'
+
+# Required for Esbuild bundling.
+gem 'jsbundling-rails'
+gem 'cssbundling-rails'
+
 # Console tables.
 gem 'hirb'
 # ActionCable to AnyCable

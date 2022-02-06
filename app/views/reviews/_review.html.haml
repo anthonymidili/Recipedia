@@ -16,8 +16,9 @@
                   %i.fas.fa-edit
                   Edit
               %li
-                = link_to [review.recipe, review], method: :delete,
-                data: { confirm: 'Are you sure.' }, remote: true,
+                = link_to [review.recipe, review],
+                data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                remote: true,
                 class: 'red-text', title: 'Delete' do
                   %i.fas.fa-trash
       .grid-x
