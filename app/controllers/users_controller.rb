@@ -52,6 +52,6 @@ private
   end
 
   def remove_avatar
-    @user.avatar.purge if user_params[:remove_avatar] == "1"
+    @user.avatar.purge_later if user_params[:remove_avatar] == "1"
   end
 end

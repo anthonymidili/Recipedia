@@ -27,7 +27,7 @@ class User < ApplicationRecord
   has_many :notifications, foreign_key: 'recipient_id', dependent: :destroy
   has_one :notification_setting, dependent: :destroy
 
-  has_one_attached :avatar
+  has_one_attached :avatar, dependent: :purge_later
 
   attr_accessor :remove_avatar
 

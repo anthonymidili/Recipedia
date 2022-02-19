@@ -27,15 +27,21 @@ gem 'meta-tags', '~> 2.16.0'
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
-# Active Storage file processing and storage.
+# Active Storage file processing and storage
+gem "mini_magick", "~> 4.11.0"
 gem 'image_processing', '~> 1.12.1'
-gem 'aws-sdk', '~> 3'
+gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
 gem 'sidekiq', '~> 6.4.0'
 
 # Required for Esbuild bundling.
 gem 'jsbundling-rails'
 gem 'cssbundling-rails'
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
 
 # Console tables.
 gem 'hirb'
@@ -59,3 +65,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"

@@ -1,4 +1,4 @@
-= form_with model: [@recipe, @recipe_image], local: true do |f|
+= form_with model: [@recipe, @recipe_image], local: true, multipart: true do |f|
   .grid-x
     .medium-6.cell
       .callout-transparent
@@ -17,7 +17,7 @@
     - if @recipe.recipe_images
       - @recipe.recipe_images.by_original_first.each do |recipe_image|
         - if recipe_image.image.attached?
-          .medium-3.cell
+          .medium-3.cell{id: "recipe_image_thumb_#{recipe_image.id}"}
             = link_to recipe_image.user do
               Uploaded by:
               %b= recipe_image.user.username

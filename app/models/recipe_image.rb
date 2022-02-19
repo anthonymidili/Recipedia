@@ -8,7 +8,7 @@ class RecipeImage < ApplicationRecord
   belongs_to :recipe
   belongs_to :user
 
-  has_one_attached :image
+  has_one_attached :image, dependent: :purge_later
 
   # Always show the first image then order the rest from newest to oldest.
   # [1, 2, 3, 4] becomes [1, 4, 3, 2]
