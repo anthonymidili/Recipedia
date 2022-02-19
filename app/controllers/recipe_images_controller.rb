@@ -36,14 +36,6 @@ class RecipeImagesController < ApplicationController
         }
         format.json { head :no_content }
       end
-    else
-      respond_to do |format|
-        format.html {
-          redirect_to new_recipe_recipe_image_path(@recipe),
-          notice: 'Image was successfully removed.'
-        }
-        format.json { head :no_content }
-      end
     end
   end
 
