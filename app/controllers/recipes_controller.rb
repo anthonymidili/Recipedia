@@ -29,8 +29,10 @@ class RecipesController < ApplicationController
     @review = @recipe.reviews.new
 
     respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update("recipe_image", partial: 'recipe_images/recipe_image', locals: { recipe_image: @recipe_image })
+      end
       format.html
-      format.js
     end
   end
 
