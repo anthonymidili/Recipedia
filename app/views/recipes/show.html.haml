@@ -71,26 +71,26 @@
         .autolinks= simple_format(@recipe.description)
   .medium-5.cell
     .center
-      = turbo_frame_tag "recipe_images" do
-        #recipe_image
-          - if @recipe_image.try(:image).try(:attached?)
-            = render @recipe_image
-          - else
-            .hide-on-print
-            = image_tag "default_recipe_image.svg", size: "800x800",
-            class: "thumbnail show-for-medium"
-        .hide-on-print
-          %br/
-          .add-image-link
-            = link_to new_recipe_recipe_image_path(@recipe),
-            class: 'thumbnail stack-text', data: { turbo_frame: "_top" } do
-              %i.fas.fa-plus-circle
-              Image
-          - if @recipe.recipe_images.any?
-            - @recipe.recipe_images.by_original_first.first(9).each do |recipe_image|
-              - if recipe_image.image.attached?
-                = link_to recipe_path(@recipe, image: recipe_image.id) do
-                  = image_tag avatar_image(recipe_image.image, 80), class: 'thumbnail'
+      = turbo_frame_tag "main_recipe_image" do
+        - if @recipe_image.try(:image).try(:attached?)
+          = render @recipe_image
+        - else
+          .hide-on-print
+          = image_tag "default_recipe_image.svg", size: "800x800",
+          class: "thumbnail show-for-medium"
+      .hide-on-print
+        %br/
+        .add-image-link
+          = link_to new_recipe_recipe_image_path(@recipe),
+          class: 'thumbnail stack-text' do
+            %i.fas.fa-plus-circle
+            Image
+        - if @recipe.recipe_images.any?
+          - @recipe.recipe_images.by_original_first.first(9).each do |recipe_image|
+            - if recipe_image.image.attached?
+              = link_to recipe_path(@recipe, image: recipe_image.id),
+              data: { turbo_frame: "main_recipe_image" } do
+                = image_tag avatar_image(recipe_image.image, 80), class: 'thumbnail'
 .grid-x
   .small-12.cell
     - if @recipe.ingredients.any?

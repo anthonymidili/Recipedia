@@ -30,7 +30,8 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.update("recipe_image", partial: 'recipe_images/recipe_image', locals: { recipe_image: @recipe_image })
+        render turbo_stream: turbo_stream.replace("main_recipe_image",
+          partial: 'recipe_images/recipe_image', locals: { recipe_image: @recipe_image })
       end
       format.html
     end

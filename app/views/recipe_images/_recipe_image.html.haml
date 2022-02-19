@@ -1,9 +1,10 @@
 #recipe_image_container
   .recipe_image_card
     .recipe_image_uploader.hide-on-print
-      = link_to recipe_image.user do
+      = link_to recipe_image.user, data: { turbo_frame: "_top" } do
         Uploaded by:
         %b= recipe_image.user.username
     .recipe_image_image
-      = link_to rails_blob_path recipe_image.image, class: 'max-image-height' do
+      = link_to rails_blob_path recipe_image.image,
+      class: 'max-image-height', data: { turbo_frame: "_top" } do
         = image_tag large_image(recipe_image.image), class: 'thumbnail'
