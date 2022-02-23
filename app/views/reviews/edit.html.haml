@@ -1,6 +1,7 @@
-%h1 Editing review
+= turbo_frame_tag dom_id(review) do
+  %h1 Editing review
 
-= render 'form', recipe: @recipe, review: @review
+  = render 'form', recipe: @recipe, review: @review
 
-%ul.nav-links
-  %li= link_to 'Back', recipe_path(@recipe, anchor: "review_#{@review.id}")
+  %ul.nav-links
+    %li= link_to 'Back', recipe_path(@recipe, anchor: "review_#{@review.id}")

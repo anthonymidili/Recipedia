@@ -1,6 +1,6 @@
 .callout
   = render 'categories/form', category: @category, remote: true
-  = form_with model: recipe, local: true do |f|
+  = form_with model: recipe, local: true, data: { turbo: false } do |f|
     = render 'notifications/error_messages', object: f.object
     .grid-x
       .cell

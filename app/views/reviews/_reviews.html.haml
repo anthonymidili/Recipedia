@@ -1,14 +1,20 @@
+= turbo_stream_from "reviews"
+
 .grid-x
   .cell
-    %h4#reviews_header Reviews
+    %h4#reviews_header
+      = render "reviews/count", recipe: recipe
     - if user_signed_in?
-      .callout= render 'reviews/form', recipe: recipe, review: review
+      .callout
+        = turbo_frame_tag "new_review" do
+          = render 'reviews/form', recipe: recipe, review: review
     - else
       %p
         = link_to log_in_recipe_path(@recipe) do
           %i.fa.fa-sign-in-alt
           Log in to create a review
 
-    - if recipe.reviews
-      %ul#reviews.menu.vertical
-        = render recipe.reviews
+    %ul#reviews.menu.vertical
+      = turbo_frame_tag "#{dom_id(recipe)}_reviews" do
+        - recipe.reviews.each do |review|
+          = render review if review.persisted?

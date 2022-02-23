@@ -38,7 +38,7 @@
             %div{id: "recipe_likes_count_#{@recipe.id}"}
               = render 'recipes/likes_count', recipe: @recipe
           %li
-            = link_to "#{pluralize(@recipe.reviews.count, "Review")}", recipe_path(@recipe, anchor: "reviews_header")
+            = link_to "Reviews", recipe_path(@recipe, anchor: "reviews_header")
     %h1.center-on-print= @recipe.name
 .grid-x
   .medium-7.cell

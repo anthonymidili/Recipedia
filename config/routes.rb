@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :recipes do
-    resources :reviews, only: [:create, :edit, :update, :destroy]
+    resources :reviews, only: [:show, :create, :edit, :update, :destroy]
     resources :recipe_images, only: [:new, :create, :destroy]
     collection do
       get :search

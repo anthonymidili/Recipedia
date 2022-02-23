@@ -1,9 +1,12 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   before_action :set_recipe
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :deny_access!,
   unless: -> { is_author?(@review.user) }, only: [:edit, :update, :destroy]
+
+  def show
+  end
 
   # GET /reviews/1/edit
   def edit
@@ -17,10 +20,24 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
+        format.turbo_stream do
+          render turbo_stream: [
+            # Add review to list.
+            # turbo_stream.prepend("reviews",
+            #   partial: "reviews/review", locals: { review: @review }),
+            # Clear form.
+            turbo_stream.replace("review_form_new_review",
+              partial: "reviews/form", locals: { recipe: @recipe, review: @recipe.reviews.new })
+          ]
+        end
         format.html { redirect_to @recipe, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
-        format.js
       else
+        format.turbo_stream do
+          # Display errors.
+          render turbo_stream: turbo_stream.replace("review_form_new_review",
+            partial: "reviews/form", locals: { recipe: @recipe, review: @review })
+        end
         format.html { render :new }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
@@ -32,6 +49,9 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
+        # format.turbo_stream do
+        #   render turbo_stream: turbo_stream.replace
+        # end
         format.html { redirect_to recipe_path(@recipe, anchor: "review_#{@review.id}"), notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
