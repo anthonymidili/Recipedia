@@ -20,6 +20,7 @@ import './packs/autocomplete'
 import './packs/autofocus_cacoon'
 import './packs/direct_uploads'
 import './packs/mark_as_read'
+import "./packs/reviews_count"
 import './packs/sites'
 import './packs/slider'
 import './packs/touch_punch'

@@ -12,8 +12,13 @@ form#notification_settings {
   }
 }
 
+h3 .favor_form_button {
+  width: 47px;
+}
+
 .favor_form_button {
-  margin-right: 20px;
+  width: 32px;
+  margin-right: 100%;
   margin-bottom: 5px;
   display: flex;
   padding: 5px !important;

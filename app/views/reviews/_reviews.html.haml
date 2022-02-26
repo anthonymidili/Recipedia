@@ -2,8 +2,8 @@
 
 .grid-x
   .cell
-    %h4#reviews_header
-      = render "reviews/count", recipe: recipe
+    %h4#reviews_header= render "reviews/count", recipe: recipe
+
     - if user_signed_in?
       .callout
         = turbo_frame_tag "new_review" do
