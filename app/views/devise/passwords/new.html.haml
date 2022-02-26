@@ -2,7 +2,8 @@
   .medium-6.cell
     %h1 Forgot your password?
 
-    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    = form_with model: resource, as: resource_name, url: password_path(resource_name),
+    html: { method: :post }, local: true, data: { turbo: false } do |f|
       = render 'notifications/error_messages', object: f.object
 
       = f.label :email
