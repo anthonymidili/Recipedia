@@ -21,14 +21,10 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       if @review.save
         format.turbo_stream do
-          render turbo_stream: [
-            # Add review to list.
-            # turbo_stream.prepend("reviews",
-            #   partial: "reviews/review", locals: { review: @review }),
-            # Clear form.
-            turbo_stream.replace("review_form_new_review",
-              partial: "reviews/form", locals: { recipe: @recipe, review: @recipe.reviews.new })
-          ]
+          # Broadcast review to list from model.
+          # Clear form.
+          render turbo_stream: turbo_stream.replace("review_form_new_review",
+            partial: "reviews/form", locals: { recipe: @recipe, review: @recipe.reviews.new })
         end
         format.html { redirect_to @recipe, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @recipe }
@@ -49,12 +45,16 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        # format.turbo_stream do
-        #   render turbo_stream: turbo_stream.replace
-        # end
+        # Broadcast updated review on list from model.
+        format.turbo_stream
         format.html { redirect_to recipe_path(@recipe, anchor: "review_#{@review.id}"), notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
+        format.turbo_stream do
+          # Display errors.
+          render turbo_stream: turbo_stream.replace("review_form_review_#{@review.id}",
+            partial: "reviews/form", locals: { recipe: @recipe, review: @review })
+        end
         format.html { render :edit }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
@@ -66,9 +66,10 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
+      # Broadcast remove review on list from model.
+      format.turbo_stream { render turbo_stream: "" }
       format.html { redirect_to recipe_path(@recipe, anchor: "reviews_header"), notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
-      format.js
     end
   end
 

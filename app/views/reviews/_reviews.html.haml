@@ -2,7 +2,8 @@
 
 .grid-x
   .cell
-    %h4#reviews_header= render "reviews/count", recipe: recipe
+    %h4#reviews_header
+      = "Review".pluralize(recipe.reviews.count)
 
     - if user_signed_in?
       .callout
