@@ -26,7 +26,7 @@ gem 'meta-tags', '~> 2.15.0'
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
 # Active Storage file processing and storage.
-gem 'image_processing', '~> 1.12.1'
+gem 'image_processing', '~> 1.12.2'
 gem 'aws-sdk', '~> 3'
 # Active Job backgrounding.
 gem 'sidekiq', '~> 6.2.1'
