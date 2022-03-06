@@ -1,121 +1,122 @@
 - provide(:title, @recipe.name)
 
-.hide-on-print
-  .grid-x
-    .small-12.cell
-      - if is_author?(@recipe.user)
-        %ul.menu.simple.float-right
-          %li
-            = link_to edit_recipe_path(@recipe) do
-              %i.fas.fa-edit
-              Edit
-          %li
-            = link_to @recipe, class: 'red-text',
-            data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do
-              %i.fas.fa-trash
-      = render 'recipes/share', recipe: @recipe
-  - if is_author?(@recipe.user) && !@recipe.published?
+%div{id: "recipe_#{@recipe.id}", data: { recipe_id: @recipe.id }}
+  .hide-on-print
     .grid-x
-      .cell
-        .center-text= render 'recipes/publish_form', recipe: @recipe
-  .grid-x
-    .small-12.cell
-      %p.callout-transparent
-        %b Assigned Categories:
-        = links_to_categories(@recipe)
-.grid-x
-  .cell
-    .hide-on-print
-      %h3
-        %ul.menu
-          %li
-            - if user_signed_in? && !is_author?(@recipe.user)
-              = render 'recipes/favor_form', recipe: @recipe
-            - elsif !user_signed_in?
-              = link_to log_in_recipe_path(@recipe), class: 'favor_form_button' do
-                %i.gray-text.far.fa-heart
-          %li
-            %div{id: "recipe_likes_count_#{@recipe.id}"}
-              = render 'recipes/likes_count', recipe: @recipe
-          %li
-            = link_to recipe_path(@recipe, anchor: "reviews_header") do
-              = render 'reviews/count', recipe: @recipe
-    %h1.center-on-print= @recipe.name
-.grid-x
-  .medium-7.cell
-    .callout-transparent
-      .center-text.left-on-print
-        .grid-x
-          .cell.large-6
-            .grid-x
-              .cell
-                = link_to @recipe.user do
-                  Posted by:
-                  %b= @recipe.user.username
-            .grid-x
-              .cell
-                = render 'users/profile_stats', user: @recipe.user, size: 100
-          .cell.large-6
-            .hide-on-print.center-vertical
-              .grid-x
-                .cell
-                  = render 'relationships/form', user: @recipe.user, recipe: @recipe
-    - if @recipe.source?
+      .small-12.cell
+        - if is_author?(@recipe.user)
+          %ul.menu.simple.float-right
+            %li
+              = link_to edit_recipe_path(@recipe) do
+                %i.fas.fa-edit
+                Edit
+            %li
+              = link_to @recipe, class: 'red-text',
+              data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do
+                %i.fas.fa-trash
+        -# = render 'recipes/share', recipe: @recipe
+    - if is_author?(@recipe.user) && !@recipe.published?
       .grid-x
         .cell
-          %p
-            %b Source:
-            = @recipe.source
+          .center-text= render 'recipes/publish_form', recipe: @recipe
     .grid-x
-      .cell
-        %b Description:
-        .autolinks= simple_format(@recipe.description)
-  .medium-5.cell
-    .center
-      = turbo_frame_tag "main_recipe_image" do
-        - if @recipe_image.try(:image).try(:attached?)
-          = render @recipe_image
-        - else
-          .hide-on-print
-          = image_tag "default_recipe_image.svg", size: "800x800",
-          class: "thumbnail show-for-medium"
+      .small-12.cell
+        %p.callout-transparent
+          %b Assigned Categories:
+          = links_to_categories(@recipe)
+  .grid-x
+    .cell
       .hide-on-print
-        %br/
-        .add-image-link
-          = link_to new_recipe_recipe_image_path(@recipe),
-          class: 'thumbnail stack-text' do
-            %i.fas.fa-plus-circle
-            Image
-        - if @recipe.recipe_images.any?
-          - @recipe.recipe_images.by_original_first.first(9).each do |recipe_image|
-            - if recipe_image.image.attached?
-              = link_to recipe_path(@recipe, image: recipe_image.id),
-              data: { turbo_frame: "main_recipe_image" } do
-                = image_tag avatar_image(recipe_image.image, 80), class: 'thumbnail'
-.grid-x
-  .small-12.cell
-    - if @recipe.ingredients.any?
-      %h4 Ingredients:
-      .callout
-        - @recipe.parts.each do |part|
-          - if @recipe.parts.count > 1
-            %h4= part.name
-          = render part.ingredients
+        %h3
+          %ul.menu
+            %li
+              - if user_signed_in? && !is_author?(@recipe.user)
+                = render 'recipes/favor_form', recipe: @recipe
+              - elsif !user_signed_in?
+                = link_to log_in_recipe_path(@recipe), class: 'favor_form_button' do
+                  %i.gray-text.far.fa-heart
+            %li
+              %div{id: "recipe_likes_count_#{@recipe.id}"}
+                = render 'recipes/likes_count', recipe: @recipe
+            %li
+              = link_to recipe_path(@recipe, anchor: "reviews_header") do
+                = render 'reviews/count', recipe: @recipe
+      %h1.center-on-print= @recipe.name
+  .grid-x
+    .medium-7.cell
+      .callout-transparent
+        .center-text.left-on-print
+          .grid-x
+            .cell.large-6
+              .grid-x
+                .cell
+                  = link_to @recipe.user do
+                    Posted by:
+                    %b= @recipe.user.username
+              .grid-x
+                .cell
+                  = render 'users/profile_stats', user: @recipe.user, size: 100
+            .cell.large-6
+              .hide-on-print.center-vertical
+                .grid-x
+                  .cell
+                    = render 'relationships/form', user: @recipe.user, recipe: @recipe
+      - if @recipe.source?
+        .grid-x
+          .cell
+            %p
+              %b Source:
+              = @recipe.source
+      .grid-x
+        .cell
+          %b Description:
+          .autolinks= simple_format(@recipe.description)
+    .medium-5.cell
+      .center
+        = turbo_frame_tag "main_recipe_image" do
+          - if @recipe_image.try(:image).try(:attached?)
+            = render @recipe_image
+          - else
+            .hide-on-print
+            = image_tag "default_recipe_image.svg", size: "800x800",
+            class: "thumbnail show-for-medium"
+        .hide-on-print
           %br/
-    - if @recipe.steps.any?
-      %h4 Steps:
-      .callout
-        - @recipe.parts.each do |part|
-          - if @recipe.parts.count > 1
-            %h4= part.name
-          - part.steps.each_with_index do |step, index|
-            %span.red-text= "#{index += 1}."
-            = step.description
-            %br/
-          %br/
-.hide-on-print
+          .add-image-link
+            = link_to new_recipe_recipe_image_path(@recipe),
+            class: 'thumbnail stack-text' do
+              %i.fas.fa-plus-circle
+              Image
+          - if @recipe.recipe_images.any?
+            - @recipe.recipe_images.by_original_first.first(9).each do |recipe_image|
+              - if recipe_image.image.attached?
+                = link_to recipe_path(@recipe, image: recipe_image.id),
+                data: { turbo_frame: "main_recipe_image" } do
+                  = image_tag avatar_image(recipe_image.image, 80), class: 'thumbnail'
   .grid-x
     .small-12.cell
-      %ul.nav-links
-        %li= link_to 'All Recipes', recipes_path
-  = render 'reviews/reviews', recipe: @recipe, review: @review
+      - if @recipe.ingredients.any?
+        %h4 Ingredients:
+        .callout
+          - @recipe.parts.each do |part|
+            - if @recipe.parts.count > 1
+              %h4= part.name
+            = render part.ingredients
+            %br/
+      - if @recipe.steps.any?
+        %h4 Steps:
+        .callout
+          - @recipe.parts.each do |part|
+            - if @recipe.parts.count > 1
+              %h4= part.name
+            - part.steps.each_with_index do |step, index|
+              %span.red-text= "#{index += 1}."
+              = step.description
+              %br/
+            %br/
+  .hide-on-print
+    .grid-x
+      .small-12.cell
+        %ul.nav-links
+          %li= link_to 'All Recipes', recipes_path
+    = render 'reviews/reviews', recipe: @recipe, review: @review

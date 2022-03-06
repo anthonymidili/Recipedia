@@ -22,9 +22,7 @@ class Review < ApplicationRecord
     target: "recipe_#{recipe.id}_reviews",
     partial: "reviews/review_frame", locals: { review: self }
 
-    broadcast_replace_later_to "reviews",
-    target: "recipe_#{recipe.id}_reviews_count",
-    partial: "reviews/count", locals: { recipe: self.recipe }
+    CountReviewsJob.perform_later(self.recipe)
   end
 
   def after_update_broadcast
@@ -37,8 +35,6 @@ class Review < ApplicationRecord
     broadcast_remove_to "reviews",
     target: "review_#{self.id}"
 
-    broadcast_replace_to "reviews",
-    target: "recipe_#{recipe.id}_reviews_count",
-    partial: "reviews/count", locals: { recipe: self.recipe }
+    CountReviewsJob.perform_later(self.recipe)
   end
 end

@@ -6,6 +6,7 @@
     = link_to settings_notifications_path, class: 'button warning' do
       %i.fas.fa-cog
       Notification settings
+    = link_to "Mark as Read", mark_as_read_notifications_path, data: { turbo_method: :patch }
     .callout#notifications
       %p#unread_notifications{class: hide_if(@notifications.by_unread.any?)} NEW
       %ul#unread_notifications_list.menu.vertical

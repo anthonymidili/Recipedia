@@ -1,5 +1,3 @@
-= turbo_frame_tag "#{dom_id(recipe)}_reviews_count" do
-  %span{class: "#{dom_id(recipe)}_reviews_count",
-  data: { recipe_id: recipe.id, count: recipe.reviews.count }}
-    = recipe.reviews.count
-  = "Review".pluralize(recipe.reviews.count)
+%span{class: dom_id(recipe, "reviews_count")}
+  = recipe.reviews.count
+= "Review".pluralize(recipe.reviews.count)

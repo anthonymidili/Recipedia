@@ -1,5 +1,5 @@
 .cell
-  .card.recipe-card
+  .card.recipe-card{id: "recipe_#{recipe.id}", data: { recipe_id: recipe.id }}
     .recipe-card-image
       = link_to recipe do
         - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
