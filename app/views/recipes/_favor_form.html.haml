@@ -1,4 +1,4 @@
-%div{id: "favor_form_#{recipe.id}"}
+= turbo_frame_tag dom_id(recipe, "find_favor_form") do
   - if current_user.find_favoritism(recipe)
     = render 'recipes/unfavor', recipe: recipe
   - else

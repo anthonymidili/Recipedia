@@ -1,7 +1,4 @@
 class Review < ApplicationRecord
-  after_commit on: [:create] do
-    NotifiyUsersJob.perform_later(self)
-  end
   after_create_commit :after_create_broadcast
   after_update_commit :after_update_broadcast
   after_destroy_commit :after_destroy_broadcast
@@ -22,7 +19,9 @@ class Review < ApplicationRecord
     target: "recipe_#{recipe.id}_reviews",
     partial: "reviews/review_frame", locals: { review: self }
 
-    CountReviewsJob.perform_later(self.recipe)
+    RecipeStatsJob.perform_later(self.recipe)
+
+    NotifiyUsersJob.perform_later(self)
   end
 
   def after_update_broadcast
@@ -35,6 +34,6 @@ class Review < ApplicationRecord
     broadcast_remove_to "reviews",
     target: "review_#{self.id}"
 
-    CountReviewsJob.perform_later(self.recipe)
+    RecipeStatsJob.perform_later(self.recipe)
   end
 end

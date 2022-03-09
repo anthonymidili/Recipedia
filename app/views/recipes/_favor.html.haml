@@ -1,5 +1,4 @@
-= form_with model: current_user.favoritisms.build(recipe_id: recipe.id),
-local: false do |f|
-  = f.hidden_field :recipe_id
-  = f.button class: 'favor_form_button' do
+%div{id: dom_id(recipe, "favor_form")}
+  = button_to favoritisms_path, params: { recipe_id: recipe.id },
+  class: "favor_form_button" do
     %i.red-text.far.fa-heart

@@ -19,8 +19,12 @@ document.addEventListener('turbo:load', function() {
         // Set recipe reviews count on all reviews_count_recipe_## classes.
         var reviews_count = document.querySelectorAll(".reviews_count_recipe_" + recipe_id);
         reviews_count.forEach(function(review_count) {
-          review_count.innerHTML = data.count;
+          review_count.innerHTML = data.reviews_count;
         });
+
+        // Set recipe likes count on recipe_likes_count_## id by replacing the partial.
+        var likes_count = document.querySelector("#recipe_likes_count_" + recipe_id);
+        likes_count.innerHTML = data.likes_partial;
       }
     });
   });
