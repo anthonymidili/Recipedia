@@ -1,0 +1,3 @@
+- if current_user.recipes.by_unpublished.any?
+  %span.info-text#unpublished_count
+    = pluralize(current_user.recipes.by_unpublished.count, 'draft')

@@ -20,8 +20,7 @@
           = link_to user_path(current_user) do
             %i.fa.fa-book
             My cookbook
-            - if current_user.recipes.by_unpublished.any?
-              %span.info-text#unpublished_count= pluralize(current_user.recipes.by_unpublished.count, 'draft')
+            = render "recipes/unpublished_count"
         %li
           = link_to notifications_path do
             %i.fas.fa-bell

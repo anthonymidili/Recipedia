@@ -72,13 +72,17 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if @recipe.update(recipe_params)
         @recipes_unpublished_count = current_user.recipes.by_unpublished.count
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.remove("publish_form_recipe_#{@recipe.id}"),
+            turbo_stream.replace("unpublished_count", partial: "recipes/unpublished_count")
+          ]
+        end
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
-        format.js
       else
         format.html { render :edit }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
-        format.js
       end
     end
   end

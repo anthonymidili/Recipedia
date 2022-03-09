@@ -1,4 +1,4 @@
-= form_with model: recipe, local: false, id: "recipe_publish_form",
-class: "submitOnChange js" do |f|
-  = f.hidden_field :published, value: 'true'
-  = f.submit "Click to Publish Recipe", class: "button"
+= turbo_frame_tag dom_id(recipe, "publish_form") do
+  = form_with model: recipe, local: false, id: "recipe_publish_form" do |f|
+    = f.hidden_field :published, value: 'true'
+    = f.submit "Click to Publish Recipe", class: "button"
