@@ -1,5 +1,5 @@
 .small-12.medium-6.cell
-  = link_to category do
+  = link_to category, data: { turbo_frame: "_top" } do
     .banner
       - @recipe_with_image = category.recipes.last_with_image(@used_recipes)
       - if @recipe_with_image.try(:recipe_images).try(:first).try(:image).try(:attached?)

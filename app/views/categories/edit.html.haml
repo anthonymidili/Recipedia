@@ -1,22 +1,19 @@
 - provide(:title, 'Edit Category')
 
-.grid-x
-  .small-12.cell
-    %small.float-right
-      Last Modified
-      = @category.updated_at.strftime('%m-%d-%Y')
-      by
-      = link_to @category.user.username, @category.user
-.grid-x
-  .small-12.cell
-    %p
-      %b Available Categories:
-      = @categories.list_names
+= turbo_frame_tag dom_id(@category) do
+  .grid-x
+    .small-12.cell
+      %small.float-right
+        Last Modified
+        = @category.updated_at.strftime('%m-%d-%Y')
+        by
+        = link_to @category.user.username, @category.user
+  .grid-x
+    .small-12.cell
+      %p
+        %b Available Categories:
+        = @categories.list_names
 
-    %h1 Editing category
+      %h1 Editing category
 
-    = render 'form', category: @category
-
-    %ul.nav-links
-      %li= link_to 'Back', @category
-      %li= link_to 'All Categories', categories_path
+      = render 'form', category: @category

@@ -92,7 +92,11 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.', status: 303 }
+      format.html {
+        redirect_to recipes_url,
+        notice: 'Recipe was successfully destroyed.',
+        status: 303
+      }
       format.json { head :no_content }
     end
   end

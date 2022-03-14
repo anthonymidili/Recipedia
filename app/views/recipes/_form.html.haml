@@ -1,5 +1,6 @@
 .callout
-  = render 'categories/form', category: @category, remote: true
+  = turbo_frame_tag dom_id(@category) do
+    = link_to "Add Category", new_category_path, class: "button warning small"
   = form_with model: recipe, local: true, data: { turbo: false } do |f|
     = render 'notifications/error_messages', object: f.object
     .grid-x
@@ -10,12 +11,10 @@
           or
           %b create your own category
           to make it easy for others to find.
-        %ul#check_boxes.menu.simple
-          - Category.all.each do |category|
-            = render 'categories/check_box', recipe: recipe, category: category
-        -# %ul.menu.simple
-        -#   = f.collection_check_boxes :category_ids, Category.all, :id, :name do |category|
-        -#     %li= category.label(data: { value: category.value }) { category.check_box + category.text }
+        = turbo_frame_tag "categories" do
+          %ul#check_boxes.menu
+            - Category.all.each do |category|
+              = render 'categories/check_box', recipe: recipe, category: category
     .grid-x
       .medium-6.cell.small-order-1.medium-order-1
         = f.label :name

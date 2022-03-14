@@ -18,7 +18,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :categories
+  resources :categories do
+    collection do
+      get :more
+    end
+  end
 
   resources :users, only: [:index, :show, :edit, :update] do
     member do

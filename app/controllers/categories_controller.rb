@@ -2,7 +2,6 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create,:edit, :update, :destroy]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :category_in_use?, only: [:update, :destroy]
-  before_action :set_return_to, only: [:new, :edit, :create, :update]
 
   # GET /categories
   # GET /categories.json
@@ -41,7 +40,23 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to return_back_to, notice: 'Category was successfully created.' }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append("check_boxes",
+              partial: "categories/check_box",
+              locals: { recipe: @recipe, category: @category }
+            ),
+            turbo_stream.replace("categories_list_names",
+              partial: "categories/list_names",
+              locals: { categories: @categories }
+            ),
+            turbo_stream.replace("form_category",
+              partial: "categories/form",
+              locals: { category: Category.new }
+            )
+          ]
+        end
+        format.html { redirect_to @category, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: categories_path }
         format.js
       else
@@ -55,9 +70,11 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1.json
   def update
     @category.user = current_user
+    @categories = Category.all
+
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to return_back_to, notice: 'Category was successfully updated.' }
+        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -71,9 +88,20 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+      format.html {
+        redirect_to categories_path,
+        notice: 'Category was successfully destroyed.',
+        status: 303
+      }
       format.json { head :no_content }
     end
+  end
+
+  def more
+    @categories =
+      Category.includes(recipes: [recipe_images: [:user, image_attachment: :blob]]).
+      oldest_to_newest
+    @used_recipes = []
   end
 
 private
@@ -86,18 +114,6 @@ private
     if @category.in_use?
       redirect_to @category, alert: "Can't edit a category that recipes are using."
       return
-    end
-  end
-
-  def set_return_to
-    @recipe = Recipe.find_by(id: params[:return_to]) if params[:return_to]
-  end
-
-  def return_back_to
-    if @recipe
-      edit_recipe_path(@recipe)
-    else
-      categories_path
     end
   end
 

@@ -1,18 +1,15 @@
 - provide(:title, 'New Category')
 
+= turbo_frame_tag dom_id(@category) do
+  .grid-x
+    .small-12.cell
+      %h1 New category
+
+      %p
+        %b Available Categories:
+        = render "categories/list_names", categories: @categories
+      = render 'form', category: @category
 .grid-x
-  .small-12.cell
-    %p
-      %b Available Categories:
-      = @categories.list_names
-
-    %h1 New category
-
-    = render 'form', category: @category
-
+  .cell
     %ul.nav-links
-      %li
-        - if @recipe
-          = link_to 'Back To Editing Recipe', edit_recipe_path(@recipe)
-        - else
-          = link_to 'Back', categories_path
+      %li= link_to 'Back', categories_path
