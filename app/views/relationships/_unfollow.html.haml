@@ -1,4 +1,5 @@
-= form_with model: current_user.following?(user), method: :delete, local: false do |f|
+= form_with model: current_user.following?(user), method: :delete,
+id: dom_id(user, "unfollow_form"), local: false do |f|
   = render 'notifications/error_messages', object: f.object
 
   .actions

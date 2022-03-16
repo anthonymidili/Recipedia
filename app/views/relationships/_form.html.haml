@@ -1,17 +1,18 @@
 - unless is_author?(user)
-  %div{id: "follow_form_for_#{user.id}"}
-    - if !user_signed_in?
-      - if defined?(recipe)
-        = button_to log_in_recipe_path(recipe),
-        class: 'hollow button secondary', method: :get do
-          %i.fa.fa-sign-in-alt
-          Log in to follow
-      - else
-        = button_to log_in_user_path(user),
-        class: "hollow button secondary", method: :get do
-          %i.fa.fa-sign-in-alt
-          Log in to follow
-    - elsif current_user.following?(user)
-      = render 'relationships/unfollow', user: user
+  - if !user_signed_in?
+    - if defined?(recipe)
+      = button_to log_in_recipe_path(recipe),
+      class: 'hollow button secondary', method: :get do
+        %i.fa.fa-sign-in-alt
+        Log in to follow
     - else
+      = button_to log_in_user_path(user),
+      class: "hollow button secondary", method: :get do
+        %i.fa.fa-sign-in-alt
+        Log in to follow
+  - elsif current_user.following?(user)
+    = turbo_frame_tag dom_id(user, "following_form") do
+      = render 'relationships/unfollow', user: user
+  - else
+    = turbo_frame_tag dom_id(user, "following_form") do
       = render 'relationships/follow', user: user
