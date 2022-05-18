@@ -100,16 +100,16 @@ nav.pagination {
 }
 
 .callout-on-small-only {
-  @include  breakpoint(small only) {
-    @include callout;
-  }
+  // @include  breakpoint(small only) {
+  //   @include callout;
+  // }
 }
 
 .inline-button-on-medium {
-  @include breakpoint(medium) {
-    height: 2.4375rem;
-    margin-top: 1.55rem;
-  }
+  // @include breakpoint(medium) {
+  //   height: 2.4375rem;
+  //   margin-top: 1.55rem;
+  // }
 }
 
 .red-text {
@@ -139,7 +139,7 @@ a.gray-text:hover {
 }
 
 .banner {
-  @include callout;
+  // @include callout;
   padding: 0;
   position: relative;
   height: 180px;
@@ -170,29 +170,29 @@ a.gray-text:hover {
 }
 
 .inline-large-icon {
-  @include breakpoint(medium) {
-    font-size: 1.5rem;
-    margin-top: 1.55rem;
-  }
+  // @include breakpoint(medium) {
+  //   font-size: 1.5rem;
+  //   margin-top: 1.55rem;
+  // }
 }
 
 .inline-icon {
-  @include breakpoint(medium) {
-    margin-top: 1.35rem;
-  }
+  // @include breakpoint(medium) {
+  //   margin-top: 1.35rem;
+  // }
 }
 
 .slide {
   text-align: center;
-  @include breakpoint(medium) {
-    margin-top: 20px;
-    height: 50px;
-    svg.large {
-      height: 20px;
-      width: 20px;
-      margin-top: 15px;
-    }
-  }
+  // @include breakpoint(medium) {
+  //   margin-top: 20px;
+  //   height: 50px;
+  //   svg.large {
+  //     height: 20px;
+  //     width: 20px;
+  //     margin-top: 15px;
+  //   }
+  // }
   background: $turquoise-light;
   border: 1px solid $black;
 }
@@ -224,10 +224,10 @@ a.gray-text:hover {
 }
 
 ul.edit_menu {
-  @include menu-base;
-  @include breakpoint(medium) {
-    justify-content: flex-end;
-  }
+  // @include menu-base;
+  // @include breakpoint(medium) {
+  //   justify-content: flex-end;
+  // }
 }
 
 .timestamp {
@@ -268,7 +268,7 @@ ul.edit_menu {
 }
 
 .header-background {
-  @extend .callout-transparent;
+  // @extend .callout-transparent;
   width: fit-content;
   &.no-background {
     background-color: unset;
@@ -293,21 +293,21 @@ ul.edit_menu {
 }
 
 .default-avatar-150 {
-  @include thumbnail;
+  // @include thumbnail;
   width: 150px !important;
   height: 150px !important;
   background-color: $light-background;
 }
 
 .default-avatar-100 {
-  @include thumbnail;
+  // @include thumbnail;
   width: 100px !important;
   height: 100px !important;
   background-color: $light-background;
 }
 
 .default-avatar-50 {
-  @include thumbnail;
+  // @include thumbnail;
   margin: 0 20px 16px 0;
   width: 50px !important;
   height: 50px !important;

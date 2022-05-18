@@ -1,7 +1,8 @@
-// Entry point for your Sass build
 @import 'custom_colors';
-// node-module styles.
-@import 'foundation_and_overrides';
+
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
 @import '@fortawesome/fontawesome-free/css/fontawesome';
 @import "ilyabirman-likely/release/likely";
 @import "jquery-ui";

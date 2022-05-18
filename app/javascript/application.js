@@ -6,10 +6,11 @@ import "./controllers"
 import "./jquery"
 
 // Foundation setup.
-import Foundation from 'foundation-sites'
-$(document).on('turbo:load', function() {
-  $(document).foundation();
-});
+// import Foundation from 'foundation-sites'
+// $(document).on('turbo:load', function() {
+//   $(document).foundation();
+// });
+import * as bootstrap from "bootstrap"
 
 // jQuery ui setup for Autocomplete and Sortable.
 import "./packs/jquery-ui"

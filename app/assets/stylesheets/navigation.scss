@@ -1,6 +1,6 @@
 ul.nav-links {
-  @include menu-base;
-  @extend .callout-transparent;
+  // @include menu-base;
+  // @extend .callout-transparent;
   padding: 0 15px 0 15px;
 
   li:not(:first-child) {
@@ -8,10 +8,10 @@ ul.nav-links {
   }
 
   a {
-    @include button;
+    // @include button;
     border-radius: 6px;
     font-weight: bold;
-    @include button-style($turquoise, darken($turquoise, 20%), $black);
+    // @include button-style($turquoise, darken($turquoise, 20%), $black);
     margin: 14px 0 16px 0;
     box-shadow: 2px 2px 8px $black;
 
@@ -34,25 +34,25 @@ ul.nav-buttons {
     margin: 0;
   }
   ul {
-    @include  breakpoint(medium) {
-      float: right;
-    }
+    // @include  breakpoint(medium) {
+    //   float: right;
+    // }
   }
   li {
-    @include  breakpoint(medium) {
-      display: inline-block;
-    }
+    // @include  breakpoint(medium) {
+    //   display: inline-block;
+    // }
     margin-bottom: 20px;
   }
   & > li {
     margin-right: 20px;
   }
   & > ul > li {
-    @include  breakpoint(medium) {
-      margin-left: 20px;
-    }
+    // @include  breakpoint(medium) {
+    //   margin-left: 20px;
+    // }
   }
   a {
-    @extend .button;
+    // @extend .button;
   }
 }
