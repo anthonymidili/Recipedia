@@ -3,3 +3,4 @@
 
 import "./notify_user_channel"
 import "./recipe_channel"
+import "./mark_as_read_channel"

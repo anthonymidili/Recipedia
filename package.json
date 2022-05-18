@@ -9,8 +9,8 @@
   "private": true,
   "engines": {
     "yarn": "1.22.x",
-    "node": "12.x",
-    "npm": "7.x"
+    "node": "18.x",
+    "npm": "8.x"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.2",

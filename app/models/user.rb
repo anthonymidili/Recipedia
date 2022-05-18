@@ -88,6 +88,15 @@ class User < ApplicationRecord
     relationships.find_by(followed: user)
   end
 
+  def mark_as_read
+    # Mark notifications as read.
+    notifications.by_unread.mark_as_read
+
+    # Broadcast to current_user unread notifications count.
+    MarkAsReadChannel.broadcast_to self,
+    unread_notifications_count: notifications.unread_count
+  end
+
 private
 
   # Setter

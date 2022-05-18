@@ -4,18 +4,14 @@ class NotificationsController < ApplicationController
   def index
     @notifications = current_user.notifications.
     includes(:notifiable, notifier: [avatar_attachment: :blob])
+
+    MarkNotificationsAsReadJob.set(wait: 10.seconds).perform_later(current_user)
   end
 
   def mark_as_read
-    @notifications = current_user.notifications.by_unread.mark_as_read
-    @unread_notifications_count = current_user.notifications.unread_count
-    respond_to do |format|
-      format.html {
-        redirect_to notifications_path,
-        notice: 'All notification have been marked as read.'
-      }
-      format.js
-    end
+    # Mark notifications as read and broadcast to
+    # current user updated notification bell.
+    current_user.mark_as_read
   end
 
   def settings

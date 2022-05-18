@@ -3,15 +3,15 @@
 .grid-x
   .cell
     %h1 Notifications
-    = link_to settings_notifications_path, class: 'button warning' do
-      %i.fas.fa-cog
-      Notification settings
-    = link_to "Mark as Read", mark_as_read_notifications_path, data: { turbo_method: :patch }
-    .callout#notifications
-      %p#unread_notifications{class: hide_if(@notifications.by_unread.any?)} NEW
-      %ul#unread_notifications_list.menu.vertical
-        = render @notifications.by_unread
-      - if @notifications.by_read.any?
-        %p#read_notifications EARLIER
-        %ul#read_notifications_list.menu.vertical
-          = render @notifications.by_read
+    %ul.menu
+      %li.pad-right
+        = link_to settings_notifications_path, class: 'button warning' do
+          %i.fas.fa-cog
+          Notification settings
+      %li
+        = link_to "Mark all as read", mark_as_read_notifications_path,
+        class: "button", data: { turbo_method: :patch }
+
+    %br/
+    .callout
+      = render "notifications/notifications_list", notifications: @notifications
