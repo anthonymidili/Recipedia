@@ -293,21 +293,21 @@ ul.edit_menu {
 }
 
 .default-avatar-150 {
-  // @include thumbnail;
+  @extend .img-thumbnail;
   width: 150px !important;
   height: 150px !important;
   background-color: $light-background;
 }
 
 .default-avatar-100 {
-  // @include thumbnail;
+  @extend .img-thumbnail;
   width: 100px !important;
   height: 100px !important;
   background-color: $light-background;
 }
 
 .default-avatar-50 {
-  // @include thumbnail;
+  @extend .img-thumbnail;
   margin: 0 20px 16px 0;
   width: 50px !important;
   height: 50px !important;

@@ -1,72 +1,83 @@
-.app-name {
-  font-size: 4em;
-  font-weight: normal;
-  font-family: $app-title-font;
-  white-space: nowrap;
-}
+$prefix: bs-;
 
-.top-bar {
+.navbar {
+  /* Background color are changed with a style attribute on the nav tag */
   margin-bottom: 20px;
 
-  .top-bar-right {
-    /* submenu  */
-    .dropdown.menu > li > a {
-      background: $topbar-background;
-    }
-    li.is-submenu-item > a {
-      color: $topbar-background;
-      &:hover {
-        color: lighten($topbar-background, 20%)
-      }
-    }
-    /* little bar in submenu small view link to dropdown options */
-    .accordion-menu {
-      background-color: lighten($topbar-background, 5%);
-    }
-  }
-
-  /* make menu icon larger and easier to click */
-  span.menu-icon {
-    padding-left: 3em;
-    margin-right: 0.5em;
-    &::after {
-      background: $yellow;
-      box-shadow: 0 7px 0 $yellow, 0 14px 0 $yellow;
-    }
-    &:hover::after {
-      background: $yellow-dark;
-      box-shadow: 0 7px 0 $yellow-dark,
-      0 14px 0 $yellow-dark;
-    }
-  }
-
   /* link colors */
-  li.is-active > a {
-    color: $yellow-dark !important;
-  }
   a {
-    color: $yellow;
+    color: $yellow !important;
     span.info-text {
       color: #f6f6f6;
     }
     &:hover {
-      color: $yellow-dark;
+      color: $yellow-dark !important;
       span.info-text {
         color: #f27474;
       }
     }
-    &::after {
-      border-color: $yellow transparent transparent !important;
+  }
+
+  .app-name {
+    height: 64px;
+    img {
+      height: 64px;
+    }
+    margin-top: 15px;
+    margin-bottom: 10px;
+    // font-size: 64px;
+    // font-family: $app-title-font;
+    // white-space: nowrap;
+  }
+
+  .nav-bell {
+    margin-right: auto;
+  }
+
+  /* Push nav items right */
+  .nav-items-right {
+    margin-left: auto;
+  }
+
+  /* Enlarge the menu icon */
+  .navbar-toggler {
+    width: 100px;
+    color: $yellow !important;
+    border-color: rgba($yellow, 0.50) !important;
+    border-width: 2px;
+    &:hover {
+      color: $yellow-dark !important;
+    }
+
+    .navbar-toggler-icon {
+      width: 40px;
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255, 237, 0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+      &:hover {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(231, 216, 21)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+      }
     }
   }
 
-  /* Remove icon margin in top-bar */
-  i {
-    margin: 0 !important;
+  .navbar-collapse {
+    /* Add submenu background color when toggler icon not shown */
+    @include media-breakpoint-down(lg) {
+      background-color: lighten($topbar-background, 5%);
+    }
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
   }
 
-  /* Move dropdown infront of alert box close button. */
-  .is-dropdown-submenu {
-    z-index: 11;
+  /* submenu  */
+  .dropdown-menu {
+    background: $yellow !important;
+
+    .dropdown-item {
+      color: $topbar-background !important;
+      &:hover {
+        color: lighten($topbar-background, 20%) !important;
+        background: $yellow !important;
+      }
+    }
   }
 }

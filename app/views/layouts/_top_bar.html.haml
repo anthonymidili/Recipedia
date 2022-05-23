@@ -1,60 +1,56 @@
-.top-bar
-  .title-bar-left
-    .title-bar-title
-      .app-name= link_to 'Recipedia', root_path
-  .title-bar-right
-    %span{data: {hide_for: 'medium', responsive_toggle: 'responsive-menu'}}
-      %span.menu-icon{data: {toggle: true}}
-  .top-bar-right
-    %ul.menu
-      %li
-        = link_to recipes_path do
-          %i.fa.fa-utensils
-          Recipes
-      %li
-        = link_to users_path do
-          %i.fa.fa-address-book
-          Cooks
-      - if user_signed_in?
-        %li
-          = link_to user_path(current_user) do
-            %i.fa.fa-book
-            My cookbook
-            = render "recipes/unpublished_count"
-        %li
-          = link_to notifications_path do
-            %i.fas.fa-bell
-            %span.info-text#unread_count= current_user.notifications.unread_count
-      - else
-        %li
-          = link_to new_user_session_path do
-            %i.fa.fa-sign-in-alt
-            Log in
-        %li
-          = link_to new_user_registration_path do
-            %i.fa.fa-user-plus
-            Sign up
-  #responsive-menu.top-bar-right
-    %ul.menu.mainmenu.vertical.medium-horizontal{data: {responsive_menu: 'accordion medium-dropdown'}}
-      - if user_signed_in?
-        -# dropdown menu
-        %li
-          = link_to '#', remote: true do
-            %i.fas.fa-user
-            = current_user.username
-          %ul.menu.vertical
-            %li
-              = link_to edit_user_registration_path do
-                %i.fa.fa-cog
-                User
-            %li
-              = link_to destroy_user_session_path, data: { turbo_method: :delete } do
-                %i.fa.fa-sign-out-alt
-                Sign out
+%nav.navbar.navbar-expand-lg{style: "background-color: #113536;"}
+  .container-fluid
+    = link_to root_path, class: "navbar-brand" do
+      .app-name= image_tag("recipedia-yellow.svg")
+    - if user_signed_in?
+      = link_to notifications_path, class: "nav-link nav-bell" do
+        %i.fas.fa-bell
+        %span.info-text#unread_count= current_user.notifications.unread_count
+    %button.navbar-toggler{aria: {
+    controls: "navbarNavDropdown",
+    expanded: "false", label: "Toggle navigation" },
+    data: { bs_target: "#navbarNavDropdown",
+    bs_toggle: "collapse" },
+    type: "button"}
+      %span.navbar-toggler-icon
 
-        -# dropdown menu
-        -# %li
-        -#   = link_to 'dropdown link', '#', remote: true
-        -#   %ul.menu.vertical
-        -#     %li= link_to 'link#1', '#'
-        -#     %li= link_to 'link#2', '#'
+    #navbarNavDropdown.collapse.navbar-collapse
+      %ul.navbar-nav.nav-items-right
+        %li.nav-item
+          = link_to recipes_path, class: "nav-link" do
+            %i.fa.fa-utensils
+            Recipes
+        %li.nav-item
+          = link_to users_path, class: "nav-link" do
+            %i.fa.fa-address-book
+            Cooks
+        - if user_signed_in?
+          %li.nav-item
+            = link_to user_path(current_user), class: "nav-link" do
+              %i.fa.fa-book
+              My cookbook
+              = render "recipes/unpublished_count"
+          %li.nav-item.dropdown
+            = link_to '#', id: "navbarDropdown", class: "nav-link dropdown-toggle",
+            role: "Dropdown", data: { bs_toggle: "dropdown" },
+            aria: { expanded: "false" } do
+              %i.fas.fa-user
+              = current_user.username
+            %ul.dropdown-menu{aria: { labelledby: "navbarDropdown" }}
+              %li
+                = link_to edit_user_registration_path, class: "dropdown-item" do
+                  %i.fa.fa-cog
+                  User
+              %li
+                = link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" do
+                  %i.fa.fa-sign-out-alt
+                  Sign out
+        - else
+          %li.nav-item
+            = link_to new_user_session_path, class: "nav-link" do
+              %i.fa.fa-sign-in-alt
+              Log in
+          %li.nav-item
+            = link_to new_user_registration_path, class: "nav-link" do
+              %i.fa.fa-user-plus
+              Sign up
