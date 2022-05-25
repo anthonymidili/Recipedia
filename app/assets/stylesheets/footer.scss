@@ -14,11 +14,8 @@ html, body {height: 100%;}
   background-color: $main-background;
   border: 3px solid $turquoise;
   border-radius: 20px;
+  // Add side gutters.
   @extend .container-xl;
-  // @include xy-grid-container;
-  // .grid-x {
-  //   @extend .grid-margin-x; /* Use grid-margin-x by default */
-  // }
 }
 
 footer {

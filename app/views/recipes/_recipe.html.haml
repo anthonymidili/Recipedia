@@ -1,33 +1,30 @@
-.cell
+.col-sm-12.col-md-6.col-lg-4
   .card.recipe-card{id: "recipe_#{recipe.id}", data: { recipe_id: recipe.id }}
-    .recipe-card-image
-      = link_to recipe do
-        - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
-          = image_tag banner_image(recipe.recipe_images.first.image)
-        - else
-          .photo
-            = image_tag('default_recipe_image.svg', size: "600x400")
-    .card-section
-      .grid-x
-        .cell
-          %ul.menu.expanded.simple
-            %li
-              - if user_signed_in? && !is_author?(recipe.user)
-                = render 'recipes/favor_form', recipe: recipe
-              - elsif !user_signed_in?
-                = link_to log_in_recipe_path(recipe), class: 'favor_form_button' do
-                  %i.gray-text.far.fa-heart
-            %li{id: "recipe_likes_count_#{recipe.id}"}
+    = link_to recipe do
+      - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
+        = image_tag banner_image(recipe.recipe_images.first.image), class: "card-img-top"
+      - else
+        = image_tag('default_recipe_image.svg', class: "card-img-top")
+    .card-body
+      .row
+        .col
+          .nav-buttons
+            - if user_signed_in? && !is_author?(recipe.user)
+              = render 'recipes/favor_form', recipe: recipe
+            - elsif !user_signed_in?
+              = link_to log_in_recipe_path(recipe), class: 'favor_form_button' do
+                %i.gray-text.far.fa-heart
+            %div{id: "recipe_likes_count_#{recipe.id}"}
               = render 'recipes/likes_count', recipe: recipe
-            %li
-              = link_to recipe_path(recipe, anchor: "reviews_header") do
-                = render "reviews/count", recipe: recipe
-      .grid-x
-        .cell
+            = link_to recipe_path(recipe, anchor: "reviews_header") do
+              = render "reviews/count", recipe: recipe
+          %hr/
+      .row
+        .col
           = link_to recipe.user do
             %p
               Posted by:
               %b= recipe.user.username
       = link_to recipe do
         %h4= recipe.name
-        .autolinks= recipe.description
+        .description.autolinks= recipe.description

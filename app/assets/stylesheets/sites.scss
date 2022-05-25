@@ -21,6 +21,10 @@ svg, img {
   max-width: 100% !important;
 }
 
+a {
+  text-decoration: none;
+}
+
 .italic {
   font-style: italic;
 }
@@ -39,6 +43,7 @@ svg, img {
   background-repeat: no-repeat;
   background-size: cover;
   margin-bottom: 20px;
+  @extend .rounded;
 }
 
 .callout {

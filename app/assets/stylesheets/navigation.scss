@@ -26,6 +26,10 @@ a.button {
   border-radius: 10px;
 }
 
+.nav-buttons {
+  @extend .d-flex, .justify-content-between;
+}
+
 ul.nav-buttons {
   &, ul {
     list-style-type: none;
@@ -34,25 +38,22 @@ ul.nav-buttons {
     margin: 0;
   }
   ul {
-    // @include  breakpoint(medium) {
-    //   float: right;
-    // }
+    @include media-breakpoint-up(md) {
+      float: right;
+    }
   }
   li {
-    // @include  breakpoint(medium) {
-    //   display: inline-block;
-    // }
+    @include media-breakpoint-up(md) {
+      display: inline-block;
+    }
     margin-bottom: 20px;
   }
   & > li {
     margin-right: 20px;
   }
   & > ul > li {
-    // @include  breakpoint(medium) {
-    //   margin-left: 20px;
-    // }
-  }
-  a {
-    // @extend .button;
+    @include media-breakpoint-up(md) {
+      margin-left: 20px;
+    }
   }
 }

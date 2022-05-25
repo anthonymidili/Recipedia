@@ -1,27 +1,24 @@
 - provide(:title, "Let's cook together")
 
-.grid-x.center
-  .medium-8.cell
+.row.justify-content-center
+  .col-md-8
     .center-text
       .title Recipedia
-.grid-x
-  .cell
-    %ul.nav-buttons
-      %li
-        = link_to categories_path, class: 'warning' do
-          %i.fa.fa-list
-          Browse recipes by categories
-      %ul
-        %li
-          = link_to new_recipe_path, class: 'alert' do
-            %i.fa.fa-plus-circle
-            Add a recipe
+.row.pb-3
+  .col
+    .nav-buttons
+      = link_to categories_path, class: 'btn btn-warning' do
+        %i.fa.fa-list
+        Browse by categories
+      = link_to new_recipe_path, class: 'btn btn-danger' do
+        %i.fa.fa-plus-circle
+        Add a recipe
 = turbo_stream_from "reviews"
-.grid-x
-  .small-12.cell
+.row
+  .col
     %h1 Latest Recipes
-.grid-x.small-up-1.medium-up-2.large-up-3
+.row
   = render @recipes
-.grid-x
-  .small-12.cell
+.row
+  .col
     = paginate @recipes
