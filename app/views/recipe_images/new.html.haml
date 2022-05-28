@@ -1,31 +1,31 @@
 = form_with model: [@recipe, @recipe_image], local: true, multipart: true do |f|
-  .grid-x
-    .medium-6.cell
+  .row
+    .col-md-6
       .callout-transparent
         = render 'notifications/error_messages', object: f.object
-        = f.label :image, 'Upload image'
-        .small.italic
-          Landscape for best results.
-          %br/
-          Don't leave page until upload is complete.
-        = f.file_field :image, direct_upload: true,
-        accept: 'image/png,image/gif,image/jpeg'
-        %br/
-        = f.submit 'Upload Image', class: 'button'
-      %p= link_to 'Finished Editing', @recipe, class: 'button warning'
+        .mb-3
+          = f.label :image, 'Upload image', class: "form-label", for: "image_file_field"
+          .small.italic
+            Landscape for best results.
+            %br/
+            Don't leave page until upload is complete.
+          = f.file_field :image, direct_upload: true, id: "image_file_field",
+          accept: 'image/png,image/gif,image/jpeg'
+        = f.submit 'Upload Image', class: 'btn btn-primary'
+      %p= link_to 'Finished Editing', @recipe, class: 'btn btn-warning'
 
     - if @recipe.recipe_images
       - @recipe.recipe_images.by_original_first.each do |recipe_image|
         - if recipe_image.image.attached?
-          .medium-3.cell{id: "recipe_image_thumb_#{recipe_image.id}"}
+          .col-sm-3.mb-3{id: "recipe_image_thumb_#{recipe_image.id}"}
             = link_to recipe_image.user do
               Uploaded by:
               %b= recipe_image.user.username
-            .thumbnail
-              %p= image_tag medium_image(recipe_image.image)
+            .img-thumbnail
+              = image_tag large_image(recipe_image.image), class: "pb-1"
               - if is_author?(@recipe.user) || is_author?(recipe_image.user)
                 %br/
                 .center-text
                   = link_to 'Remove Image', [@recipe, recipe_image],
-                  class: 'alert button tiny',
+                  class: 'btn btn-danger btn-small',
                   data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
