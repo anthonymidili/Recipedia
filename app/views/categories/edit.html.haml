@@ -1,15 +1,15 @@
 - provide(:title, 'Edit Category')
 
 = turbo_frame_tag dom_id(@category) do
-  .grid-x
-    .small-12.cell
-      %small.float-right
+  .row
+    .col
+      %small.float-end
         Last Modified
         = @category.updated_at.strftime('%m-%d-%Y')
         by
-        = link_to @category.user.username, @category.user
-  .grid-x
-    .small-12.cell
+        = link_to @category.user.username, @category.user, data: { turbo_frame: "_top" }
+  .row
+    .col
       %p
         %b Available Categories:
         = @categories.list_names

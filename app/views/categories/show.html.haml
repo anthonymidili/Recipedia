@@ -1,22 +1,22 @@
 = turbo_frame_tag dom_id(@category) do
-  .grid-x
-    .small-12.cell
+  .row
+    .col
       - unless @category.in_use?
-        .float-right
+        .float-end
           = link_to 'Edit', edit_category_path(@category), data: { turbo_frame: dom_id(@category) }
           or
           = link_to 'Destroy', @category,
           data: { turbo_method: :delete, turbo_confirm: 'Are you sure?', turbo_frame: "_top" }
           Category
-  .grid-x
-    .cell
+  .row
+    .col
       %h1= @category.name
 
-.grid-x.small-up-1.medium-up-2.large-up-3
+.row
   = render @recipes
 
-.grid-x
-  .small-12.cell
+.row
+  .col
     = paginate @recipes
 
     %ul.nav-links
