@@ -47,7 +47,22 @@ a {
 }
 
 .callout {
+  padding: 1rem;
   background-color: $light-background;
+  border: 1px solid rgba(10, 10, 10, 0.25);
+  margin-bottom: 20px;
+}
+
+.callout-transparent {
+  border: 4px solid $yellow;
+  border-radius: 12px;
+  background-color: unset;
+  @extend .callout;
+  box-shadow: 0 0 2px $black;
+  margin-bottom: 20px;
+  img {
+    margin: 0 0 20px 0;
+  }
 }
 
 .messages .callout {
@@ -93,7 +108,7 @@ ul.simple {
   height: 35px;
   img {
     margin-left: -5px !important;
-    margin-top: -5px;
+    margin-top: -9.5px;
   }
 }
 
@@ -233,7 +248,7 @@ a.gray-text:hover {
 }
 
 ul.edit_menu {
-  // @include menu-base;
+  @extend .nav, .justify-content-end;
   // @include breakpoint(medium) {
   //   justify-content: flex-end;
   // }
@@ -261,18 +276,6 @@ ul.edit_menu {
         color: $black !important;
       }
     }
-  }
-}
-
-.callout-transparent {
-  border: 4px solid $yellow;
-  border-radius: 12px;
-  background-color: unset;
-  @extend .callout;
-  box-shadow: 0 0 2px $black;
-  margin-bottom: 20px;
-  img {
-    margin: 0 0 20px 0;
   }
 }
 
@@ -358,12 +361,14 @@ ul.user-list {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  .thumbnail {
+  .img-thumbnail {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 88px;
     width: 88px;
+    background-clip: border-box;
+    border: 4px solid #fff;
     background-color: $yellow;
     &:hover {
       background-color: $yellow-dark;

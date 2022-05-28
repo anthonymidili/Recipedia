@@ -1,7 +1,7 @@
 = turbo_stream_from "reviews"
 
-.grid-x
-  .cell
+.row
+  .col
     %h4#reviews_header
       = render "reviews/count", recipe: recipe
 
@@ -15,7 +15,7 @@
           %i.fa.fa-sign-in-alt
           Log in to create a review
 
-    %ul#reviews.menu.vertical
+    %ul#reviews.nav.flex-column
       = turbo_frame_tag "#{dom_id(recipe)}_reviews" do
         - recipe.reviews.each do |review|
           = render review if review.persisted?

@@ -13,7 +13,7 @@ form#notification_settings {
 }
 
 h3 .favor_form_button {
-  width: 47px;
+  width: 40px;
 }
 
 .favor_form_button {
@@ -26,8 +26,4 @@ h3 .favor_form_button {
   &:hover {
     background-color: $yellow;
   }
-}
-
-#search-box {
-  padding-bottom: 1rem;
 }

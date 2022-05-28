@@ -1,18 +1,20 @@
 ul.nav-links {
-  // @include menu-base;
-  // @extend .callout-transparent;
+  @extend .callout-transparent;
   padding: 0 15px 0 15px;
+  list-style-type: none;
 
   li:not(:first-child) {
     margin-left: 60px;
   }
 
   a {
-    // @include button;
+    @extend .btn;
     border-radius: 6px;
     font-weight: bold;
-    // @include button-style($turquoise, darken($turquoise, 20%), $black);
-    margin: 14px 0 16px 0;
+    background-color: $turquoise;
+    &:hover {
+      background-color: darken($turquoise, 20%);
+    }
     box-shadow: 2px 2px 8px $black;
 
     // Custom colors.
