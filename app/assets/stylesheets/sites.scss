@@ -163,7 +163,7 @@ a.gray-text:hover {
 }
 
 .banner {
-  // @include callout;
+  @extend .callout;
   padding: 0;
   position: relative;
   height: 180px;
@@ -180,8 +180,9 @@ a.gray-text:hover {
     width: 100%;
     padding: 10px;
   }
-  h4 {
+  h3 {
     margin-bottom: -0.1em;
+    color: $black;
   }
 }
 

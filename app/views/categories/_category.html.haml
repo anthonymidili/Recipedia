@@ -1,4 +1,4 @@
-.small-12.medium-6.cell
+.col-sm-12.col-md-6
   = link_to category, data: { turbo_frame: "_top" } do
     .banner
       - @recipe_with_image = category.recipes.last_with_image(@used_recipes)
@@ -9,5 +9,5 @@
       .highlight-text.content
         %h3
           = category.name
-          .float-right= category.recipes.by_published.count
+          .float-end= category.recipes.by_published.count
       - @used_recipes << @recipe_with_image.try(:id)

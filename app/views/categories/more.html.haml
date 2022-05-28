@@ -1,4 +1,4 @@
 = turbo_frame_tag "more_categories" do
-  = link_to "Hide", "#", class: "button warning"
-  .grid-x
+  = link_to "Hide", "#", class: "btn btn-warning mb-3"
+  .row
     = render @categories.not_used
