@@ -3,6 +3,10 @@ ul.nav-links {
   padding: 0 15px 0 15px;
   list-style-type: none;
 
+  li {
+    display: inline-block;
+  }
+
   li:not(:first-child) {
     margin-left: 60px;
   }

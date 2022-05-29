@@ -1,15 +1,17 @@
 .nested-fields
   .callout-on-small-only
-    .grid-x
-      .medium-1.small-order-1.medium-order-3.cell
+    .row
+      .col-lg-5.order-lg-2.mb-3
+        = f.label :quantity, class: "form-label", for: "ingQuant"
+        = f.text_field :quantity, placeholder: '1 cup',
+        id: "ingQuant", class: 'autofocus-on-last form-control'
+      .col-lg-6.order-lg-3.mb-3
+        = f.label :item, class: "form-label", for: "ingItem"
+        = f.text_field :item, placeholder: 'all-purpose flour',
+        id: "ingItem", class: "form-control"
+      .col-lg-1.order-lg-1.mb-3
         .inline-large-icon
           = link_to_remove_association f, class: 'red-text' do
             %i.fa.fa-trash
-            %span.show-for-small-only
+            %span.hide-on-large
               Remove
-      .medium-5.small-order-2.medium-order-1.cell
-        = f.label :quantity
-        = f.text_field :quantity, placeholder: '1 cup', class: 'autofocus-on-last'
-      .medium-6.small-order-3.medium-order-2.cell
-        = f.label :item
-        = f.text_field :item, placeholder: 'all-purpose flour '

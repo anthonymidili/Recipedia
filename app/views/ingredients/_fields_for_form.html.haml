@@ -1,5 +1,5 @@
-.grid-x
-  .small-12.cell
+.row.mb-4
+  .col
     %h5 Ingredients
     .ingredients
       = f.fields_for :ingredients do |ingredient|
@@ -8,4 +8,3 @@
         = link_to_add_association f, :ingredients, partial: 'ingredients/ingredient_fields' do
           %i.fa.fa-plus-circle
           Add an ingredient
-    %br/

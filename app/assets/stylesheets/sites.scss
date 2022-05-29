@@ -124,16 +124,21 @@ nav.pagination {
 }
 
 .callout-on-small-only {
-  // @include  breakpoint(small only) {
-  //   @include callout;
-  // }
+  @include  media-breakpoint-down(lg) {
+    // .callout
+    padding: 1rem;
+    background-color: $light-background;
+    border: 1px solid rgba(10, 10, 10, 0.25);
+    margin-bottom: 20px;
+    // .callout
+  }
 }
 
 .inline-button-on-medium {
-  // @include breakpoint(medium) {
-  //   height: 2.4375rem;
-  //   margin-top: 1.55rem;
-  // }
+  @include media-breakpoint-up(md) {
+    height: 2.4375rem;
+    margin-top: 1.55rem;
+  }
 }
 
 .red-text {
@@ -195,29 +200,29 @@ a.gray-text:hover {
 }
 
 .inline-large-icon {
-  // @include breakpoint(medium) {
-  //   font-size: 1.5rem;
-  //   margin-top: 1.55rem;
-  // }
+  @include media-breakpoint-up(lg) {
+    font-size: 1.5rem;
+    margin-top: 1.55rem;
+  }
 }
 
-.inline-icon {
-  // @include breakpoint(medium) {
-  //   margin-top: 1.35rem;
-  // }
+.hide-on-large {
+  @include media-breakpoint-up(lg) {
+    @include visually-hidden;
+  }
 }
 
 .slide {
   text-align: center;
-  // @include breakpoint(medium) {
-  //   margin-top: 20px;
-  //   height: 50px;
-  //   svg.large {
-  //     height: 20px;
-  //     width: 20px;
-  //     margin-top: 15px;
-  //   }
-  // }
+  @include media-breakpoint-up(lg) {
+    margin-top: 20px;
+    height: 50px;
+    svg.large {
+      height: 20px;
+      width: 20px;
+      margin-top: 15px;
+    }
+  }
   background: $turquoise-light;
   border: 1px solid $black;
 }
@@ -394,6 +399,6 @@ ul.user-list {
 }
 
 .evenly_spaced {
-  min-width: 140px;
+  min-width: 10rem;
   margin-right: 20px;
 }

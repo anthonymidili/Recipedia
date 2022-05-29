@@ -1,10 +1,10 @@
 .callout
   = turbo_frame_tag dom_id(@category) do
-    = link_to "Add Category", new_category_path, class: "button warning small"
+    = link_to "Add Category", new_category_path, class: "btn btn-warning btn-sm mb-3"
   = form_with model: recipe, local: true, data: { turbo: false } do |f|
     = render 'notifications/error_messages', object: f.object
-    .grid-x
-      .cell
+    .row
+      .col
         %label
           It's important to
           %b check all categories that apply
@@ -12,33 +12,40 @@
           %b create your own category
           to make it easy for others to find.
         = turbo_frame_tag "categories" do
-          %ul#check_boxes.menu
+          %ul#check_boxes.nav.mb-3
             - Category.all.each do |category|
               = render 'categories/check_box', recipe: recipe, category: category
-    .grid-x
-      .medium-6.cell.small-order-1.medium-order-1
-        = f.label :name
-        = f.text_field :name, placeholder: 'Apple Pie'
-      .small-12.cell.small-order-2.medium-order-3
-        = f.label :description
-        = f.text_area :description, placeholder: 'The best apple pie you will ever eat.', rows: '5'
-      .medium-6.cell.small-order-3.medium-order-2
-        = f.label :source
-        = f.text_field :source, placeholder: 'cookbook, website or person'
+    .row
+      .col-md-6.order-sm-1.order-md-1.mb-3
+        = f.label :name, class: "form-label", for: "recipeName"
+        = f.text_field :name, placeholder: 'Apple Pie', id: "recipeName", class: "form-control"
+      .col-sm-12.order-sm-2.order-md-3.mb-3
+        = f.label :description, class: "form-label", for: "recipeDescription"
+        = f.text_area :description, placeholder: 'The best apple pie you will ever eat.',
+        rows: '5', id: "recipeDescription", class: "form-control"
+      .col-md-6.order-sm-3.order-md-2.mb-3
+        = f.label :source, class: "form-label", for: "recipeSource"
+        = f.text_field :source, placeholder: 'cookbook, website or person',
+        id: "recipeSource", class: "form-control"
 
     #parts= render 'parts/fields_for_form', f: f
 
-    .grid-x
-      .small-12.cell
+    .row
+      .col
         %b Publish
         recipe or save
         as
         %b Draft
         so recipe is
         only visable to you in your cookbook
-        .switch.large
-          = f.check_box :published, id: 'published', class: 'switch-input'
-          = f.label :published, class: 'switch-paddle', for: 'published' do
-            %span.switch-active{"aria-hidden" => "true"} Publish
-            %span.switch-inactive{"aria-hidden" => "true"} Draft
-        = f.submit class: 'button'
+    .row
+      .col
+        .form-check.form-check-inline
+          = f.radio_button :published, "false", class: "form-check-input", id: "pubFalse"
+          = f.label :published, "Unpublish", value: "false", class: "form-check-label", for: "pubFalse"
+        .form-check.form-check-inline.mb-3
+          = f.radio_button :published, "true", class: "form-check-input", id: "pubTrue"
+          = f.label :published, "Publish", value: "true", class: "form-check-label", for: "pubTrue"
+    .row
+      .col
+        = f.submit class: 'btn btn-primary'

@@ -1,14 +1,15 @@
 .nested-fields
   .callout
-    .grid-x
-      .small-order-1.medium-order-2.medium-6.cell
-        .inline-icon
+    .row
+      .col-md-6.order-sm-1.order-md-2.mb-3
+        .float-md-end
           = link_to_remove_association f, class: 'red-text' do
             %i.fa.fa-trash
             Remove Recipe Part
-      .small-order-2.medium-order-1.medium-6.cell
-        = f.label :name
-        = f.text_field :name, placeholder: 'Pie Crust'
+      .col-md-6.order-sm-2.order-md-1.mb-3
+        = f.label :name, class: "form-label", for: "partName"
+        = f.text_field :name, placeholder: 'Pie Crust',
+        id: "partName", class: "form-control"
 
     = render 'ingredients/fields_for_form', f: f
 

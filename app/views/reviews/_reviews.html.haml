@@ -15,7 +15,7 @@
           %i.fa.fa-sign-in-alt
           Log in to create a review
 
-    %ul#reviews.nav.flex-column
+    #reviews.flex-d.flex-column
       = turbo_frame_tag "#{dom_id(recipe)}_reviews" do
         - recipe.reviews.each do |review|
           = render review if review.persisted?

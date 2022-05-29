@@ -1,15 +1,15 @@
 - provide(:title, 'New Category')
 
 = turbo_frame_tag dom_id(@category) do
-  .grid-x
-    .small-12.cell
+  .row
+    .col
       %h1 New category
 
       %p
         %b Available Categories:
         = render "categories/list_names", categories: @categories
       = render 'form', category: @category
-.grid-x
-  .cell
+.row
+  .col
     %ul.nav-links
       %li= link_to 'Back', categories_path

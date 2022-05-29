@@ -1,22 +1,22 @@
 .nested-fields
   .callout-on-small-only
-    .grid-x
-      .medium-1.small-order-1.medium-order-2.cell
+    .row
+      .col-lg-11.order-lg-2
+        .row
+          .col-sm-12.col-lg-1.mb-3
+            .slide
+              %i.fa.fa-arrows-alt-v.large
+          .col-sm-3.col-lg-2.mb-3
+            = f.label :step_order, class: "form-label", for: "stepOrder"
+            = f.number_field :step_order, class: 'stepOrderField form-control',
+            readonly: true, id: "stepOrder"
+          .col-sm-9.col-lg-9.mb-3
+            = f.label :description, class: "form-label", for: "stepDesc"
+            = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F',
+            class: 'autofocus-on-last form-control', id: "stepDesc"
+      .col-lg-1.order-lg-1.mb-3
         .inline-large-icon
           = link_to_remove_association f, class: 'red-text' do
             %i.fa.fa-trash
-            %span.show-for-small-only
+            %span.hide-on-large
               Remove
-
-      .medium-11.small-order-2.medium-order-1.cell
-        .grid-x
-          .medium-2.large-1.cell
-            .slide
-              %i.fa.fa-arrows-alt-v.large
-          .medium-2.large-2.cell
-            = f.label :step_order
-            = f.number_field :step_order, class: 'stepOrderField', readonly: true
-          .medium-8.large-9.cell
-            = f.label :description
-            = f.text_area :description, rows: 2, placeholder: 'Heat oven to 425°F',
-            class: 'autofocus-on-last'
