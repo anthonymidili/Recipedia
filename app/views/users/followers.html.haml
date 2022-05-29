@@ -1,9 +1,9 @@
 - provide :title, 'Followers'
 
-.grid-x
-  .cell.medium-6.large-5
+.row
+  .col-md-6.col-lg-5
     = render 'users/follow_header', user: @user
-  .cell.medium-6.large-7
+  .col-md-6.col-lg-7
     %h3 Followers
-    %ul.menu.vertical.user-list
+    .d-flex.flex-column.user-list
       = render @user.followers

@@ -1,28 +1,28 @@
 - provide :title, 'The Cook'
 
-.grid-x
-  .small-12.cell
+.row
+  .col
     = link_to new_recipe_path, class: 'float-right button alert' do
       %i.fa.fa-plus-circle
       Add a recipe
-.grid-x
-  .cell.small-12
+.row
+  .col
     .callout-transparent
       - if is_author?(@user)
-        .grid-x
-          .cell
+        .row
+          .col
             = link_to edit_user_path(@user), class: "float-right" do
               %i.fas.fa-edit
               Edit about you
-      .grid-x
-        .cell
+      .row
+        .col
           .center-text
             %h1.no-background #{@user.username}'s Cookbook
-      .grid-x
-        .cell.medium-5.large-3
+      .row
+        .col-md-5.col-lg-3
           .center-text
             = render 'users/profile_stats', user: @user, size: 150
-        .cell.medium-7.large-9
+        .col-md-7.col-lg-9
           = render 'relationships/form', user: @user
           %p
             = link_to user_path(@user, anchor: 'submitted') do
@@ -34,20 +34,20 @@
               = @user.favorite_recipes.count
           .autolinks= simple_format(@user.info.body) if @user.info
 - if @user == current_user && @user.recipes.by_unpublished.any?
-  .grid-x
-    .small-12.cell
+  .row
+    .col
       %h3 Unpublished Drafts
-      .grid-x.small-up-1.medium-up-2.large-up-3
+      .row
         = render @user.recipes.by_unpublished
 - if @user.recipes.by_published.any?
-  .grid-x
-    .small-12.cell
+  .row
+    .col
       %h3#submitted Submitted Recipes
-      .grid-x.small-up-1.medium-up-2.large-up-3
+      .row
         = render @user.recipes.by_published
 - if @user.favorite_recipes.any?
-  .grid-x
-    .small-12.cell
+  .row
+    .col
       %h3#favorites Favorites
-      .grid-x.small-up-1.medium-up-2.large-up-3
+      .row
         = render @user.favorite_recipes

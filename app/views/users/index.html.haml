@@ -1,7 +1,7 @@
 - provide :title, 'The Cooks'
 
-.grid-x
-  .cell
+.row
+  .col
     %h1 The Cooks
-    %ul.menu.vertical.user-list
+    .flex-d.flex-column.user-list
       = render @users
