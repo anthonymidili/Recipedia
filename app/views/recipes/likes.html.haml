@@ -1,14 +1,14 @@
 - provide :title, 'Likes'
 
-.grid-x
-  .cell.medium-6.large-5
+.row.mb-3
+  .col-md-6.col-lg-5
     = render 'users/follow_header', user: @recipe.user
-  .cell.medium-6.large-7
+  .col-md-6.col-lg-7
     %h3= @recipe.name
     %h5.red-text= pluralize(@recipe.liked_users.count, 'Like')
-    %ul.menu.vertical.user-list
+    .d-flex.flex-column.user-list
       = render @recipe.liked_users
-.grid-x
-  .small-12.cell
+.row
+  .col
     %ul.nav-links
       %li= link_to 'Back to recipe', @recipe

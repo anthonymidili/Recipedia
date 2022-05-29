@@ -2,7 +2,7 @@
 
 .row
   .col
-    = link_to new_recipe_path, class: 'float-right button alert' do
+    = link_to new_recipe_path, class: 'float-end btn btn-danger mb-3' do
       %i.fa.fa-plus-circle
       Add a recipe
 .row
@@ -11,7 +11,7 @@
       - if is_author?(@user)
         .row
           .col
-            = link_to edit_user_path(@user), class: "float-right" do
+            = link_to edit_user_path(@user), class: "float-end" do
               %i.fas.fa-edit
               Edit about you
       .row
