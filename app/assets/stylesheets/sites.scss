@@ -305,6 +305,7 @@ ul.edit_menu {
 }
 
 .default-avatar-300 {
+  @extend .img-thumbnail;
   width: 300px !important;
   height: 300px !important;
   background-color: $light-background;

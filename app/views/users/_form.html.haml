@@ -1,25 +1,28 @@
 = form_with model: user, local: true, multipart: true do |f|
   = render 'notifications/error_messages', object: f.object
-  .row
-    .col
-      = f.label :avatar
+  .row.mb-3
+    .col-md-6
+      = f.label :avatar, class: "form-label", for: "avatarUser"
       = f.file_field :avatar, direct_upload: true,
-      accept: 'image/png,image/gif,image/jpeg'
+      accept: 'image/png,image/gif,image/jpeg', id: "avatarUser",
+      class: "form-control"
   .row
-    .col-md-4
-      %p
-        - if f.object.avatar.attached?
-          = image_tag avatar_image(f.object.avatar, 300)
-          .row
-            .col
-              = f.check_box :remove_avatar, id: 'user_remove_image'
-              = f.label :remove_avatar, for: 'user_remove_image'
-        - else
-          %i.fas.fa-user.default-avatar-300
-    .col-md-8
+    .col-md-4.mb-3
+      - if f.object.avatar.attached?
+        .img-thumbnail= image_tag avatar_image(f.object.avatar, 800)
+        .row
+          .col
+            .form-check
+              = f.check_box :remove_avatar, id: 'user_remove_image',
+              class: "form-check-input"
+              = f.label :remove_avatar, for: 'user_remove_image',
+              class: "form-check-label"
+      - else
+        %i.fas.fa-user.default-avatar-300
+    .col-md-8.mb-3
       = f.fields_for :info do |info_f|
-        = info_f.label :body
-        = info_f.text_area :body, rows: 10
-  .row
+        = info_f.label :body, class: "form-label", for: "infoUser"
+        = info_f.text_area :body, rows: 12, id: "infoUser", class: "form-control"
+  .row.mb-3
     .col
-      = f.submit class: 'button'
+      = f.submit class: 'btn btn-primary'
