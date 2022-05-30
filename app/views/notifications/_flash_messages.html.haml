@@ -1,14 +1,14 @@
 .messages
-  .grid-x
-    .small-12.cell
+  .row
+    .col
       - if flash[:alert]
-        .alert.callout{data: {closable: true}}
+        .alert.alert-danger.alert-dismissible.fade.show
           = sanitize(flash[:alert])
-          %button.close-button{aria: {label: 'Dismiss alert'}, data: {close: true}, type: 'button'}
-            %span{aria: {hidden: 'true'}} ×
+          %button.btn-close{aria: { label: 'X' },
+          data: { bs_dismiss: "alert"}, type: 'button'}
 
       - if flash[:notice]
-        .primary.callout{data: {closable: true}}
+        .alert.alert-warning.alert-dismissible.fade.show
           = sanitize(flash[:notice])
-          %button.close-button{aria: {label: 'Dismiss alert'}, data: {close: true}, type: 'button'}
-            %span{aria: {hidden: 'true'}} ×
+          %button.btn-close{aria: { label: 'X' },
+          data: { bs_dismiss: "alert"}, type: 'button'}

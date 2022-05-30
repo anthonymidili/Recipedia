@@ -1,16 +1,16 @@
 - provide :title, 'Notifications'
 
-.grid-x
-  .cell
+.row
+  .col
     %h1 Notifications
-    %ul.menu
-      %li.pad-right
-        = link_to settings_notifications_path, class: 'button warning' do
+    %ul.nav
+      %li.nav-item.pad-right
+        = link_to settings_notifications_path, class: 'btn btn-warning' do
           %i.fas.fa-cog
           Notification settings
-      %li
+      %li.nav-item
         = link_to "Mark all as read", mark_as_read_notifications_path,
-        class: "button", data: { turbo_method: :patch }
+        class: "btn btn-primary", data: { turbo_method: :patch }
 
     %br/
     .callout

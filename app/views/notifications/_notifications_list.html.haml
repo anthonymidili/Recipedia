@@ -1,7 +1,7 @@
-%p#unread_notifications{class: hide_if(notifications.by_unread.any?)} NEW
-%ul#unread_notifications_list.menu.vertical
+#unread_notifications{class: hide_if(notifications.by_unread.any?)} NEW
+#unread_notifications_list.row.d-flex.flex-column
   = render notifications.by_unread
 
-%p#read_notifications EARLIER
-%ul#read_notifications_list.menu.vertical
+#read_notifications EARLIER
+#read_notifications_list.row.d-flex.fles-column
   = render notifications.by_read.limit(30)

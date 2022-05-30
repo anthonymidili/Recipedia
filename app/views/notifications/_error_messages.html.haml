@@ -1,10 +1,9 @@
 - if object.errors.any?
   .messages
-    .alert.callout{data: {closable: true}}
+    .alert.alert-danger.alert-dismissible.fade.show
       %h2
         Form contains #{pluralize(object.errors.count, 'error')}
       %ul
         - object.errors.full_messages.each do |msg|
           %li= msg
-      %button.close-button{aria: {label: 'Dismiss alert'}, data: {close: true}, type: 'button'}
-        %span{aria: {hidden: 'true'}} ×
+      %button.btn-close{aria: {label: "X"}, data: {bs_dismiss: "alert"}, type: 'button'}

@@ -48,7 +48,12 @@ private
   end
 
   def render_notification(notification)
-    NotificationsController.render partial: 'notifications/notification',
+    renderer = ApplicationController.renderer.new(
+      http_host: ENV.fetch("DEFAULT_URL", localhost:3000),
+      https: false
+    )
+
+    renderer.render partial: 'notifications/notification',
     locals: { notification: notification }
   end
 

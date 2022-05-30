@@ -1,7 +1,8 @@
-%li{id: "notification_#{notification.id}", class: "is_read_#{notification.is_read} notifications"}
-  = link_to notification.notifier, class: 'user-badge' do
-    = image_tag avatar_image(notification.notifier.avatar, 35) if notification.notifier.avatar.attached?
-    = notification.notifier.username
-  = link_to_notifiable(notification.notifiable, notification.action)
-  %span.timestamp
-    #{time_ago_in_words(notification.created_at)} ago
+.col-sm-12
+  %div{id: "notification_#{notification.id}", class: "is_read_#{notification.is_read} notifications"}
+    = link_to notification.notifier, class: 'user-badge' do
+      = image_tag avatar_image(notification.notifier.avatar, 35) if notification.notifier.avatar.attached?
+      = notification.notifier.username
+    = link_to_notifiable(notification.notifiable, notification.action)
+    %span.timestamp
+      #{time_ago_in_words(notification.created_at)} ago
