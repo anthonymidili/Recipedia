@@ -49,7 +49,7 @@ private
 
   def render_notification(notification)
     renderer = ApplicationController.renderer.new(
-      http_host: ENV.fetch("DEFAULT_URL", localhost:3000),
+      http_host: ENV.fetch("DEFAULT_URL", "localhost:3000"),
       https: false
     )
 
