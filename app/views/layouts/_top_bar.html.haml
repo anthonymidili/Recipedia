@@ -32,11 +32,11 @@
               = render "recipes/unpublished_count"
           %li.nav-item.dropdown
             = link_to '#', id: "navbarDropdown", class: "nav-link dropdown-toggle",
-            role: "Dropdown", data: { bs_toggle: "dropdown" },
+            role: "button", data: { bs_toggle: "dropdown" },
             aria: { expanded: "false" } do
               %i.fas.fa-user
               = current_user.username
-            %ul.dropdown-menu{aria: { labelledby: "navbarDropdown" }}
+            %ul.dropdown-menu.dropdown-menu-end{aria: { labelledby: "navbarDropdown" }}
               %li
                 = link_to edit_user_registration_path, class: "dropdown-item" do
                   %i.fa.fa-cog

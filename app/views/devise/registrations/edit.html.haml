@@ -1,42 +1,51 @@
-.grid-x.center
-  .medium-6.cell
+.row.center
+  .col-md-6
     %h1 User Settings
 
     = form_with model: resource, as: resource_name, url: registration_path(resource_name),
     html: { method: :put }, local: true, data: { turbo: false } do |f|
       = render 'notifications/error_messages', object: f.object
 
-      = f.label :username
-      = f.text_field :username, autofocus: true
+      .mb-3
+        = f.label :username, for: "deviseUsername", class: "form-label"
+        = f.text_field :username, autofocus: true, id: "deviseUsername", class: "form-control"
 
-      = f.label :email
-      = f.email_field :email
+      .mb-3
+        = f.label :email, for: "deviseEmail", class: "form-label"
+        = f.email_field :email, id: "deviseEmail", class: "form-control"
 
       - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-        %div
+        %div.mb-3
           Currently waiting confirmation for:
           = resource.unconfirmed_email
 
       %h5 Change your password
       .callout
-        %lable
-          New password
-          %i (leave blank if you don't want to change it)
-          - if @minimum_password_length
-            %br/
-            %em
-              = @minimum_password_length
-              characters minimum
-        = f.password_field :password, autocomplete: 'off'
+        .mb-3
+          %lable.form-label{for: "devisePassword"}
+            New password
+            %i (leave blank if you don't want to change it)
+            - if @minimum_password_length
+              %br/
+              %em
+                = @minimum_password_length
+                characters minimum
+          = f.password_field :password, autocomplete: 'off', id: "devisePassword",
+          class: "form-control"
+        .mb-3
+          = f.label :password_confirmation, 'New password confirmation',
+          for: "devisePassConf", class: "form-label"
+          = f.password_field :password_confirmation, autocomplete: 'off',
+          id: "devisePassConf", class: "form-control"
 
-        = f.label :password_confirmation, 'New password confirmation'
-        = f.password_field :password_confirmation, autocomplete: 'off'
+      .mb-3
+        = f.label :current_password, for: "deviseCurrent", class: "form-label"
+        %i (we need your current password to confirm your changes)
+        = f.password_field :current_password, autocomplete: 'off',
+        id: "deviseCurrent", class: "form-control"
 
-      = f.label :current_password
-      %i (we need your current password to confirm your changes)
-      = f.password_field :current_password, autocomplete: 'off'
-
-      = f.submit 'Update', class: 'button'
+      .mb-3
+        = f.submit 'Update', class: 'btn btn-primary'
 
     -# %h3 Cancel my account
     -#
@@ -45,4 +54,5 @@
     -#   = button_to 'Cancel my account', registration_path(resource_name),
     -#   data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
 
-    %p= link_to 'Back', :back
+    .mb-3
+      = link_to 'Back', :back

@@ -1,14 +1,17 @@
-.grid-x.center
-  .medium-6.cell
+.row.center
+  .col-md-6
     %h1 Forgot your password?
 
     = form_with model: resource, as: resource_name, url: password_path(resource_name),
     html: { method: :post }, local: true, data: { turbo: false } do |f|
       = render 'notifications/error_messages', object: f.object
+      .mb-3
+        = f.label :email, for: "deviseEmail", class: "form-label"
+        = f.email_field :email, autofocus: true,
+        id: "deviseEmail", class: "form-control"
 
-      = f.label :email
-      = f.email_field :email, autofocus: true
+      .mb-3
+        = f.submit 'Send me reset password instructions', class: 'btn btn-primary'
 
-      = f.submit 'Send me reset password instructions', class: 'button'
-
-    %p= render 'devise/shared/links'
+    .mb-3
+      = render 'devise/shared/links'

@@ -1,5 +1,5 @@
-.grid-x.center
-  .medium-6.cell
+.row.center
+  .col-md-6
     %h1 Change your password
 
     = form_with model: resource, as: resource_name, url: password_path(resource_name),
@@ -7,15 +7,22 @@
       = render 'notifications/error_messages', object: f.object
       = f.hidden_field :reset_password_token
 
-      %label
-        New password
-        - if @minimum_password_length
-          %em (#{@minimum_password_length} characters minimum)
-      = f.password_field :password, autofocus: true, autocomplete: 'off'
+      .mb-3
+        %label{for: "devisePassword", class: "form-label"}
+          New password
+          - if @minimum_password_length
+            %em (#{@minimum_password_length} characters minimum)
+      .mb-3
+        = f.password_field :password, autofocus: true, autocomplete: 'off',
+        id: "deviseEmail", class: "form-control"
+      .mb-3
+        = f.label :password_confirmation, 'Confirm new password',
+        for: "devisePassConf", class: "form-label"
+        = f.password_field :password_confirmation, autocomplete: 'off',
+        id: "devisePassConf", class: "form-control"
 
-      = f.label :password_confirmation, 'Confirm new password'
-      = f.password_field :password_confirmation, autocomplete: 'off'
+      .mb-3
+        = f.submit 'Change my password', class: 'btn btn-primary'
 
-      = f.submit 'Change my password', class: 'button'
-
-    %p= render 'devise/shared/links'
+    .mb-3
+      = render 'devise/shared/links'
