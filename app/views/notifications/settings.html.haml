@@ -14,6 +14,9 @@
         = f.label :receive_email, for: 'receive_email', class: "form-check-label"
       %hr/
       .field.form-check.mb-3
+        = f.check_box :follows_you, id: 'follows_you', class: "form-check-input"
+        = f.label :follows_you, for: 'follows_you', class: "form-check-label"
+      .field.form-check.mb-3
         = f.check_box :recipe_created, id: 'recipe_created', class: "form-check-input"
         = f.label :recipe_created, for: 'recipe_created', class: "form-check-label"
       .field.form-check.mb-3
@@ -22,9 +25,6 @@
       .field.form-check.mb-3
         = f.check_box :review_created, id: 'review_created', class: "form-check-input"
         = f.label :review_created, for: 'review_created', class: "form-check-label"
-      .field.form-check.mb-3
-        = f.check_box :follows_you, id: 'follows_you', class: "form-check-input"
-        = f.label :follows_you, for: 'follows_you', class: "form-check-label"
       .field.form-check.mb-3
         = f.check_box :recipe_favored, id: 'recipe_favored', class: "form-check-input"
         = f.label :recipe_favored, for: 'recipe_favored', class: "form-check-label"
