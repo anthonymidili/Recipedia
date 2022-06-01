@@ -23,15 +23,17 @@
           .center-text
             = render 'users/profile_stats', user: @user, size: 150
         .col-md-7.col-lg-9
-          = render 'relationships/form', user: @user
-          %p
-            = link_to user_path(@user, anchor: 'submitted') do
-              Submitted:
-              = @user.recipes.by_published.count
-            %br/
-            = link_to user_path(@user, anchor: 'favorites') do
-              Favorites:
-              = @user.favorite_recipes.count
+          .center-on-md
+            .mb-3
+              = render 'relationships/form', user: @user
+            .mb-3
+              = link_to user_path(@user, anchor: 'submitted') do
+                Submitted:
+                = @user.recipes.by_published.count
+              %br/
+              = link_to user_path(@user, anchor: 'favorites') do
+                Favorites:
+                = @user.favorite_recipes.count
           .autolinks= simple_format(@user.info.body) if @user.info
 - if @user == current_user && @user.recipes.by_unpublished.any?
   .row

@@ -1,9 +1,8 @@
 = turbo_frame_tag dom_id(@review) do
-  %li
-    .callout
-      .float-end
-        = link_to 'Cancel', recipe_review_path(@recipe, @review), class: "btn btn-secondary"
+  .callout
+    .float-end
+      = link_to 'Cancel', recipe_review_path(@recipe, @review), class: "btn btn-secondary"
 
-      %h1 Editing review
+    %h1 Editing review
 
-      = render 'form', recipe: @recipe, review: @review
+    = render 'form', recipe: @recipe, review: @review

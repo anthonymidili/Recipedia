@@ -40,12 +40,12 @@
         only visable to you in your cookbook
     .row
       .col
-        .form-check.form-check-inline
-          = f.radio_button :published, "false", class: "form-check-input", id: "pubFalse"
-          = f.label :published, "Unpublish", value: "false", class: "form-check-label", for: "pubFalse"
         .form-check.form-check-inline.mb-3
           = f.radio_button :published, "true", class: "form-check-input", id: "pubTrue"
           = f.label :published, "Publish", value: "true", class: "form-check-label", for: "pubTrue"
+        .form-check.form-check-inline.mb-3
+          = f.radio_button :published, "false", class: "form-check-input", id: "pubFalse"
+          = f.label :published, "Draft", value: "false", class: "form-check-label", for: "pubFalse"
     .row
       .col
         = f.submit class: 'btn btn-primary'

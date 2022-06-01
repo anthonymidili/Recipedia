@@ -88,6 +88,12 @@ ul.simple {
   height: 100%;
 }
 
+.center-on-md {
+  @include  media-breakpoint-down(md) {
+    text-align: center;
+  }
+}
+
 .pad-bottom {
   margin-bottom: 5px !important;
 }
