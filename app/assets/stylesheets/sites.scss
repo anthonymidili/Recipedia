@@ -124,10 +124,10 @@ ul.simple {
   display: none;
 }
 
-/* Display Kaminari pagination links inline */
-nav.pagination {
-  span {
-    display: inline-block;
+/* Kaminari pagination */
+ul.pagination {
+  a.page-link {
+    background-color: $light-background;
   }
 }
 
