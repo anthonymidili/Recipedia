@@ -2,12 +2,9 @@
   border: 1px solid $black;
   background-color: $light-background;
   margin-bottom: 20px;
-
-  .card-body {
-    height: 240px;
-    .description {
-      height: 4.5rem;
-      overflow-y: scroll;
-    }
+  overflow-x: hidden;
+  .description {
+    height: 6rem;
+    overflow-x: scroll;
   }
 }
