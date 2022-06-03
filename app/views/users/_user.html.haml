@@ -13,3 +13,8 @@
   .col-4.col-md-3.col-lg-2
     .mb-3
       = render 'relationships/form', user: user
+  - if is_site_admin? && !user_is_site_admin?(user)
+    .col
+      = link_to "Permanently Delete User", user_path(user),
+      class: "btn btn-danger btn-sm",
+      data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :log_in]
-  before_action :set_user, only: [:show, :edit, :update, :log_in, :followers, :following]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :log_in, :followers, :following]
   before_action :remove_avatar, only: [:update]
   before_action :deny_access!,
   unless: -> { is_author?(@user) }, only: [:edit, :update]
@@ -26,6 +26,20 @@ class UsersController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    if is_site_admin? && !user_is_site_admin?(@user)
+      @user.destroy
+      respond_to do |format|
+        format.html {
+          redirect_to users_url,
+          notice: 'User was successfully destroyed.',
+          status: 303
+        }
+        format.json { head :no_content }
       end
     end
   end
