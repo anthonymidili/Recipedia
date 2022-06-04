@@ -1,23 +1,41 @@
+@use "sass:math";
+
 @media print {
   html, body {
-    overflow-x: visible !important;
-    padding-bottom: 100px;
+    background: none;
+    background-image: none !important;
+    height: 100%;
   }
 
-  #main, .callout-transparent {
+  #wrap {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #main {
+    flex: 1 1 0%;
+  }
+
+  #main, .callout, .callout-transparent {
     border: none !important;
-    padding: 0;
+    box-shadow: none !important;
+    background: none !important;
+    padding: 0 !important;
   }
 
   .left-on-print{
     text-align: left !important;
   }
 
-  .top-bar, #search-box, footer, .hide-on-print, .messages {
+  .navbar, #search-box, footer, .hide-on-print, .messages {
     display: none !important;
   }
 
-  a { text-decoration: none; }
+  a {
+    text-decoration: none;
+    color: $black;
+  }
 
   a[href]:after {
     content: none;
@@ -33,10 +51,15 @@
     font-size: 2rem;
   }
 
+  // Add bootstrap large grid for page print.
+  @for $n from 1 through 12 {
+    .col-print-#{$n} {
+      width: percentage(math.div($n, 12));
+    }
+  }
+
   /* Fixed to the bottom center of every page */
   .print-footer.hidden {
-    position: fixed;
-    bottom: 0;
     display: flex;
     justify-content: center;
     width: 100%;
