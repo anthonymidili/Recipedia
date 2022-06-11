@@ -43,7 +43,7 @@
                 = render 'reviews/count', recipe: @recipe
       %h1.center-on-print= @recipe.name
   .row.mb-3
-    .col-md-7.col-print-7
+    .col-md-7.col-print-8
       .callout-transparent
         .center-text.left-on-print
           .row
@@ -71,7 +71,7 @@
         .col
           %b Description:
           .autolinks= simple_format(@recipe.description)
-    .col-md-5.col-print-5
+    .col-md-5.col-print-4
       .center
         = turbo_frame_tag "main_recipe_image" do
           .mb-1
