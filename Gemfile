@@ -32,7 +32,7 @@ gem "mini_magick", "~> 4.11.0"
 gem 'image_processing', '~> 1.12.1'
 gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
-gem 'sidekiq', '~> 6.4.0'
+gem 'sidekiq', '~> 6.5.0'
 # Use Redis for Action Cable
 gem "redis", "~> 4.0"
 
