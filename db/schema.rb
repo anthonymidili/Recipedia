@@ -10,18 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_013528) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_06_15_014649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", precision: 6, null: false
+    t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -33,7 +42,7 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", precision: 6, null: false
+    t.datetime "created_at", null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -46,8 +55,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
 
   create_table "categories", force: :cascade do |t|
     t.citext "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
@@ -55,8 +64,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
   create_table "categorizations", force: :cascade do |t|
     t.bigint "category_id", null: false
     t.bigint "recipe_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_categorizations_on_category_id"
     t.index ["recipe_id"], name: "index_categorizations_on_recipe_id"
   end
@@ -64,8 +73,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
   create_table "favoritisms", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_favoritisms_on_recipe_id"
     t.index ["user_id", "recipe_id"], name: "index_favoritisms_on_user_id_and_recipe_id", unique: true
     t.index ["user_id"], name: "index_favoritisms_on_user_id"
@@ -74,8 +83,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
   create_table "infos", force: :cascade do |t|
     t.text "body"
     t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_infos_on_user_id"
   end
 
@@ -83,8 +92,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
     t.citext "item"
     t.string "quantity"
     t.bigint "recipe_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "part_id", null: false
     t.index ["part_id"], name: "index_ingredients_on_part_id"
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
@@ -97,8 +106,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
     t.boolean "follows_you", default: true
     t.boolean "recipe_favored", default: true
     t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "image_uploaded", default: true
     t.index ["user_id"], name: "index_notification_settings_on_user_id"
   end
@@ -110,8 +119,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
     t.bigint "recipient_id", null: false
     t.string "action", null: false
     t.boolean "is_read", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
     t.index ["notifier_id"], name: "index_notifications_on_notifier_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
@@ -120,25 +129,24 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
   create_table "parts", force: :cascade do |t|
     t.string "name"
     t.bigint "recipe_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_parts_on_recipe_id"
   end
 
   create_table "recipe_images", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_recipe_images_on_recipe_id"
     t.index ["user_id"], name: "index_recipe_images_on_user_id"
   end
 
   create_table "recipes", force: :cascade do |t|
     t.citext "name"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.string "source"
     t.boolean "published", default: false
@@ -148,8 +156,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
   create_table "relationships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "followed_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["user_id", "followed_id"], name: "index_relationships_on_user_id_and_followed_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
@@ -158,9 +166,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
   create_table "reviews", force: :cascade do |t|
     t.bigint "recipe_id", null: false
     t.bigint "user_id", null: false
-    t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_reviews_on_recipe_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -168,8 +175,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
   create_table "steps", force: :cascade do |t|
     t.text "description"
     t.bigint "recipe_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "part_id", null: false
     t.integer "step_order", null: false
     t.index ["part_id"], name: "index_steps_on_part_id"
@@ -181,15 +188,15 @@ ActiveRecord::Schema.define(version: 2022_02_05_013528) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: 6
-    t.datetime "remember_created_at", precision: 6
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: 6
-    t.datetime "last_sign_in_at", precision: 6
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.citext "slug", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

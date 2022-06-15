@@ -70,7 +70,7 @@
       .row
         .col
           %b Description:
-          .autolinks= simple_format(@recipe.description)
+          = @recipe.description
     .col-md-5.col-print-4
       .center
         = turbo_frame_tag "main_recipe_image" do
@@ -114,7 +114,7 @@
                 .row
                   .col
                     %span.red-text= "#{index += 1}."
-                    = step.description
+                    %span.autolinks= step.description
   .hide-on-print
     .row
       .col

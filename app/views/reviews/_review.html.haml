@@ -1,13 +1,13 @@
 = turbo_frame_tag dom_id(review) do
   .callout
-    .row
-      .col-md-8
+    .row.mb-1
+      .col-8
         = link_to review.user, class: 'user-badge', data: { turbo_frame: "_top" } do
           = image_tag avatar_image(review.user.avatar, 35) if review.user.avatar.attached?
           = review.user.username
         %span.timestamp
           posted #{time_ago_in_words(review.created_at)} ago
-      .col-md-4
+      .col-4
         - if is_author?(review.user)
           %ul.edit_menu
             %li.nav-item
@@ -22,4 +22,4 @@
                 %i.fas.fa-trash
     .row
       .col
-        %p.autolinks= simple_format(review.body, class: 'content')
+        = review.body

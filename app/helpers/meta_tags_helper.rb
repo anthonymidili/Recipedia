@@ -1,10 +1,10 @@
 module MetaTagsHelper
   def set_root_meta_tag_options
-    set_meta_tags description: description,
+    set_meta_tags description: main_description,
       twitter: {
         card:  "summary",
         title: "Recipedia | Let's cook together",
-        description: description,
+        description: main_description,
         url: root_url,
         secure_url: root_url,
         image: {
@@ -17,7 +17,7 @@ module MetaTagsHelper
       },
       og: {
         title: "Recipedia | Let's cook together",
-        description: description,
+        description: main_description,
         type: 'website',
         url: root_url,
         secure_url: root_url,
@@ -32,12 +32,12 @@ module MetaTagsHelper
   end
 
   def recipe_meta_tag_options(recipe)
-    set_meta_tags description: recipe.description,
+    set_meta_tags description: recipe.description.to_plain_text,
       keywords: recipe.categories.list_names,
       twitter: {
         card:  "summary",
         title: recipe.name,
-        description: recipe.description,
+        description: recipe.description.to_plain_text,
         url: recipe_url(recipe),
         secure_url: recipe_url(recipe),
         image: {
@@ -50,7 +50,7 @@ module MetaTagsHelper
       },
       og: {
         title: recipe.name,
-        description: recipe.description,
+        description: recipe.description.to_plain_text,
         type: 'website',
         url: recipe_url(recipe),
         secure_url: recipe_url(recipe),
@@ -70,7 +70,7 @@ module MetaTagsHelper
     image_url = recipe.recipe_images.first.image.url if recipe.recipe_images.try(:first).try(:image).try(:attached?)
   end
 
-  def description
+  def main_description
     "Making it easy to share your recipes with friends and family. Swap recipes, leave reviews, post
     images of recipes you've tried and get notified when a cook you follow posts a new
     recipe. Share on Twitter, Facebook, Pinterest, Telagram or email."

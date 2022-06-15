@@ -21,7 +21,7 @@
         = f.text_field :name, placeholder: 'Apple Pie', id: "recipeName", class: "form-control"
       .col-sm-12.order-sm-2.order-md-3.mb-3
         = f.label :description, class: "form-label", for: "recipeDescription"
-        = f.text_area :description, placeholder: 'The best apple pie you will ever eat.',
+        = f.rich_text_area :description, placeholder: 'The best apple pie you will ever eat.',
         rows: '5', id: "recipeDescription", class: "form-control"
       .col-md-6.order-sm-3.order-md-2.mb-3
         = f.label :source, class: "form-label", for: "recipeSource"

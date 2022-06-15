@@ -36,3 +36,5 @@ import "cocoon-js"
 import "ilyabirman-likely/release/likely.js"
 // import "ilyabirman-likely/release/likely.css"
 import './packs/likely_share_button'
+import "trix"
+import "@rails/actiontext"

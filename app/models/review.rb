@@ -3,6 +3,8 @@ class Review < ApplicationRecord
   after_update_commit :after_update_broadcast
   after_destroy_commit :after_destroy_broadcast
 
+  has_rich_text :body
+
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   belongs_to :recipe

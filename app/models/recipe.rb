@@ -3,6 +3,8 @@ class Recipe < ApplicationRecord
     NotifiyUsersJob.perform_later(self) if published
   end
 
+  has_rich_text :description
+
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   has_many :favoritisms, dependent: :destroy
