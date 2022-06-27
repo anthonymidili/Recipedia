@@ -3,8 +3,10 @@
 %div{id: "recipe_#{@recipe.id}", data: { recipe_id: @recipe.id }}
   .hide-on-print
     .row
-      .col
-        - if is_author?(@recipe.user)
+      .col-8
+        = render 'recipes/share', recipe: @recipe
+      - if is_author?(@recipe.user)
+        .col-4
           %ul.edit_menu
             %li.nav-item
               = link_to edit_recipe_path(@recipe), class: "nav-link" do
@@ -14,7 +16,6 @@
               = link_to @recipe, class: 'red-text nav-link',
               data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do
                 %i.fas.fa-trash
-        -# = render 'recipes/share', recipe: @recipe
     - if is_author?(@recipe.user) && !@recipe.published?
       .row
         .col
