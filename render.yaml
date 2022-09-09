@@ -5,6 +5,7 @@ databases:
     previewPlan: starter
     databaseName: recipedia_production
     user: recipedia_user
+    region: ohio
 
 services:
   - type: redis
