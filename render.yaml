@@ -1,0 +1,46 @@
+previewsEnabled: true
+databases:
+  - name: recipedia-postgresql
+    plan: starter
+    previewPlan: starter
+    databaseName: recipedia_production
+    user: recipedia_user
+
+services:
+  - type: redis
+    name: recipedia-sidekiq-redis
+    region: ohio
+    maxmemoryPolicy: noeviction
+    ipAllowList: [] # only allow internal connections
+
+  - type: worker
+    name: recipedia-sidekiq-worker
+    env: ruby
+    region: ohio
+    buildCommand: bundle install
+    startCommand: bundle exec sidekiq -C config/sidekiq.yml
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: recipedia-sidekiq-redis
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+
+  - type: web
+    name: recipedia-rails-web
+    plan: starter
+    previewPlan: starter
+    env: ruby
+    region: ohio
+    buildCommand: bundle install; bundle exec rake assets:precompile; bundle exec rake assets:clean;
+    startCommand: bundle exec passenger start -p $PORT --max-pool-size $RAILS_MAX_THREADS --min-instances $RAILS_MAX_THREADS
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: recipedia-sidekiq-redis
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
