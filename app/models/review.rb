@@ -22,7 +22,6 @@ class Review < ApplicationRecord
     partial: "reviews/review_frame", locals: { review: self }
 
     RecipeStatsJob.perform_later(self.recipe)
-
     NotifiyUsersJob.perform_later(self)
   end
 

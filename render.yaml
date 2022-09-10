@@ -27,7 +27,7 @@ services:
           name: recipedia-sidekiq-redis
           property: connectionString
       - key: RAILS_MASTER_KEY
-        sync: false
+        # sync: false
 
   - type: web
     name: recipedia-rails-web
@@ -44,4 +44,4 @@ services:
           name: recipedia-sidekiq-redis
           property: connectionString
       - key: RAILS_MASTER_KEY
-        sync: false
+        # sync: false
