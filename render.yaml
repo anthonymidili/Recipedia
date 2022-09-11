@@ -8,10 +8,28 @@ databases:
     region: ohio
 
 services:
+  - type: web
+    name: recipedia-rails-web
+    plan: starter
+    previewPlan: starter
+    env: ruby
+    region: ohio
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec passenger start --max-pool-size $RAILS_MAX_THREADS --min-instances $RAILS_MAX_THREADS"
+    envVars:
+      - key: DATABASE_URL
+        fromService:
+          name: recipedia-postgresql
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: recipedia-sidekiq-redis
+          property: connectionString
+
   - type: redis
     name: recipedia-sidekiq-redis
     region: ohio
-    maxmemoryPolicy: noeviction
     ipAllowList: [] # only allow internal connections
 
   - type: worker
@@ -26,22 +44,4 @@ services:
           type: redis
           name: recipedia-sidekiq-redis
           property: connectionString
-      - key: RAILS_MASTER_KEY
-        # sync: false
-
-  - type: web
-    name: recipedia-rails-web
-    plan: starter
-    previewPlan: starter
-    env: ruby
-    region: ohio
-    buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec passenger start --max-pool-size $RAILS_MAX_THREADS --min-instances $RAILS_MAX_THREADS"
-    envVars:
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: recipedia-sidekiq-redis
-          property: connectionString
-      - key: RAILS_MASTER_KEY
         # sync: false
