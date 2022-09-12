@@ -3,11 +3,11 @@ class FavoritismsController < ApplicationController
   before_action :set_recipe
 
   def create
-    favoritism = current_user.favoritisms.build
-    favoritism.recipe = @recipe
+    @favoritism = current_user.favoritisms.build
+    @favoritism.recipe = @recipe
 
     respond_to do |format|
-      if favoritism.save
+      if @favoritism.save
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace("favor_form_recipe_#{@recipe.id}",
           partial: "recipes/unfavor", locals: { recipe: @recipe })

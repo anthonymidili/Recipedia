@@ -21,8 +21,8 @@ class Review < ApplicationRecord
     target: "recipe_#{recipe.id}_reviews",
     partial: "reviews/review_frame", locals: { review: self }
 
-    RecipeStatsJob.perform_later(self.recipe.id)
-    NotifiyUsersJob.perform_later(self)
+    RecipeStatsJob.perform_later(self.recipe.try(:id))
+    NotifiyUsersJob.perform_later(self.class, self.id)
   end
 
   def after_update_broadcast
@@ -35,6 +35,6 @@ class Review < ApplicationRecord
     broadcast_remove_to "reviews",
     target: "review_#{self.id}"
 
-    RecipeStatsJob.perform_later(self.recipe.id)
+    RecipeStatsJob.perform_later(self.recipe.try(:id))
   end
 end
