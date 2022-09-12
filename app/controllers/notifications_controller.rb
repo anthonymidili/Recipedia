@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
     @notifications = current_user.notifications.
     includes(:notifiable, notifier: [avatar_attachment: :blob])
 
-    MarkNotificationsAsReadJob.set(wait: 10.seconds).perform_later(current_user)
+    MarkNotificationsAsReadJob.set(wait: 10.seconds).perform_later(current_user.id)
   end
 
   def mark_as_read

@@ -4,7 +4,7 @@ class Favoritism < ApplicationRecord
   end
 
   after_commit do
-    RecipeStatsJob.perform_later(self.recipe)
+    RecipeStatsJob.perform_later(self.recipe.id)
   end
 
   has_many :notifications, as: :notifiable, dependent: :destroy

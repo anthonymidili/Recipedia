@@ -2,7 +2,9 @@ class RecipeStatsJob < ApplicationJob
   queue_as :default
   sidekiq_options retry: 3
 
-  def perform(recipe)
+  def perform(recipe_id)
+    recipe = Recipe.find(recipe_id)
+
     RecipeChannel.broadcast_to recipe,
     # Update all recipe review count(s).
     reviews_count: recipe.reviews.count,
