@@ -18,7 +18,7 @@ services:
     startCommand: "bundle exec passenger start --max-pool-size $RAILS_MAX_THREADS --min-instances $RAILS_MAX_THREADS"
     envVars:
       - key: DATABASE_URL
-        fromService:
+        fromDatabase:
           name: recipedia-postgresql
           property: connectionString
       - key: REDIS_URL
