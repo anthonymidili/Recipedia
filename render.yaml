@@ -16,6 +16,11 @@ services:
     region: ohio
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec passenger start --max-pool-size $RAILS_MAX_THREADS --min-instances $RAILS_MAX_THREADS"
+    scaling:
+      minInstances: 1
+      maxInstances: 2
+      targetMemoryPercent: 60 # optional if targetCPUPercent is set (valid: 1-90)
+      # targetCPUPercent: 60 # optional if targetMemory is set (valid: 1-90)
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -37,7 +42,8 @@ services:
     env: ruby
     region: ohio
     buildCommand: bundle install
-    startCommand: bundle exec sidekiq -C config/sidekiq.yml
+    startCommand: bundle exec sidekiq # -C config/sidekiq.yml
+    numInstances: 2
     envVars:
       - key: REDIS_URL
         fromService:
