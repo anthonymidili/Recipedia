@@ -3,6 +3,6 @@ class NotifiyUsersJob < ApplicationJob
   sidekiq_options retry: 3
 
   def perform(notifiable)
-    NotifyUsers.new(notifiable)
+    # NotifyUsers.new(notifiable)
   end
 end
