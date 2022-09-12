@@ -15,7 +15,7 @@ services:
     env: ruby
     region: ohio
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec passenger start --max-pool-size $RAILS_MAX_THREADS --min-instances $RAILS_MAX_THREADS"
+    startCommand: "bundle exec passenger start"
     scaling:
       minInstances: 1
       maxInstances: 2
@@ -41,8 +41,8 @@ services:
     name: recipedia-sidekiq-worker
     env: ruby
     region: ohio
-    buildCommand: bundle install
-    startCommand: bundle exec sidekiq # -C config/sidekiq.yml
+    buildCommand: "bundle install"
+    startCommand: "bundle exec sidekiq" # -C config/sidekiq.yml
     numInstances: 2
     envVars:
       - key: REDIS_URL
