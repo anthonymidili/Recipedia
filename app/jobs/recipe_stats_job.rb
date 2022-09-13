@@ -5,13 +5,11 @@ class RecipeStatsJob < ApplicationJob
   def perform(recipe_id)
     recipe = Recipe.find_by(id: recipe_id)
 
-    if recipe
-      RecipeChannel.broadcast_to recipe,
-      # Update all recipe review count(s).
-      reviews_count: recipe.reviews.count,
-      # Render likes_count partial.
-      likes_partial: render_likes_partial(recipe)
-    end
+    RecipeChannel.broadcast_to recipe,
+    # Update all recipe review count(s).
+    reviews_count: recipe.reviews.count,
+    # Render likes_count partial.
+    likes_partial: render_likes_partial(recipe)
   end
 
 private

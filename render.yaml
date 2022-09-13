@@ -33,7 +33,7 @@ services:
     region: ohio
     buildCommand: bundle install
     startCommand: bundle exec sidekiq
-    numInstances: 2
+    numInstances: 4
     envVars:
       - key: REDIS_URL
         fromService:

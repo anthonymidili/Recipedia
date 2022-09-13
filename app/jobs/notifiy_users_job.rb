@@ -5,8 +5,6 @@ class NotifiyUsersJob < ApplicationJob
   def perform(notifiable_class, notifiable_id)
     notifiable = notifiable_class.find_by(id: notifiable_id)
 
-    if notifiable
-      NotifyUsers.new(notifiable)
-    end
+    NotifyUsers.new(notifiable)
   end
 end
