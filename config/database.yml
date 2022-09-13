@@ -61,7 +61,4 @@ development:
 
 production:
  <<: *default
- database: recipedia_production
- username: recipedia_user
- password: <%= ENV['DATABASE_PASSWORD'] %>
  url: <%= ENV['DATABASE_URL'] %>
