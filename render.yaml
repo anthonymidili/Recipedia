@@ -11,7 +11,7 @@ services:
     startCommand: bundle exec passenger start
     scaling:
       minInstances: 1
-      maxInstances: 2
+      maxInstances: 4
       targetMemoryPercent: 60 # optional if targetCPUPercent is set (valid: 1-90)
       # targetCPUPercent: 60 # optional if targetMemory is set (valid: 1-90)
     envVars:
@@ -30,10 +30,15 @@ services:
   - type: worker
     name: recipedia-sidekiq-worker
     env: ruby
+    plan: starter
     region: ohio
     buildCommand: bundle install
     startCommand: bundle exec sidekiq -C config/sidekiq.yml
-    numInstances: 2
+    scaling:
+      minInstances: 1
+      maxInstances: 4
+      targetMemoryPercent: 60 # optional if targetCPUPercent is set (valid: 1-90)
+      # targetCPUPercent: 60 # optional if targetMemory is set (valid: 1-90)
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -49,6 +54,7 @@ services:
 
   - type: redis
     name: recipedia-sidekiq-redis
+    plan: starter
     region: ohio
     ipAllowList: [] # only allow internal connections
     maxmemoryPolicy: noeviction # optional (defaults to allkeys-lru)
