@@ -1,6 +1,6 @@
 class Relationship < ApplicationRecord
   after_commit on: [:create] do
-    NotifiyUsersJob.perform_later(self.class, self.id)
+    NotifiyUsersJob.perform_later(self)
   end
 
   has_many :notifications, as: :notifiable, dependent: :destroy

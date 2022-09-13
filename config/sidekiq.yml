@@ -3,7 +3,7 @@
 # heroku config:set MALLOC_ARENA_MAX=2
 
 ---
-:concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY") { 1 } %>
+# :concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY") { 1 } %>
 :timeout: 25
 :queues:
   - default

@@ -1,6 +1,6 @@
 class Recipe < ApplicationRecord
   after_commit on: [:create, :update] do
-    NotifiyUsersJob.perform_later(self.class, self.id) if published
+    NotifiyUsersJob.perform_later(self) if published
   end
 
   has_rich_text :description

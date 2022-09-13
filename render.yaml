@@ -32,8 +32,8 @@ services:
     env: ruby
     region: ohio
     buildCommand: bundle install
-    startCommand: bundle exec sidekiq
-    numInstances: 4
+    startCommand: bundle exec sidekiq -C config/sidekiq.yml
+    numInstances: 2
     envVars:
       - key: DATABASE_URL
         fromDatabase:
