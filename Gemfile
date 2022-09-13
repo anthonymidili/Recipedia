@@ -23,7 +23,7 @@ gem 'kaminari', '~> 1.2.0'
 gem 'cocoon', '~> 1.2.10'
 gem 'devise', '~> 4.8.0'
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
-gem 'meta-tags', '~> 2.16.0'
+gem 'meta-tags', '~> 2.17.0'
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
