@@ -32,7 +32,7 @@ services:
     env: ruby
     region: ohio
     buildCommand: bundle install
-    startCommand: bundle exec sidekiq -C config/sidekiq.yml
+    startCommand: bundle exec sidekiq
     numInstances: 2
     envVars:
       - key: REDIS_URL
