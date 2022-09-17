@@ -8,7 +8,7 @@
     .card-body
       .row
         .col
-          .nav-buttons
+          .nav-buttons.recipe-card-stats
             - if user_signed_in? && !is_author?(recipe.user)
               = render 'recipes/favor_form', recipe: recipe
             - elsif !user_signed_in?

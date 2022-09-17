@@ -8,13 +8,23 @@
         - else
           %i.fas.fa-user.default-avatar-50
         %b= user.username
-        - if user.info.persisted? && user.info.body && @show_info_body
-          .autolinks= simple_format(truncate(user.info.body, length: 120))
+        %br/
+        = link_to user_path(user, anchor: 'submitted') do
+          Submitted:
+          = user.recipes.by_published.count
+        = link_to user_path(user, anchor: 'favorites'), class: "ps-3" do
+          Favorites:
+          = user.favorite_recipes.count
+
   .col-4.col-md-3.col-lg-2
     .mb-3
       = render 'relationships/form', user: user
+- if user.info.persisted? && user.info.body && @show_info_body
+  .row
+    .col.mb-3
+      .autolinks= simple_format(truncate(user.info.body, length: 120))
   - if is_site_admin? && !user_is_site_admin?(user)
-    .col
+    .col.mb-3
       = link_to "Permanently Delete User", user_path(user),
       class: "btn btn-danger btn-sm",
       data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
