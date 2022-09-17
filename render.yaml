@@ -67,6 +67,3 @@ databases:
 
 envVarGroups:
   - name: recipedia-settings
-    envVars:
-      - key: RAILS_MASTER_KEY
-        generateValue: true
