@@ -24,8 +24,7 @@ services:
           type: redis
           name: recipedia-sidekiq-redis
           property: connectionString
-      - key: RAILS_MASTER_KEY
-        sync: false
+      - fromGroup: recipedia-settings
 
   - type: worker
     name: recipedia-sidekiq-worker
@@ -49,8 +48,7 @@ services:
           type: redis
           name: recipedia-sidekiq-redis
           property: connectionString
-      - key: RAILS_MASTER_KEY
-        sync: false
+      - fromGroup: recipedia-settings
 
   - type: redis
     name: recipedia-sidekiq-redis
@@ -66,3 +64,9 @@ databases:
     databaseName: recipedia_production
     user: recipedia_user
     region: ohio
+
+envVarGroups:
+  - name: recipedia-settings
+    envVars:
+      - key: RAILS_MASTER_KEY
+        generateValue: true
