@@ -3,6 +3,9 @@
   background-color: $light-background;
   margin-bottom: 20px;
   overflow-x: hidden;
+  .recipe-card-stats{
+    height: 37px;
+  }
   .description {
     height: 6rem;
     overflow-x: scroll;
