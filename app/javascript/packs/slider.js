@@ -1,26 +1,26 @@
 document.addEventListener("turbo:load", function() {
-  function updateStepValues() {
-    $('.all-slides').each(function(){
-      $(this).find('.stepOrderField').each(function(index) {
-        $(this).val(index + 1)
-      });
-    });
-  }
-
-  function makeSlidable() {
-    $('.all-slides').sortable({
-      handle: ".slide",
-      update: function(event, ui) {
-        updateStepValues();
-      }
-    });
-  }
-
-  // initiate makeSlidable on page load
   makeSlidable();
-
-  $('#parts').on('cocoon:after-insert cocoon:after-remove', function() {
-    updateStepValues();
-    makeSlidable();
-  });
+  updateStepValues();
 });
+
+$('#parts').on('cocoon:after-insert cocoon:after-remove', function() {
+  makeSlidable();
+  updateStepValues();
+});
+
+function makeSlidable() {
+  $('.all-slides').sortable({
+    handle: ".slide",
+    update: function(event, ui) {
+      updateStepValues();
+    }
+  })
+};
+
+function updateStepValues() {
+  $('.all-slides').each(function(){
+    $(this).find('.stepOrderField').each(function(index) {
+      $(this).val(index + 1)
+    })
+  })
+};

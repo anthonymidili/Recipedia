@@ -113,7 +113,7 @@
                 %h4= part.name
               - part.steps.each_with_index do |step, index|
                 .row
-                  .col
+                  .col.mb-2
                     .float-start.red-text.me-1= "#{index += 1}."
                     .trix-img-max= step.description
   .hide-on-print
