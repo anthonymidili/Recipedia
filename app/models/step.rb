@@ -7,6 +7,7 @@ class Step < ApplicationRecord
   has_rich_text :description
 
   validates :description, presence: true
+  validates :step_order, presence: true
 
   default_scope -> { order(step_order: :asc) }
 
