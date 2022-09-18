@@ -114,9 +114,8 @@
               - part.steps.each_with_index do |step, index|
                 .row
                   .col
-                    .inline
-                      %span.float-top.red-text= "#{index += 1}."
-                      %span.trix-img-max= step.description
+                    .float-start.red-text.me-1= "#{index += 1}."
+                    .trix-img-max= step.description
   .hide-on-print
     .row
       .col
