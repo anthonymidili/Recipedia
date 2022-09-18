@@ -129,6 +129,9 @@ ul.pagination {
   a.page-link {
     background-color: $light-background;
   }
+  .active > a.page-link {
+    background-color: $blue;
+  }
 }
 
 .callout-on-small-only {
