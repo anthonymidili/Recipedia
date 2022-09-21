@@ -52,7 +52,7 @@ services:
 
   - type: redis
     name: recipedia-sidekiq-redis
-    plan: starter
+    plan: free
     region: ohio
     ipAllowList: [] # only allow internal connections
     maxmemoryPolicy: noeviction # optional (defaults to allkeys-lru)
@@ -67,3 +67,30 @@ databases:
 
 envVarGroups:
   - name: recipedia-settings
+    envVars:
+      - key: RAILS_MAX_THREADS
+        generateValue: true
+      # - key: SIDEKIQ_CONCURRENCY
+      #   generateValue: true
+      - key: RAILS_SERVE_STATIC_FILES
+        generateValue: true
+      - key: DEFAULT_URL
+        generateValue: true
+      - key: MAILER_SENDER
+        generateValue: true
+      - key: SMTP_USERNAME
+        generateValue: true
+      - key: SMTP_PASSWORD
+        generateValue: true
+      - key: SMTP_ADDRESS
+        generateValue: true
+      - key: SMTP_AUTHENTICATION
+        generateValue: true
+      - key: SMTP_ENABLE_STARTTLS_AUTO
+        generateValue: true
+      - key: SMTP_OPENSSL_VERIFY_MODE
+        generateValue: true
+      - key: SMTP_PORT
+        generateValue: true
+      - key: SITE_ADMIN
+        generateValue: true
