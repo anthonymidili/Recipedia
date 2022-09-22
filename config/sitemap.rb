@@ -30,11 +30,11 @@ SitemapGenerator::Sitemap.create do
   #
   # Add '/articles'
   #
-  add recipes_path, :priority => 0.7, :changefreq => 'daily'
+  add recipes_path, priority: 0.7, changefreq: 'daily'
   #
   # Add all articles:
   #
   Recipe.find_each do |recipe|
-    add recipe_path(recipe), :lastmod => recipe.updated_at
+    add recipe_path(recipe), lastmod: recipe.updated_at
   end
 end
