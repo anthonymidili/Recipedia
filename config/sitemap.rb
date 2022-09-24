@@ -36,6 +36,14 @@ SitemapGenerator::Sitemap.create do
   # Add all articles:
   #
   Recipe.find_each do |recipe|
-    add recipe_path(recipe), lastmod: recipe.updated_at
+    if recipe.recipe_images.try(:first).try(:image).try(:attached?)
+      add recipe_path(recipe), lastmod: recipe.updated_at,
+      images: [{
+        loc: recipe.recipe_images.first.image.url,
+        title: recipe.name
+      }]
+    else
+      add recipe_path(recipe), lastmod: recipe.updated_at
+    end
   end
 end
