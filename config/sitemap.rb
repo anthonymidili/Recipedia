@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'aws-sdk-s3'
 require 'sitemap_generator'
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "https://recipedia.wiki"
