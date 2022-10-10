@@ -1,4 +1,4 @@
-.col-sm-12.col-md-6.col-lg-4
+.col-12.col-md-6.col-lg-4
   .card.recipe-card{id: "recipe_#{recipe.id}", data: { recipe_id: recipe.id }}
     = link_to recipe do
       - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
@@ -7,7 +7,7 @@
         = image_tag('default_recipe_image.svg', class: "card-img-top")
     .card-body
       .row
-        .col
+        .col-12
           .nav-buttons.recipe-card-stats
             - if user_signed_in? && !is_author?(recipe.user)
               = render 'recipes/favor_form', recipe: recipe
@@ -20,7 +20,7 @@
               = render "reviews/count", recipe: recipe
           %hr/
       .row
-        .col
+        .col-12
           = link_to recipe.user do
             %p
               Posted by:

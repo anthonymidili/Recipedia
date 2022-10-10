@@ -21,10 +21,10 @@
       = render 'relationships/form', user: user
 - if user.info.persisted? && user.info.body && @show_info_body
   .row
-    .col.mb-3
+    .col-12.mb-3
       .autolinks= simple_format(truncate(user.info.body, length: 120))
   - if is_site_admin? && !user_is_site_admin?(user)
-    .col.mb-3
+    .col-12.mb-3
       = link_to "Permanently Delete User", user_path(user),
       class: "btn btn-danger btn-sm",
       data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }

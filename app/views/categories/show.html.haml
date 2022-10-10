@@ -1,6 +1,6 @@
 = turbo_frame_tag dom_id(@category) do
   .row
-    .col
+    .col-12
       - unless @category.in_use?
         .float-end
           = link_to 'Edit', edit_category_path(@category), data: { turbo_frame: dom_id(@category) }
@@ -9,14 +9,14 @@
           data: { turbo_method: :delete, turbo_confirm: 'Are you sure?', turbo_frame: "_top" }
           Category
   .row
-    .col
+    .col-12
       %h1= @category.name
 
 .row
   = render @recipes
 
 .row
-  .col
+  .col-12
     = paginate @recipes
 
     %ul.nav-links

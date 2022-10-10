@@ -1,21 +1,21 @@
 - provide :title, 'The Cook'
 
 .row
-  .col
+  .col-12
     = link_to new_recipe_path, class: 'float-end btn btn-danger mb-3' do
       %i.fa.fa-plus-circle
       Add a recipe
 .row
-  .col
+  .col-12
     .callout-transparent
       - if is_author?(@user)
         .row
-          .col
+          .col-12
             = link_to edit_user_path(@user), class: "float-end" do
               %i.fas.fa-edit
               Edit about you
       .row
-        .col
+        .col-12
           .center-text
             %h1.no-background #{@user.username}'s Cookbook
       .row
@@ -37,19 +37,19 @@
           .autolinks= simple_format(@user.info.body) if @user.info
 - if @user == current_user && @user.recipes.by_unpublished.any?
   .row
-    .col
+    .col-12
       %h3 Unpublished Drafts
       .row
         = render @user.recipes.by_unpublished
 - if @user.recipes.by_published.any?
   .row
-    .col
+    .col-12
       %h3#submitted Submitted Recipes
       .row
         = render @user.recipes.by_published
 - if @user.favorite_recipes.any?
   .row
-    .col
+    .col-12
       %h3#favorites Favorites
       .row
         = render @user.favorite_recipes

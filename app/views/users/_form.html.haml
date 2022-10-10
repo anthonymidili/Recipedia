@@ -11,7 +11,7 @@
       - if f.object.avatar.attached?
         .img-thumbnail= image_tag avatar_image(f.object.avatar, 800)
         .row
-          .col
+          .col-12
             .form-check
               = f.check_box :remove_avatar, id: 'user_remove_image',
               class: "form-check-input"
@@ -24,5 +24,5 @@
         = info_f.label :body, class: "form-label", for: "infoUser"
         = info_f.text_area :body, rows: 12, id: "infoUser", class: "form-control"
   .row.mb-3
-    .col
+    .col-12
       = f.submit class: 'btn btn-primary'

@@ -1,4 +1,4 @@
-.col-sm-12.col-md-6
+.col-12.col-md-6
   = link_to category, data: { turbo_frame: "_top" } do
     .banner
       - @recipe_with_image = category.recipes.last_with_image(@used_recipes)

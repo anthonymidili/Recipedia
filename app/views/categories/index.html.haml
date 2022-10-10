@@ -1,7 +1,7 @@
 - provide(:title, 'Categories')
 
 .row
-  .col
+  .col-12
     %ul.nav-button-links
       %li
         = link_to recipes_path, class: 'btn btn-warning' do
@@ -17,7 +17,7 @@
             %i.fa.fa-plus-circle
             Add a recipe
 .row
-  .col
+  .col-12
     %h1 Browse Categories
 
 .row
@@ -25,6 +25,6 @@
 
 - if @categories.not_used.any?
   .row
-    .col
+    .col-12
       = turbo_frame_tag "more_categories" do
         = link_to 'More Categories', more_categories_path, class: "btn btn-warning mb-3"

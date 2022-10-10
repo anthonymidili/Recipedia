@@ -2,7 +2,7 @@
 
 = turbo_frame_tag dom_id(@category) do
   .row
-    .col
+    .col-12
       %h1 New category
 
       %p
@@ -10,6 +10,6 @@
         = render "categories/list_names", categories: @categories
       = render 'form', category: @category
 .row
-  .col
+  .col-12
     %ul.nav-links
       %li= link_to 'Back', categories_path

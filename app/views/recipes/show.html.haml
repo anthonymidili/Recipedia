@@ -18,15 +18,15 @@
                 %i.fas.fa-trash
     - if is_author?(@recipe.user) && !@recipe.published?
       .row
-        .col
+        .col-12
           .center-text= render 'recipes/publish_form', recipe: @recipe
     .row
-      .col
+      .col-12
         %p.callout-transparent
           %b Assigned Categories:
           = links_to_categories(@recipe)
   .row
-    .col
+    .col-12
       .hide-on-print
         %h3
           %nav.nav
@@ -50,26 +50,26 @@
           .row
             .col-lg-6
               .row
-                .col
+                .col-12
                   = link_to @recipe.user do
                     Posted by:
                     %b= @recipe.user.username
               .row
-                .col
+                .col-12
                   = render 'users/profile_stats', user: @recipe.user, size: 100
             .col-lg-6
               .hide-on-print.center-vertical
                 .row
-                  .col
+                  .col-12
                     = render 'relationships/form', user: @recipe.user, recipe: @recipe
       - if @recipe.source?
         .row
-          .col
+          .col-12
             %p
               %b Source:
               = @recipe.source
       .row
-        .col
+        .col-12
           %b Description:
           = @recipe.description
     .col-md-5.col-print-4
@@ -95,7 +95,7 @@
                 data: { turbo_frame: "main_recipe_image" } do
                   = image_tag avatar_image(recipe_image.image, 80), class: 'img-thumbnail mb-1'
   .row
-    .col
+    .col-12
       - if @recipe.ingredients.any?
         %h4 Ingredients:
         .callout
@@ -118,7 +118,7 @@
                     .trix-img-max= step.description
   .hide-on-print
     .row
-      .col
+      .col-12
         %ul.nav-links
           %li= link_to 'All Recipes', recipes_path
     = render 'reviews/reviews', recipe: @recipe, review: @review

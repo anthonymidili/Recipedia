@@ -1,12 +1,12 @@
 .nested-fields
   .callout
     .row
-      .col-md-6.order-sm-1.order-md-2.mb-3
+      .col-md-6.order-1.order-md-2.mb-3
         .float-md-end
           = link_to_remove_association f, class: 'red-text' do
             %i.fa.fa-trash
             Remove Recipe Part
-      .col-md-6.order-sm-2.order-md-1.mb-3
+      .col-md-6.order-2.order-md-1.mb-3
         = f.label :name, class: "form-label"
         = f.text_field :name, placeholder: 'Pie Crust', class: "form-control"
 

@@ -4,7 +4,7 @@
   = form_with model: recipe, local: true, data: { turbo: false } do |f|
     = render 'notifications/error_messages', object: f.object
     .row
-      .col
+      .col-12
         %label
           It's important to
           %b check all categories that apply
@@ -16,14 +16,14 @@
             - Category.all.each do |category|
               = render 'categories/check_box', recipe: recipe, category: category
     .row
-      .col-md-6.order-sm-1.order-md-1.mb-3
+      .col-md-6.order-1.order-md-1.mb-3
         = f.label :name, class: "form-label", for: "recipeName"
         = f.text_field :name, placeholder: 'Apple Pie', id: "recipeName", class: "form-control"
-      .col-sm-12.order-sm-2.order-md-3.mb-3
+      .col-12.order-2.order-md-3.mb-3
         = f.label :description, class: "form-label", for: "recipeDescription"
         = f.rich_text_area :description, placeholder: 'The best apple pie you will ever eat.',
         rows: '5', id: "recipeDescription", class: "form-control"
-      .col-md-6.order-sm-3.order-md-2.mb-3
+      .col-md-6.order-3.order-md-2.mb-3
         = f.label :source, class: "form-label", for: "recipeSource"
         = f.text_field :source, placeholder: 'cookbook, website or person',
         id: "recipeSource", class: "form-control"
@@ -31,7 +31,7 @@
     #parts= render 'parts/fields_for_form', f: f
 
     .row
-      .col
+      .col-12
         %b Publish
         recipe or save
         as
@@ -39,7 +39,7 @@
         so recipe is
         only visable to you in your cookbook
     .row
-      .col
+      .col-12
         .form-check.form-check-inline.mb-3
           = f.radio_button :published, "true", class: "form-check-input", id: "pubTrue"
           = f.label :published, "Publish", value: "true", class: "form-check-label", for: "pubTrue"
@@ -47,5 +47,5 @@
           = f.radio_button :published, "false", class: "form-check-input", id: "pubFalse"
           = f.label :published, "Draft", value: "false", class: "form-check-label", for: "pubFalse"
     .row
-      .col
+      .col-12
         = f.submit class: 'btn btn-primary'

@@ -2,14 +2,14 @@
 
 = turbo_frame_tag dom_id(@category) do
   .row
-    .col
+    .col-12
       %small.float-end
         Last Modified
         = @category.updated_at.strftime('%m-%d-%Y')
         by
         = link_to @category.user.username, @category.user, data: { turbo_frame: "_top" }
   .row
-    .col
+    .col-12
       %p
         %b Available Categories:
         = @categories.list_names

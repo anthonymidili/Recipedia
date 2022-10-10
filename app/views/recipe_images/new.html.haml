@@ -17,7 +17,7 @@
     - if @recipe.recipe_images
       - @recipe.recipe_images.by_original_first.each do |recipe_image|
         - if recipe_image.image.attached?
-          .col-sm-3.mb-3{id: "recipe_image_thumb_#{recipe_image.id}"}
+          .col-3.mb-3{id: "recipe_image_thumb_#{recipe_image.id}"}
             = link_to recipe_image.user do
               Uploaded by:
               %b= recipe_image.user.username
