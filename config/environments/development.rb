@@ -11,8 +11,8 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
-  config.hosts << "web-production-29a3.up.railway.app"
-  
+  # config.hosts << ["web-production-29a3.up.railway.app", "recipedia.wiki"]
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
