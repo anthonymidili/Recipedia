@@ -11,7 +11,7 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
-  config.hosts << "web-production-29a3.up.railway.app"
+  config.hosts << ".recipedia.wiki"
 
   # Settings specified here will take precedence over those in config/application.rb.
 
