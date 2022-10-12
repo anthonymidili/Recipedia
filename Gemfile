@@ -17,13 +17,13 @@ gem 'jbuilder', '~> 2.5'
 # Speed up boot time by caching expensive operations
 gem 'bootsnap', require: false
 
-gem 'haml-rails', '~> 2.0.0'
+gem 'haml-rails', '~> 2.1.0'
 gem 'kaminari', '~> 1.2.0'
 # For webpacker, you must use the cocoon gem with the yarn package cocoon-js.
 gem 'cocoon', '~> 1.2.10'
 gem 'devise', '~> 4.8.0'
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
-gem 'meta-tags', '~> 2.17.0'
+gem 'meta-tags', '~> 2.18.0'
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
