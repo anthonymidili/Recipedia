@@ -3,7 +3,12 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.hosts << ".recipedia.wiki"
+  config.hosts = [
+    IPAddr.new("0.0.0.0/0"),        # All IPv4 addresses.
+    IPAddr.new("::/0"),             # All IPv6 addresses.
+    "localhost",                    # The localhost reserved domain
+    ".recipedia.wiki"
+  ]
 
   # Code is not reloaded between requests.
   config.cache_classes = true

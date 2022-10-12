@@ -11,7 +11,12 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
-  config.hosts << ".recipedia.wiki"
+  config.hosts = [
+    IPAddr.new("0.0.0.0/0"),        # All IPv4 addresses.
+    IPAddr.new("::/0"),             # All IPv6 addresses.
+    "localhost",                    # The localhost reserved domain
+    ".recipedia.wiki"
+  ]
 
   # Settings specified here will take precedence over those in config/application.rb.
 
