@@ -3,8 +3,15 @@
 # heroku config:set MALLOC_ARENA_MAX=2
 
 ---
-# :concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY") { 1 } %>
+:concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY") { 5 } %>
 :timeout: 25
 :queues:
   - default
   - mailers
+
+# :schedule:
+#   rufus_scheduler_options:
+#     max_work_threads: 5
+#   midnight_cron:
+#     cron: '* * * * *'   # Runs every night at midnight
+#     class: MidnightCron

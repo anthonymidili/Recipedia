@@ -33,6 +33,7 @@ gem 'image_processing', '~> 1.12.1'
 gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
 gem 'sidekiq', '~> 6.5.0'
+gem "sidekiq-scheduler", "~> 4.0.3"
 # Use Redis for Action Cable
 gem "redis", "~> 4.0"
 
