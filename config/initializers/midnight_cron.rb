@@ -1,17 +1,13 @@
 require 'sidekiq-scheduler'
-require "rake"
-Rails.application.load_tasks
 
 class MidnightCron
   include Sidekiq::Worker
 
   def perform
-    Rake::Task["clean_notifications"].reenable
-    Rake::Task["clean_notifications"].execute
+    %x(bundle exec rake clean_notifications)
 
     if Rails.env.production?
-      Rake::Task["sitemap:refresh"].reenable
-      Rake::Task["sitemap:refresh"].execute
+      %x(bundle exec rake sitemap:refresh)
     else
       puts "Only refresh sitemap in production environment!!!"
     end

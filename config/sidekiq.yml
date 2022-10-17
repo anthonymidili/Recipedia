@@ -9,9 +9,9 @@
   - default
   - mailers
 
-# :schedule:
-#   rufus_scheduler_options:
-#     max_work_threads: 5
-#   midnight_cron:
-#     cron: '* * * * *'   # Runs every night at midnight
-#     class: MidnightCron
+:schedule:
+  rufus_scheduler_options:
+    max_work_threads: 5
+  midnight_cron:
+    cron: '0 0 * * *'   # Runs every night at midnight
+    class: MidnightCron
