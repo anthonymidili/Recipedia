@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '3.1.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.0.1'
@@ -28,14 +28,14 @@ gem 'meta-tags', '~> 2.18.0'
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
 # Active Storage file processing and storage
-gem "mini_magick", "~> 4.11.0"
+gem "mini_magick", "~> 4.12.0"
 gem 'image_processing', '~> 1.12.1'
 gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
 gem 'sidekiq', '~> 6.5.0'
 gem "sidekiq-scheduler", "~> 4.0.3"
 # Use Redis for Action Cable
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.0"
 
 # Required for Esbuild bundling.
 gem 'jsbundling-rails'
