@@ -60,5 +60,5 @@ development:
 #   database: Recipedia_test
 
 production:
- <<: *default
- url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
