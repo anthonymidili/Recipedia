@@ -1,11 +1,12 @@
 #search-box.mb-3
   .row.justify-content-center
     .col-md-8
-      = form_tag recipes_path, method: :get do
+      = form_tag recipes_path, method: :get, autocomplete: "off", id: "search_form" do
         .ui-widget
           .input-group
             %span.input-group-text
               %i.fa.fa-search
-            = text_field_tag :search, params[:search], class: 'form-control', data: { autocomplete_source: search_recipes_path }
+            = text_field_tag :search, params[:search], class: 'form-control', 
+            id: "search", data: { autocomplete_source: search_recipes_path }
             .input-group-button
               = submit_tag 'Search Recipes', name: nil, class: 'btn btn-primary'
