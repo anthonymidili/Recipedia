@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.1.2'
@@ -23,7 +23,7 @@ gem 'kaminari', '~> 1.2.0'
 gem 'cocoon', '~> 1.2.10'
 gem 'devise', '~> 4.9.3'
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
-gem 'meta-tags', '~> 2.20.0'
+gem 'meta-tags', '~> 2.21.0'
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
@@ -60,7 +60,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'listen', '~> 3.8.0'
+  gem 'listen', '~> 3.9.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring', '~> 4.0.0'
   gem 'bullet'
