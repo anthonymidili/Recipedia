@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.1'
+ruby '3.3.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1.2'
+gem 'rails', '~> 7.2.1'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
@@ -23,16 +23,16 @@ gem 'kaminari', '~> 1.2.0'
 gem 'cocoon', '~> 1.2.10'
 gem 'devise', '~> 4.9.3'
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
-gem 'meta-tags', '~> 2.21.0'
+gem 'meta-tags', '~> 2.22.0'
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem 'sitemap_generator'
 # Active Storage file processing and storage
-gem "mini_magick", "~> 4.12.0"
-gem 'image_processing', '~> 1.12.1'
+gem "mini_magick"
+gem 'image_processing', '~> 1.13.0'
 gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
-gem 'sidekiq', '~> 7.2.0'
+gem 'sidekiq', '~> 7.3.2'
 gem "sidekiq-scheduler", "~> 5.0.3"
 # Use Redis for Action Cable
 gem "redis", "~> 5.0"

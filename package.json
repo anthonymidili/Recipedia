@@ -8,9 +8,9 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "yarn": "1.22.x",
-    "node": "21.x",
-    "npm": "10.x"
+    "yarn": ">=1.22",
+    "node": ">=21.7",
+    "npm": ">=10.5"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
@@ -26,7 +26,7 @@
     "bootstrap-icons": "^1.8.2",
     "cocoon-js": "^0.0.5",
     "coffeescript": "^2.7.0",
-    "esbuild": "^0.19.10",
+    "esbuild": "^0.23.1",
     "ilyabirman-likely": "^3.2.0",
     "jquery": "^3.4.1",
     "postcss": "^8.4.7",
