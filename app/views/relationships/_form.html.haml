@@ -1,4 +1,4 @@
-- unless is_author?(user, check_admin=false)
+- unless is_author?(user)
   - if !user_signed_in?
     - if defined?(recipe)
       = button_to log_in_recipe_path(recipe),

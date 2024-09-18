@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :log_in]
   before_action :set_recipe, only: [:show, :edit, :update, :destroy, :log_in, :likes]
   before_action :deny_access!,
-  unless: -> { is_author?(@recipe.user) }, only: [:edit, :update, :destroy]
+  unless: -> { is_author?(@recipe.user) || is_site_admin? }, only: [:edit, :update, :destroy]
   before_action :set_category, only: [:new, :create, :edit, :update]
   before_action :set_root_meta_tag_options, only: [:index]
   before_action :set_recipe_meta_tag_options, only: [:show]

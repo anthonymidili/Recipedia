@@ -5,7 +5,7 @@
     .row
       .col-8
         = render 'recipes/share', recipe: @recipe
-      - if is_author?(@recipe.user)
+      - if is_author?(@recipe.user) || is_site_admin?
         .col-4
           %ul.edit_menu
             %li.nav-item

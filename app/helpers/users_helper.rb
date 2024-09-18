@@ -1,6 +1,6 @@
 module UsersHelper
-  def is_author?(user, check_admin=true)
-    user == current_user || check_admin && is_site_admin?
+  def is_author?(user)
+    user == current_user
   end
 
   def is_site_admin?
