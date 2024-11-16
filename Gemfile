@@ -63,6 +63,8 @@ group :development do
   gem 'listen', '~> 3.9.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring', '~> 4.0.0'
+  # IRB colors.
+  gem 'irbtools', require: 'irbtools/binding'
   gem 'bullet'
 end
 

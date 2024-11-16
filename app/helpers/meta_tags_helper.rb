@@ -51,7 +51,7 @@ module MetaTagsHelper
       og: {
         title: recipe.name,
         description: recipe.description.to_plain_text,
-        type: 'website',
+        type: 'Recipe',
         url: recipe_url(recipe),
         secure_url: recipe_url(recipe),
         image: {

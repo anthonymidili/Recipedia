@@ -8,4 +8,6 @@ class Notification < ApplicationRecord
   scope :by_read, -> { where(is_read: true) }
   scope :unread_count, -> { by_unread.count }
   scope :mark_as_read, -> { update_all(is_read: true) if any? }
+  scope :by_older_than_month, -> { where("created_at < :time", time: (DateTime.current - 1.month)) }
+
 end
