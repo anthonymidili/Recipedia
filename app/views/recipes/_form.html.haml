@@ -1,7 +1,7 @@
 .callout
   = turbo_frame_tag dom_id(@category) do
     = link_to "Add Category", new_category_path, class: "btn btn-warning btn-sm mb-3"
-  = form_with model: recipe, local: true, data: { turbo: false } do |f|
+  = form_with model: recipe, local: true, data: { turbo: false, controller: "ocr" } do |f|
     = render 'notifications/error_messages', object: f.object
     .row
       .col-12
@@ -16,17 +16,33 @@
             - Category.all.each do |category|
               = render 'categories/check_box', recipe: recipe, category: category
     .row
-      .col-md-6.order-1.order-md-1.mb-3
+      .col-md-6.mb-3
         = f.label :name, class: "form-label", for: "recipeName"
         = f.text_field :name, placeholder: 'Apple Pie', id: "recipeName", class: "form-control"
-      .col-12.order-2.order-md-3.mb-3
-        = f.label :description, class: "form-label", for: "recipeDescription"
-        = f.rich_text_area :description, placeholder: 'The best apple pie you will ever eat.',
-        rows: '5', id: "recipeDescription", class: "form-control"
-      .col-md-6.order-3.order-md-2.mb-3
+      .col-md-6.mb-3
         = f.label :source, class: "form-label", for: "recipeSource"
         = f.text_field :source, placeholder: 'cookbook, website or person',
         id: "recipeSource", class: "form-control"
+    .row
+      .col-md-6.mb-3
+        = label_tag :convert_image, class: "form-label" do
+          = t("convert_image.label_html")
+        = file_field_tag :convert_image, class: "form-control",
+        data: { ocr_target: 'file', action: "change->ocr#upload" }
+    .hidden{data: { ocr_target: "hidden" }}
+      .row
+        .col-md-6.mb-3
+          = image_tag "", class: 'object-cover img-thumbnail max-image-height', 
+          data: { ocr_target: "canvas" }
+        .col-12.mb-3
+          = label_tag :output, t("convert_image.output"), class: "form-label"
+          = text_area_tag :output, nil, class: "form-control", rows: 10,
+          data: { ocr_target: 'imageDescription' }, class: "form-control"
+    .row
+      .col-12.mb-3
+        = f.label :description, class: "form-label", for: "recipeDescription"
+        = f.rich_text_area :description, placeholder: 'The best apple pie you will ever eat.',
+        rows: '5', id: "recipeDescription", class: "form-control"
 
     #parts= render 'parts/fields_for_form', f: f
 

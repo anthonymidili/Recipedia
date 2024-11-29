@@ -30,7 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord :
+  activerecord:
     attributes:
       user:
         avatar: 'Your avatar'
@@ -50,8 +50,12 @@ en:
         recipe_favored: "Your recipe is favored/added to a cookbook."
       recipe:
         description: "Description (optional)"
-        source: "(Give credit where credit is due) Name the recipe's source"
+        source: "Name the recipe's source (optional)"
       part:
         name: "Recipe part name (optional for single part recipes)"
       ingredient:
         quantity: "Quantity (optional)"
+  convert_image:
+    label_html: "Convert image to text <br> (reuse as many times as needed, 
+    image will not be saved to recipe.)"
+    output: "Double check rendered text then copy and paste where needed"
