@@ -1,11 +1,13 @@
 document.addEventListener("turbo:load", function() {
+  // On page load.
   makeSlidable();
   updateStepValues();
-});
-
-$('#parts').on('cocoon:after-insert cocoon:after-remove', function() {
-  makeSlidable();
-  updateStepValues();
+  
+  // On cocoon event.
+  $('#parts').on('cocoon:after-insert cocoon:after-remove', function() {
+    makeSlidable();
+    updateStepValues();
+  });
 });
 
 function makeSlidable() {
