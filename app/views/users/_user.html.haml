@@ -8,6 +8,8 @@
         - else
           %i.fas.fa-user.default-avatar-50
         %b= user.username
+        - if is_site_admin?
+          = user.email
         %br/
         = link_to user_path(user, anchor: 'submitted') do
           Submitted:
