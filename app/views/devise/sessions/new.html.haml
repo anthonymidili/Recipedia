@@ -7,7 +7,7 @@
     local: true, data: { turbo: false } do |f|
       .mb-3
         = f.label :email, for: "deviseEmail", class: "form-label"
-        = f.email_field :email, autofocus: true,
+        = f.email_field :email, autocomplete: 'username',
         id: "deviseEmail", class: "form-control"
       .mb-3
         = f.label :password, for: "devisePassword", class: "form-label"

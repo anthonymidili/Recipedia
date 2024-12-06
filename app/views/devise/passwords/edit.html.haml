@@ -13,7 +13,7 @@
           - if @minimum_password_length
             %em (#{@minimum_password_length} characters minimum)
       .mb-3
-        = f.password_field :password, autofocus: true, autocomplete: 'off',
+        = f.password_field :password, autocomplete: 'off',
         id: "deviseEmail", class: "form-control"
       .mb-3
         = f.label :password_confirmation, 'Confirm new password',

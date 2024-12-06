@@ -7,7 +7,7 @@
       = render 'notifications/error_messages', object: f.object
       .mb-3
         = f.label :email, for: "deviseEmail", class: "form-label"
-        = f.email_field :email, autofocus: true, id: "deviseEmail", class: "form-control"
+        = f.email_field :email, autocomplete: 'username', id: "deviseEmail", class: "form-control",
         value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
 
       .mb-3
