@@ -317,9 +317,9 @@ browserslist@^4.23.3:
     update-browserslist-db "^1.1.1"
 
 caniuse-lite@^1.0.30001646, caniuse-lite@^1.0.30001669:
-  version "1.0.30001684"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001684.tgz#0eca437bab7d5f03452ff0ef9de8299be6b08e16"
-  integrity sha512-G1LRwLIQjBQoyq0ZJGqGIJUXzJ8irpbjHLpVRXDvBEScFJ9b17sgK6vlx0GAJFE21okD7zXl08rRRUfq6HdoEQ==
+  version "1.0.30001687"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001687.tgz#d0ac634d043648498eedf7a3932836beba90ebae"
+  integrity sha512-0S/FDhf4ZiqrTUiQ39dKeUjYRjkv7lOZU1Dgif2rIqrTzX/1wV2hfKu9TOm1IHkdSijfLswxTFzl/cvir+SLSQ==
 
 chokidar@^4.0.0:
   version "4.0.1"
@@ -346,9 +346,9 @@ detect-libc@^1.0.3:
   integrity sha512-pGjwhsmsp4kL2RTz08wcOlGN83otlqHeD/Z5T8GXZB+/YcpQ/dgo+lbU8ZsGxV0HIvqqxo9l7mqYwyYMD9bKDg==
 
 electron-to-chromium@^1.5.41:
-  version "1.5.67"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.67.tgz#66ebd2be4a77469ac2760ef5e9e460ba9a43a845"
-  integrity sha512-nz88NNBsD7kQSAGGJyp8hS6xSPtWwqNogA0mjtc2nUYeEf3nURK9qpV18TuBdDmEDgVWotS8Wkzf+V52dSQ/LQ==
+  version "1.5.71"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.71.tgz#d8b5dba1e55b320f2f4e9b1ca80738f53fcfec2b"
+  integrity sha512-dB68l59BI75W1BUGVTAEJy45CEVuEGy9qPVVQ8pnHyHMn36PLPPoE1mjLH+lo9rKulO3HC2OhbACI/8tCqJBcA==
 
 esbuild@^0.24.0:
   version "0.24.0"
@@ -519,9 +519,9 @@ regenerator-runtime@^0.13.3:
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
 sass@^1.51.0:
-  version "1.81.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.81.0.tgz#a9010c0599867909dfdbad057e4a6fbdd5eec941"
-  integrity sha512-Q4fOxRfhmv3sqCLoGfvrC9pRV8btc0UtqL9mN6Yrv6Qi9ScL55CVH1vlPP863ISLEEMNLLuu9P+enCeGHlnzhA==
+  version "1.82.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.82.0.tgz#30da277af3d0fa6042e9ceabd0d984ed6d07df70"
+  integrity sha512-j4GMCTa8elGyN9A7x7bEglx0VgSpNUG4W4wNedQ33wSMdnkqQCT8HTwOaVSV4e6yQovcu/3Oc4coJP/l0xhL2Q==
   dependencies:
     chokidar "^4.0.0"
     immutable "^5.0.2"
