@@ -11,15 +11,15 @@ private
 
   def recipients(notifiable)
     case notifiable.class.name
-    when 'Recipe'
+    when "Recipe"
       notifiable.user.followers.by_unnotified(notifiable) if notifiable.published
-    when 'RecipeImage'
+    when "RecipeImage"
       User.by_uploaders(notifiable)
-    when 'Review'
+    when "Review"
       User.by_reviewers(notifiable)
-    when 'Relationship'
+    when "Relationship"
       User.where(id: notifiable.followed)
-    when 'Favoritism'
+    when "Favoritism"
       User.where(id: notifiable.recipe.user)
     end
   end
@@ -53,21 +53,21 @@ private
       https: false
     )
 
-    renderer.render partial: 'notifications/notification',
+    renderer.render partial: "notifications/notification",
     locals: { notification: notification }
   end
 
   def action_statement(notifiable)
     case notifiable.class.name
-    when 'Recipe'
+    when "Recipe"
       "ADDED a new recipe - #{notifiable.name}"
-    when 'RecipeImage'
+    when "RecipeImage"
       "UPLOADED an image to recipe #{notifiable.recipe.name}"
-    when 'Review'
+    when "Review"
       "REVIEWED recipe #{notifiable.recipe.name}"
-    when 'Relationship'
+    when "Relationship"
       "started FOLLOWING you"
-    when 'Favoritism'
+    when "Favoritism"
       "ADDED #{notifiable.recipe.name} to their favorites"
     end
   end

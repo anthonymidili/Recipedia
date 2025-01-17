@@ -8,8 +8,8 @@ module MetaTagsHelper
         url: root_url,
         secure_url: root_url,
         image: {
-          _: (request.host_with_port + ActionController::Base.helpers.asset_path('spice.jpg')),
-          sucure_url: (request.host_with_port + ActionController::Base.helpers.asset_path('spice.jpg')),
+          _: (request.host_with_port + ActionController::Base.helpers.asset_path("spice.jpg")),
+          sucure_url: (request.host_with_port + ActionController::Base.helpers.asset_path("spice.jpg")),
           width: 600,
           height: 400,
           type: "image/jpeg"
@@ -18,12 +18,12 @@ module MetaTagsHelper
       og: {
         title: "Recipedia | Let's cook together",
         description: main_description,
-        type: 'website',
+        type: "website",
         url: root_url,
         secure_url: root_url,
         image: {
-          _: (request.host_with_port + ActionController::Base.helpers.asset_path('spice.jpg')),
-          sucure_url: (request.host_with_port + ActionController::Base.helpers.asset_path('spice.jpg')),
+          _: (request.host_with_port + ActionController::Base.helpers.asset_path("spice.jpg")),
+          sucure_url: (request.host_with_port + ActionController::Base.helpers.asset_path("spice.jpg")),
           width: 600,
           height: 400,
           type: "image/jpeg"
@@ -51,7 +51,7 @@ module MetaTagsHelper
       og: {
         title: recipe.name,
         description: recipe.description.to_plain_text,
-        type: 'Recipe',
+        type: "Recipe",
         url: recipe_url(recipe),
         secure_url: recipe_url(recipe),
         image: {

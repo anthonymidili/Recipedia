@@ -1,12 +1,12 @@
-require 'rubygems'
-require 'aws-sdk-s3'
-require 'sitemap_generator'
+require "rubygems"
+require "aws-sdk-s3"
+require "sitemap_generator"
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "https://recipedia.wiki"
 SitemapGenerator::Sitemap.compress = false
 SitemapGenerator::Sitemap.sitemaps_host = "https://console.aws.amazon.com/s3/buckets/#{Rails.application.credentials.dig(:aws, :s3_bucket)}/?region=#{Rails.application.credentials.dig(:aws, :region)}"
-SitemapGenerator::Sitemap.public_path = 'tmp/'
-SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
+SitemapGenerator::Sitemap.public_path = "tmp/"
+SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"
 
 SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
   Rails.application.credentials.dig(:aws, :s3_bucket),
@@ -31,17 +31,17 @@ SitemapGenerator::Sitemap.create do
   #
   # Add '/articles'
   #
-  add recipes_path, priority: 0.7, changefreq: 'daily'
+  add recipes_path, priority: 0.7, changefreq: "daily"
   #
   # Add all articles:
   #
   Recipe.find_each do |recipe|
     if recipe.recipe_images.try(:first).try(:image).try(:attached?)
       add recipe_path(recipe), lastmod: recipe.updated_at,
-      images: [{
+      images: [ {
         loc: recipe.recipe_images.first.image.url,
         title: recipe.name
-      }]
+      } ]
     else
       add recipe_path(recipe), lastmod: recipe.updated_at
     end

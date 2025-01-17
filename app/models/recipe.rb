@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  after_commit on: [:create, :update] do
+  after_commit on: [ :create, :update ] do
     NotifiyUsersJob.perform_later(self) if published
   end
 
@@ -32,11 +32,11 @@ class Recipe < ApplicationRecord
   scope :by_unpublished, -> { where(published: false) }
   scope :by_name, -> { order(name: :asc) }
   scope :newest_to_oldest, -> { order(created_at: :desc) }
-  scope :unique_images, -> (used_recipes) { where.not(id: used_recipes) }
-  scope :last_with_image, -> (used_recipes) {
+  scope :unique_images, ->(used_recipes) { where.not(id: used_recipes) }
+  scope :last_with_image, ->(used_recipes) {
     (unique_images(used_recipes).includes(:recipe_images).where.not(recipe_images: { id: nil })).last
   }
-  scope :filtered_by, -> (term) { where('name ILIKE :search', search: "%#{term}%") }
+  scope :filtered_by, ->(term) { where("name ILIKE :search", search: "%#{term}%") }
 
   def published?
     published == true
@@ -45,14 +45,14 @@ class Recipe < ApplicationRecord
 private
 
   def check_box_presence
-    errors.add(:base, 'Must have at least one category selected') if category_ids.blank?
+    errors.add(:base, "Must have at least one category selected") if category_ids.blank?
   end
 
   def name_on_parts
     parts_count = self.parts.map.count
     parts_name_count = self.parts.map(&:name).reject(&:empty?).count
     if parts_count > 1 && parts_count != parts_name_count
-      errors.add(:base, 'Must name recipe parts if more than 1')
+      errors.add(:base, "Must name recipe parts if more than 1")
     end
   end
 end

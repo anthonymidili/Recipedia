@@ -9,7 +9,7 @@ module ApplicationCable
   protected
 
     def find_verfied_user
-      if verified_user = env['warden'].user
+      if verified_user = env["warden"].user
         verified_user
       else
         nil

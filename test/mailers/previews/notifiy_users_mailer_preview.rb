@@ -1,6 +1,5 @@
 # Preview all emails at http://localhost:3000/rails/mailers/notifiy_users_mailer
 class NotifiyUsersMailerPreview < ActionMailer::Preview
-
   # Preview this email at http://localhost:3000/rails/mailers/notifiy_users_mailer/notifiable
   def notifiable
     NotifiyUsersMailer.notifiable
@@ -15,5 +14,4 @@ class NotifiyUsersMailerPreview < ActionMailer::Preview
   def recipients
     NotifiyUsersMailer.recipients
   end
-
 end

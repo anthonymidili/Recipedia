@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class RecipeImagesControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
@@ -15,5 +15,4 @@ class RecipeImagesControllerTest < ActionDispatch::IntegrationTest
     get recipe_images_destroy_url
     assert_response :success
   end
-
 end

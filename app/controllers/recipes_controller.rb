@@ -1,11 +1,11 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :log_in]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :log_in, :likes]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy, :log_in ]
+  before_action :set_recipe, only: [ :show, :edit, :update, :destroy, :log_in, :likes ]
   before_action :deny_access!,
-  unless: -> { is_author?(@recipe.user) || is_site_admin? }, only: [:edit, :update, :destroy]
-  before_action :set_category, only: [:new, :create, :edit, :update]
-  before_action :set_root_meta_tag_options, only: [:index]
-  before_action :set_recipe_meta_tag_options, only: [:show]
+  unless: -> { is_author?(@recipe.user) || is_site_admin? }, only: [ :edit, :update, :destroy ]
+  before_action :set_category, only: [ :new, :create, :edit, :update ]
+  before_action :set_root_meta_tag_options, only: [ :index ]
+  before_action :set_recipe_meta_tag_options, only: [ :show ]
 
   # GET /recipes
   # GET /recipes.json
@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace("main_recipe_image",
-          partial: 'recipe_images/recipe_image', locals: { recipe_image: @recipe_image })
+          partial: "recipe_images/recipe_image", locals: { recipe_image: @recipe_image })
       end
       format.html
     end
@@ -56,7 +56,7 @@ class RecipesController < ApplicationController
 
       respond_to do |format|
         if @recipe.save
-          format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
+          format.html { redirect_to @recipe, notice: "Recipe was successfully created." }
           format.json { render :show, status: :created, location: @recipe }
         else
           format.html { render :new }
@@ -78,7 +78,7 @@ class RecipesController < ApplicationController
             turbo_stream.replace("unpublished_count", partial: "recipes/unpublished_count")
           ]
         end
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
+        format.html { redirect_to @recipe, notice: "Recipe was successfully updated." }
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.html { render :edit }
@@ -94,7 +94,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       format.html {
         redirect_to recipes_url,
-        notice: 'Recipe was successfully destroyed.',
+        notice: "Recipe was successfully destroyed.",
         status: 303
       }
       format.json { head :no_content }
@@ -118,9 +118,9 @@ private
   def set_recipe
     @recipe =
       Recipe.includes(:user,
-        parts: [:ingredients, :steps],
-        reviews: [user: [avatar_attachment: :blob]],
-        recipe_images: [:user, image_attachment: :blob]).
+        parts: [ :ingredients, :steps ],
+        reviews: [ user: [ avatar_attachment: :blob ] ],
+        recipe_images: [ :user, image_attachment: :blob ]).
         find(params[:id])
   end
 
@@ -131,9 +131,9 @@ private
   # Never trust parameters from the scary internet, only allow the white list through.
   def recipe_params
     params.require(:recipe).permit(:name, :description, :source, :published, category_ids: [],
-      parts_attributes: [:id, :name, :_destroy,
-        ingredients_attributes: [:id, :item, :quantity, :_destroy],
-        steps_attributes: [:id, :description, :step_order, :_destroy]])
+      parts_attributes: [ :id, :name, :_destroy,
+        ingredients_attributes: [ :id, :item, :quantity, :_destroy ],
+        steps_attributes: [ :id, :description, :step_order, :_destroy ] ])
   end
 
   def set_recipe_meta_tag_options
