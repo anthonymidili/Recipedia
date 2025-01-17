@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = current_user.notifications.
-    includes(:notifiable, notifier: [avatar_attachment: :blob])
+    includes(:notifiable, notifier: [ avatar_attachment: :blob ])
 
     MarkNotificationsAsReadJob.set(wait: 10.seconds).perform_later(current_user)
   end
@@ -22,7 +22,7 @@ class NotificationsController < ApplicationController
     @notification_setting = current_user.notification_setting
     respond_to do |format|
       if @notification_setting.update(notification_setting_params)
-        format.html { redirect_to notifications_path, notice: 'Notification settings were successfully updated.' }
+        format.html { redirect_to notifications_path, notice: "Notification settings were successfully updated." }
         format.json { render :setting, status: :ok, location: settings_notifications_path }
       else
         format.html { render :setting }

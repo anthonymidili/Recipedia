@@ -1,9 +1,9 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [ :show ]
   before_action :set_recipe
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_review, only: [ :show, :edit, :update, :destroy ]
   before_action :deny_access!,
-  unless: -> { is_author?(@review.user) }, only: [:edit, :update, :destroy]
+  unless: -> { is_author?(@review.user) }, only: [ :edit, :update, :destroy ]
 
   def show
   end
@@ -26,7 +26,7 @@ class ReviewsController < ApplicationController
           render turbo_stream: turbo_stream.replace("review_form_new_review",
             partial: "reviews/form", locals: { recipe: @recipe, review: @recipe.reviews.new })
         end
-        format.html { redirect_to @recipe, notice: 'Review was successfully created.' }
+        format.html { redirect_to @recipe, notice: "Review was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       else
         format.turbo_stream do
@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
       if @review.update(review_params)
         # Broadcast updated review on list from model.
         format.turbo_stream
-        format.html { redirect_to recipe_path(@recipe, anchor: "review_#{@review.id}"), notice: 'Review was successfully updated.' }
+        format.html { redirect_to recipe_path(@recipe, anchor: "review_#{@review.id}"), notice: "Review was successfully updated." }
         format.json { render :show, status: :ok, location: @recipe }
       else
         format.turbo_stream do
@@ -68,7 +68,7 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       # Broadcast remove review on list from model.
       format.turbo_stream { render turbo_stream: "" }
-      format.html { redirect_to recipe_path(@recipe, anchor: "reviews_header"), notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to recipe_path(@recipe, anchor: "reviews_header"), notice: "Review was successfully destroyed." }
       format.json { head :no_content }
     end
   end

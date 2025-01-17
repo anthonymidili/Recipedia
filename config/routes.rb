@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   # Serve websocket cable requests in-process for Passenger Standalone.
-  mount ActionCable.server => '/cable'
+  mount ActionCable.server => "/cable"
 
-  root 'recipes#index'
+  root "recipes#index"
 
   devise_for :users
 
   resources :recipes do
-    resources :reviews, only: [:show, :create, :edit, :update, :destroy]
-    resources :recipe_images, only: [:new, :create, :destroy]
+    resources :reviews, only: [ :show, :create, :edit, :update, :destroy ]
+    resources :recipe_images, only: [ :new, :create, :destroy ]
     collection do
       get :search
     end
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show, :edit, :update, :destroy] do
+  resources :users, only: [ :index, :show, :edit, :update, :destroy ] do
     member do
       get :log_in
       get :followers
@@ -32,11 +32,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :favoritisms, only: [:create, :destroy]
+  resources :favoritisms, only: [ :create, :destroy ]
 
-  resources :relationships, only: [:create, :destroy]
+  resources :relationships, only: [ :create, :destroy ]
 
-  resources :notifications, only: [:index] do
+  resources :notifications, only: [ :index ] do
     collection do
       patch :mark_as_read
       get :settings
@@ -44,6 +44,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'sitemap.xml', to: 'sites#sitemap', format: :xml
+  get "sitemap.xml", to: "sites#sitemap", format: :xml
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

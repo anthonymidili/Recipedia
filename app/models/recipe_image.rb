@@ -1,5 +1,5 @@
 class RecipeImage < ApplicationRecord
-  after_commit on: [:create] do
+  after_commit on: [ :create ] do
     NotifiyUsersJob.perform_later(self)
   end
 

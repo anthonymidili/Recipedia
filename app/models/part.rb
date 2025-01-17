@@ -10,12 +10,12 @@ class Part < ApplicationRecord
   default_scope -> { order(created_at: :asc) }
 
   def ingredients_list
-    ingredients.map(&:item).join(', ')
+    ingredients.map(&:item).join(", ")
   end
 
 private
 
  def description_blank(attributes)
-   attributes['description'].blank?
+   attributes["description"].blank?
  end
 end

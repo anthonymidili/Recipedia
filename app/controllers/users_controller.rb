@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :log_in]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :log_in, :followers, :following]
-  before_action :remove_avatar, only: [:update]
+  before_action :authenticate_user!, only: [ :edit, :update, :log_in ]
+  before_action :set_user, only: [ :show, :edit, :update, :destroy, :log_in, :followers, :following ]
+  before_action :remove_avatar, only: [ :update ]
   before_action :deny_access!,
-  unless: -> { is_author?(@user) }, only: [:edit, :update]
+  unless: -> { is_author?(@user) }, only: [ :edit, :update ]
 
   def index
-    @users = User.includes(:info, [avatar_attachment: :blob]).all
+    @users = User.includes(:info, [ avatar_attachment: :blob ]).all
     @show_info_body = true
   end
 
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if user_params && @user.update(user_params)
-        format.html { redirect_to @user, notice: 'Avatar was successfully updated.' }
+        format.html { redirect_to @user, notice: "Avatar was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.html {
           redirect_to users_url,
-          notice: 'User was successfully destroyed.',
+          notice: "User was successfully destroyed.",
           status: 303
         }
         format.json { head :no_content }
@@ -62,7 +62,7 @@ private
 
   def user_params
     params.require(:user).permit(:avatar, :remove_avatar,
-      info_attributes: [:id, :body, :_destroy])
+      info_attributes: [ :id, :body, :_destroy ])
   end
 
   def remove_avatar

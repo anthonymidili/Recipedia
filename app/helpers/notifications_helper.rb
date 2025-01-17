@@ -1,18 +1,18 @@
 module NotificationsHelper
   def link_to_notifiable(notifiable, action)
     case notifiable.class.name
-    when 'Recipe'
+    when "Recipe"
       link_to action, recipe_url(notifiable)
-    when 'RecipeImage'
+    when "RecipeImage"
       link_to action, recipe_url(notifiable.recipe, image: notifiable.id)
-    when 'Review'
+    when "Review"
       link_to action, recipe_url(notifiable.recipe, anchor: "review_#{notifiable.id}")
-    when 'Relationship'
+    when "Relationship"
       link_to action, user_url(notifiable.user)
-    when 'Favoritism'
+    when "Favoritism"
       link_to action, user_url(notifiable.user)
     else
-      link_to 'Home',  root_url
+      link_to "Home",  root_url
     end
   end
 

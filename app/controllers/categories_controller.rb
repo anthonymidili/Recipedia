@@ -1,13 +1,13 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create,:edit, :update, :destroy]
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :category_in_use?, only: [:update, :destroy]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy ]
+  before_action :set_category, only: [ :show, :edit, :update, :destroy ]
+  before_action :category_in_use?, only: [ :update, :destroy ]
 
   # GET /categories
   # GET /categories.json
   def index
     @categories =
-      Category.includes(recipes: [recipe_images: [:user, image_attachment: :blob]]).
+      Category.includes(recipes: [ recipe_images: [ :user, image_attachment: :blob ] ]).
       oldest_to_newest
     @used_recipes = []
   end
@@ -56,7 +56,7 @@ class CategoriesController < ApplicationController
             )
           ]
         end
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
+        format.html { redirect_to @category, notice: "Category was successfully created." }
         format.json { render :show, status: :created, location: categories_path }
         format.js
       else
@@ -74,7 +74,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+        format.html { redirect_to @category, notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -90,7 +90,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html {
         redirect_to categories_path,
-        notice: 'Category was successfully destroyed.',
+        notice: "Category was successfully destroyed.",
         status: 303
       }
       format.json { head :no_content }
@@ -99,7 +99,7 @@ class CategoriesController < ApplicationController
 
   def more
     @categories =
-      Category.includes(recipes: [recipe_images: [:user, image_attachment: :blob]]).
+      Category.includes(recipes: [ recipe_images: [ :user, image_attachment: :blob ] ]).
       oldest_to_newest
     @used_recipes = []
   end
@@ -113,7 +113,7 @@ private
   def category_in_use?
     if @category.in_use?
       redirect_to @category, alert: "Can't edit a category that recipes are using."
-      return
+      nil
     end
   end
 

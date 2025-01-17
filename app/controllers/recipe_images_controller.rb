@@ -15,7 +15,7 @@ class RecipeImagesController < ApplicationController
     respond_to do |format|
       if @recipe_image.save
         format.html { redirect_to new_recipe_recipe_image_path(@recipe),
-          notice: 'Images were successfully updated.' }
+          notice: "Images were successfully updated." }
         format.json { render :new, status: :ok, location: new_recipe_recipe_image_path(@recipe) }
       else
         format.html { render :new }
@@ -32,7 +32,7 @@ class RecipeImagesController < ApplicationController
         format.turbo_stream { render turbo_stream: turbo_stream.remove("recipe_image_thumb_#{@recipe_image.id}") }
         format.html {
           redirect_to new_recipe_recipe_image_path(@recipe),
-          notice: 'Image was successfully removed.'
+          notice: "Image was successfully removed."
         }
         format.json { head :no_content }
       end
@@ -50,6 +50,6 @@ private
   end
 
   def no_image_uploaded
-    redirect_to new_recipe_recipe_image_path(@recipe), notice: 'No image uploaded.'
+    redirect_to new_recipe_recipe_image_path(@recipe), notice: "No image uploaded."
   end
 end

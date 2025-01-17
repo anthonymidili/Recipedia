@@ -1,6 +1,6 @@
 class RelationshipsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_relationship, only: [:destroy]
+  before_action :set_relationship, only: [ :destroy ]
 
   # POST /relationships
   # POST /relationships.json
@@ -19,7 +19,7 @@ class RelationshipsController < ApplicationController
             turbo_stream.update("following_count_#{current_user.id}", html: current_user.following.count)
           ]
         end
-        format.html { redirect_to @relationship.followed, notice: 'Relationship was successfully created.' }
+        format.html { redirect_to @relationship.followed, notice: "Relationship was successfully created." }
         format.json { render :show, status: :created, location: @relationship.followed }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class RelationshipsController < ApplicationController
           turbo_stream.update("following_count_#{current_user.id}", html: current_user.following.count)
         ]
       end
-      format.html { redirect_to @user, notice: 'Relationship was successfully destroyed.' }
+      format.html { redirect_to @user, notice: "Relationship was successfully destroyed." }
       format.json { head :no_content }
     end
   end

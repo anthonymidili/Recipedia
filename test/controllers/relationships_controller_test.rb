@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class RelationshipsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -16,8 +16,8 @@ class RelationshipsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create relationship" do
-    assert_difference('Relationship.count') do
-      post relationships_url, params: { relationship: {  } }
+    assert_difference("Relationship.count") do
+      post relationships_url, params: { relationship: {} }
     end
 
     assert_redirected_to relationship_url(Relationship.last)
@@ -34,12 +34,12 @@ class RelationshipsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update relationship" do
-    patch relationship_url(@relationship), params: { relationship: {  } }
+    patch relationship_url(@relationship), params: { relationship: {} }
     assert_redirected_to relationship_url(@relationship)
   end
 
   test "should destroy relationship" do
-    assert_difference('Relationship.count', -1) do
+    assert_difference("Relationship.count", -1) do
       delete relationship_url(@relationship)
     end
 
