@@ -39,7 +39,7 @@ SitemapGenerator::Sitemap.create do
     if recipe.recipe_images.try(:first).try(:image).try(:attached?)
       add recipe_path(recipe), lastmod: recipe.updated_at,
       images: [ {
-        loc: recipe.recipe_images.first.image.url,
+        loc: Rails.application.routes.url_helpers.rails_blob_url(recipe.recipe_images.first.image, disposition: "preview", only_path: false),
         title: recipe.name
       } ]
     else
