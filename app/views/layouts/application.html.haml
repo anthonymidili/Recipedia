@@ -10,7 +10,7 @@
     -# Display media in searches and social media
     = display_meta_tags
 
-    = favicon_link_tag "favicon.png"
+    = favicon_link_tag "favicon.svg"
     %title= content_for?(:title) ? ("Recipedia | #{yield(:title)}").html_safe : 'Recipedia'
 
     = csrf_meta_tags
