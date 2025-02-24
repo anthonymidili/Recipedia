@@ -250,7 +250,7 @@ GEM
     parser (3.3.7.0)
       ast (~> 2.4.1)
       racc
-    passenger (6.0.24)
+    passenger (6.0.26)
       rack (>= 1.6.13)
       rackup (>= 2.0.0)
       rake (>= 12.3.3)
@@ -265,7 +265,7 @@ GEM
       stringio
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.8)
+    rack (3.1.10)
     rack-session (2.1.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
