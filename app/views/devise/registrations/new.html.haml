@@ -25,7 +25,10 @@
         class: "form-label"
         = f.password_field :password_confirmation, autocomplete: 'off',
         id: "devisePassConf", class: "form-control"
-
+      .honeypot.mb-3
+        = label_tag :body, "Body", for: "body", class: "form-label"
+        = text_field_tag :body, nil, id: "body", class: "form-control",
+        placeholder: "!WARNING! Do not fill this out unless you are a BOT!"
       .mb-3
         = f.submit 'Sign up', class: 'btn btn-primary'
 

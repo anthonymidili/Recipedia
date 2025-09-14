@@ -27,3 +27,10 @@ h3 .favor_form_button {
     background-color: $yellow;
   }
 }
+
+.honeypot {
+  position: absolute;
+  visibility: hidden;
+  left: -5000px;
+  top: -5000px;
+}

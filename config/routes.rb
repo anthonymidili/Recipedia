@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root "recipes#index"
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :recipes do
     resources :reviews, only: [ :show, :create, :edit, :update, :destroy ]
