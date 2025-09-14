@@ -1,12 +1,12 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.4"
+ruby "3.4.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.0.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft", "~> 1.1.0"
+gem "propshaft", "~> 1.2.1"
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
 # Use Puma as the app server
@@ -28,12 +28,12 @@ gem "meta-tags", "~> 2.22.0"
 # run [rake sitemap:refresh] in production
 gem "sitemap_generator"
 # Active Storage file processing and storage
-gem "mini_magick"
-gem "image_processing", "~> 1.13.0"
+gem "mini_magick", "~> 5.3.1"
+gem "image_processing", "~> 1.14.0"
 gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
-gem "sidekiq", "~> 7.3.2"
-gem "sidekiq-scheduler", "~> 5.0.3"
+gem "sidekiq", "~> 8.0.7"
+gem "sidekiq-scheduler", "~> 6.0.1"
 # Use Redis for Action Cable
 gem "redis", "~> 5.0"
 
@@ -53,7 +53,7 @@ gem "hirb"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platforms: [ :mri, :mingw, :x64_mingw ]
+  gem "byebug"
 end
 
 group :development do
@@ -71,4 +71,4 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [ :mingw, :mswin, :x64_mingw, :jruby ]
+gem "tzinfo-data" if Gem.win_platform?
