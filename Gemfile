@@ -6,7 +6,7 @@ ruby "3.4.4"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.0.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft", "~> 1.2.1"
+gem "propshaft", "~> 1.3.1"
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
 # Use Puma as the app server
@@ -17,7 +17,7 @@ gem "jbuilder", "~> 2.5"
 # Speed up boot time by caching expensive operations
 gem "bootsnap", require: false
 
-gem "haml-rails", "~> 2.1.0"
+gem "haml-rails", "~> 3.0.0"
 gem "kaminari", "~> 1.2.0"
 # For webpacker, you must use the cocoon gem with the yarn package cocoon-js.
 gem "cocoon", "~> 1.2.10"
