@@ -1,0 +1,28 @@
+one:
+  recipe: one
+  name: Flour
+  quantity: "2"
+  unit: "cups"
+  created_at: 2024-01-01 00:00:00
+
+two:
+  recipe: one
+  name: Sugar
+  quantity: "1"
+  unit: "cup"
+  created_at: 2024-01-02 00:00:00
+
+three:
+  recipe: two
+  name: Salt
+  quantity: "1"
+  unit: "tsp"
+  created_at: 2024-01-03 00:00:00
+
+four:
+  recipe: four
+  name: Lettuce
+  quantity: "2"
+  unit: "cups"
+  created_at: 2024-01-04 00:00:00
+

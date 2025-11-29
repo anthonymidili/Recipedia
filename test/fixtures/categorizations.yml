@@ -1,0 +1,19 @@
+one:
+  recipe: one
+  category: one
+
+two:
+  recipe: one
+  category: two
+
+three:
+  recipe: two
+  category: one
+
+four:
+  recipe: three
+  category: three
+
+five:
+  recipe: four
+  category: three

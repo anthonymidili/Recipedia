@@ -1,0 +1,19 @@
+one:
+  recipe: one
+  step_number: 1
+  description: First step of recipe one
+
+two:
+  recipe: one
+  step_number: 2
+  description: Second step of recipe one
+
+three:
+  recipe: two
+  step_number: 1
+  description: First step of recipe two
+
+four:
+  recipe: four
+  step_number: 1
+  description: First step of recipe four

@@ -1,0 +1,23 @@
+one:
+  name: Pasta Recipe
+  user: one
+  published: true
+  created_at: 2024-01-01 00:00:00
+
+two:
+  name: Soup Recipe
+  user: one
+  published: true
+  created_at: 2024-01-02 00:00:00
+
+three:
+  name: Draft Recipe
+  user: two
+  published: false
+  created_at: 2024-01-03 00:00:00
+
+four:
+  name: Salad Recipe
+  user: two
+  published: true
+  created_at: 2024-01-04 00:00:00
