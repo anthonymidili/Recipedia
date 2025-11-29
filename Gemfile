@@ -27,9 +27,9 @@ gem "meta-tags", "~> 2.22.0"
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem "sitemap_generator"
-# Active Storage file processing and storage
-gem "mini_magick", "~> 5.3.1"
-gem "image_processing", "~> 1.14.0"
+# Use ActiveStorage variant
+gem "ruby-vips"
+gem "image_processing", "~> 1.6"
 gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
 gem "sidekiq", "~> 8.0.7"
@@ -54,6 +54,7 @@ gem "hirb"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug"
+  gem "dotenv-rails", "~> 3.1"
 end
 
 group :development do

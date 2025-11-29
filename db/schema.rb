@@ -10,39 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2022_09_18_114748) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_29_152819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
-    t.string "name", null: false
     t.text "body"
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum"
+    t.string "content_type"
     t.datetime "created_at", null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -54,8 +54,8 @@ ActiveRecord::Schema[7.2].define(version: 2022_09_18_114748) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.citext "name"
     t.datetime "created_at", null: false
+    t.citext "name"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_categories_on_user_id"
@@ -63,18 +63,18 @@ ActiveRecord::Schema[7.2].define(version: 2022_09_18_114748) do
 
   create_table "categorizations", force: :cascade do |t|
     t.bigint "category_id", null: false
-    t.bigint "recipe_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "recipe_id", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_categorizations_on_category_id"
     t.index ["recipe_id"], name: "index_categorizations_on_recipe_id"
   end
 
   create_table "favoritisms", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "recipe_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["recipe_id"], name: "index_favoritisms_on_recipe_id"
     t.index ["user_id", "recipe_id"], name: "index_favoritisms_on_user_id_and_recipe_id", unique: true
     t.index ["user_id"], name: "index_favoritisms_on_user_id"
@@ -82,44 +82,44 @@ ActiveRecord::Schema[7.2].define(version: 2022_09_18_114748) do
 
   create_table "infos", force: :cascade do |t|
     t.text "body"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_infos_on_user_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.citext "item"
+    t.bigint "part_id", null: false
     t.string "quantity"
     t.bigint "recipe_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "part_id", null: false
     t.index ["part_id"], name: "index_ingredients_on_part_id"
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
   end
 
   create_table "notification_settings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.boolean "follows_you", default: true
+    t.boolean "image_uploaded", default: true
     t.boolean "receive_email", default: true
     t.boolean "recipe_created", default: true
-    t.boolean "review_created", default: true
-    t.boolean "follows_you", default: true
     t.boolean "recipe_favored", default: true
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
+    t.boolean "review_created", default: true
     t.datetime "updated_at", null: false
-    t.boolean "image_uploaded", default: true
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_notification_settings_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.string "notifiable_type", null: false
+    t.string "action", null: false
+    t.datetime "created_at", null: false
+    t.boolean "is_read", default: false
     t.bigint "notifiable_id", null: false
+    t.string "notifiable_type", null: false
     t.bigint "notifier_id", null: false
     t.bigint "recipient_id", null: false
-    t.string "action", null: false
-    t.boolean "is_read", default: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
     t.index ["notifier_id"], name: "index_notifications_on_notifier_id"
@@ -127,76 +127,76 @@ ActiveRecord::Schema[7.2].define(version: 2022_09_18_114748) do
   end
 
   create_table "parts", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "name"
     t.bigint "recipe_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_parts_on_recipe_id"
   end
 
   create_table "recipe_images", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "recipe_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["recipe_id"], name: "index_recipe_images_on_recipe_id"
     t.index ["user_id"], name: "index_recipe_images_on_user_id"
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.citext "name"
     t.datetime "created_at", null: false
+    t.citext "name"
+    t.boolean "published", default: false
+    t.string "source"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.string "source"
-    t.boolean "published", default: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "followed_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "followed_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["user_id", "followed_id"], name: "index_relationships_on_user_id_and_followed_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
+    t.bigint "recipe_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["recipe_id"], name: "index_reviews_on_recipe_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "steps", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.bigint "part_id", null: false
+    t.bigint "recipe_id", null: false
     t.integer "step_order", null: false
+    t.datetime "updated_at", null: false
     t.index ["part_id"], name: "index_steps_on_part_id"
     t.index ["recipe_id"], name: "index_steps_on_recipe_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.citext "username", null: false
+    t.datetime "created_at", null: false
+    t.datetime "current_sign_in_at"
+    t.inet "current_sign_in_ip"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.integer "sign_in_count", default: 0, null: false
     t.citext "slug", null: false
+    t.datetime "updated_at", null: false
+    t.citext "username", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
