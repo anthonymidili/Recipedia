@@ -57,6 +57,14 @@ group :development, :test do
   gem "dotenv-rails", "~> 3.1"
 end
 
+group :test do
+  gem "rails-controller-testing", "~> 1.0"
+  gem "factory_bot_rails"
+  # Required for Rails system tests (ActionDispatch::SystemTestCase)
+  gem "capybara", "~> 3.39"
+  gem "selenium-webdriver", "~> 4.26"
+end
+
 group :development do
   # IRB colors.
   gem "irbtools", require: "irbtools/binding"

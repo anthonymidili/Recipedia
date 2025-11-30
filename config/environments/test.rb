@@ -31,6 +31,11 @@ Rails.application.configure do
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
 
+  # Set default URL options for ActiveStorage
+  config.after_initialize do
+    ActiveStorage::Current.url_options = { host: "http://www.example.com" }
+  end
+
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.

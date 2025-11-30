@@ -1,48 +1,45 @@
 require "test_helper"
 
 class RelationshipsControllerTest < ActionDispatch::IntegrationTest
-  setup do
+  def setup
+    @user = users(:one)
+    @other_user = users(:two)
     @relationship = relationships(:one)
   end
 
-  test "should get index" do
-    get relationships_url
-    assert_response :success
+  test "should require authentication to create relationship" do
+    assert_no_difference("Relationship.count") do
+      post relationships_url, params: { relationship: { followed_id: @other_user.id } }
+    end
+    assert_redirected_to new_user_session_path
   end
 
-  test "should get new" do
-    get new_relationship_url
-    assert_response :success
-  end
-
-  test "should create relationship" do
+  test "should create relationship when authenticated" do
+    sign_in(@user)
+    # Clear any existing relationships to ensure clean test
+    Relationship.destroy_all
+    # Use users(:three) to avoid existing relationship with users(:two)
+    target_user = users(:three)
     assert_difference("Relationship.count") do
-      post relationships_url, params: { relationship: {} }
+      post relationships_url, params: { relationship: { followed_id: target_user.id } }
     end
-
-    assert_redirected_to relationship_url(Relationship.last)
   end
 
-  test "should show relationship" do
-    get relationship_url(@relationship)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_relationship_url(@relationship)
-    assert_response :success
-  end
-
-  test "should update relationship" do
-    patch relationship_url(@relationship), params: { relationship: {} }
-    assert_redirected_to relationship_url(@relationship)
-  end
-
-  test "should destroy relationship" do
+  test "should destroy relationship when authenticated" do
+    sign_in(@user)
+    relationship = Relationship.create!(user: @user, followed: @other_user)
     assert_difference("Relationship.count", -1) do
-      delete relationship_url(@relationship)
+      delete relationship_url(relationship)
     end
+  end
 
-    assert_redirected_to relationships_url
+  test "should not allow destroying other user relationship" do
+    sign_in(@other_user)
+    followed_user = users(:three)
+    relationship = Relationship.create!(user: @user, followed: followed_user)
+
+    assert_no_difference("Relationship.count") do
+      delete relationship_url(relationship)
+    end
   end
 end

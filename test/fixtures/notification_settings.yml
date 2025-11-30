@@ -1,0 +1,15 @@
+one:
+  receive_email: false
+  recipe_created: false
+  review_created: false
+  follows_you: false
+  recipe_favored: false
+  user: one
+
+two:
+  receive_email: false
+  recipe_created: false
+  review_created: false
+  follows_you: false
+  recipe_favored: false
+  user: two
