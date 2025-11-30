@@ -1,5 +1,0 @@
-# GitHub Actions
-.github/workflows/test.yml
-
-# CI test artifacts
-coverage/
