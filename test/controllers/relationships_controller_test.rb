@@ -9,15 +9,19 @@ class RelationshipsControllerTest < ActionDispatch::IntegrationTest
 
   test "should require authentication to create relationship" do
     assert_no_difference("Relationship.count") do
-      post relationships_url, params: { followed_id: @other_user.id }
+      post relationships_url, params: { relationship: { followed_id: @other_user.id } }
     end
     assert_redirected_to new_user_session_path
   end
 
   test "should create relationship when authenticated" do
     sign_in(@user)
+    # Clear any existing relationships to ensure clean test
+    Relationship.destroy_all
+    # Use users(:three) to avoid existing relationship with users(:two)
+    target_user = users(:three)
     assert_difference("Relationship.count") do
-      post relationships_url, params: { followed_id: @other_user.id }
+      post relationships_url, params: { relationship: { followed_id: target_user.id } }
     end
   end
 

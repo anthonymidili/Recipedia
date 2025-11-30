@@ -1,27 +1,16 @@
 require "test_helper"
 
 class NotifiyUsersMailerTest < ActionMailer::TestCase
-  test "notifiable" do
-    mail = NotifiyUsersMailer.notifiable
-    assert_equal "Notifiable", mail.subject
-    assert_equal [ "to@example.org" ], mail.to
-    assert_equal [ "from@example.com" ], mail.from
-    assert_match "Hi", mail.body.encoded
-  end
+  test "activity email" do
+    notifiable = recipes(:one)
+    notifier = users(:one)
+    recipients = [ "test@example.com" ]
+    action_statement = "created a new recipe"
 
-  test "notifier" do
-    mail = NotifiyUsersMailer.notifier
-    assert_equal "Notifier", mail.subject
-    assert_equal [ "to@example.org" ], mail.to
-    assert_equal [ "from@example.com" ], mail.from
-    assert_match "Hi", mail.body.encoded
-  end
+    mail = NotifiyUsersMailer.activity(notifiable, notifier, recipients, action_statement)
 
-  test "recipients" do
-    mail = NotifiyUsersMailer.recipients
-    assert_equal "Recipients", mail.subject
-    assert_equal [ "to@example.org" ], mail.to
-    assert_equal [ "from@example.com" ], mail.from
-    assert_match "Hi", mail.body.encoded
+    assert_equal "#{notifier.username} #{action_statement}", mail.subject
+    assert_equal recipients, mail.bcc
+    assert_match notifier.username, mail.body.encoded
   end
 end

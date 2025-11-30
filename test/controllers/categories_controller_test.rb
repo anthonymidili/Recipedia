@@ -59,19 +59,23 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update category when owner" do
     sign_in(@user)
+    # Create a category not in use (no recipes attached)
+    unused_category = FactoryBot.create(:category, user: @user)
     new_name = "Updated Category"
-    patch category_url(@category), params: {
+    patch category_url(unused_category), params: {
       category: { name: new_name }
     }
-    assert_redirected_to category_url(@category)
-    @category.reload
-    assert_equal new_name, @category.name
+    assert_redirected_to category_url(unused_category)
+    unused_category.reload
+    assert_equal new_name, unused_category.name
   end
 
   test "should destroy category when owner" do
     sign_in(@user)
-    category_id = @category.id
-    delete category_url(@category)
+    # Create a category not in use (no recipes attached)
+    unused_category = FactoryBot.create(:category, user: @user)
+    category_id = unused_category.id
+    delete category_url(unused_category)
     assert_not Category.exists?(category_id)
   end
 end

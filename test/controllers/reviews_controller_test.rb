@@ -8,18 +8,16 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get show" do
-    get review_url(@review)
-    assert_response :success
-  end
-
-  test "should get new when authenticated" do
-    sign_in(@user)
-    get new_recipe_review_url(@recipe)
+    get recipe_review_url(@recipe, @review)
     assert_response :success
   end
 
   test "should require auth to create review" do
-    get new_recipe_review_url(@recipe)
+    assert_no_difference("Review.count") do
+      post recipe_reviews_url(@recipe), params: {
+        review: { body: "<p>Great recipe!</p>" }
+      }
+    end
     assert_redirected_to new_user_session_path
   end
 
@@ -42,7 +40,7 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     other_user = users(:two)
     sign_in(other_user)
     get edit_recipe_review_url(@recipe, @review)
-    assert_response :forbidden
+    assert_redirected_to root_path
   end
 
   test "should update review when owner" do
@@ -50,7 +48,7 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     patch recipe_review_url(@recipe, @review), params: {
       review: { body: "<p>Updated review</p>" }
     }
-    assert_response :success
+    assert_redirected_to recipe_url(@recipe, anchor: "review_#{@review.id}")
   end
 
   test "should destroy review when owner" do

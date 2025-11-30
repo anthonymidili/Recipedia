@@ -19,21 +19,23 @@ class NotificationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should mark notifications as read when authenticated" do
     sign_in(@user)
-    patch notifications_mark_as_read_url
+    patch mark_as_read_notifications_url
     assert_response :success
   end
 
   test "should get settings when authenticated" do
     sign_in(@user)
-    get notifications_settings_url
+    get settings_notifications_url
     assert_response :success
   end
 
   test "should update settings when authenticated" do
     sign_in(@user)
-    patch notifications_update_settings_url, params: {
+    # Ensure notification_setting exists
+    @user.create_notification_setting! unless @user.notification_setting
+    patch update_settings_notifications_url, params: {
       notification_setting: { receive_email: false }
     }
-    assert_response :success
+    assert_redirected_to notifications_path
   end
 end

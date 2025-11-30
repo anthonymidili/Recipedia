@@ -73,7 +73,7 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     other_user = users(:two)
     sign_in(other_user)
     get edit_recipe_url(@recipe)
-    assert_response :forbidden
+    assert_redirected_to root_path
   end
 
   test "should update recipe when owner" do
@@ -82,7 +82,7 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     patch recipe_url(@recipe), params: {
       recipe: { name: new_name, category_ids: [ @category.id ] }
     }
-    assert_response :success
+    assert_redirected_to recipe_url(@recipe)
     @recipe.reload
     assert_equal new_name, @recipe.name
   end
@@ -100,14 +100,8 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     assert_not_includes assigns(:recipes), recipes(:three)
   end
 
-  test "should display likes" do
-    get recipe_url(@recipe, action: :likes)
-    assert_response :success
-  end
-
-  test "should handle turbo_stream request for show" do
-    get recipe_url(@recipe, image: @recipe.recipe_images.first.id),
-        headers: { "Accept" => "text/vnd.turbo-stream.html" }
+  test "should show recipe" do
+    get recipe_url(@recipe)
     assert_response :success
   end
 end

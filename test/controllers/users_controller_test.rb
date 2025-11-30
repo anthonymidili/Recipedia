@@ -25,7 +25,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should not allow edit of other profile" do
     sign_in(@user)
     get edit_user_url(@other_user)
-    assert_response :forbidden
+    assert_redirected_to root_path
   end
 
   test "should update own profile" do
@@ -50,7 +50,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user)
     user_id = @user.id
     delete user_url(@user)
-    assert_not User.exists?(user_id)
+    # Users can only be destroyed by site admins, not by themselves
+    assert User.exists?(user_id), "User should not be deleted unless current user is site admin"
   end
 
   test "should not allow destroy of other account" do

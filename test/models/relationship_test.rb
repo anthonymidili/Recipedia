@@ -33,9 +33,10 @@ class RelationshipTest < ActiveSupport::TestCase
   end
 
   test "can create multiple following relationships" do
-    user = users(:one)
-    follower1 = users(:two)
-    follower2 = users(:three)
+    # Create fresh users to avoid fixture conflicts
+    user = FactoryBot.create(:user)
+    follower1 = FactoryBot.create(:user)
+    follower2 = FactoryBot.create(:user)
 
     rel1 = Relationship.create!(user: follower1, followed: user)
     rel2 = Relationship.create!(user: follower2, followed: user)
@@ -48,14 +49,17 @@ class RelationshipTest < ActiveSupport::TestCase
     user = users(:one)
     follower = users(:two)
 
-    assert_includes user.followers, follower
-    assert_not_includes user.following, follower
-    assert_includes follower.following, user
+    # relationships(:one) has user: two, followed: one
+    # So users(:one) is followed by users(:two)
+    assert_includes user.followers, follower, "users(:one) should have users(:two) as follower"
+    assert_not_includes user.following, follower, "users(:one) should not be following users(:two)"
+    assert_includes follower.following, user, "users(:two) should be following users(:one)"
   end
 
   test "user can follow and be followed by same user" do
-    user1 = users(:one)
-    user2 = users(:two)
+    # Create fresh users to avoid fixture conflicts
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
 
     Relationship.create!(user: user1, followed: user2)
     Relationship.create!(user: user2, followed: user1)

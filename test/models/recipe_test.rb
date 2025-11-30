@@ -29,14 +29,14 @@ class RecipeTest < ActiveSupport::TestCase
 
   test "recipe requires part names if more than one part" do
     category = create_category(@user)
-    recipe = @user.recipes.build(
+    recipe = Recipe.new(
+      user: @user,
       name: "Test Recipe",
-      category_ids: [ category.id ],
-      parts_attributes: [
-        { name: "Part 1" },
-        { name: "" }
-      ]
+      category_ids: [ category.id ]
     )
+    # Build parts directly to ensure both are created (nested attributes with blank name gets rejected)
+    recipe.parts.build(name: "Part 1")
+    recipe.parts.build(name: "")
     assert_not recipe.valid?
     assert_includes recipe.errors[:base], "Must name recipe parts if more than 1"
   end
@@ -73,11 +73,13 @@ class RecipeTest < ActiveSupport::TestCase
   end
 
   test "recipe has many reviews" do
+    # Ensure at least one review exists
+    reviews(:one)
     assert @recipe.reviews.count > 0
   end
 
   test "recipe has many recipe images" do
-    assert @recipe.has_many_association?(:recipe_images)
+    assert_kind_of ActiveRecord::Associations::CollectionProxy, @recipe.recipe_images
   end
 
   test "recipe belongs to user" do
@@ -138,9 +140,14 @@ class RecipeTest < ActiveSupport::TestCase
   end
 
   test "recipe last_with_image scope returns last recipe with image" do
+    # Ensure there's a recipe with image
+    recipe_with_image = FactoryBot.create(:recipe)
+    FactoryBot.create(:recipe_image, recipe: recipe_with_image, user: recipe_with_image.user)
+
     used = []
     last_recipe = Recipe.last_with_image(used)
     assert_not_nil last_recipe
+    assert_respond_to last_recipe, :recipe_images
     assert last_recipe.recipe_images.any?
   end
 end

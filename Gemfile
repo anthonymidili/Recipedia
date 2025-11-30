@@ -58,7 +58,11 @@ group :development, :test do
 end
 
 group :test do
+  gem "rails-controller-testing", "~> 1.0"
   gem "factory_bot_rails"
+  # Required for Rails system tests (ActionDispatch::SystemTestCase)
+  gem "capybara", "~> 3.39"
+  gem "selenium-webdriver", "~> 4.26"
 end
 
 group :development do

@@ -7,10 +7,10 @@ class IngredientTest < ActiveSupport::TestCase
   end
 
   test "should create ingredient with valid attributes" do
-    ingredient = @recipe.ingredients.build(
-      name: "Flour",
-      quantity: "2",
-      unit: "cups"
+    part = @recipe.parts.first || @recipe.parts.create!(name: "Main")
+    ingredient = part.ingredients.build(
+      item: "Flour",
+      quantity: "2 cups"
     )
     assert ingredient.save
   end
@@ -20,25 +20,25 @@ class IngredientTest < ActiveSupport::TestCase
   end
 
   test "ingredient can have different units" do
+    part = @recipe.parts.first || @recipe.parts.create!(name: "Main")
     units = [ "cup", "tbsp", "tsp", "ml", "g", "oz" ]
     units.each do |unit|
-      ingredient = @recipe.ingredients.build(
-        name: "Test",
-        quantity: "1",
-        unit: unit
+      ingredient = part.ingredients.build(
+        item: "Test",
+        quantity: "1 #{unit}"
       )
       assert ingredient.valid?
     end
   end
 
   test "ingredient stores quantity as string" do
-    ingredient = @recipe.ingredients.build(
-      name: "Salt",
-      quantity: "1.5",
-      unit: "tsp"
+    part = @recipe.parts.first || @recipe.parts.create!(name: "Main")
+    ingredient = part.ingredients.build(
+      item: "Salt",
+      quantity: "1.5 tsp"
     )
     assert ingredient.save
-    assert_equal "1.5", ingredient.quantity
+    assert_equal "1.5 tsp", ingredient.quantity
   end
 end
 
@@ -49,8 +49,9 @@ class StepTest < ActiveSupport::TestCase
   end
 
   test "should create step with valid attributes" do
-    step = @recipe.steps.build(
-      step_number: 3,
+    part = @recipe.parts.first || @recipe.parts.create!(name: "Main")
+    step = part.steps.build(
+      step_order: 3,
       description: "Mix ingredients"
     )
     assert step.save
@@ -61,13 +62,14 @@ class StepTest < ActiveSupport::TestCase
   end
 
   test "step stores description" do
+    part = @recipe.parts.first || @recipe.parts.create!(name: "Main")
     description = "Preheat oven to 350°F"
-    step = @recipe.steps.build(
-      step_number: 1,
+    step = part.steps.build(
+      step_order: 1,
       description: description
     )
     assert step.save
-    assert_equal description, step.description
+    assert_equal description, step.description.to_plain_text
   end
 end
 
@@ -138,6 +140,9 @@ class CategorizationTest < ActiveSupport::TestCase
   test "recipe can have multiple categories" do
     cat1 = categories(:one)
     cat2 = categories(:two)
+
+    # Clear any pre-existing categories from fixture wiring
+    @recipe.categories.clear
 
     @recipe.categorizations.create!(category: cat1)
     @recipe.categorizations.create!(category: cat2)
