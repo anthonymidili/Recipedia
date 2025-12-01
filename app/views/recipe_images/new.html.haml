@@ -1,6 +1,6 @@
 = form_with model: [@recipe, @recipe_image], local: true, multipart: true do |f|
   .row
-    .col-md-6
+    .col-md-6.col-12
       .callout-transparent
         = render 'notifications/error_messages', object: f.object
         .mb-3
@@ -13,19 +13,20 @@
           accept: 'image/png,image/gif,image/jpeg', class: "form-control"
         = f.submit 'Upload Image', class: 'btn btn-primary'
       %p= link_to 'Finished Editing', @recipe, class: 'btn btn-warning'
-
-    - if @recipe.recipe_images
-      - @recipe.recipe_images.by_original_first.each do |recipe_image|
-        - if recipe_image.image.attached?
-          .col-3.mb-3{id: "recipe_image_thumb_#{recipe_image.id}"}
-            = link_to recipe_image.user do
-              Uploaded by:
-              %b= recipe_image.user.username
-            .img-thumbnail
-              = image_tag large_image(recipe_image.image), class: "pb-1"
-              - if is_author?(@recipe.user) || is_author?(recipe_image.user)
-                %br/
-                .center-text
-                  = link_to 'Remove Image', [@recipe, recipe_image],
-                  class: 'btn btn-danger btn-small',
-                  data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
+  .row
+    .col-md-3.col-6
+      - if @recipe.recipe_images
+        - @recipe.recipe_images.by_original_first.each do |recipe_image|
+          - if recipe_image.image.attached?
+            .mb-3{id: "recipe_image_thumb_#{recipe_image.id}"}
+              = link_to recipe_image.user do
+                Uploaded by:
+                %b= recipe_image.user.username
+              .img-thumbnail
+                = image_tag large_image(recipe_image.image), class: "pb-1"
+                - if is_author?(@recipe.user) || is_author?(recipe_image.user)
+                  %br/
+                  .center-text
+                    = link_to 'Remove Image', [@recipe, recipe_image],
+                    class: 'btn btn-danger btn-small',
+                    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
