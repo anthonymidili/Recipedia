@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.4"
+ruby "3.4.8"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.1.1"
@@ -32,7 +32,7 @@ gem "ruby-vips"
 gem "image_processing", "~> 1.6"
 gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
-gem "sidekiq", "~> 8.0.7"
+gem "sidekiq", "~> 8.1.0"
 gem "sidekiq-scheduler", "~> 6.0.1"
 # Use Redis for Action Cable
 gem "redis", "~> 5.0"
