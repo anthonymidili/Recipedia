@@ -25,6 +25,12 @@
         %p.callout-transparent
           %b Assigned Categories:
           = links_to_categories(@recipe)
+    .row
+      .col-12
+        .form-check.form-switch.switch-container{data: { controller: "wake-lock" }}
+          %input#keep-awake.form-check-input.wake-lock-toggle{type: "checkbox", 
+          data: { action: "change->wake-lock#toggle", "wake-lock-target": "checkbox" }}
+          %label.form-check-label{for: "keep-awake"} Keep screen awake
   .row
     .col-12
       .hide-on-print
