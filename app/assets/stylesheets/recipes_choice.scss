@@ -3,7 +3,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   
   &:hover {
-    transform: translateY(-5px);
+    // transform: translateY(-5px);
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
   }
 }
@@ -15,5 +15,20 @@
   
   .btn {
     border-radius: 0.5rem;
+  }
+
+  .icon-create {
+    font-size: 3rem;
+    color: #198754;
+  }
+
+  .icon-import {
+    font-size: 3rem;
+    color: #0d6efd;
+  }
+
+  .icon-link {
+    font-size: 1.25rem;
+    color: #0d6efd;
   }
 }
