@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :recipe_images, only: [ :new, :create, :destroy ]
     collection do
       get :search
+      post :import
+      get :choice
     end
     member do
       get :log_in
@@ -45,5 +47,6 @@ Rails.application.routes.draw do
   end
 
   get "sitemap.xml", to: "sites#sitemap", format: :xml
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

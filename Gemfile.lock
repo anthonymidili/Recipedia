@@ -484,6 +484,7 @@ DEPENDENCIES
   kaminari (~> 1.2.0)
   listen (~> 3.3)
   meta-tags (~> 2.22.0)
+  nokogiri
   passenger (>= 5.0.25)
   pg (>= 0.18, < 2.0)
   propshaft (~> 1.3.1)

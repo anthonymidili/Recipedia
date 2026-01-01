@@ -48,6 +48,8 @@ gem "stimulus-rails"
 
 # Console tables.
 gem "hirb"
+
+gem "nokogiri"
 # ActionCable to AnyCable
 # gem "anycable-rails", "~> 1.0"
 

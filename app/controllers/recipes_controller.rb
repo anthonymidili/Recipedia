@@ -7,6 +7,8 @@ class RecipesController < ApplicationController
   before_action :set_root_meta_tag_options, only: [ :index ]
   before_action :set_recipe_meta_tag_options, only: [ :show ]
 
+  skip_before_action :verify_authenticity_token, only: [ :import ]
+
   # GET /recipes
   # GET /recipes.json
   def index
@@ -41,6 +43,37 @@ class RecipesController < ApplicationController
   def new
     @recipe = current_user.recipes.build
     @recipe.parts.build
+
+    # Check for imported data
+    if session[:import_id]
+      import = current_user.imports.find_by(id: session[:import_id])
+      if import
+        @recipe.name = import.title
+        @recipe.description = import.description
+        @recipe.source = import.source
+
+        # Build ingredients (format: "quantity|item" or "|item" for no quantity)
+        import.ingredients.split("\n").each do |ing|
+          parts = ing.split("|", 2)
+          quantity = parts[0].presence
+          item = parts[1] || ing # Fallback to full string if no pipe found
+          @recipe.parts.first.ingredients.build(quantity: quantity, item: item)
+        end
+
+        # Build steps
+        import.instructions.split("\n").each do |inst|
+          @recipe.parts.first.steps.build(description: inst)
+        end
+
+        # Clean up the import
+        import.destroy
+        session.delete(:import_id)
+      end
+    else
+      # Default empty fields for manual creation
+      @recipe.parts.first.ingredients.build
+      @recipe.parts.first.steps.build
+    end
   end
 
   # GET /recipes/1/edit
@@ -106,11 +139,70 @@ class RecipesController < ApplicationController
     render json: @recipes.pluck(:name)
   end
 
+  def choice
+  end
+
   def log_in
     redirect_to @recipe
   end
 
   def likes
+  end
+
+  def import
+    url = params[:url]
+
+    begin
+      importer = RecipeImporter.new(url)
+      data = importer.import
+
+      # Validate that we found recipe content
+      if data[:ingredients].empty? && data[:instructions].empty?
+        Rails.logger.warn "No recipe content found for URL: #{url}"
+        respond_to do |format|
+          format.json { render json: { error: "No recipe ingredients or instructions found on this page. Please make sure you're importing from a recipe page, not an article or review page." }, status: :unprocessable_entity }
+          format.html do
+            flash[:alert] = "No recipe ingredients or instructions found on this page. Please make sure you're importing from a recipe page, not an article or review page."
+            redirect_to choice_recipes_path
+          end
+        end
+        return
+      end
+
+      respond_to do |format|
+        format.json { render json: data }
+        format.html do
+          # Format ingredients with quantity and item separated by pipe
+          formatted_ingredients = data[:ingredients].map do |ing|
+            if ing[:quantity].present?
+              "#{ing[:quantity]}|#{ing[:item]}"
+            else
+              "|#{ing[:item]}"
+            end
+          end
+
+          import = current_user.imports.create!(
+            title: data[:name],
+            description: data[:description],
+            source: data[:source],
+            ingredients: formatted_ingredients.join("\n"),
+            instructions: data[:instructions].join("\n")
+          )
+          session[:import_id] = import.id
+          redirect_to new_recipe_path
+        end
+      end
+    rescue => e
+      Rails.logger.error "Import error for #{url}: #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
+      respond_to do |format|
+        format.json { render json: { error: e.message }, status: :unprocessable_entity }
+        format.html do
+          flash[:alert] = "Failed to import recipe: #{e.message}"
+          redirect_to choice_recipes_path
+        end
+      end
+    end
   end
 
 private
