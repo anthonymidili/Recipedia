@@ -1,4 +1,8 @@
 module RecipesHelper
+  def recipe_form_url(recipe)
+    recipe.new_record? ? recipes_path : user_recipe_path(recipe.user.slug, recipe.slug)
+  end
+
   def links_to_categories(recipe)
     recipe.categories.map { |category|
       link_to category.name, category

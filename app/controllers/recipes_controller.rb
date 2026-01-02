@@ -189,7 +189,17 @@ class RecipesController < ApplicationController
             instructions: data[:instructions].join("\n")
           )
           session[:import_id] = import.id
+          flash[:warning] = "Recipe imported successfully! Please double-check all fields against the original recipe before saving."
           redirect_to new_recipe_path
+        end
+      end
+    rescue RecipeImporter::ImportError => e
+      Rails.logger.warn "Import blocked for #{url}: #{e.message}"
+      respond_to do |format|
+        format.json { render json: { error: e.message }, status: :unprocessable_entity }
+        format.html do
+          flash[:alert] = e.message
+          redirect_to choice_recipes_path
         end
       end
     rescue => e
