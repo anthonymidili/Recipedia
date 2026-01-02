@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_save :set_slug
+  before_destroy :reassign_content_to_admin
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -102,6 +103,15 @@ private
   # Setter
   def set_slug
     self.slug = username.parameterize
+  end
+
+  # Reassign recipes and categories to admin before deletion
+  def reassign_content_to_admin
+    admin = User.find_by(email: ENV.fetch("SITE_ADMIN", nil))
+    return unless admin && admin != self
+
+    recipes.update_all(user_id: admin.id)
+    categories.update_all(user_id: admin.id)
   end
 
   def self.receive_notification_type(notifiable)

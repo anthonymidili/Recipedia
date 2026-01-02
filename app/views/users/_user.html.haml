@@ -1,36 +1,37 @@
-%hr/
-.row
-  .col-8.col-md-9.col-lg-10
-    .mb-3
-      = link_to user, class: "black-text" do
-        - if user.avatar.attached?
-          = image_tag avatar_image(user.avatar, 50), class: 'img-thumbnail'
-        - else
-          %i.fas.fa-user.default-avatar-50
-        %b= user.username
-        - if is_site_admin?
-          = user.email
-        %br/
-        = link_to user_path(user, anchor: 'submitted') do
-          Submitted:
-          = user.recipes.by_published.count
-        = link_to user_path(user, anchor: 'favorites'), class: "ps-3" do
-          Favorites:
-          = user.favorite_recipes.count
-        - if is_site_admin?
-          = link_to user_path(user, anchor: "drafts"), class: "ps-3" do
-            Drafts:
-            = user.recipes.by_unpublished.count
+= turbo_frame_tag dom_id(user) do
+  %hr/
+  .row
+    .col-8.col-md-9.col-lg-10
+      .mb-3
+        = link_to user, class: "black-text", data: { turbo: false } do
+          - if user.avatar.attached?
+            = image_tag avatar_image(user.avatar, 50), class: 'img-thumbnail'
+          - else
+            %i.fas.fa-user.default-avatar-50
+          %b= user.username
+          - if is_site_admin?
+            = user.email
+          %br/
+          = link_to user_path(user, anchor: 'submitted'), data: { turbo: false } do
+            Submitted:
+            = user.recipes.by_published.count
+          = link_to user_path(user, anchor: 'favorites'), class: "ps-3", data: { turbo: false } do
+            Favorites:
+            = user.favorite_recipes.count
+          - if is_site_admin?
+            = link_to user_path(user, anchor: "drafts"), class: "ps-3", data: { turbo: false } do
+              Drafts:
+              = user.recipes.by_unpublished.count
 
-  .col-4.col-md-3.col-lg-2
-    .mb-3
-      = render 'relationships/form', user: user
+    .col-4.col-md-3.col-lg-2
+      .mb-3
+        = render 'relationships/form', user: user
 
-.row
-  .col-12.mb-3
-    .autolinks= simple_format(truncate(user.info.body, length: 120))
-- if is_site_admin? && !user_is_site_admin?(user)
-  .col-12.mb-3
-    = link_to "Permanently Delete User", user_path(user),
-    class: "btn btn-danger btn-sm",
-    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
+  .row
+    .col-12.mb-3
+      .autolinks= simple_format(truncate(user.info.body, length: 120))
+  - if is_site_admin? && !user_is_site_admin?(user)
+    .col-12.mb-3
+      = link_to "Permanently Delete User", user_path(user),
+      class: "btn btn-danger btn-sm",
+      data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
