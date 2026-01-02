@@ -10,5 +10,8 @@ application.register("hello", HelloController)
 import OcrController from "./ocr_controller"
 application.register("ocr", OcrController)
 
+import PushNotificationsController from "./push_notifications_controller"
+application.register("push-notifications", PushNotificationsController)
+
 import WakeLockController from "./wake_lock_controller"
 application.register("wake-lock", WakeLockController)

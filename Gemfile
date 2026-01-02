@@ -36,6 +36,8 @@ gem "sidekiq", "~> 8.1.0"
 gem "sidekiq-scheduler", "~> 6.0.1"
 # Use Redis for Action Cable
 gem "redis", "~> 5.0"
+# Web Push Notifications
+gem "web-push"
 
 # Required for Esbuild bundling.
 gem "jsbundling-rails"

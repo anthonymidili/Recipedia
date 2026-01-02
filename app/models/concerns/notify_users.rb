@@ -41,9 +41,11 @@ private
           action: action_statement(notifiable)
         )
 
-      NotifyUserChannel.broadcast_to recipient,
-      unread_notifications_count: recipient.notifications.unread_count,
-      notification_partial: render_notification(notification)
+      # Queue Action Cable notification as background job
+      SendActionCableNotificationJob.perform_later(recipient.id, notification.id)
+
+      # Queue push notification as background job
+      PushNotificationService.send_notification(recipient, notification)
     end
   end
 

@@ -30,3 +30,19 @@
         = f.label :recipe_favored, for: 'recipe_favored', class: "form-check-label"
       .actions.mb-3
         = f.submit class: 'btn btn-primary'
+
+    %hr.my-4/
+
+    .mb-3.push-notifications{ data: { controller: "push-notifications" } }
+      %h2 Push Notifications
+      %p.text-muted Get notified even when you're not on Recipedia
+      
+      .alert.alert-info.safari-info{ style: "display: none;" }
+        %strong Safari Users:
+        Push notifications require Safari 16+ on macOS 13+ (Ventura) or iOS 16.4+.
+        If the button doesn't work, check your macOS/iOS version.
+      
+      .status{ data: { push_notifications_target: "status" }, style: "display: none;" }
+      
+      %button.btn.btn-secondary{ type: "button", data: { action: "push-notifications#toggle", push_notifications_target: "button" } }
+        Enable Push Notifications

@@ -51,6 +51,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :push_subscriptions, only: [ :create, :destroy ] do
+    collection do
+      get :vapid_public_key
+    end
+  end
+
   get "sitemap.xml", to: "sites#sitemap", format: :xml
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,7 +1,7 @@
 = turbo_frame_tag dom_id(user) do
   %hr/
   .row
-    .col-8.col-md-9.col-lg-10
+    .col-8.col-md-9.col-lg-9
       .mb-3
         = link_to user, class: "black-text", data: { turbo: false } do
           - if user.avatar.attached?
@@ -23,7 +23,7 @@
               Drafts:
               = user.recipes.by_unpublished.count
 
-    .col-4.col-md-3.col-lg-2
+    .col-4.col-md-3.col-lg-3
       .mb-3
         = render 'relationships/form', user: user
 

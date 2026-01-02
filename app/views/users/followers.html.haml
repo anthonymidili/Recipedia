@@ -1,9 +1,9 @@
 - provide :title, 'Followers'
 
 .row
-  .col-md-6.col-lg-5
+  .col-12.col-lg-5
     = render 'users/follow_header', user: @user
-  .col-md-6.col-lg-7
+  .col-12.col-lg-7
     %h3 Followers
     .d-flex.flex-column.user-list
       = render @user.followers

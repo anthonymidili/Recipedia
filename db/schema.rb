@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_01_211155) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_02_163953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -146,6 +146,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_01_211155) do
     t.index ["recipe_id"], name: "index_parts_on_recipe_id"
   end
 
+  create_table "push_subscriptions", force: :cascade do |t|
+    t.text "auth_key", null: false
+    t.datetime "created_at", null: false
+    t.text "endpoint", null: false
+    t.text "p256dh_key", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["endpoint"], name: "index_push_subscriptions_on_endpoint", unique: true
+    t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
+  end
+
   create_table "recipe_images", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "recipe_id", null: false
@@ -230,6 +241,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_01_211155) do
   add_foreign_key "notifications", "users", column: "notifier_id"
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "parts", "recipes"
+  add_foreign_key "push_subscriptions", "users"
   add_foreign_key "recipe_images", "recipes"
   add_foreign_key "recipe_images", "users"
   add_foreign_key "relationships", "users"
