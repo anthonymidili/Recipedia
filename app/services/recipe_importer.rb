@@ -29,15 +29,15 @@ class RecipeImporter
         'disable-dev-shm-usage': nil
       }
     }
-    
+
     # Set browser path for production environments
-    if ENV['BROWSER_PATH'].present?
-      browser_config[:browser_path] = ENV['BROWSER_PATH']
+    if ENV["BROWSER_PATH"].present?
+      browser_config[:browser_path] = ENV["BROWSER_PATH"]
     elsif Rails.env.production?
       # Default chromium path in Debian/Ubuntu-based systems
-      browser_config[:browser_path] = '/usr/bin/chromium'
+      browser_config[:browser_path] = "/usr/bin/chromium"
     end
-    
+
     browser = Ferrum::Browser.new(browser_config)
 
     begin
