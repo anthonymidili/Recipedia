@@ -28,6 +28,7 @@
         = label_tag :convert_image, class: "form-label" do
           = t("convert_image.label_html")
         = file_field_tag :convert_image, class: "form-control",
+        accept: 'image/png,image/gif,image/jpeg,image/jpg,image/webp',
         data: { ocr_target: 'file', action: "change->ocr#upload" }
     .hidden{data: { ocr_target: "hidden" }}
       .row
