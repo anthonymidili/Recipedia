@@ -2,11 +2,11 @@ module NotificationsHelper
   def link_to_notifiable(notifiable, action)
     case notifiable.class.name
     when "Recipe"
-      link_to action, recipe_url(notifiable)
+      link_to action, user_recipe_url(notifiable.user.slug, notifiable.slug)
     when "RecipeImage"
-      link_to action, recipe_url(notifiable.recipe, image: notifiable.id)
+      link_to action, user_recipe_url(notifiable.recipe.user.slug, notifiable.recipe.slug, image: notifiable.id)
     when "Review"
-      link_to action, recipe_url(notifiable.recipe, anchor: "review_#{notifiable.id}")
+      link_to action, user_recipe_url(notifiable.recipe.user.slug, notifiable.recipe.slug, anchor: "review_#{notifiable.id}")
     when "Relationship"
       link_to action, user_url(notifiable.user)
     when "Favoritism"

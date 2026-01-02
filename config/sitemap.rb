@@ -35,15 +35,16 @@ SitemapGenerator::Sitemap.create do
   #
   # Add all articles:
   #
-  Recipe.find_each do |recipe|
+  Recipe.includes(:user).find_each do |recipe|
+    recipe_url = Rails.application.routes.url_helpers.user_recipe_url(recipe.user.slug, recipe.slug, host: SitemapGenerator::Sitemap.default_host)
     if recipe.recipe_images.try(:first).try(:image).try(:attached?)
-      add recipe_path(recipe), lastmod: recipe.updated_at,
+      add recipe_url, lastmod: recipe.updated_at,
       images: [ {
-        loc: Rails.application.routes.url_helpers.rails_blob_url(recipe.recipe_images.first.image, disposition: "preview", only_path: false),
+        loc: Rails.application.routes.url_helpers.rails_blob_url(recipe.recipe_images.first.image, disposition: "preview", host: SitemapGenerator::Sitemap.default_host),
         title: recipe.name
       } ]
     else
-      add recipe_path(recipe), lastmod: recipe.updated_at
+      add recipe_url, lastmod: recipe.updated_at
     end
   end
 end

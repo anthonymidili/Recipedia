@@ -1,4 +1,5 @@
 - provide(:title, @recipe.name)
+= recipe_json_ld(@recipe)
 
 %div{id: "recipe_#{@recipe.id}", data: { recipe_id: @recipe.id }}
   .hide-on-print
@@ -9,11 +10,11 @@
         .col-4
           %ul.edit_menu
             %li.nav-item
-              = link_to edit_recipe_path(@recipe), class: "nav-link" do
+              = link_to edit_user_recipe_path(@recipe.user.slug, @recipe.slug), class: "nav-link" do
                 %i.fas.fa-edit
                 Edit
             %li.nav-item
-              = link_to @recipe, class: 'red-text nav-link',
+              = link_to user_recipe_path(@recipe.user.slug, @recipe.slug), class: 'red-text nav-link',
               data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do
                 %i.fas.fa-trash
     - if is_author?(@recipe.user) && !@recipe.published?
@@ -40,13 +41,13 @@
               - if user_signed_in? && !is_author?(@recipe.user)
                 = render 'recipes/favor_form', recipe: @recipe
               - elsif !user_signed_in?
-                = link_to log_in_recipe_path(@recipe), class: 'favor_form_button' do
+                = link_to log_in_user_recipe_path(@recipe.user.slug, @recipe.slug), class: 'favor_form_button' do
                   %i.gray-text.far.fa-heart
             .nav-link
               %div{id: "recipe_likes_count_#{@recipe.id}"}
                 = render 'recipes/likes_count', recipe: @recipe
             .nav-link
-              = link_to recipe_path(@recipe, anchor: "reviews_header") do
+              = link_to user_recipe_path(@recipe.user.slug, @recipe.slug, anchor: "reviews_header") do
                 = render 'reviews/count', recipe: @recipe
       %h1.center-on-print= @recipe.name
   .row.mb-3
@@ -90,14 +91,14 @@
               class: "img-thumbnail show-for-medium"
         .hide-on-print
           .add-image-link
-            = link_to new_recipe_recipe_image_path(@recipe),
+            = link_to new_user_recipe_recipe_image_path(@recipe.user.slug, @recipe.slug),
             class: 'img-thumbnail mb-1' do
               %i.fas.fa-plus-circle
               Image
           - if @recipe.recipe_images.any?
             - @recipe.recipe_images.by_original_first.first(9).each do |recipe_image|
               - if recipe_image.image.attached?
-                = link_to recipe_path(@recipe, image: recipe_image.id),
+                = link_to user_recipe_path(@recipe.user.slug, @recipe.slug, image: recipe_image.id),
                 data: { turbo_frame: "main_recipe_image" } do
                   = image_tag avatar_image(recipe_image.image, 80), class: 'img-thumbnail mb-1'
   .row

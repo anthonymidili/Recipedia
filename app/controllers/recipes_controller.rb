@@ -89,8 +89,8 @@ class RecipesController < ApplicationController
 
       respond_to do |format|
         if @recipe.save
-          format.html { redirect_to @recipe, notice: "Recipe was successfully created." }
-          format.json { render :show, status: :created, location: @recipe }
+        format.html { redirect_to user_recipe_path(@recipe.user.slug, @recipe.slug), notice: "Recipe was successfully created." }
+        format.json { render :show, status: :created, location: user_recipe_url(@recipe.user.slug, @recipe.slug) }
         else
           format.html { render :new }
           format.json { render json: @recipe.errors, status: :unprocessable_entity }
@@ -111,8 +111,8 @@ class RecipesController < ApplicationController
             turbo_stream.replace("unpublished_count", partial: "recipes/unpublished_count")
           ]
         end
-        format.html { redirect_to @recipe, notice: "Recipe was successfully updated." }
-        format.json { render :show, status: :ok, location: @recipe }
+        format.html { redirect_to user_recipe_path(@recipe.user.slug, @recipe.slug), notice: "Recipe was successfully updated." }
+        format.json { render :show, status: :ok, location: user_recipe_url(@recipe.user.slug, @recipe.slug) }
       else
         format.html { render :edit }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
@@ -143,7 +143,7 @@ class RecipesController < ApplicationController
   end
 
   def log_in
-    redirect_to @recipe
+    redirect_to user_recipe_path(@recipe.user.slug, @recipe.slug)
   end
 
   def likes
@@ -208,12 +208,14 @@ class RecipesController < ApplicationController
 private
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
-    @recipe =
-      Recipe.includes(:user,
-        parts: [ :ingredients, :steps ],
-        reviews: [ user: [ avatar_attachment: :blob ] ],
-        recipe_images: [ :user, image_attachment: :blob ]).
-        find(params[:id])
+    # Scoped route: /recipes/:username/:slug
+    user = User.find_by!(slug: params[:username])
+    @recipe = user.recipes.includes(
+      :user,
+      parts: [ :ingredients, :steps ],
+      reviews: [ user: [ avatar_attachment: :blob ] ],
+      recipe_images: [ :user, image_attachment: :blob ]
+    ).find_by!(slug: params[:slug])
   end
 
   def set_category
