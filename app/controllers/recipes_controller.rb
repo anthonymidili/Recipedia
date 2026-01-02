@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy, :log_in ]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy, :log_in, :import ]
   before_action :set_recipe, only: [ :show, :edit, :update, :destroy, :log_in, :likes ]
   before_action :deny_access!,
   unless: -> { is_author?(@recipe.user) || is_site_admin? }, only: [ :edit, :update, :destroy ]
