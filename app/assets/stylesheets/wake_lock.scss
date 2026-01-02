@@ -1,0 +1,10 @@
+.switch-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; 
+  
+  .wake-lock-toggle {
+    height: 30px;
+    width: 60px;
+  }
+}

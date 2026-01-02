@@ -32,14 +32,15 @@ module MetaTagsHelper
   end
 
   def recipe_meta_tag_options(recipe)
+    recipe_url_value = user_recipe_url(recipe.user.slug, recipe.slug)
     set_meta_tags description: recipe.description.to_plain_text,
       keywords: recipe.categories.list_names,
       twitter: {
         card:  "summary",
         title: recipe.name,
         description: recipe.description.to_plain_text,
-        url: recipe_url(recipe),
-        secure_url: recipe_url(recipe),
+        url: recipe_url_value,
+        secure_url: recipe_url_value,
         image: {
           _: image_url(recipe),
           secure_url: image_url(recipe),
@@ -52,8 +53,8 @@ module MetaTagsHelper
         title: recipe.name,
         description: recipe.description.to_plain_text,
         type: "Recipe",
-        url: recipe_url(recipe),
-        secure_url: recipe_url(recipe),
+        url: recipe_url_value,
+        secure_url: recipe_url_value,
         image: {
           _: image_url(recipe),
           secure_url: image_url(recipe),

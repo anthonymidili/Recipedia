@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_29_152819) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_01_211155) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -80,6 +80,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_29_152819) do
     t.index ["user_id"], name: "index_favoritisms_on_user_id"
   end
 
+  create_table "imports", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.text "ingredients"
+    t.text "instructions"
+    t.string "source"
+    t.text "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_imports_on_user_id"
+  end
+
   create_table "infos", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -147,9 +159,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_29_152819) do
     t.datetime "created_at", null: false
     t.citext "name"
     t.boolean "published", default: false
+    t.string "slug"
     t.string "source"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["user_id", "slug"], name: "index_recipes_on_user_id_and_slug", unique: true
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
@@ -209,6 +223,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_29_152819) do
   add_foreign_key "categorizations", "recipes"
   add_foreign_key "favoritisms", "recipes"
   add_foreign_key "favoritisms", "users"
+  add_foreign_key "imports", "users"
   add_foreign_key "infos", "users"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "notification_settings", "users"

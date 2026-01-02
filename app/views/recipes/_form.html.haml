@@ -1,7 +1,7 @@
 .callout
   = turbo_frame_tag dom_id(@category) do
     = link_to "Add Category", new_category_path, class: "btn btn-warning btn-sm mb-3"
-  = form_with model: recipe, local: true, data: { turbo: false, controller: "ocr" } do |f|
+  = form_with model: recipe, url: recipe_form_url(recipe), local: true, data: { turbo: false, controller: "ocr" } do |f|
     = render 'notifications/error_messages', object: f.object
     .row
       .col-12

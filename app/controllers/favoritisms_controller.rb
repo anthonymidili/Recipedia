@@ -12,7 +12,7 @@ class FavoritismsController < ApplicationController
           render turbo_stream: turbo_stream.replace("favor_form_recipe_#{@recipe.id}",
           partial: "recipes/unfavor", locals: { recipe: @recipe })
         end
-        format.html { redirect_to @recipe }
+        format.html { redirect_to user_recipe_path(@recipe.user.slug, @recipe.slug) }
       end
     end
   end
@@ -25,7 +25,7 @@ class FavoritismsController < ApplicationController
         render turbo_stream: turbo_stream.replace("favor_form_recipe_#{@recipe.id}",
         partial: "recipes/favor", locals: { recipe: @recipe })
       end
-      format.html { redirect_to @recipe }
+      format.html { redirect_to user_recipe_path(@recipe.user.slug, @recipe.slug) }
     end
   end
 

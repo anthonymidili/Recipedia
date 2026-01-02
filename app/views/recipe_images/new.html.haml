@@ -1,4 +1,4 @@
-= form_with model: [@recipe, @recipe_image], local: true, multipart: true do |f|
+= form_with model: @recipe_image, url: user_recipe_recipe_images_path(@recipe.user.slug, @recipe.slug), local: true, multipart: true do |f|
   .row
     .col-md-6.col-12
       .callout-transparent
@@ -12,7 +12,7 @@
           = f.file_field :image, direct_upload: true, id: "image_file_field",
           accept: 'image/png,image/gif,image/jpeg', class: "form-control"
         = f.submit 'Upload Image', class: 'btn btn-primary'
-      %p= link_to 'Finished Editing', @recipe, class: 'btn btn-warning'
+      %p= link_to 'Finished Editing', user_recipe_path(@recipe.user.slug, @recipe.slug), class: 'btn btn-warning'
   .row
     .col-md-3.col-6
       - if @recipe.recipe_images
@@ -27,6 +27,6 @@
                 - if is_author?(@recipe.user) || is_author?(recipe_image.user)
                   %br/
                   .center-text
-                    = link_to 'Remove Image', [@recipe, recipe_image],
+                    = link_to 'Remove Image', user_recipe_recipe_image_path(@recipe.user.slug, @recipe.slug, id: recipe_image.id),
                     class: 'btn btn-danger btn-small',
                     data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }

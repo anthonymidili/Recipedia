@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import OcrController from "./ocr_controller"
 application.register("ocr", OcrController)
+
+import WakeLockController from "./wake_lock_controller"
+application.register("wake-lock", WakeLockController)

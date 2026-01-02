@@ -7,8 +7,14 @@
           %button.btn-close{aria: { label: 'X' },
           data: { bs_dismiss: "alert"}, type: 'button'}
 
-      - if flash[:notice]
+      - if flash[:warning]
         .alert.alert-warning.alert-dismissible.fade.show
+          = sanitize(flash[:warning])
+          %button.btn-close{aria: { label: 'X' },
+          data: { bs_dismiss: "alert"}, type: 'button'}
+
+      - if flash[:notice]
+        .alert.alert-info.alert-dismissible.fade.show
           = sanitize(flash[:notice])
           %button.btn-close{aria: { label: 'X' },
           data: { bs_dismiss: "alert"}, type: 'button'}

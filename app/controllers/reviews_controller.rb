@@ -26,8 +26,8 @@ class ReviewsController < ApplicationController
           render turbo_stream: turbo_stream.replace("review_form_new_review",
             partial: "reviews/form", locals: { recipe: @recipe, review: @recipe.reviews.new })
         end
-        format.html { redirect_to @recipe, notice: "Review was successfully created." }
-        format.json { render :show, status: :created, location: @recipe }
+        format.html { redirect_to user_recipe_path(@recipe.user.slug, @recipe.slug), notice: "Review was successfully created." }
+        format.json { render :show, status: :created, location: user_recipe_url(@recipe.user.slug, @recipe.slug) }
       else
         format.turbo_stream do
           # Display errors.
@@ -46,9 +46,12 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       if @review.update(review_params)
         # Broadcast updated review on list from model.
-        format.turbo_stream
-        format.html { redirect_to recipe_path(@recipe, anchor: "review_#{@review.id}"), notice: "Review was successfully updated." }
-        format.json { render :show, status: :ok, location: @recipe }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("review_#{@review.id}",
+          partial: "reviews/review", locals: { review: @review })
+        end
+        format.html { redirect_to user_recipe_path(@recipe.user.slug, @recipe.slug, anchor: "review_#{@review.id}"), notice: "Review was successfully updated." }
+        format.json { render :show, status: :ok, location: user_recipe_url(@recipe.user.slug, @recipe.slug) }
       else
         format.turbo_stream do
           # Display errors.
@@ -68,7 +71,7 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       # Broadcast remove review on list from model.
       format.turbo_stream { render turbo_stream: "" }
-      format.html { redirect_to recipe_path(@recipe, anchor: "reviews_header"), notice: "Review was successfully destroyed." }
+      format.html { redirect_to user_recipe_path(@recipe.user.slug, @recipe.slug, anchor: "reviews_header"), notice: "Review was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -76,7 +79,8 @@ class ReviewsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
-      @recipe = Recipe.find(params[:recipe_id])
+      user = User.find_by!(slug: params[:username])
+      @recipe = user.recipes.find_by!(slug: params[:recipe_slug])
     end
 
     def set_review

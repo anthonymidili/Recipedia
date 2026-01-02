@@ -1,7 +1,7 @@
 = turbo_frame_tag dom_id(@review) do
   .callout
     .float-end
-      = link_to 'Cancel', recipe_review_path(@recipe, @review), class: "btn btn-secondary"
+      = link_to 'Cancel', user_recipe_review_path(@recipe.user.slug, @recipe.slug, @review.id), class: "btn btn-secondary"
 
     %h1 Editing review
 

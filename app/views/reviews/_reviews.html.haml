@@ -11,7 +11,7 @@
           = render 'reviews/form', recipe: recipe, review: review
     - else
       %p
-        = link_to log_in_recipe_path(@recipe) do
+        = link_to log_in_user_recipe_path(@recipe.user.slug, @recipe.slug) do
           %i.fa.fa-sign-in-alt
           Log in to create a review
 

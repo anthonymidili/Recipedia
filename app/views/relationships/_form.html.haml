@@ -1,7 +1,7 @@
 - unless is_author?(user)
   - if !user_signed_in?
     - if defined?(recipe)
-      = button_to log_in_recipe_path(recipe),
+      = button_to log_in_user_recipe_path(recipe.user.slug, recipe.slug),
       class: 'btn btn-outline-secondary btn-lg', method: :get do
         %i.fa.fa-sign-in-alt
         Log in to follow

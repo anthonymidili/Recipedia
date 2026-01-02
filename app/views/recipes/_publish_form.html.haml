@@ -1,4 +1,4 @@
 = turbo_frame_tag dom_id(recipe, "publish_form") do
-  = form_with model: recipe, local: false, id: "recipe_publish_form" do |f|
+  = form_with model: recipe, url: user_recipe_path(recipe.user.slug, recipe.slug), id: "recipe_publish_form" do |f|
     = f.hidden_field :published, value: 'true'
     .mb-3= f.submit "Click to Publish Recipe", class: "btn btn-primary"

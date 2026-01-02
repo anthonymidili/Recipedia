@@ -1,0 +1,45 @@
+.recipes-choice.mt-3.mb-3
+  .row.justify-content-center
+    .col-lg-8.col-md-10
+      .text-center.mb-3
+        %h1 Add a Recipe
+        %p.text-muted.mb-0 Choose how you'd like to add your recipe
+      
+      .row.g-3
+        .col-md-6
+          .card.h-100.border-0.shadow-sm.hover-card
+            .card-body.text-center.p-4
+              .mb-3
+                %i.bi.bi-pencil-square.icon-create
+              %h3.card-title.h5.mb-2 Create from Scratch
+              %p.card-text.text-muted.small Start with a blank recipe and add your own ingredients and instructions
+              = link_to new_recipe_path, class: "btn btn-success mt-2 px-3" do
+                Start Creating
+                %i.bi.bi-arrow-right.ms-2
+        
+        .col-md-6
+          .card.h-100.border-0.shadow-sm.hover-card
+            .card-body.text-center.p-4
+              .mb-3
+                %i.bi.bi-cloud-download.icon-import
+              %h3.card-title.h5.mb-2 Import from Website
+              %p.card-text.text-muted.small Import a recipe from your favorite cooking website automatically
+              %button.btn.btn-primary.mt-2.px-3{ type: "button", data: { "bs-toggle": "collapse", "bs-target": "#importForm" }, "aria-expanded": "false" }
+                Import Recipe
+                %i.bi.bi-arrow-down.ms-2
+      
+      #importForm.collapse.mt-3
+        .card.border-0.shadow-sm
+          .card-body.p-3
+            .d-flex.align-items-center.mb-2
+              %i.bi.bi-link-45deg.me-2.icon-link
+              %h5.mb-0.h6 Enter Recipe URL
+            %p.text-muted.small.mb-2 
+              Paste the URL from sites like AllRecipes, Food Network, Tasty, and more
+            
+            = form_with url: import_recipes_path, method: :post, local: true do |f|
+              .mb-2
+                = text_field_tag :url, "", placeholder: "https://www.recipe.com/...", class: "form-control", required: true
+              .d-flex.gap-2
+                = f.submit "Import Recipe", class: "btn btn-primary px-3", data: { disable_with: "Importing..." }
+                %button.btn.btn-outline-secondary{ type: "button", data: { "bs-toggle": "collapse", "bs-target": "#importForm" } } Cancel

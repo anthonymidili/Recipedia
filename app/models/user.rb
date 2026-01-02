@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :categories
   has_many :recipes
   has_many :reviews, dependent: :destroy
+  has_many :imports, dependent: :destroy
 
   has_one :info, dependent: :destroy
   accepts_nested_attributes_for :info, reject_if: :all_blank, allow_destroy: true
