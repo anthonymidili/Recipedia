@@ -23,10 +23,22 @@ class RecipeImporter
     browser_config = {
       headless: true,
       timeout: 30,
+      process_timeout: 20,
       browser_options: {
         'no-sandbox': nil,
         'disable-gpu': nil,
-        'disable-dev-shm-usage': nil
+        'disable-dev-shm-usage': nil,
+        'disable-software-rasterizer': nil,
+        'disable-extensions': nil,
+        'disable-background-networking': nil,
+        'disable-sync': nil,
+        'disable-translate': nil,
+        'hide-scrollbars': nil,
+        'metrics-recording-only': nil,
+        'mute-audio': nil,
+        'no-first-run': nil,
+        'safebrowsing-disable-auto-update': nil,
+        'single-process': nil
       }
     }
 
@@ -84,7 +96,24 @@ class RecipeImporter
       which_chromium
     ].compact
 
-    possible_paths.find { |path| File.exist?(path) }
+    Rails.logger.info "Searching for browser executable..."
+    possible_paths.each do |path|
+      exists = File.exist?(path)
+      Rails.logger.info "  #{path}: #{exists ? 'FOUND' : 'not found'}"
+    end
+
+    found_path = possible_paths.find { |path| File.exist?(path) }
+
+    if found_path
+      Rails.logger.info "Using browser: #{found_path}"
+    else
+      Rails.logger.error "No browser executable found. Searched: #{possible_paths.join(', ')}"
+      # Log what's actually in /usr/bin/
+      Rails.logger.error "Contents of /usr/bin/chrom*: #{`ls -la /usr/bin/chrom* 2>/dev/null`}"
+      Rails.logger.error "Contents of /usr/bin/google*: #{`ls -la /usr/bin/google* 2>/dev/null`}"
+    end
+
+    found_path
   end
 
   def which_chromium

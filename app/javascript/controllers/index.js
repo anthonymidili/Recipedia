@@ -7,6 +7,9 @@ import { application } from "./application"
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ImportStatusController from "./import_status_controller"
+application.register("import-status", ImportStatusController)
+
 import OcrController from "./ocr_controller"
 application.register("ocr", OcrController)
 

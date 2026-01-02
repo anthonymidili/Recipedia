@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_02_163953) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_02_225700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -83,12 +83,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_02_163953) do
   create_table "imports", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "description"
+    t.text "error_message"
     t.text "ingredients"
     t.text "instructions"
     t.string "source"
+    t.string "status", default: "pending", null: false
     t.text "title"
     t.datetime "updated_at", null: false
+    t.string "url"
     t.bigint "user_id", null: false
+    t.index ["status"], name: "index_imports_on_status"
     t.index ["user_id"], name: "index_imports_on_user_id"
   end
 

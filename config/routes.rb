@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :search
       post :import
       get :choice
+      get "import_status/:id", action: :import_status, as: :import_status
     end
   end
 

@@ -4,6 +4,13 @@
   .col-12
     %h1 New recipe
 
+    - if @pending_import
+      .alert.alert-info{ data: { controller: "import-status", "import-status-import-id-value": @pending_import.id } }
+        .d-flex.align-items-center
+          .spinner-border.spinner-border-sm.me-2{ role: "status" }
+          %span{ data: { "import-status-target": "message" } }
+            = @pending_import.processing? ? "Processing recipe..." : "Importing recipe, please wait..."
+
     = render 'form', recipe: @recipe
 
     %ul.nav-links

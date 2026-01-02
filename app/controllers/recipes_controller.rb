@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy, :log_in, :import ]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy, :log_in, :import, :import_status ]
   before_action :set_recipe, only: [ :show, :edit, :update, :destroy, :log_in, :likes ]
   before_action :deny_access!,
   unless: -> { is_author?(@recipe.user) || is_site_admin? }, only: [ :edit, :update, :destroy ]
@@ -48,26 +48,39 @@ class RecipesController < ApplicationController
     if session[:import_id]
       import = current_user.imports.find_by(id: session[:import_id])
       if import
-        @recipe.name = import.title
-        @recipe.description = import.description
-        @recipe.source = import.source
+        if import.completed?
+          @recipe.name = import.title
+          @recipe.description = import.description
+          @recipe.source = import.source
 
-        # Build ingredients (format: "quantity|item" or "|item" for no quantity)
-        import.ingredients.split("\n").each do |ing|
-          parts = ing.split("|", 2)
-          quantity = parts[0].presence
-          item = parts[1] || ing # Fallback to full string if no pipe found
-          @recipe.parts.first.ingredients.build(quantity: quantity, item: item)
+          # Build ingredients (format: "quantity|item" or "|item" for no quantity)
+          import.ingredients.split("\n").each do |ing|
+            parts = ing.split("|", 2)
+            quantity = parts[0].presence
+            item = parts[1] || ing # Fallback to full string if no pipe found
+            @recipe.parts.first.ingredients.build(quantity: quantity, item: item)
+          end
+
+          # Build steps
+          import.instructions.split("\n").each do |inst|
+            @recipe.parts.first.steps.build(description: inst)
+          end
+
+          # Clean up the import
+          import.destroy
+          session.delete(:import_id)
+          flash.now[:warning] = "Recipe imported successfully! Please double-check all fields against the original recipe before saving."
+        elsif import.failed?
+          flash.now[:alert] = "Recipe import failed: #{import.error_message}"
+          session.delete(:import_id)
+          @recipe.parts.first.ingredients.build
+          @recipe.parts.first.steps.build
+        else
+          # Still pending or processing - let JS handle polling
+          @pending_import = import
+          @recipe.parts.first.ingredients.build
+          @recipe.parts.first.steps.build
         end
-
-        # Build steps
-        import.instructions.split("\n").each do |inst|
-          @recipe.parts.first.steps.build(description: inst)
-        end
-
-        # Clean up the import
-        import.destroy
-        session.delete(:import_id)
       end
     else
       # Default empty fields for manual creation
@@ -149,68 +162,46 @@ class RecipesController < ApplicationController
   def likes
   end
 
+  def import_status
+    import = current_user.imports.find(params[:id])
+
+    render json: {
+      id: import.id,
+      status: import.status,
+      error_message: import.error_message,
+      ready: import.completed?
+    }
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Import not found" }, status: :not_found
+  end
+
   def import
     url = params[:url]
 
-    begin
-      importer = RecipeImporter.new(url)
-      data = importer.import
+    # Create import record and queue background job
+    import = current_user.imports.create!(
+      url: url,
+      status: "pending"
+    )
 
-      # Validate that we found recipe content
-      if data[:ingredients].empty? && data[:instructions].empty?
-        Rails.logger.warn "No recipe content found for URL: #{url}"
-        respond_to do |format|
-          format.json { render json: { error: "No recipe ingredients or instructions found on this page. Please make sure you're importing from a recipe page, not an article or review page." }, status: :unprocessable_entity }
-          format.html do
-            flash[:alert] = "No recipe ingredients or instructions found on this page. Please make sure you're importing from a recipe page, not an article or review page."
-            redirect_to choice_recipes_path
-          end
-        end
-        return
-      end
+    RecipeImportJob.perform_later(import.id)
 
-      respond_to do |format|
-        format.json { render json: data }
-        format.html do
-          # Format ingredients with quantity and item separated by pipe
-          formatted_ingredients = data[:ingredients].map do |ing|
-            if ing[:quantity].present?
-              "#{ing[:quantity]}|#{ing[:item]}"
-            else
-              "|#{ing[:item]}"
-            end
-          end
-
-          import = current_user.imports.create!(
-            title: data[:name],
-            description: data[:description],
-            source: data[:source],
-            ingredients: formatted_ingredients.join("\n"),
-            instructions: data[:instructions].join("\n")
-          )
-          session[:import_id] = import.id
-          flash[:warning] = "Recipe imported successfully! Please double-check all fields against the original recipe before saving."
-          redirect_to new_recipe_path
-        end
+    respond_to do |format|
+      format.json { render json: { import_id: import.id, status: "pending", message: "Recipe import started. You will be notified when it completes." } }
+      format.html do
+        session[:import_id] = import.id
+        flash[:notice] = "Recipe import started! This may take a few moments. Please wait..."
+        redirect_to new_recipe_path
       end
-    rescue RecipeImporter::ImportError => e
-      Rails.logger.warn "Import blocked for #{url}: #{e.message}"
-      respond_to do |format|
-        format.json { render json: { error: e.message }, status: :unprocessable_entity }
-        format.html do
-          flash[:alert] = e.message
-          redirect_to choice_recipes_path
-        end
-      end
-    rescue => e
-      Rails.logger.error "Import error for #{url}: #{e.message}"
-      Rails.logger.error e.backtrace.join("\n")
-      respond_to do |format|
-        format.json { render json: { error: e.message }, status: :unprocessable_entity }
-        format.html do
-          flash[:alert] = "Failed to import recipe: #{e.message}"
-          redirect_to choice_recipes_path
-        end
+    end
+  rescue => e
+    Rails.logger.error "Failed to queue import for #{url}: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
+    respond_to do |format|
+      format.json { render json: { error: "Failed to start import: #{e.message}" }, status: :unprocessable_entity }
+      format.html do
+        flash[:alert] = "Failed to start import: #{e.message}"
+        redirect_to choice_recipes_path
       end
     end
   end
