@@ -1,5 +1,5 @@
 class RecipeImporter
-  require "open-uri"
+  require "ferrum"
   require "nokogiri"
   require "json"
 
@@ -20,34 +20,45 @@ class RecipeImporter
   attr_reader :url, :doc
 
   def fetch_html
-    html = URI.open(
-      url,
-      "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-      "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      "Accept-Language" => "en-US,en;q=0.9",
-      "Referer" => "https://www.google.com/"
-    ).read
-    @doc = Nokogiri::HTML(html)
-  rescue OpenURI::HTTPError => e
-    case e.io.status[0]
-    when "403"
-      raise ImportError, "The website is blocking automated requests. Try manually copying the recipe or use a different source."
-    when "404"
-      raise ImportError, "Recipe page not found. Please check the URL and try again."
-    when "429"
-      raise ImportError, "Too many requests. Please wait a moment and try again."
-    when "500", "502", "503"
-      raise ImportError, "The recipe website is temporarily unavailable. Please try again later."
-    else
-      raise ImportError, "Unable to access recipe page (HTTP #{e.io.status[0]}). Please try a different URL."
+    browser = Ferrum::Browser.new(
+      headless: true,
+      timeout: 30,
+      browser_options: {
+        'no-sandbox': nil,
+        'disable-gpu': nil
+      }
+    )
+
+    begin
+      browser.go_to(url)
+
+      # Wait for the page to load and render
+      sleep 2
+
+      # Get the rendered HTML
+      html = browser.body
+      @doc = Nokogiri::HTML(html)
+
+    rescue Ferrum::TimeoutError => e
+      raise ImportError, "Request timed out. The website may be slow or unavailable."
+    rescue Ferrum::StatusError => e
+      case e.message
+      when /404/
+        raise ImportError, "Recipe page not found. Please check the URL and try again."
+      when /403/
+        raise ImportError, "Access forbidden. The website may be blocking requests."
+      when /500/, /502/, /503/
+        raise ImportError, "The recipe website is temporarily unavailable. Please try again later."
+      else
+        raise ImportError, "Unable to access recipe page. Please try a different URL."
+      end
+    rescue => e
+      Rails.logger.error "Unexpected error fetching #{url}: #{e.class} - #{e.message}"
+      Rails.logger.error e.backtrace.first(10).join("\n")
+      raise ImportError, "Failed to fetch recipe page: #{e.message}"
+    ensure
+      browser&.quit
     end
-  rescue SocketError, Errno::ECONNREFUSED, Errno::ETIMEDOUT => e
-    raise ImportError, "Cannot connect to recipe website. Please check the URL and your internet connection."
-  rescue URI::InvalidURIError => e
-    raise ImportError, "Invalid URL format. Please check the URL and try again."
-  rescue => e
-    Rails.logger.error "Unexpected error fetching #{url}: #{e.class} - #{e.message}"
-    raise ImportError, "Failed to fetch recipe page. Please try a different URL."
   end
 
   def extract_recipe_data
@@ -79,7 +90,6 @@ class RecipeImporter
           ingredients = raw_ingredients.map { |ing| parse_ingredient(ing) }
           instructions = extract_instructions_from_json(recipe_data["recipeInstructions"] || [])
 
-          Rails.logger.info "JSON-LD found - ingredients: #{ingredients.size}, instructions: #{instructions.size}"
           break if ingredients.any? && instructions.any?
         end
       rescue JSON::ParserError => e
@@ -120,8 +130,11 @@ class RecipeImporter
   end
 
   def parse_ingredient(ingredient_string)
-    # Remove extra whitespace
+    # Remove extra whitespace and clean up formatting issues
     text = ingredient_string.to_s.strip
+      .gsub(/\(\(/, "(")  # Remove double opening parentheses
+      .gsub(/\)\)/, ")")  # Remove double closing parentheses
+      .gsub(/\s+/, " ")   # Collapse multiple spaces to single space
 
     # Common measurement units (sorted by length descending to match longest first)
     units = %w[
@@ -139,7 +152,7 @@ class RecipeImporter
     match = text.match(pattern)
 
     if match
-      quantity = [ match[1], match[2] ].compact.join(" ").strip
+      quantity = [ match[1], match[2] ].compact.join(" ").strip.gsub(/\s+/, " ")
       item = match[3].strip
 
       # If quantity is empty, it means no number/unit was found (like "salt to taste")
@@ -183,7 +196,7 @@ class RecipeImporter
 
   def extract_title
     doc.at_css("h1")&.text&.strip ||
-    doc.at_css("title")&.text&.split("|").first&.strip
+    doc.at_css("title")&.text&.then { |t| t&.split("|")&.first }&.strip
   end
 
   def extract_description
@@ -273,7 +286,12 @@ class RecipeImporter
   end
 
   def find_list_after_element(element)
-    container = element.ancestors("div").first || element.parent
+    return nil unless element
+
+    ancestors = element.ancestors("div")
+    container = (ancestors && ancestors.any?) ? ancestors.first : element.parent
+    return nil unless container
+
     container.at("ul") || container.at("ol") ||
     element.xpath("following::ul[1]").first ||
     element.xpath("following::ol[1]").first
