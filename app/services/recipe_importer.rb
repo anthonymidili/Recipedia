@@ -20,14 +20,25 @@ class RecipeImporter
   attr_reader :url, :doc
 
   def fetch_html
-    browser = Ferrum::Browser.new(
+    browser_config = {
       headless: true,
       timeout: 30,
       browser_options: {
         'no-sandbox': nil,
-        'disable-gpu': nil
+        'disable-gpu': nil,
+        'disable-dev-shm-usage': nil
       }
-    )
+    }
+    
+    # Set browser path for production environments
+    if ENV['BROWSER_PATH'].present?
+      browser_config[:browser_path] = ENV['BROWSER_PATH']
+    elsif Rails.env.production?
+      # Default chromium path in Debian/Ubuntu-based systems
+      browser_config[:browser_path] = '/usr/bin/chromium'
+    end
+    
+    browser = Ferrum::Browser.new(browser_config)
 
     begin
       browser.go_to(url)

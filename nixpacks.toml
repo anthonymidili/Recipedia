@@ -1,2 +1,2 @@
 [phases.setup]
-  aptPkgs = ['...', 'imagemagick']
+  aptPkgs = ['...', 'imagemagick', 'chromium', 'chromium-driver']
