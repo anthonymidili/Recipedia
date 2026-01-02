@@ -34,8 +34,9 @@ class RecipeImporter
     if ENV["BROWSER_PATH"].present?
       browser_config[:browser_path] = ENV["BROWSER_PATH"]
     elsif Rails.env.production?
-      # Default chromium path in Debian/Ubuntu-based systems
-      browser_config[:browser_path] = "/usr/bin/chromium"
+      # Try to find Chrome/Chromium in common locations
+      browser_path = find_browser_executable
+      browser_config[:browser_path] = browser_path if browser_path
     end
 
     browser = Ferrum::Browser.new(browser_config)
@@ -70,6 +71,28 @@ class RecipeImporter
     ensure
       browser&.quit
     end
+  end
+
+  def find_browser_executable
+    # List of common Chrome/Chromium paths in Linux environments
+    possible_paths = [
+      "/usr/bin/chromium",
+      "/usr/bin/chromium-browser",
+      "/usr/bin/google-chrome",
+      "/usr/bin/google-chrome-stable",
+      "/snap/bin/chromium",
+      which_chromium
+    ].compact
+
+    possible_paths.find { |path| File.exist?(path) }
+  end
+
+  def which_chromium
+    # Use 'which' command to find chromium in PATH
+    result = `which chromium 2>/dev/null`.strip
+    result.presence
+  rescue
+    nil
   end
 
   def extract_recipe_data
