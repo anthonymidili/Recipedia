@@ -1,7 +1,8 @@
 class RecipeImporter
-  require "ferrum"
   require "nokogiri"
   require "json"
+  require "net/http"
+  require "uri"
 
   class ImportError < StandardError; end
 
@@ -20,124 +21,43 @@ class RecipeImporter
   attr_reader :url, :doc
 
   def fetch_html
-    browser_config = {
-      headless: true,
-      timeout: 60,
-      process_timeout: 60,
-      ws_max_receive_size: 100 * 1024 * 1024, # 100MB
-      xvfb: false,
-      browser_options: {
-        'no-sandbox': nil,
-        'disable-gpu': nil,
-        'disable-dev-shm-usage': nil,
-        'disable-software-rasterizer': nil,
-        'disable-extensions': nil,
-        'disable-background-networking': nil,
-        'disable-sync': nil,
-        'disable-translate': nil,
-        'hide-scrollbars': nil,
-        'metrics-recording-only': nil,
-        'mute-audio': nil,
-        'no-first-run': nil,
-        'safebrowsing-disable-auto-update': nil,
-        'single-process': nil,
-        'disable-setuid-sandbox': nil,
-        'disable-crash-reporter': nil,
-        'no-zygote': nil,
-        'memory-pressure-off': nil,
-        'disable-features': "VizDisplayCompositor"
-      }
-    }
+    uri = URI.parse(url)
 
-    # Set browser path for production environments
-    if ENV["BROWSER_PATH"].present?
-      browser_config[:browser_path] = ENV["BROWSER_PATH"]
-      Rails.logger.info "Using BROWSER_PATH: #{ENV['BROWSER_PATH']}"
-    elsif Rails.env.production?
-      # Try to find Chrome/Chromium in common locations
-      browser_path = find_browser_executable
-      if browser_path
-        browser_config[:browser_path] = browser_path
-        Rails.logger.info "Found browser at: #{browser_path}"
-      else
-        Rails.logger.error "No browser executable found!"
-      end
-    end
+    Rails.logger.info "Fetching URL: #{url}"
 
-    Rails.logger.info "Starting browser with config: headless=#{browser_config[:headless]}, timeout=#{browser_config[:timeout]}, process_timeout=#{browser_config[:process_timeout]}"
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = (uri.scheme == "https")
+    http.open_timeout = 10
+    http.read_timeout = 30
 
-    browser = Ferrum::Browser.new(browser_config)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request["User-Agent"] = "Mozilla/5.0 (compatible; RecipeBot/1.0)"
 
     begin
-      Rails.logger.info "Navigating to URL: #{url}"
-      browser.go_to(url)
+      response = http.request(request)
 
-      # Wait for the page to load and render
-      sleep 2
-
-      # Get the rendered HTML
-      html = browser.body
-      @doc = Nokogiri::HTML(html)
-
-    rescue Ferrum::TimeoutError => e
-      raise ImportError, "Request timed out. The website may be slow or unavailable."
-    rescue Ferrum::StatusError => e
-      case e.message
-      when /404/
+      case response.code.to_i
+      when 200
+        @doc = Nokogiri::HTML(response.body)
+        Rails.logger.info "Successfully fetched HTML (#{response.body.length} bytes)"
+      when 404
         raise ImportError, "Recipe page not found. Please check the URL and try again."
-      when /403/
+      when 403
         raise ImportError, "Access forbidden. The website may be blocking requests."
-      when /500/, /502/, /503/
+      when 500..503
         raise ImportError, "The recipe website is temporarily unavailable. Please try again later."
       else
-        raise ImportError, "Unable to access recipe page. Please try a different URL."
+        raise ImportError, "Unable to access recipe page (HTTP #{response.code}). Please try a different URL."
       end
+    rescue Net::OpenTimeout, Net::ReadTimeout
+      raise ImportError, "Request timed out. The website may be slow or unavailable."
+    rescue SocketError, Errno::ECONNREFUSED
+      raise ImportError, "Could not connect to the website. Please check the URL."
     rescue => e
       Rails.logger.error "Unexpected error fetching #{url}: #{e.class} - #{e.message}"
       Rails.logger.error e.backtrace.first(10).join("\n")
       raise ImportError, "Failed to fetch recipe page: #{e.message}"
-    ensure
-      browser&.quit
     end
-  end
-
-  def find_browser_executable
-    # List of common Chrome/Chromium paths in Linux environments
-    possible_paths = [
-      "/usr/bin/chromium",
-      "/usr/bin/chromium-browser",
-      "/usr/bin/google-chrome",
-      "/usr/bin/google-chrome-stable",
-      "/snap/bin/chromium",
-      which_chromium
-    ].compact
-
-    Rails.logger.info "Searching for browser executable..."
-    possible_paths.each do |path|
-      exists = File.exist?(path)
-      Rails.logger.info "  #{path}: #{exists ? 'FOUND' : 'not found'}"
-    end
-
-    found_path = possible_paths.find { |path| File.exist?(path) }
-
-    if found_path
-      Rails.logger.info "Using browser: #{found_path}"
-    else
-      Rails.logger.error "No browser executable found. Searched: #{possible_paths.join(', ')}"
-      # Log what's actually in /usr/bin/
-      Rails.logger.error "Contents of /usr/bin/chrom*: #{`ls -la /usr/bin/chrom* 2>/dev/null`}"
-      Rails.logger.error "Contents of /usr/bin/google*: #{`ls -la /usr/bin/google* 2>/dev/null`}"
-    end
-
-    found_path
-  end
-
-  def which_chromium
-    # Use 'which' command to find chromium in PATH
-    result = `which chromium 2>/dev/null`.strip
-    result.presence
-  rescue
-    nil
   end
 
   def extract_recipe_data
