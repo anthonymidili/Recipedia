@@ -22,8 +22,9 @@ class RecipeImporter
   def fetch_html
     browser_config = {
       headless: true,
-      timeout: 30,
-      process_timeout: 20,
+      timeout: 60,
+      process_timeout: 45,
+      ws_max_receive_size: 100 * 1024 * 1024, # 100MB
       browser_options: {
         'no-sandbox': nil,
         'disable-gpu': nil,
@@ -38,22 +39,34 @@ class RecipeImporter
         'mute-audio': nil,
         'no-first-run': nil,
         'safebrowsing-disable-auto-update': nil,
-        'single-process': nil
+        'single-process': nil,
+        'disable-setuid-sandbox': nil,
+        'disable-crash-reporter': nil,
+        'no-zygote': nil
       }
     }
 
     # Set browser path for production environments
     if ENV["BROWSER_PATH"].present?
       browser_config[:browser_path] = ENV["BROWSER_PATH"]
+      Rails.logger.info "Using BROWSER_PATH: #{ENV['BROWSER_PATH']}"
     elsif Rails.env.production?
       # Try to find Chrome/Chromium in common locations
       browser_path = find_browser_executable
-      browser_config[:browser_path] = browser_path if browser_path
+      if browser_path
+        browser_config[:browser_path] = browser_path
+        Rails.logger.info "Found browser at: #{browser_path}"
+      else
+        Rails.logger.error "No browser executable found!"
+      end
     end
 
+    Rails.logger.info "Starting browser with config: headless=#{browser_config[:headless]}, timeout=#{browser_config[:timeout]}, process_timeout=#{browser_config[:process_timeout]}"
+    
     browser = Ferrum::Browser.new(browser_config)
 
     begin
+      Rails.logger.info "Navigating to URL: #{url}"
       browser.go_to(url)
 
       # Wait for the page to load and render
