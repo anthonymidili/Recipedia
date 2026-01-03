@@ -66,9 +66,6 @@ class RecipeImporter
 
     Rails.logger.info "Starting browser with config: headless=#{browser_config[:headless]}, timeout=#{browser_config[:timeout]}, process_timeout=#{browser_config[:process_timeout]}"
 
-    # Log Chrome launch command for debugging
-    browser_config[:logger] = Rails.logger if Rails.env.production?
-
     browser = Ferrum::Browser.new(browser_config)
 
     begin
