@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# Custom test runner that works around Rails 8.1.1 test discovery issues
+# This script uses 'ruby -Itest' with programmatic file loading
+
+# Change to the Rails root directory
+Dir.chdir(File.expand_path('..', __dir__))
+
+# Extract test files from ARGV (skip any Minitest options)
+test_files = ARGV.select { |arg| arg.end_with?('_test.rb') && File.exist?(arg) }
+
+if test_files.empty?
+  # If no specific files, run all tests using programmatic loading
+  # This works around Rails 8.1.x test discovery issues
+  require_relative '../test/test_helper'
+  Dir.glob('test/**/*_test.rb').sort.each do |file|
+    require File.expand_path(file)
+  end
+else
+  # Remove test_helper.rb if it was accidentally included
+  test_files.reject! { |f| f.end_with?('test_helper.rb') }
+
+  if test_files.empty?
+    puts "No test files found"
+    exit 1
+  end
+
+  # Build the command for specific files
+  cmd = ['ruby', '-Itest'] + test_files
+
+  # Execute the tests
+  exec(*cmd)
+end

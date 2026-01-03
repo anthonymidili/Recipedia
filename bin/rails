@@ -1,4 +1,37 @@
 #!/usr/bin/env ruby
+# Workaround for Rails 8.1 test loading issue
+# Intercept 'test' command and use programmatic file loading
+if ARGV.first == "test"
+  test_files = ARGV[1..].select { |arg| arg.end_with?("_test.rb") && File.exist?(arg) }
+  
+  if test_files.empty?
+    # Load all tests programmatically to work around Rails 8.1.x bug
+    Dir.chdir(File.expand_path('..', __dir__))
+    $LOAD_PATH.unshift(File.expand_path('test'))
+    require_relative '../test/test_helper'
+    Dir.glob('test/**/*_test.rb').sort.each { |file| require File.expand_path(file) }
+    exit 0
+  else
+    # Run specific test files
+    test_files.reject! { |f| f.end_with?("test_helper.rb") }
+    if test_files.any?
+      # Check if Ruby LSP reporter is already loaded (via -r flag)
+      ruby_lsp_reporter = $LOADED_FEATURES.find { |f| f.include?('ruby_lsp/test_reporters') }
+      
+      if ruby_lsp_reporter
+        # Reporter is loaded - require test files in current process to keep reporter context
+        Dir.chdir(File.expand_path('..', __dir__))
+        $LOAD_PATH.unshift(File.expand_path('test')) unless $LOAD_PATH.include?(File.expand_path('test'))
+        require_relative '../test/test_helper'
+        test_files.each { |file| require File.expand_path(file) }
+        exit 0
+      else
+        exec("ruby", "-Itest", *test_files)
+      end
+    end
+  end
+end
+
 APP_PATH = File.expand_path("../config/application", __dir__)
 require_relative "../config/boot"
 require "rails/commands"

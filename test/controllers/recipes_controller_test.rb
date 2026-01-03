@@ -82,8 +82,8 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     patch recipe_url(@recipe), params: {
       recipe: { name: new_name, category_ids: [ @category.id ] }
     }
-    assert_redirected_to recipe_url(@recipe)
     @recipe.reload
+    assert_redirected_to recipe_url(@recipe)
     assert_equal new_name, @recipe.name
   end
 

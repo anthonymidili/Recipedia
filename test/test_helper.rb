@@ -1,4 +1,9 @@
 ENV["RAILS_ENV"] ||= "test"
+
+# Ensure test directory is in load path for requiring test_helper
+test_dir = File.expand_path(__dir__)
+$LOAD_PATH.unshift(test_dir) unless $LOAD_PATH.include?(test_dir)
+
 require_relative "../config/environment"
 require "rails/test_help"
 require "active_job/test_helper"
@@ -9,8 +14,15 @@ ActiveStorage::Current.url_options = { host: "http://www.example.com" }
 
 module ActiveSupport
   class TestCase
-    # Run tests in parallel with specified workers
-    parallelize(workers: :number_of_processors)
+    # Run tests serially to avoid issues with parallel test execution
+    # Note: Rails 8.1.x has a known issue where `bin/rails test` doesn't load test files properly.
+    # Fixed by custom bin/test script and lib/tasks/test.rake
+    # To run tests:
+    #   1. bin/test (runs all tests - 265 tests)
+    #   2. bundle exec rake test (runs all tests)
+    #   3. bundle exec rake test:models (runs only model tests)
+    #   4. ruby -Itest test/models/user_test.rb (run individual files)
+    parallelize(workers: 1)
 
     # Set ActiveStorage URL options for each test
     setup do
@@ -218,6 +230,74 @@ module ActionDispatch
 
     def sign_out
       delete destroy_user_session_path
+    end
+
+    # Custom URL helper methods to match the scoped routing structure
+    # Recipes are nested under /recipes/:username
+    def recipe_url(recipe, options = {})
+      user_recipe_url(recipe.user.slug, recipe.slug, options)
+    end
+
+    def recipe_path(recipe, options = {})
+      user_recipe_path(recipe.user.slug, recipe.slug, options)
+    end
+
+    def edit_recipe_url(recipe)
+      edit_user_recipe_url(recipe.user.slug, recipe.slug)
+    end
+
+    def edit_recipe_path(recipe)
+      edit_user_recipe_path(recipe.user.slug, recipe.slug)
+    end
+
+    # Recipe images nested under recipes
+    def recipe_recipe_images_url(recipe)
+      user_recipe_recipe_images_url(recipe.user.slug, recipe.slug)
+    end
+
+    def recipe_recipe_images_path(recipe)
+      user_recipe_recipe_images_path(recipe.user.slug, recipe.slug)
+    end
+
+    def new_recipe_recipe_image_url(recipe)
+      new_user_recipe_recipe_image_url(recipe.user.slug, recipe.slug)
+    end
+
+    def new_recipe_recipe_image_path(recipe)
+      new_user_recipe_recipe_image_path(recipe.user.slug, recipe.slug)
+    end
+
+    def recipe_recipe_image_url(recipe, recipe_image)
+      user_recipe_recipe_image_url(recipe.user.slug, recipe.slug, recipe_image)
+    end
+
+    def recipe_recipe_image_path(recipe, recipe_image)
+      user_recipe_recipe_image_path(recipe.user.slug, recipe.slug, recipe_image)
+    end
+
+    # Reviews nested under recipes
+    def recipe_reviews_url(recipe)
+      user_recipe_reviews_url(recipe.user.slug, recipe.slug)
+    end
+
+    def recipe_reviews_path(recipe)
+      user_recipe_reviews_path(recipe.user.slug, recipe.slug)
+    end
+
+    def recipe_review_url(recipe, review)
+      user_recipe_review_url(recipe.user.slug, recipe.slug, review)
+    end
+
+    def recipe_review_path(recipe, review)
+      user_recipe_review_path(recipe.user.slug, recipe.slug, review)
+    end
+
+    def edit_recipe_review_url(recipe, review)
+      edit_user_recipe_review_url(recipe.user.slug, recipe.slug, review)
+    end
+
+    def edit_recipe_review_path(recipe, review)
+      edit_user_recipe_review_path(recipe.user.slug, recipe.slug, review)
     end
   end
 end
