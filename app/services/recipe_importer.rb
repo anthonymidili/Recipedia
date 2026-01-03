@@ -23,8 +23,9 @@ class RecipeImporter
     browser_config = {
       headless: true,
       timeout: 60,
-      process_timeout: 45,
+      process_timeout: 60,
       ws_max_receive_size: 100 * 1024 * 1024, # 100MB
+      xvfb: false,
       browser_options: {
         'no-sandbox': nil,
         'disable-gpu': nil,
@@ -42,7 +43,9 @@ class RecipeImporter
         'single-process': nil,
         'disable-setuid-sandbox': nil,
         'disable-crash-reporter': nil,
-        'no-zygote': nil
+        'no-zygote': nil,
+        'memory-pressure-off': nil,
+        'disable-features': "VizDisplayCompositor"
       }
     }
 
@@ -62,6 +65,9 @@ class RecipeImporter
     end
 
     Rails.logger.info "Starting browser with config: headless=#{browser_config[:headless]}, timeout=#{browser_config[:timeout]}, process_timeout=#{browser_config[:process_timeout]}"
+
+    # Log Chrome launch command for debugging
+    browser_config[:logger] = Rails.logger if Rails.env.production?
 
     browser = Ferrum::Browser.new(browser_config)
 
