@@ -55,8 +55,6 @@ gem "nokogiri"
 # ActionCable to AnyCable
 # gem "anycable-rails", "~> 1.0"
 
-gem "ferrum", "~> 0.17.1"
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug"

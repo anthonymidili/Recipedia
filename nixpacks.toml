@@ -1,2 +1,2 @@
 [phases.setup]
-  aptPkgs = ['...', 'imagemagick', 'chromium-browser', 'chromium-chromedriver', 'libnss3', 'libfontconfig1']
+  aptPkgs = ['...', 'imagemagick']
