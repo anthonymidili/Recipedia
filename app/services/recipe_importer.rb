@@ -62,7 +62,7 @@ class RecipeImporter
     end
 
     Rails.logger.info "Starting browser with config: headless=#{browser_config[:headless]}, timeout=#{browser_config[:timeout]}, process_timeout=#{browser_config[:process_timeout]}"
-    
+
     browser = Ferrum::Browser.new(browser_config)
 
     begin
