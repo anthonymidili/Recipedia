@@ -36,6 +36,14 @@ a.button {
   @extend .d-flex, .justify-content-between;
 }
 
+.stacked-on-sm {
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
 ul.nav-button-links {
   padding-inline-start: 0px !important;
   &, ul {
