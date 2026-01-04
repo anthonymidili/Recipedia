@@ -62,6 +62,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "minitest", "~> 5.25"
   gem "rails-controller-testing", "~> 1.0"
   gem "factory_bot_rails"
   # Required for Rails system tests (ActionDispatch::SystemTestCase)
