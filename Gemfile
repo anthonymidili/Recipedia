@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.8"
+ruby "4.0.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.1.1"
@@ -56,13 +56,9 @@ gem "nokogiri"
 # gem "anycable-rails", "~> 1.0"
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug"
+  # Call 'debugger' anywhere in the code to get a debugger console in the views
+  gem "debug", ">= 1.0.0", require: false, platforms: :mri
   gem "dotenv-rails", "~> 3.1"
-  # Ruby LSP for IDE features
-  # gem "ruby-lsp", require: false
-  # gem "ruby-lsp-rails", require: false
-  gem "debug", require: false, platforms: :mri
 end
 
 group :test do
@@ -79,8 +75,8 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console", ">= 3.3.0"
   gem "listen", "~> 3.3"
-  gem "better_errors"
-  gem "binding_of_caller"
+  # gem "better_errors"
+  # gem "binding_of_caller"
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
