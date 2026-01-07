@@ -27,6 +27,8 @@ gem "meta-tags", "~> 2.22.0"
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem "sitemap_generator"
+# Required for Ruby 4.0.0+ compatibility (cgi was removed from stdlib)
+gem "cgi", "~> 0.4"
 # Use ActiveStorage variant
 gem "ruby-vips"
 gem "image_processing", "~> 1.6"

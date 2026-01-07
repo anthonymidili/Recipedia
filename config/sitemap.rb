@@ -1,6 +1,8 @@
 require "rubygems"
 require "aws-sdk-s3"
 require "sitemap_generator"
+require_relative "../lib/sitemap_adapters/aws_sdk_adapter"
+
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "https://recipedia.wiki"
 SitemapGenerator::Sitemap.compress = false
@@ -8,7 +10,7 @@ SitemapGenerator::Sitemap.sitemaps_host = "https://#{Rails.application.credentia
 SitemapGenerator::Sitemap.public_path = "tmp/"
 SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/recipedia/"
 
-SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
+SitemapGenerator::Sitemap.adapter = SitemapAdapters::AwsSdkAdapter.new(
   Rails.application.credentials.dig(:sitemap, :s3_bucket),
   aws_access_key_id: Rails.application.credentials.dig(:aws, :access_key_id),
   aws_secret_access_key: Rails.application.credentials.dig(:aws, :secret_access_key),
