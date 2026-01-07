@@ -35,7 +35,14 @@ SitemapGenerator::Sitemap.create do
   #
   # Add all articles:
   #
+  default_user = User.find_by(email: ENV["SITE_ADMIN"])
+
   Recipe.includes(:user).find_each do |recipe|
+    if recipe.user.nil?
+      recipe.update(user: default_user)
+      recipe.reload
+    end
+
     recipe_url = Rails.application.routes.url_helpers.user_recipe_url(recipe.user.slug, recipe.slug, host: SitemapGenerator::Sitemap.default_host)
     if recipe.recipe_images.try(:first).try(:image).try(:attached?)
       add recipe_url, lastmod: recipe.updated_at,
