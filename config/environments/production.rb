@@ -25,6 +25,10 @@ Rails.application.configure do
   config.active_storage.service = :amazon
   config.active_storage.variant_processor = :vips
 
+  # Set the default URL options for Active Storage and routes
+  config.action_controller.default_url_options = { host: ENV.fetch("DEFAULT_URL", "example.com"), protocol: "https" }
+  config.action_controller.asset_host = ENV.fetch("DEFAULT_URL", "example.com")
+
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   config.assume_ssl = true
 
