@@ -34,10 +34,12 @@ gem "ruby-vips"
 gem "image_processing", "~> 1.6"
 gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
-gem "sidekiq", "~> 8.1.0"
+gem "sidekiq", "~> 7.3"
 gem "sidekiq-scheduler", "~> 6.0.1"
 # Use Redis for Action Cable
 gem "redis", "~> 5.0"
+# Pin connection_pool to 2.x for Rails 8.1.1 compatibility
+gem "connection_pool", "~> 2.4.1"
 # Web Push Notifications
 gem "web-push"
 
