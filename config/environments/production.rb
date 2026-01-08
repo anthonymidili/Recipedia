@@ -16,7 +16,10 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Cache assets for far-future expiry since they are all digest stamped.
-  config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
+  config.public_file_server.headers = {
+    "cache-control" => "public, max-age=#{1.year.to_i}",
+    "Access-Control-Allow-Origin" => "*"
+  }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
@@ -27,7 +30,7 @@ Rails.application.configure do
 
   # Set the default URL options for Active Storage and routes
   config.action_controller.default_url_options = { host: ENV.fetch("DEFAULT_URL", "example.com"), protocol: "https" }
-  config.action_controller.asset_host = ENV.fetch("DEFAULT_URL", "example.com")
+  config.action_controller.asset_host = "https://#{ENV.fetch('DEFAULT_URL', 'example.com')}"
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   config.assume_ssl = true
