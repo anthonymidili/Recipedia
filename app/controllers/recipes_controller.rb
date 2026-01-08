@@ -20,6 +20,9 @@ class RecipesController < ApplicationController
         Recipe.includes(:user, :recipe_images).by_published.newest_to_oldest.
         page(params[:page]).per(30)
       end
+    
+    # Prevent CDN/browser caching of index page
+    expires_now
   end
 
   # GET /recipes/1
