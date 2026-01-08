@@ -1,31 +1,32 @@
-.col-12.col-md-6.col-lg-4
-  .card.recipe-card{id: "recipe_#{recipe.id}", data: { recipe_id: recipe.id }}
-    = link_to user_recipe_path(recipe.user.slug, recipe.slug) do
-      - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
-        = image_tag banner_image(recipe.recipe_images.first.image), class: "card-img-top"
-      - else
-        = image_tag('default_recipe_image.svg', class: "card-img-top")
-    .card-body
-      .row
-        .col-12
-          .nav-buttons.recipe-card-stats
-            - if user_signed_in? && !is_author?(recipe.user)
-              = render 'recipes/favor_form', recipe: recipe
-            - elsif !user_signed_in?
-              = link_to log_in_user_recipe_path(recipe.user.slug, recipe.slug), class: 'favor_form_button' do
-                %i.gray-text.far.fa-heart
-            %div{id: "recipe_likes_count_#{recipe.id}"}
-              = render 'recipes/likes_count', recipe: recipe
-            = link_to user_recipe_path(recipe.user.slug, recipe.slug, anchor: "reviews_header") do
-              = render "reviews/count", recipe: recipe
-          %hr/
-      .row
-        .col-12
-          = link_to recipe.user do
-            %p
-              Posted by:
-              %b= recipe.user.username
+- cache [recipe, recipe.updated_at] do
+  .col-12.col-md-6.col-lg-4
+    .card.recipe-card{id: "recipe_#{recipe.id}", data: { recipe_id: recipe.id }}
       = link_to user_recipe_path(recipe.user.slug, recipe.slug) do
-        %h4= recipe.name
-        .description
-          = recipe.description
+        - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
+          = image_tag banner_image(recipe.recipe_images.first.image), class: "card-img-top"
+        - else
+          = image_tag('default_recipe_image.svg', class: "card-img-top")
+      .card-body
+        .row
+          .col-12
+            .nav-buttons.recipe-card-stats
+              - if user_signed_in? && !is_author?(recipe.user)
+                = render 'recipes/favor_form', recipe: recipe
+              - elsif !user_signed_in?
+                = link_to log_in_user_recipe_path(recipe.user.slug, recipe.slug), class: 'favor_form_button' do
+                  %i.gray-text.far.fa-heart
+              %div{id: "recipe_likes_count_#{recipe.id}"}
+                = render 'recipes/likes_count', recipe: recipe
+              = link_to user_recipe_path(recipe.user.slug, recipe.slug, anchor: "reviews_header") do
+                = render "reviews/count", recipe: recipe
+            %hr/
+        .row
+          .col-12
+            = link_to recipe.user do
+              %p
+                Posted by:
+                %b= recipe.user.username
+        = link_to user_recipe_path(recipe.user.slug, recipe.slug) do
+          %h4= recipe.name
+          .description
+            = recipe.description

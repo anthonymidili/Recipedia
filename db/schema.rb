@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_02_225700) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_08_124607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -172,12 +172,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_02_225700) do
 
   create_table "recipes", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.integer "favoritisms_count", default: 0, null: false
     t.citext "name"
     t.boolean "published", default: false
+    t.integer "reviews_count", default: 0, null: false
     t.string "slug"
     t.string "source"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["name"], name: "index_recipes_on_name"
+    t.index ["published", "created_at"], name: "index_recipes_on_published_and_created_at"
     t.index ["user_id", "slug"], name: "index_recipes_on_user_id_and_slug", unique: true
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
