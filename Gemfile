@@ -40,6 +40,8 @@ gem "sidekiq-scheduler", "~> 6.0.1"
 gem "redis", "~> 5.0"
 # Pin connection_pool to 2.x for Rails 8.1.1 compatibility
 gem "connection_pool", "~> 2.4.1"
+# CORS support for cross-domain asset requests
+gem "rack-cors"
 # Web Push Notifications
 gem "web-push"
 
