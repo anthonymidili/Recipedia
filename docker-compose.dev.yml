@@ -1,0 +1,27 @@
+# Docker Compose configuration for development environment
+# To run: docker compose -f docker-compose.dev.yml up
+# To stop: docker compose -f docker-compose.dev.yml down
+# To rebuild: docker compose -f docker-compose.dev.yml up --build
+# To completely remove containers, networks, volumes, and images created by up: 
+# docker compose -f docker-compose.dev.yml down --rmi all -v
+# Then: docker builder prune -a -f
+services:
+  web:
+    build: .
+    command: bin/dev
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@host.docker.internal:5432/${POSTGRES_DB}
+      REDIS_URL: redis://host.docker.internal:6379/0
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-5}
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/tmp
+    ports:
+      - "${PORT:-3000}:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    stdin_open: true
+    tty: true
