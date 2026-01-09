@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
       end
 
     # Prevent CDN/browser caching of index page
-    expires_now
+    # expires_now
   end
 
   # GET /recipes/1
