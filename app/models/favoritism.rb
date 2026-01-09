@@ -9,6 +9,6 @@ class Favoritism < ApplicationRecord
 
   has_many :notifications, as: :notifiable, dependent: :destroy
 
-  belongs_to :recipe, inverse_of: :favoritisms, counter_cache: true
+  belongs_to :recipe, inverse_of: :favoritisms, counter_cache: true, touch: true
   belongs_to :user, inverse_of: :favoritisms
 end
