@@ -1,4 +1,4 @@
-- cache [recipe, recipe.updated_at, current_user&.id] do
+- cache [recipe, current_user] do
   .col-12.col-md-6.col-lg-4
     .card.recipe-card{id: "recipe_#{recipe.id}", data: { recipe_id: recipe.id }}
       = link_to user_recipe_path(recipe.user.slug, recipe.slug) do
