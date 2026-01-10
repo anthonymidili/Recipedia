@@ -4,7 +4,7 @@ FROM ruby:4.0-slim AS builder
 # Install build dependencies for gems and Node.js
 RUN apt-get update && apt-get install -y \
     build-essential libvips-dev libssl-dev libyaml-dev \
-    zlib1g-dev libffi-dev libreadline-dev ca-certificates gnupg curl \
+    zlib1g-dev libffi-dev libreadline-dev ca-certificates gnupg libjemalloc2 curl \
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
