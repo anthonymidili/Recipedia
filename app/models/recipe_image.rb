@@ -5,7 +5,7 @@ class RecipeImage < ApplicationRecord
 
   has_many :notifications, as: :notifiable, dependent: :destroy
 
-  belongs_to :recipe
+  belongs_to :recipe, touch: true
   belongs_to :user
 
   has_one_attached :image, dependent: :purge_later
