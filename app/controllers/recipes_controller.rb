@@ -210,6 +210,13 @@ class RecipesController < ApplicationController
     end
   end
 
+  def redirect_old
+    recipe = Recipe.find(params[:id])
+    redirect_to user_recipe_path(recipe.user.slug, recipe.slug), status: :moved_permanently
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, status: :moved_permanently
+  end
+
 private
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe

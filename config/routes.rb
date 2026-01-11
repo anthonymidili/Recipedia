@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: "users/registrations" }
 
+  get "/recipes/:id", to: "recipes#redirect_old", constraints: { id: /\d+/ }
+
   resources :recipes, only: [ :index, :new, :create ] do
     collection do
       get :search
