@@ -140,29 +140,43 @@ class RecipeImporter
       tablespoons tablespoon milliliters milliliter kilograms kilogram
       teaspoons teaspoon packages package gallons gallon quarts quart
       pints pint pounds pound ounces ounce grams gram liters liter
-      cloves clove pieces piece slices slice cups cup cans can bags bag
-      tbsp tsp lbs lb oz kg ml pinch dash pkg
+      cloves clove pieces piece slices slice shots shot cups cup
+      cans can bags bag tbsp tsp lbs lb oz kg ml pinches pinch
+      dashes dash pkg
     ]
 
     # Unicode fractions: ½ ⅓ ⅔ ¼ ¾ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅛ ⅜ ⅝ ⅞
     # Pattern: number (digits, fractions, decimals, unicode fractions), optional unit, then item
-    pattern = /^([0-9½⅓⅔¼¾⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞\/\.\s-]+)?\s*(#{units.join('|')})?\.?\s*(.+)$/i
+    # First try with full unit names, then try single letter with period (like "c.")
+    pattern = /^([0-9½⅓⅔¼¾⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞\/\.-]+)\s+(#{units.join('|')})\.?\s+(.+)$/i
+    abbrev_pattern = /^([0-9½⅓⅔¼¾⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞\/\.-]+)\s+([a-z])\.\s+(.+)$/i
 
-    match = text.match(pattern)
+    match = text.match(pattern) || text.match(abbrev_pattern)
 
     if match
-      quantity = [ match[1], match[2] ].compact.join(" ").strip.gsub(/\s+/, " ")
+      number = match[1]
+      unit = match[2]
       item = match[3].strip
 
-      # If quantity is empty, it means no number/unit was found (like "salt to taste")
-      if quantity.empty?
-        { quantity: nil, item: text }
-      else
-        { quantity: quantity, item: item }
+      # Expand "c" abbreviation to "cup" or "cups"
+      if unit.downcase == "c"
+        unit = number.to_f > 1 ? "cups" : "cup"
       end
+
+      quantity = "#{number} #{unit}".strip
+
+      { quantity: quantity, item: item }
     else
-      # Fallback: entire string as item if pattern doesn't match
-      { quantity: nil, item: text }
+      # Fallback: try pattern without unit for things like "2-3 apples" or "salt to taste"
+      simple_pattern = /^([0-9½⅓⅔¼¾⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞\/\.-]+)\s+(.+)$/i
+      simple_match = text.match(simple_pattern)
+
+      if simple_match
+        { quantity: simple_match[1].strip, item: simple_match[2].strip }
+      else
+        # No number found, entire string is the item
+        { quantity: nil, item: text }
+      end
     end
   end
 
