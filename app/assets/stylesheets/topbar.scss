@@ -19,12 +19,18 @@ $prefix: bs-;
   }
 
   .app-name {
-    height: 64px;
+    height: 54px;
     img {
-      height: 64px;
+      height: 54px;
     }
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+    @include media-breakpoint-down(sm) {
+      height: 43px;
+      img {
+        height: 43px;
+      }
+    }
   }
 
   /* Push nav items right */
