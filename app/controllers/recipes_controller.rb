@@ -16,11 +16,21 @@ class RecipesController < ApplicationController
     @recipes =
       if params[:search]
         Recipe.includes(:user, :recipe_images).by_published.newest_to_oldest.
-        filtered_by(params[:search]).page(params[:page]).per(30)
+        filtered_by(params[:search]).page(params[:page]).per(12)
       else
         Recipe.includes(:user, :recipe_images).by_published.newest_to_oldest.
-        page(params[:page]).per(30)
+        page(params[:page]).per(12)
       end
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: {
+          html: render_to_string(partial: "recipe", collection: @recipes, formats: [ :html ]),
+          next_page: @recipes.next_page
+        }
+      }
+    end
 
     # Prevent CDN/browser caching of index page
     # expires_now
@@ -76,6 +86,7 @@ class RecipesController < ApplicationController
           flash.now[:warning] = "Recipe imported successfully! Please double-check all fields against the original recipe before saving."
         elsif import.failed?
           flash.now[:alert] = "Recipe import failed: #{import.error_message}"
+          import.destroy
           session.delete(:import_id)
           @recipe.parts.first.ingredients.build
           @recipe.parts.first.steps.build

@@ -10,6 +10,9 @@ application.register("hello", HelloController)
 import ImportStatusController from "./import_status_controller"
 application.register("import-status", ImportStatusController)
 
+import InfiniteScrollController from "./infinite_scroll_controller"
+application.register("infinite-scroll", InfiniteScrollController)
+
 import OcrController from "./ocr_controller"
 application.register("ocr", OcrController)
 

@@ -6,8 +6,18 @@ class UsersController < ApplicationController
   unless: -> { is_author?(@user) }, only: [ :edit, :update ]
 
   def index
-    @users = User.includes(:info, [ avatar_attachment: :blob ]).all
+    @users = User.includes(:info, [ avatar_attachment: :blob ]).page(params[:page]).per(25)
     @show_info_body = true
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: {
+          html: render_to_string(partial: "user", collection: @users, formats: [ :html ]),
+          next_page: @users.next_page
+        }
+      }
+    end
   end
 
   def show

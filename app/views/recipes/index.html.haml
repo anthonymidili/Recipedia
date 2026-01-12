@@ -17,8 +17,10 @@
 .row
   .col-12
     %h1 Latest Recipes
-.row
-  = render @recipes
-.row
-  .col-12
-    = paginate @recipes
+#recipes{ data: { controller: "infinite-scroll", "infinite-scroll-next-page-value": @recipes.next_page, "infinite-scroll-search-value": params[:search] } }
+  .row{ data: { "infinite-scroll-target": "container" } }
+    = render @recipes
+  #recipes-end.infinite-end.text-center.py-4{ data: { "infinite-scroll-target": "sentinel" } }
+    .d-flex.align-items-center.justify-content-center
+      .spinner-border.spinner-border-sm.me-2{ role: "status" }
+      %span Loading more recipes...
