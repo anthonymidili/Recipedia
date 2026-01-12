@@ -76,6 +76,7 @@ class RecipesController < ApplicationController
           flash.now[:warning] = "Recipe imported successfully! Please double-check all fields against the original recipe before saving."
         elsif import.failed?
           flash.now[:alert] = "Recipe import failed: #{import.error_message}"
+          import.destroy
           session.delete(:import_id)
           @recipe.parts.first.ingredients.build
           @recipe.parts.first.steps.build
