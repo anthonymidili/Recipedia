@@ -16,11 +16,21 @@ class RecipesController < ApplicationController
     @recipes =
       if params[:search]
         Recipe.includes(:user, :recipe_images).by_published.newest_to_oldest.
-        filtered_by(params[:search]).page(params[:page]).per(30)
+        filtered_by(params[:search]).page(params[:page]).per(12)
       else
         Recipe.includes(:user, :recipe_images).by_published.newest_to_oldest.
-        page(params[:page]).per(30)
+        page(params[:page]).per(12)
       end
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: {
+          html: render_to_string(partial: "recipe", collection: @recipes, formats: [ :html ]),
+          next_page: @recipes.next_page
+        }
+      }
+    end
 
     # Prevent CDN/browser caching of index page
     # expires_now
