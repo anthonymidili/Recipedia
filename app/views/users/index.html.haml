@@ -3,5 +3,10 @@
 .row
   .col-12
     %h1 The Cooks
-    .flex-d.flex-column.user-list
-      = render @users
+%users{ data: { controller: "infinite-scroll", "infinite-scroll-next-page-value": @users.next_page } }
+  .flex-d.flex-column.user-list{ data: { "infinite-scroll-target": "container" } }
+    = render @users
+  #users-end.infinite-end.text-center.py-4{ data: { "infinite-scroll-target": "sentinel" } }
+    .d-flex.align-items-center.justify-content-center
+      .spinner-border.spinner-border-sm.me-2{ role: "status" }
+      %span Loading more users...
