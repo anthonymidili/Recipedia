@@ -1,4 +1,4 @@
 web: bundle exec passenger start
 worker: bundle exec sidekiq -C config/sidekiq.yml
-js: yarn build --watch
-css: yarn build:css --watch
+js: yarn build:watch
+css: yarn build:css:watch

@@ -1,7 +1,5 @@
 # Docker Compose configuration for Recipedia application
 # To run the application, use: docker-compose up --build
-version: '3.8'
-
 services:
   web:
     build: .
@@ -23,7 +21,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
-  sidekiq:
+  worker:
     build: .
     command: bundle exec sidekiq -C config/sidekiq.yml
     environment:
@@ -38,3 +36,5 @@ services:
       - ./tmp:/app/tmp
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    depends_on:
+      - web

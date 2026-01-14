@@ -1,5 +1,5 @@
 # Stage 1: Builder
-FROM ruby:4.0-slim AS builder
+FROM ruby:4.0.0-slim AS builder
 
 # Install build dependencies for gems and Node.js
 RUN apt-get update && apt-get install -y \
@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev libffi-dev libreadline-dev ca-certificates gnupg libjemalloc2 curl \
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
+    && corepack enable \
+    && corepack prepare yarn@1.22.22 --activate \
     && rm -rf /var/lib/apt/lists/*
 
 # Set WORKDIR
@@ -26,7 +28,7 @@ RUN SECRET_KEY_BASE=dummy_for_build bundle exec rake assets:precompile
 
 
 # Stage 2: Final Runtime Image
-FROM ruby:4.0-slim
+FROM ruby:4.0.0-slim
 
 ENV RAILS_ENV=production \
     RAILS_LOG_TO_STDOUT=true \
@@ -40,6 +42,8 @@ RUN apt-get update && apt-get install -y \
     libvips42 libvips-tools libjemalloc2 curl ca-certificates gnupg procps \
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
+    && corepack enable \
+    && corepack prepare yarn@1.22.22 --activate \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy bundler config and gems from builder

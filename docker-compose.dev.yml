@@ -8,7 +8,7 @@
 services:
   web:
     build: .
-    command: bin/dev
+    command: bundle exec passenger start
     environment:
       RAILS_ENV: development
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@host.docker.internal:5432/${POSTGRES_DB}
@@ -26,3 +26,52 @@ services:
       - "host.docker.internal:host-gateway"
     stdin_open: true
     tty: true
+
+  worker:
+    build: .
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@host.docker.internal:5432/${POSTGRES_DB}
+      REDIS_URL: redis://host.docker.internal:6379/0
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-5}
+      LD_PRELOAD: ""
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/tmp
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - web
+
+  js:
+    build: .
+    command: yarn build:watch
+    environment:
+      RAILS_ENV: development
+      LD_PRELOAD: ""
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/tmp
+    stdin_open: true
+    tty: true
+    depends_on:
+      - web
+
+  css:
+    build: .
+    command: yarn build:css:watch
+    environment:
+      RAILS_ENV: development
+      LD_PRELOAD: ""
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/tmp
+    stdin_open: true
+    tty: true
+    depends_on:
+      - web
