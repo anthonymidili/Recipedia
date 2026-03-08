@@ -18,7 +18,7 @@ WORKDIR /app
 
 # Install Bundler and Ruby Gems
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler:4.0.4 && bundle install --jobs 4 --retry 3
+RUN gem install bundler:4.0.7 && bundle install --jobs 4 --retry 3
 
 # Install JS Dependencies using corepack (built into Node.js)
 COPY package.json yarn.lock .yarnrc.yml ./

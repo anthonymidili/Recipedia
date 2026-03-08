@@ -21,7 +21,7 @@ gem "haml-rails", "~> 3.0.0"
 gem "kaminari", "~> 1.2.0"
 # For webpacker, you must use the cocoon gem with the yarn package cocoon-js.
 gem "cocoon", "~> 1.2.10"
-gem "devise", "~> 4.9.3"
+gem "devise", "~> 5.0.2"
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
 gem "meta-tags", "~> 2.22.0"
 # https://github.com/kjvarga/sitemap_generator
@@ -34,12 +34,11 @@ gem "ruby-vips"
 gem "image_processing", "~> 1.6"
 gem "aws-sdk-s3", require: false
 # Active Job backgrounding.
-gem "sidekiq", "~> 7.3"
+gem "sidekiq", "~> 8.1"
 gem "sidekiq-scheduler", "~> 6.0.1"
 # Use Redis for Action Cable
 gem "redis", "~> 5.0"
-# Pin connection_pool to 2.x for Rails 8.1.1 compatibility
-gem "connection_pool", "~> 2.4.1"
+gem "connection_pool", "~> 3.0.2"
 # CORS support for cross-domain asset requests
 # gem "rack-cors"
 # Web Push Notifications
@@ -68,7 +67,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "minitest", "~> 5.25"
+  gem "minitest", "~> 6.0"
   gem "rails-controller-testing", "~> 1.0"
   gem "factory_bot_rails"
   # Required for Rails system tests (ActionDispatch::SystemTestCase)
