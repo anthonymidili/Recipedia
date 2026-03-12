@@ -27,7 +27,7 @@
     "postcss": "^8.5.8",
     "sass": "^1.97.3",
     "tesseract.js": "^7.0.0",
-    "trix": "^2.1.16",
+    "trix": "^2.1.17",
     "what-input": "^5.2.12"
   },
   "packageManager": "yarn@4.12.0",
