@@ -21,7 +21,7 @@ gem "haml-rails", "~> 3.0.0"
 gem "kaminari", "~> 1.2.0"
 # For webpacker, you must use the cocoon gem with the yarn package cocoon-js.
 gem "cocoon", "~> 1.2.10"
-gem "devise", "~> 5.0.2"
+gem "devise", "~> 5.0.3"
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
 gem "meta-tags", "~> 2.22.0"
 # https://github.com/kjvarga/sitemap_generator
