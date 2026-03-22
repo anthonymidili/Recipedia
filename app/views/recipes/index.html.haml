@@ -16,10 +16,19 @@
 = turbo_stream_from "reviews"
 .row
   .col-12
-    %h1 Latest Recipes
+    - if params[:search].present?
+      %h1 Search results for "#{params[:search]}"
+    - else
+      %h1 Latest Recipes
 #recipes{ data: { controller: "infinite-scroll", "infinite-scroll-next-page-value": @recipes.next_page, "infinite-scroll-search-value": params[:search] } }
   .row{ data: { "infinite-scroll-target": "container" } }
     = render @recipes
+  - if @recipes.empty? && params[:search].present?
+    .row
+      .col-12.text-center.py-5
+        %p.text-muted
+          No recipes found matching
+          %strong= params[:search]
   #recipes-end.infinite-end.text-center.py-4{ data: { "infinite-scroll-target": "sentinel" } }
     .d-flex.align-items-center.justify-content-center
       .spinner-border.spinner-border-sm.me-2{ role: "status" }

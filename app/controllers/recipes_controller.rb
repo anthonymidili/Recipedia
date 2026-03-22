@@ -163,8 +163,17 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @recipes = Recipe.by_published.filtered_by(params[:term])
-    render json: @recipes.pluck(:name)
+    @recipes = Recipe.includes(:user, :recipe_images).by_published.filtered_by(params[:term]).limit(8)
+    render json: @recipes.map { |recipe|
+      image = recipe.recipe_images.first&.image
+      {
+        label: recipe.name,
+        value: recipe.name,
+        username: recipe.user.username,
+        url: user_recipe_path(recipe.user.slug, recipe.slug),
+        image_url: image&.attached? ? url_for(image.variant(resize_to_fill: [ 60, 60 ])) : nil
+      }
+    }
   end
 
   def choice

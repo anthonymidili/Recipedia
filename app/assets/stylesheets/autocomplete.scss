@@ -5,19 +5,78 @@ ul.ui-autocomplete {
   padding: 0;
   border: solid 1px #999;
   cursor: default;
+  max-height: 400px;
+  overflow-y: auto;
+  width: 100% !important;
+  z-index: 9999;
   li {
     background-color: #FFF;
     margin: 0;
-    padding: 0 5px 0 5px;
+    padding: 0;
+    border-bottom: 1px solid #eee;
+    &:last-child {
+      border-bottom: none;
+    }
     a {
       color: #000;
       display: block;
       padding: 3px;
     }
-    .ui-menu-item-wrapper.ui-state-active {
-      color: #000;
-      background-color: #FFFCB2;
-      padding: 0 5px 0 5px;
+    .ui-menu-item-wrapper {
+      padding: 0;
+      &.ui-state-active {
+        color: #000;
+        background-color: #FFFCB2;
+        border: none;
+      }
     }
   }
+}
+
+.autocomplete-recipe-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.autocomplete-recipe-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.autocomplete-recipe-img--default {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 1.2rem;
+}
+
+.autocomplete-recipe-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.autocomplete-recipe-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.autocomplete-recipe-user {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2px;
 }
