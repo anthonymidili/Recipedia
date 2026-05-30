@@ -43,7 +43,7 @@ namespace :db do
         region: ENV["AWS_S3_REGION"]
       )
 
-      s3_key = "backups/backup-#{timestamp}.sql.gz"
+      s3_key = "backup-#{timestamp}.sql.gz"
       file_content = File.read(backup_file)
 
       s3_client.put_object(
@@ -63,4 +63,3 @@ namespace :db do
     end
   end
 end
-
