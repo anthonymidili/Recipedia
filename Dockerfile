@@ -1,16 +1,14 @@
 # Stage 1: Builder
-FROM ruby:4.0.2-slim AS builder
+FROM ruby:4.0.5-slim AS builder
 
 # Install build dependencies for gems and Node.js
 RUN apt-get update && apt-get install -y \
     build-essential libvips-dev libssl-dev libyaml-dev \
     zlib1g-dev libffi-dev libreadline-dev ca-certificates gnupg libjemalloc2 curl \
-    && curl -fsSL https://deb.nodesource.com/setup_25.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_26.x | bash - \
     && apt-get install -y nodejs \
-    && npm install -g npm@latest \
     && npm install -g corepack \
     && corepack enable \
-    && corepack prepare yarn@4.13.0 --activate \
     && rm -rf /var/lib/apt/lists/*
 
 # Set WORKDIR
@@ -18,11 +16,11 @@ WORKDIR /app
 
 # Install Bundler and Ruby Gems
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler:4.0.9 && bundle install --jobs 4 --retry 3
+RUN gem install bundler:4.0.12 && bundle install --jobs 4 --retry 3
 
-# Install JS Dependencies using corepack (built into Node.js)
+# Install JS Dependencies
 COPY package.json yarn.lock .yarnrc.yml ./
-RUN corepack enable && yarn install --immutable
+RUN corepack prepare yarn@4.15.0 --activate && yarn install --immutable
 
 # Copy app and precompile assets
 COPY . .
@@ -30,22 +28,18 @@ RUN SECRET_KEY_BASE=dummy_for_build bundle exec rake assets:precompile
 
 
 # Stage 2: Final Runtime Image
-FROM ruby:4.0.2-slim
+FROM ruby:4.0.5-slim
 
 ENV RAILS_ENV=production \
     RAILS_LOG_TO_STDOUT=true
 
 WORKDIR /app
 
-# Install runtime libraries
+# Install runtime libraries only (no build dependencies)
 RUN apt-get update && apt-get install -y \
     libvips42 libvips-tools libjemalloc2 curl ca-certificates gnupg procps \
-    && curl -fsSL https://deb.nodesource.com/setup_25.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm@latest \
+    nodejs npm \
     && npm install -g corepack \
-    && corepack enable \
-    && corepack prepare yarn@4.13.0 --activate \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy bundler config and gems from builder
@@ -59,4 +53,8 @@ COPY docker-entrypoint.sh /app/docker-entrypoint.sh
 RUN chmod +x /app/docker-entrypoint.sh
 
 EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3000/up || exit 1
+
 CMD ["/app/docker-entrypoint.sh"]
