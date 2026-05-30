@@ -16,7 +16,7 @@
     "@rails/actiontext": "^8.1.300",
     "@rails/activestorage": "^8.1.300",
     "autolinker": "^4.1.5",
-    "autoprefixer": "^10.4.27",
+    "autoprefixer": "^10.5.0",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "cocoon-js": "^0.0.5",
@@ -24,16 +24,16 @@
     "esbuild": "^0.28.0",
     "ilyabirman-likely": "^3.2.0",
     "jquery": "^4.0.0",
-    "postcss": "^8.5.8",
-    "sass": "^1.99.0",
+    "postcss": "^8.5.15",
+    "sass": "^1.100.0",
     "tesseract.js": "^7.0.0",
-    "trix": "^2.1.18",
+    "trix": "^2.1.19",
     "what-input": "^5.2.12"
   },
-  "packageManager": "yarn@4.13.0",
+  "packageManager": "yarn@4.15.0",
   "engines": {
-    "yarn": ">=4.13.0",
-    "node": ">=25.9.0",
+    "yarn": ">=4.15.0",
+    "node": ">=26.2.0",
     "npm": "please-use-yarn"
   },
   "scripts": {
