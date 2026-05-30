@@ -3,12 +3,22 @@ namespace :db do
   task backup_to_s3: :environment do
     require "aws-sdk-s3"
     require "fileutils"
+    require "uri"
 
-    db_config = ActiveRecord::Base.connection_db_config
-    database = db_config.database
-    username = db_config.username
-    host = db_config.host
-    port = db_config.port || 5432
+    # Railway exposes DATABASE_PRIVATE_URL for internal networking; fall back to
+    # DATABASE_URL when running outside Railway (e.g. local testing).
+    database_url = ENV["DATABASE_PRIVATE_URL"].presence || ENV["DATABASE_URL"].presence
+
+    if database_url.blank?
+      raise "No database URL found. Set DATABASE_PRIVATE_URL or DATABASE_URL."
+    end
+
+    uri      = URI.parse(database_url)
+    host     = uri.host
+    port     = uri.port || 5432
+    username = uri.user
+    password = uri.password
+    database = uri.path.delete_prefix("/")
 
     timestamp = Time.current.strftime("%Y-%m-%dT%H-%M-%S-%3NZ")
     backup_file = "/tmp/backup-#{timestamp}.sql.gz"
@@ -17,7 +27,7 @@ namespace :db do
       puts "Starting PostgreSQL backup..."
 
       # Create backup using pg_dump
-      cmd = "PGPASSWORD='#{db_config.password}' pg_dump -h #{host} -p #{port} -U #{username} #{database} | gzip > #{backup_file}"
+      cmd = "PGPASSWORD='#{password}' pg_dump -h #{host} -p #{port} -U #{username} #{database} | gzip > #{backup_file}"
       system(cmd)
 
       unless File.exist?(backup_file)
