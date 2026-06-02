@@ -54,7 +54,7 @@ RUN chmod +x /app/docker-entrypoint.sh
 
 EXPOSE 3000
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:3000/up || exit 1
+# HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+#     CMD curl -f http://localhost:3000/up || exit 1
 
 CMD ["/app/docker-entrypoint.sh"]
