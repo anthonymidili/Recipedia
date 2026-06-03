@@ -21,13 +21,13 @@ namespace :db do
     database = uri.path.delete_prefix("/")
 
     timestamp = Time.current.strftime("%Y-%m-%dT%H-%M-%S-%3NZ")
-    backup_file = "/tmp/backup-#{timestamp}.sql.gz"
+    backup_file = "/tmp/backup-#{timestamp}.dump"
 
     begin
       puts "Starting PostgreSQL backup..."
 
-      # Create backup using pg_dump
-      cmd = "PGPASSWORD='#{password}' pg_dump -h #{host} -p #{port} -U #{username} #{database} | gzip > #{backup_file}"
+      # Create backup using pg_dump custom format for better restore control
+      cmd = "PGPASSWORD='#{password}' pg_dump -h #{host} -p #{port} -U #{username} -Fc #{database} -f #{backup_file}"
       system(cmd)
 
       unless File.exist?(backup_file)
@@ -43,7 +43,7 @@ namespace :db do
         region: ENV["AWS_S3_REGION"]
       )
 
-      s3_key = "backup-#{timestamp}.sql.gz"
+      s3_key = "backup-#{timestamp}.dump"
       file_content = File.read(backup_file)
 
       s3_client.put_object(
