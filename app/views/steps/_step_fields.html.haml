@@ -3,7 +3,7 @@
     .row
       .col-lg-1.order-lg-2.mb-3
         .inline-large-icon
-          = link_to_remove_association f, class: 'red-text' do
+          %button{type: "button", "data-action": "steps#remove", class: 'red-text'}
             %i.fa.fa-trash
             %span.hide-on-large
               Remove
@@ -19,3 +19,4 @@
             = f.label :description, class: "form-label"
             = f.rich_text_area :description, rows: 2, placeholder: 'Heat oven to 425°F',
             class: 'autofocus-on-new form-control'
+  = f.hidden_field :_destroy, value: '0'
