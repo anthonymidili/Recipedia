@@ -21,7 +21,6 @@ import './packs/autolinker'
 import './packs/autocomplete'
 import './packs/autofocus_cacoon'
 import './packs/direct_uploads'
-import './packs/slider'
 import './packs/touch_punch'
 import './packs/autolinker'
 

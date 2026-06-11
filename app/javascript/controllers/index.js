@@ -21,3 +21,6 @@ application.register("push-notifications", PushNotificationsController)
 
 import WakeLockController from "./wake_lock_controller"
 application.register("wake-lock", WakeLockController)
+
+import StepsController from "./steps_controller"
+application.register("steps", StepsController)

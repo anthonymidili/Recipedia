@@ -1,11 +1,14 @@
 .row.mb-3
   .col-12
     %h5 Steps
-    .steps
-      .all-slides
+    .steps{"data-controller": "steps"}
+      .all-slides{"data-steps-target": "list"}
         = f.fields_for :steps do |step|
           = render 'steps/step_fields', f: step
-        .links
-          = link_to_add_association f, :steps, partial: 'steps/step_fields' do
-            %i.fa.fa-plus-circle
-            Add a step
+      .links
+        %a{href: "#", "data-action": "steps#add"}
+          %i.fa.fa-plus-circle
+          Add a step
+      %template{"data-steps-target": "template"}
+        = f.fields_for :steps, Step.new, child_index: 'NEW_RECORD' do |sf|
+          = render 'steps/step_fields', f: sf

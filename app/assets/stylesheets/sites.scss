@@ -154,9 +154,11 @@ ul.pagination {
 
 .red-text {
   color: $red;
-}
-a.red-text:hover {
-  color: darken($red, 20%);
+  border: unset;
+  background: unset;
+  &:hover {
+    color: darken($red, 20%);
+  }
 }
 
 .black-text {
