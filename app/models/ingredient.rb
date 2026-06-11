@@ -6,7 +6,7 @@ class Ingredient < ApplicationRecord
 
   validates :item, presence: true
 
-  default_scope -> { order(created_at: :asc) }
+  default_scope -> { order(ingredient_order: :asc) }
 
 private
 

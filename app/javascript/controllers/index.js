@@ -24,3 +24,6 @@ application.register("wake-lock", WakeLockController)
 
 import StepsController from "./steps_controller"
 application.register("steps", StepsController)
+
+import IngredientsController from "./ingredients_controller"
+application.register("ingredients", IngredientsController)

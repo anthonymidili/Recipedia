@@ -258,7 +258,7 @@ private
   def recipe_params
     params.require(:recipe).permit(:name, :description, :source, :published, category_ids: [],
       parts_attributes: [ :id, :name, :_destroy,
-        ingredients_attributes: [ :id, :item, :quantity, :_destroy ],
+        ingredients_attributes: [ :id, :item, :quantity, :ingredient_order, :_destroy ],
         steps_attributes: [ :id, :description, :step_order, :_destroy ] ])
   end
 
