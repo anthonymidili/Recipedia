@@ -1,5 +1,6 @@
 namespace :db do
   desc "Create 100 mock users with 2 recipes each for testing"
+  # Run task with command `rails db:create_mock_users`
   task create_mock_users: :environment do
     puts "Creating 100 mock users..."
 
@@ -77,6 +78,7 @@ namespace :db do
   end
 
   desc "Delete all mock users and their recipes"
+  # Run task with `rails db:delete_mock_users`
   task delete_mock_users: :environment do
     puts "Deleting mock users and recipes..."
 

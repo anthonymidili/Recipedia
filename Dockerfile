@@ -20,7 +20,7 @@ RUN gem install bundler:4.0.14 && bundle install --jobs 4 --retry 3
 
 # Install JS Dependencies
 COPY package.json yarn.lock .yarnrc.yml ./
-RUN corepack prepare yarn@4.15.0 --activate && yarn install --immutable
+RUN corepack prepare yarn@4.16.0 --activate && yarn install --immutable
 
 # Copy app and precompile assets
 COPY . .
