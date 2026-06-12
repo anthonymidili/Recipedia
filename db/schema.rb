@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_08_124607) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_11_230611) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -106,6 +106,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_08_124607) do
 
   create_table "ingredients", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.integer "ingredient_order"
     t.citext "item"
     t.bigint "part_id", null: false
     t.string "quantity"

@@ -1,10 +1,14 @@
 .row.mb-4
   .col-12
     %h5 Ingredients
-    .ingredients
-      = f.fields_for :ingredients do |ingredient|
-        = render 'ingredients/ingredient_fields', f: ingredient
+    .ingredients{"data-controller": "ingredients"}
+      .all-ingredient-slides{"data-ingredients-target": "list"}
+        = f.fields_for :ingredients do |ingredient|
+          = render 'ingredients/ingredient_fields', f: ingredient
       .links
-        = link_to_add_association f, :ingredients, partial: 'ingredients/ingredient_fields' do
+        %a{href: "#", "data-action": "ingredients#add"}
           %i.fa.fa-plus-circle
           Add an ingredient
+      %template{"data-ingredients-target": "template"}
+        = f.fields_for :ingredients, Ingredient.new, child_index: 'NEW_RECORD' do |ing|
+          = render 'ingredients/ingredient_fields', f: ing
