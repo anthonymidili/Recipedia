@@ -4,13 +4,13 @@
 %div{id: "recipe_#{@recipe.id}", data: { recipe_id: @recipe.id }}
   .hide-on-print
     .row
-      .col-8
+      .col-7
         = render 'recipes/share', recipe: @recipe
       - if is_author?(@recipe.user) || is_site_admin?
-        .col-4
+        .col-5
           %ul.edit_menu
             %li.nav-item
-              = link_to edit_user_recipe_path(@recipe.user.slug, @recipe.slug), class: "nav-link" do
+              = link_to edit_user_recipe_path(@recipe.user.slug, @recipe.slug), class: "nav-link nav-btn" do
                 %i.fas.fa-edit
                 Edit
             %li.nav-item
