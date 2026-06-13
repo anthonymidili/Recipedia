@@ -48,16 +48,15 @@ services:
 
   js:
     build: .
-    command: yarn build:watch
+    command: sh -c "yes | yarn build:watch"
     environment:
       RAILS_ENV: development
       LD_PRELOAD: ""
+      CHOKIDAR_USEPOLLING: "true"
     volumes:
       - .:/app
       - /app/node_modules
       - /app/tmp
-    stdin_open: true
-    tty: true
     depends_on:
       - web
 
@@ -67,6 +66,7 @@ services:
     environment:
       RAILS_ENV: development
       LD_PRELOAD: ""
+      CHOKIDAR_USEPOLLING: "true"
     volumes:
       - .:/app
       - /app/node_modules

@@ -40,6 +40,7 @@ RUN apt-get update && apt-get install -y \
     libvips42 libvips-tools libjemalloc2 curl ca-certificates gnupg procps \
     nodejs npm \
     && npm install -g corepack \
+    && corepack prepare yarn@4.16.0 --activate \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy bundler config and gems from builder
