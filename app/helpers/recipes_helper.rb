@@ -48,7 +48,9 @@ module RecipesHelper
         position += 1
         {
           "@type": "HowToStep",
+          "name": "Step #{position}",
           "position": position,
+          "url": "#{recipe_url}#step-#{position}",
           "text": step.description.to_plain_text
         }
       end
@@ -79,6 +81,14 @@ module RecipesHelper
     json_ld[:image] = images if images.any?
     json_ld[:recipeCategory] = recipe.categories.map(&:name) if recipe.categories.any?
     json_ld[:keywords] = recipe.categories.map(&:name).join(", ") if recipe.categories.any?
+
+    if recipe.ratings_count > 0
+      json_ld[:aggregateRating] = {
+        "@type": "AggregateRating",
+        "ratingValue": recipe.average_rating.to_s,
+        "ratingCount": recipe.ratings_count
+      }
+    end
 
     tag.script(type: "application/ld+json") do
       json_ld.to_json.html_safe

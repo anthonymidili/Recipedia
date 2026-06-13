@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_11_230611) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_13_162634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -162,6 +162,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_230611) do
     t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "recipe_id", null: false
+    t.integer "score"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["recipe_id"], name: "index_ratings_on_recipe_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
   create_table "recipe_images", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "recipe_id", null: false
@@ -172,10 +182,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_230611) do
   end
 
   create_table "recipes", force: :cascade do |t|
+    t.decimal "average_rating", precision: 3, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.integer "favoritisms_count", default: 0, null: false
     t.citext "name"
     t.boolean "published", default: false
+    t.integer "ratings_count", default: 0
     t.integer "reviews_count", default: 0, null: false
     t.string "slug"
     t.string "source"
@@ -251,6 +263,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_230611) do
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "parts", "recipes"
   add_foreign_key "push_subscriptions", "users"
+  add_foreign_key "ratings", "recipes"
+  add_foreign_key "ratings", "users"
   add_foreign_key "recipe_images", "recipes"
   add_foreign_key "recipe_images", "users"
   add_foreign_key "relationships", "users"

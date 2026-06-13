@@ -4,10 +4,15 @@
   margin-bottom: 20px;
   overflow-x: hidden;
   .recipe-card-stats{
-    height: 37px;
+    height: 62px;
+    border-bottom: 1px solid $gray;
+    margin-bottom: 1rem;
+    .nav-buttons {
+      height: 27px;
+    }
   }
   .card-body {
-    height: 310px;
+    height: 296px;
   }
   .description {
     height: 6rem;

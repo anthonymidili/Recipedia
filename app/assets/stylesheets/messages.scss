@@ -1,4 +1,5 @@
 .callout {
+  border-radius: var(--bs-border-radius);
   &.alert {
     background-color: $red-dark;
     color: $white;

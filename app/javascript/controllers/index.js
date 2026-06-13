@@ -13,17 +13,20 @@ application.register("import-status", ImportStatusController)
 import InfiniteScrollController from "./infinite_scroll_controller"
 application.register("infinite-scroll", InfiniteScrollController)
 
+import IngredientsController from "./ingredients_controller"
+application.register("ingredients", IngredientsController)
+
 import OcrController from "./ocr_controller"
 application.register("ocr", OcrController)
 
 import PushNotificationsController from "./push_notifications_controller"
 application.register("push-notifications", PushNotificationsController)
 
-import WakeLockController from "./wake_lock_controller"
-application.register("wake-lock", WakeLockController)
+import RatingController from "./rating_controller"
+application.register("rating", RatingController)
 
 import StepsController from "./steps_controller"
 application.register("steps", StepsController)
 
-import IngredientsController from "./ingredients_controller"
-application.register("ingredients", IngredientsController)
+import WakeLockController from "./wake_lock_controller"
+application.register("wake-lock", WakeLockController)
