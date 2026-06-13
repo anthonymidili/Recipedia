@@ -28,27 +28,30 @@
           = links_to_categories(@recipe)
     .row
       .col-12
-        .form-check.form-switch.switch-container{data: { controller: "wake-lock" }}
+        .mb-3.form-check.form-switch.switch-container{data: { controller: "wake-lock" }}
           %input#keep-awake.form-check-input.wake-lock-toggle{type: "checkbox", 
           data: { action: "change->wake-lock#toggle", "wake-lock-target": "checkbox" }}
           %label.form-check-label{for: "keep-awake"} Keep screen awake
+  .row.mb-4
+    .col-12
+      .social-header-card.hide-on-print
+        .social-header-actions
+          .likes-container
+            - if user_signed_in? && !is_author?(@recipe.user)
+              = render 'recipes/favor_form', recipe: @recipe
+            - elsif !user_signed_in?
+              = link_to log_in_user_recipe_path(@recipe.user.slug, @recipe.slug), class: 'favor_form_button' do
+                %i.gray-text.far.fa-heart
+            %div{id: "recipe_likes_count_#{@recipe.id}"}
+              = render 'recipes/likes_count', recipe: @recipe
+          
+          .reviews-container
+            = link_to user_recipe_path(@recipe.user.slug, @recipe.slug, anchor: "reviews_header") do
+              = render 'reviews/count', recipe: @recipe
+        %div
+          = render 'ratings/widget', recipe: @recipe
   .row
     .col-12
-      .hide-on-print
-        %h3
-          %nav.nav
-            .nav-link
-              - if user_signed_in? && !is_author?(@recipe.user)
-                = render 'recipes/favor_form', recipe: @recipe
-              - elsif !user_signed_in?
-                = link_to log_in_user_recipe_path(@recipe.user.slug, @recipe.slug), class: 'favor_form_button' do
-                  %i.gray-text.far.fa-heart
-            .nav-link
-              %div{id: "recipe_likes_count_#{@recipe.id}"}
-                = render 'recipes/likes_count', recipe: @recipe
-            .nav-link
-              = link_to user_recipe_path(@recipe.user.slug, @recipe.slug, anchor: "reviews_header") do
-                = render 'reviews/count', recipe: @recipe
       %h1.center-on-print= @recipe.name
   .row.mb-3
     .col-md-7.col-print-8

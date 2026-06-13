@@ -1,0 +1,95 @@
+// app/assets/stylesheets/ratings.scss
+
+/* Ratings Widget */
+.rating-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rating-stars {
+  display: flex;
+}
+.star-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  color: #ccc;
+  transition: color 0.2s, transform 0.2s;
+  outline: none;
+
+  &.active-star {
+    color: #f5b301;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+.rating-info {
+  font-size: 14px;
+}
+
+/* Recipe Card Ratings */
+.recipe-card-rating {
+  text-align: right;
+  font-size: 0.9em;
+  margin-top: 5px;
+
+  .star-display {
+    font-size: 18px;
+    color: #ccc;
+    &.active-star {
+      color: #f5b301 !important;
+    }
+  }
+
+  strong {
+    margin-left: 5px;
+  }
+}
+
+/* Social Header on Show Page */
+.social-header-card {
+  @extend .callout;
+  padding: 15px 25px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.social-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+
+  .likes-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.25em;
+
+    /* Collapse the entire container if it has no interactive elements */
+    &:not(:has(a)):not(:has(form)) {
+      display: none;
+    }
+  }
+
+  /* Collapse the likes count div if it is empty so it doesn't trigger the 8px gap */
+  div[id^="recipe_likes_count_"]:not(:has(*)) {
+    display: none;
+  }
+
+  .reviews-container {
+    font-size: 1.25em;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}

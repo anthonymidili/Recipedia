@@ -26,20 +26,21 @@ class DefaultTest < ActiveSupport::TestCase
     assert_equal part3.id, parts.last.id
   end
 
-  test "Ingredient default scope orders by created_at asc" do
+  test "Ingredient default scope orders by ingredient_order asc" do
     recipe = recipes(:one)
     part = Part.create!(recipe: recipe, name: "Test Part")
 
-    ingredient1 = Ingredient.create!(recipe: recipe, part: part, item: "First", created_at: 3.days.ago)
-    ingredient2 = Ingredient.create!(recipe: recipe, part: part, item: "Second", created_at: 2.days.ago)
-    ingredient3 = Ingredient.create!(recipe: recipe, part: part, item: "Third", created_at: 1.day.ago)
+    ingredient1 = Ingredient.create!(recipe: recipe, part: part, item: "First", ingredient_order: 3)
+    ingredient2 = Ingredient.create!(recipe: recipe, part: part, item: "Second", ingredient_order: 1)
+    ingredient3 = Ingredient.create!(recipe: recipe, part: part, item: "Third", ingredient_order: 2)
 
     ingredients = Ingredient.where(id: [ ingredient1.id, ingredient2.id, ingredient3.id ])
 
-    # Should be ordered oldest first
-    assert_equal ingredient1.id, ingredients.first.id
-    assert_equal ingredient3.id, ingredients.last.id
+    # Should be ordered by ingredient_order
+    assert_equal ingredient2.id, ingredients.first.id
+    assert_equal ingredient1.id, ingredients.last.id
   end
+
 
   test "Step default scope orders by step_order asc" do
     recipe = recipes(:one)

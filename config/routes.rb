@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :recipes, only: [ :show, :edit, :update, :destroy ], path: "", param: :slug do
       resources :reviews, only: [ :show, :create, :edit, :update, :destroy ]
       resources :recipe_images, only: [ :new, :create, :destroy ]
+      resources :ratings, only: [ :create ]
       member do
         get :log_in
         get :likes
