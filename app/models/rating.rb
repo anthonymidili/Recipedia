@@ -23,5 +23,6 @@ class Rating < ApplicationRecord
       average_rating: recipe.ratings.average(:score).to_f.round(1),
       ratings_count: recipe.ratings.count
     )
+    recipe.touch
   end
 end
