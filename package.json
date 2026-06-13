@@ -21,7 +21,7 @@
     "bootstrap-icons": "^1.13.1",
     "cocoon-js": "^0.0.5",
     "coffeescript": "^2.7.0",
-    "esbuild": "^0.28.0",
+    "esbuild": "^0.28.1",
     "ilyabirman-likely": "^3.2.0",
     "jquery": "^4.0.0",
     "postcss": "^8.5.15",
