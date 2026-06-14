@@ -30,7 +30,7 @@
   .row
     .col-12.mb-3
       .autolinks= simple_format(truncate(user.info.body, length: 120))
-  - if is_site_admin? && !user_is_site_admin?(user)
+  - if is_site_admin? && !is_site_admin?(user)
     .col-12.mb-3
       = link_to "Permanently Delete User", user_path(user),
       class: "btn btn-danger btn-sm",

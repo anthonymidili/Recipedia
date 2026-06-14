@@ -3,20 +3,7 @@ module UsersHelper
     user == current_user
   end
 
-  def is_site_admin?
-    @is_site_admin ||=
-      if user_signed_in? && current_user.email == ENV.fetch("SITE_ADMIN", false)
-        true
-      else
-        false
-      end
-  end
-
-  def user_is_site_admin?(user)
-    if user_signed_in? && user.email == ENV.fetch("SITE_ADMIN", false)
-      true
-    else
-      false
-    end
+  def is_site_admin?(user = current_user)
+    user.present? && user.email == ENV.fetch("SITE_ADMIN", false)
   end
 end
