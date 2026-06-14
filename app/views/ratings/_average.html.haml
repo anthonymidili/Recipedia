@@ -1,0 +1,13 @@
+= turbo_frame_tag "recipe_average_rating_#{recipe.id}" do
+  .rating-widget
+    .rating-stars
+      - 5.times do |i|
+        %span.star-button{ class: ((i + 1) <= rating_display_score(recipe) ? 'active-star' : 'inactive-star'), style: "cursor: default;" }
+          ★
+    .rating-info
+      %div
+        - if recipe.ratings_count > 0
+          %strong= recipe.average_rating.to_f.round(1)
+          %span.text-muted (#{pluralize(recipe.ratings_count, 'vote')})
+        - else
+          %span.text-muted No ratings yet

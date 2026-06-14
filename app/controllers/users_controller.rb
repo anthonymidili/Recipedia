@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if is_site_admin? && !user_is_site_admin?(@user)
+    if is_site_admin? && !is_site_admin?(@user)
       @user.destroy
       respond_to do |format|
         format.turbo_stream {

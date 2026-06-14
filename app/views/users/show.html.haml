@@ -35,7 +35,7 @@
                 Favorites:
                 = @user.favorite_recipes.count
           .autolinks= simple_format(@user.info.body) if @user.info
-- if @user == current_user && @user.recipes.by_unpublished.any? || is_site_admin? && @user.recipes.by_unpublished.any?
+- if (is_author?(@user) || is_site_admin?) && @user.recipes.by_unpublished.any?
   .row
     .col-12
       %h3#drafts Unpublished Drafts

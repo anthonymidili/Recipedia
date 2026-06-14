@@ -31,9 +31,6 @@ class RecipesController < ApplicationController
         }
       }
     end
-
-    # Prevent CDN/browser caching of index page
-    # expires_now
   end
 
   # GET /recipes/1
@@ -43,6 +40,7 @@ class RecipesController < ApplicationController
       @recipe_image = @recipe.recipe_images.find_by(id: params[:image]) || @recipe.recipe_images.first
     end
     @review = @recipe.reviews.new
+    @user_rating = current_user&.find_rating(@recipe)
 
     respond_to do |format|
       format.turbo_stream do
@@ -244,6 +242,7 @@ private
     user = User.find_by!(slug: params[:username])
     @recipe = user.recipes.includes(
       :user,
+      :ratings,
       parts: [ :ingredients, :steps ],
       reviews: [ user: [ avatar_attachment: :blob ] ],
       recipe_images: [ :user, image_attachment: :blob ]

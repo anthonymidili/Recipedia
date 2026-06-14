@@ -3,6 +3,15 @@
   background-color: $light-background;
   margin-bottom: 20px;
   overflow-x: hidden;
+  .card-img-top {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+  .placeholder-img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
   .recipe-card-stats{
     height: 73px;
     border-bottom: 1px solid $gray;

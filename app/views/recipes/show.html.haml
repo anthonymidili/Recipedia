@@ -49,7 +49,7 @@
             = link_to user_recipe_path(@recipe.user.slug, @recipe.slug, anchor: "reviews_header") do
               = render 'reviews/count', recipe: @recipe
         %div
-          = render 'ratings/widget', recipe: @recipe
+          = render 'ratings/average', recipe: @recipe
   .row
     .col-12
       %h1.center-on-print= @recipe.name
@@ -132,4 +132,4 @@
       .col-12
         %ul.nav-links
           %li= link_to 'All Recipes', recipes_path
-    = render 'reviews/reviews', recipe: @recipe, review: @review
+    = render 'reviews/reviews', recipe: @recipe, review: @review, user_rating: @user_rating
