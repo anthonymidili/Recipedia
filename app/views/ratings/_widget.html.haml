@@ -1,19 +1,14 @@
 = turbo_frame_tag "recipe_rating_widget" do
-  - user_rating = user_signed_in? ? recipe.ratings.find_by(user: current_user) : nil
-  - display_score = user_rating ? user_rating.score : recipe.average_rating.to_f.round
-  .rating-widget{ data: { controller: "rating", current_score: display_score } }
+  .rating-widget{ data: { controller: "rating", current_score: rating_display_score(recipe, user_rating) } }
     .rating-stars
-      - can_rate = user_signed_in? && current_user != recipe.user
       - 5.times do |i|
-        - score = i + 1
-        - is_active = score <= display_score
-        - if can_rate
+        - if can_rate_recipe?(recipe)
           = form_tag "/recipes/#{recipe.user.slug}/#{recipe.slug}/ratings", method: :post, style: "display: inline;" do
-            = hidden_field_tag :score, score
-            %button.star-button{ type: "submit", class: (is_active ? 'active-star' : 'inactive-star'), data: { rating_target: "star", score: score, action: "mouseenter->rating#hover mouseleave->rating#leave" } }
+            = hidden_field_tag :score, i + 1
+            %button.star-button{ type: "submit", class: ((i + 1) <= rating_display_score(recipe, user_rating) ? 'active-star' : 'inactive-star'), data: { rating_target: "star", score: i + 1, action: "mouseenter->rating#hover mouseleave->rating#leave" } }
               ★
         - else
-          %span.star-button{ class: (is_active ? 'active-star' : 'inactive-star'), style: "cursor: default;" }
+          %span.star-button{ class: ((i + 1) <= rating_display_score(recipe, user_rating) ? 'active-star' : 'inactive-star'), style: "cursor: default;" }
             ★
 
     .rating-info

@@ -43,6 +43,7 @@ class RecipesController < ApplicationController
       @recipe_image = @recipe.recipe_images.find_by(id: params[:image]) || @recipe.recipe_images.first
     end
     @review = @recipe.reviews.new
+    @user_rating = current_user&.find_rating(@recipe)
 
     respond_to do |format|
       format.turbo_stream do

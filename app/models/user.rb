@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :categories
   has_many :recipes
   has_many :reviews, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_many :imports, dependent: :destroy
   has_many :push_subscriptions, dependent: :destroy
 
@@ -75,6 +76,10 @@ class User < ApplicationRecord
 
   def find_favoritism(recipe)
     favoritisms.find_by(recipe: recipe)
+  end
+
+  def find_rating(recipe)
+    ratings.find_by(recipe: recipe)
   end
 
   def favorite_recipes
