@@ -1,18 +1,8 @@
 = turbo_frame_tag dom_id(review) do
   .callout
     .row.mb-1
-      .col-8
-        = link_to review.user, class: 'user-badge', data: { turbo_frame: "_top" } do
-          = image_tag avatar_image(review.user.avatar, 35) if review.user.avatar.attached?
-          = review.user.username
-        - if user_rating = user_rating_from_recipe(review.recipe, review.user)
-          %span.review-stars.me-1
-            - 5.times do |i|
-              %span.star-button{ class: ((i + 1) <= user_rating.score ? 'active-star' : 'inactive-star'), style: "font-size: 0.9em; cursor: default;" } ★
-        %span.timestamp
-          posted #{time_ago_in_words(review.created_at)} ago
-      .col-4
-        - if is_author?(review.user)
+      - if is_author?(review.user)
+        .col-12.col-md-4.order-md-2
           %ul.edit_menu
             %li.nav-item
               = link_to edit_user_recipe_review_path(review.recipe.user.slug, review.recipe.slug, review.id), title: 'Edit', class: "nav-link" do
@@ -24,6 +14,16 @@
                 turbo_confirm: 'Are you sure you want to delete your review?' },
               remote: true, class: 'red-text nav-link', title: 'Delete' do
                 %i.fas.fa-trash
+      .col-12.col-md-8.order-md-1
+        = link_to review.user, class: 'user-badge', data: { turbo_frame: "_top" } do
+          = image_tag avatar_image(review.user.avatar, 35) if review.user.avatar.attached?
+          = review.user.username
+        - if user_rating = user_rating_from_recipe(review.recipe, review.user)
+          %span.review-stars.me-1
+            - 5.times do |i|
+              %span.star-button{ class: ((i + 1) <= user_rating.score ? 'active-star' : 'inactive-star'), style: "font-size: 0.9em; cursor: default;" } ★
+        %span.timestamp
+          posted #{time_ago_in_words(review.created_at)} ago
     .row
       .col-12
         .trix-img-max
