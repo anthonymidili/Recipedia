@@ -3,7 +3,9 @@
     .card.recipe-card{id: "recipe_#{recipe.id}", data: { recipe_id: recipe.id }}
       = link_to user_recipe_path(recipe.user.slug, recipe.slug) do
         - if recipe.recipe_images.try(:first).try(:image).try(:attached?)
-          = image_tag banner_image(recipe.recipe_images.first.image), class: "card-img-top"
+          = image_tag banner_image(recipe.recipe_images.first.image), 
+          class: "card-img-top placeholder-img", 
+          style: "background-image: url('#{image_path('default_recipe_image.svg')}');"
         - else
           = image_tag('default_recipe_image.svg', class: "card-img-top")
       .card-body
