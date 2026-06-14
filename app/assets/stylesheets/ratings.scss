@@ -34,20 +34,14 @@
 
 /* Recipe Card Ratings */
 .recipe-card-rating {
-  text-align: right;
-  font-size: 0.9em;
   margin-top: 5px;
 
-  .star-display {
-    font-size: 18px;
-    color: #ccc;
-    &.active-star {
-      color: #f5b301 !important;
-    }
+  .rating-widget {
+    justify-content: flex-end;
   }
 
-  strong {
-    margin-left: 5px;
+  .star-button {
+    font-size: 18px;
   }
 }
 

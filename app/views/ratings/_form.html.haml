@@ -1,0 +1,14 @@
+= turbo_frame_tag "recipe_rating_form_#{recipe.id}" do
+  - if can_rate_recipe?(recipe)
+    .rating-widget{ data: { controller: "rating", current_score: (user_rating&.score || 0) } }
+      .rating-stars
+        %strong{style: "margin-right: 10px;"} Rate this recipe:
+        - 5.times do |i|
+          = form_tag "/recipes/#{recipe.user.slug}/#{recipe.slug}/ratings", method: :post, style: "display: inline;" do
+            = hidden_field_tag :score, i + 1
+            %button.star-button{ type: "submit", class: ((i + 1) <= (user_rating&.score || 0) ? 'active-star' : 'inactive-star'), data: { rating_target: "star", score: i + 1, action: "mouseenter->rating#hover mouseleave->rating#leave" } }
+              ★
+      - if user_rating
+        .rating-info
+          %div
+            %small.text-muted= "Your rating: #{user_rating.score} ★"

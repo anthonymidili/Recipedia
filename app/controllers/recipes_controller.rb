@@ -31,9 +31,6 @@ class RecipesController < ApplicationController
         }
       }
     end
-
-    # Prevent CDN/browser caching of index page
-    # expires_now
   end
 
   # GET /recipes/1
@@ -245,6 +242,7 @@ private
     user = User.find_by!(slug: params[:username])
     @recipe = user.recipes.includes(
       :user,
+      :ratings,
       parts: [ :ingredients, :steps ],
       reviews: [ user: [ avatar_attachment: :blob ] ],
       recipe_images: [ :user, image_attachment: :blob ]

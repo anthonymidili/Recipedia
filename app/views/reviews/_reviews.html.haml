@@ -7,6 +7,8 @@
 
     - if user_signed_in?
       .callout
+        = render 'ratings/form', recipe: recipe, user_rating: user_rating
+        %hr
         = turbo_frame_tag "new_review" do
           = render 'reviews/form', recipe: recipe, review: review
     - else

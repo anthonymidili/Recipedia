@@ -22,12 +22,7 @@
                   = render "reviews/count", recipe: recipe
               - if recipe.ratings_count > 0
                 .recipe-card-rating
-                  - 5.times do |i|
-                    - score = i + 1
-                    - active_class = score <= recipe.average_rating.to_f.round ? "active-star" : "inactive-star"
-                    %span.star-display{ class: active_class } ★
-                  %strong= recipe.average_rating.to_f.round(1)
-                  %span.text-muted (#{recipe.ratings_count})
+                  = render 'ratings/average', recipe: recipe
         .row
           .col-12
             = link_to recipe.user do

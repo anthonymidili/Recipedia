@@ -10,4 +10,8 @@ module RatingsHelper
   def can_rate_recipe?(recipe)
     user_signed_in? && !is_author?(recipe.user)
   end
+
+  def user_rating_from_recipe(recipe, user)
+    recipe.ratings.to_a.find { |r| r.user_id == user.id }
+  end
 end

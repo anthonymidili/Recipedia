@@ -5,6 +5,10 @@
         = link_to review.user, class: 'user-badge', data: { turbo_frame: "_top" } do
           = image_tag avatar_image(review.user.avatar, 35) if review.user.avatar.attached?
           = review.user.username
+        - if user_rating = user_rating_from_recipe(review.recipe, review.user)
+          %span.review-stars.me-1
+            - 5.times do |i|
+              %span.star-button{ class: ((i + 1) <= user_rating.score ? 'active-star' : 'inactive-star'), style: "font-size: 0.9em; cursor: default;" } ★
         %span.timestamp
           posted #{time_ago_in_words(review.created_at)} ago
       .col-4
