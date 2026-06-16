@@ -268,9 +268,9 @@ a.gray-text:hover {
 
 ul.edit_menu {
   @extend .nav, .justify-content-end;
-  // @include breakpoint(medium) {
-  //   justify-content: flex-end;
-  // }
+  @include media-breakpoint-down(md) {
+    margin-bottom: 10px;
+  }
 }
 
 .nav-btn {
