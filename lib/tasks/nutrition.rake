@@ -19,7 +19,7 @@ namespace :nutrition do
         
         if result && result[:items].present?
           success_count += 1
-          puts "  -> Success: #{result[:calories].round} calories from #{result[:serving_count]} ingredients."
+          puts "  -> Success: Fetched nutrition data from #{result[:serving_count]} ingredients."
         else
           failure_count += 1
           puts "  -> Skipped: No ingredients or API returned no data."

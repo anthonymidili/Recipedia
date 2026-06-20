@@ -54,7 +54,6 @@ export default class extends Controller {
       return
     }
 
-    const calories = Math.round(data.calories)
     const fatTotal = this.formatNum(data.fat_total_g)
     const fatSaturated = this.formatNum(data.fat_saturated_g)
     const cholesterol = this.formatNum(data.cholesterol_mg)
@@ -62,7 +61,6 @@ export default class extends Controller {
     const carbsTotal = this.formatNum(data.carbohydrates_total_g)
     const fiber = this.formatNum(data.fiber_g)
     const sugar = this.formatNum(data.sugar_g)
-    const protein = this.formatNum(data.protein_g)
     const potassium = this.formatNum(data.potassium_mg)
 
     // Daily values based on a 2,000 calorie diet
@@ -84,11 +82,7 @@ export default class extends Controller {
         </div>
         <div class="nutrition-label__divider nutrition-label__divider--thick"></div>
 
-        <div class="nutrition-label__row nutrition-label__row--calories">
-          <span class="nutrition-label__label--bold">Calories</span>
-          <span class="nutrition-label__value--bold">${calories}</span>
-        </div>
-        <div class="nutrition-label__divider nutrition-label__divider--medium"></div>
+        <div class="nutrition-label__divider nutrition-label__divider--thick"></div>
 
         <div class="nutrition-label__dv-header">
           <span>% Daily Value*</span>
@@ -133,12 +127,6 @@ export default class extends Controller {
 
         <div class="nutrition-label__row nutrition-label__row--indented">
           <span>Total Sugars ${sugar}g</span>
-          <span class="nutrition-label__dv"></span>
-        </div>
-        <div class="nutrition-label__divider"></div>
-
-        <div class="nutrition-label__row">
-          <span><strong>Protein</strong> ${protein}g</span>
           <span class="nutrition-label__dv"></span>
         </div>
         <div class="nutrition-label__divider nutrition-label__divider--thick"></div>
