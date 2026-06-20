@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       member do
         get :log_in
         get :likes
+        get :nutrition
       end
     end
   end

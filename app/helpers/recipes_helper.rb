@@ -90,6 +90,23 @@ module RecipesHelper
       }
     end
 
+    # Include nutrition data in structured data if it has been fetched
+    nutrition = recipe.nutrition_data
+    if nutrition.present? && nutrition["calories"].to_f > 0
+      json_ld[:nutrition] = {
+        "@type": "NutritionInformation",
+        "calories": "#{nutrition["calories"].to_f.round} calories",
+        "fatContent": "#{nutrition["fat_total_g"].to_f.round(1)} g",
+        "saturatedFatContent": "#{nutrition["fat_saturated_g"].to_f.round(1)} g",
+        "cholesterolContent": "#{nutrition["cholesterol_mg"].to_f.round(1)} mg",
+        "sodiumContent": "#{nutrition["sodium_mg"].to_f.round(1)} mg",
+        "carbohydrateContent": "#{nutrition["carbohydrates_total_g"].to_f.round(1)} g",
+        "fiberContent": "#{nutrition["fiber_g"].to_f.round(1)} g",
+        "sugarContent": "#{nutrition["sugar_g"].to_f.round(1)} g",
+        "proteinContent": "#{nutrition["protein_g"].to_f.round(1)} g"
+      }
+    end
+
     tag.script(type: "application/ld+json") do
       json_ld.to_json.html_safe
     end

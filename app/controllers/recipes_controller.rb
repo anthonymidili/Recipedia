@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :edit,
   :update, :destroy, :log_in, :choice, :import, :import_status ]
-  before_action :set_recipe, only: [ :show, :edit, :update, :destroy, :log_in, :likes ]
+  before_action :set_recipe, only: [ :show, :edit, :update, :destroy, :log_in, :likes, :nutrition ]
   before_action :deny_access!,
   unless: -> { is_author?(@recipe.user) || is_site_admin? }, only: [ :edit, :update, :destroy ]
   before_action :set_category, only: [ :new, :create, :edit, :update ]
@@ -182,6 +182,13 @@ class RecipesController < ApplicationController
   end
 
   def likes
+  end
+
+  def nutrition
+    render json: NutritionService.fetch_for_recipe(@recipe)
+  rescue => e
+    Rails.logger.error "Nutrition fetch failed: #{e.message}"
+    render json: { error: "Unable to fetch nutrition data. Please try again later." }, status: :service_unavailable
   end
 
   def import_status

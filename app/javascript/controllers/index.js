@@ -13,6 +13,9 @@ application.register("import-status", ImportStatusController)
 import InfiniteScrollController from "./infinite_scroll_controller"
 application.register("infinite-scroll", InfiniteScrollController)
 
+import NutritionController from "./nutrition_controller"
+application.register("nutrition", NutritionController)
+
 import IngredientsController from "./ingredients_controller"
 application.register("ingredients", IngredientsController)
 

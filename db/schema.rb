@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_13_162634) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_20_141249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -186,6 +186,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_13_162634) do
     t.datetime "created_at", null: false
     t.integer "favoritisms_count", default: 0, null: false
     t.citext "name"
+    t.jsonb "nutrition_data"
     t.boolean "published", default: false
     t.integer "ratings_count", default: 0
     t.integer "reviews_count", default: 0, null: false

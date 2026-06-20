@@ -127,6 +127,15 @@
                     .float-start.red-text.me-1= "#{index += 1}."
                     .trix-img-max
                       = step.description
+  - if @recipe.ingredients.any?
+    .row
+      .col-12
+        .mb-3.nutrition-section{data: { controller: "nutrition", nutrition_url: nutrition_user_recipe_path(@recipe.user.slug, @recipe.slug) }}
+          %button.nutrition-toggle-btn{data: { nutrition_target: "button", action: "click->nutrition#toggle" }}
+            %i.fas.fa-chart-pie
+            %span{data: { nutrition_target: "buttonText" }} Show Nutrition Facts
+            %span.nutrition-spinner.hidden{data: { nutrition_target: "spinner" }}
+          .nutrition-content{data: { nutrition_target: "content" }}
   .hide-on-print
     .row
       .col-12
