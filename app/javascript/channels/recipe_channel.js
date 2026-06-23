@@ -2,10 +2,11 @@ import consumer from "./consumer"
 
 document.addEventListener('turbo:load', function() {
   // Find all recipes on page and subscribe to the channel.
-  var recipes = document.querySelectorAll("[id^='recipe_']");
+  var recipes = document.querySelectorAll("[data-recipe-id]");
   recipes.forEach(function(recipe) {
     var recipe_id = recipe.getAttribute('data-recipe-id');
-    consumer.subscriptions.create({ channel: "RecipeChannel", recipe: recipe_id }, {
+    if (recipe_id) {
+      consumer.subscriptions.create({ channel: "RecipeChannel", recipe: recipe_id }, {
       connected() {
         // Called when the subscription is ready for use on the server.
       },
@@ -27,5 +28,6 @@ document.addEventListener('turbo:load', function() {
         likes_count.innerHTML = data.likes_partial;
       }
     });
+    }
   });
 });
