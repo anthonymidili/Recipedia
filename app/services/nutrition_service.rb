@@ -14,8 +14,15 @@ class NutritionService
     items = []
 
     ingredients.each do |ingredient|
+      next if ingredient.quantity.blank?
+
+      # Remove text inside parentheses (e.g. "(thinly sliced)") which confuses the API
+      item_clean = ingredient.item.gsub(/\s*\([^)]*\)/, '').strip
+      # If the ENTIRE item was in parentheses, just remove the parenthesis characters instead
+      item_clean = ingredient.item.delete('()').strip if item_clean.blank?
+
       # Build the natural language query: "1 cup flour", "2 large eggs", etc.
-      query = [ingredient.quantity, ingredient.item].compact_blank.join(" ")
+      query = [ingredient.quantity, item_clean].compact_blank.join(" ")
       next if query.blank?
 
       result = query_api(query)

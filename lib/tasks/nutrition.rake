@@ -37,4 +37,11 @@ namespace :nutrition do
     puts "Successfully fetched: #{success_count}"
     puts "Failed/Skipped: #{failure_count}"
   end
+
+  desc "Force recalculate all nutrition facts"
+  task recalculate: :environment do
+    puts "Clearing existing nutrition data..."
+    Recipe.update_all(nutrition_data: nil)
+    Rake::Task["nutrition:backfill"].invoke
+  end
 end
