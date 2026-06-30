@@ -8,6 +8,7 @@
 services:
   web:
     build: .
+    image: recipedia:latest
     command: bundle exec passenger start
     environment:
       RAILS_ENV: development
@@ -16,6 +17,7 @@ services:
       RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
       RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-5}
       LD_PRELOAD: ""
+      CHOKIDAR_USEPOLLING: "true"
     volumes:
       - .:/app
       - /app/node_modules
@@ -28,7 +30,7 @@ services:
     tty: true
 
   worker:
-    build: .
+    image: recipedia:latest
     command: bundle exec sidekiq -C config/sidekiq.yml
     environment:
       RAILS_ENV: development
@@ -37,6 +39,7 @@ services:
       RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
       RAILS_MAX_THREADS: ${RAILS_MAX_THREADS:-5}
       LD_PRELOAD: ""
+      CHOKIDAR_USEPOLLING: "true"
     volumes:
       - .:/app
       - /app/node_modules
@@ -47,7 +50,7 @@ services:
       - web
 
   js:
-    build: .
+    image: recipedia:latest
     command: sh -c "yes | yarn build:watch"
     environment:
       RAILS_ENV: development
@@ -61,7 +64,7 @@ services:
       - web
 
   css:
-    build: .
+    image: recipedia:latest
     command: yarn build:css:watch
     environment:
       RAILS_ENV: development
