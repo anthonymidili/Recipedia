@@ -17,7 +17,7 @@ gem "jbuilder", "~> 2.5"
 # Speed up boot time by caching expensive operations
 gem "bootsnap", require: false
 
-gem "haml-rails", "~> 3.0.0"
+gem "haml-rails", "~> 3.1.0"
 gem "kaminari", "~> 1.2.0"
 # For webpacker, you must use the cocoon gem with the yarn package cocoon-js.
 gem "cocoon", "~> 1.2.10"

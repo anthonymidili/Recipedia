@@ -16,11 +16,11 @@ WORKDIR /app
 
 # Install Bundler and Ruby Gems
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler:4.0.16 && bundle install --jobs 4 --retry 3
+RUN gem install bundler:4.0.19 && bundle install --jobs 4 --retry 3
 
 # Install JS Dependencies
 COPY package.json yarn.lock .yarnrc.yml ./
-RUN corepack prepare yarn@4.17.1 --activate && yarn install --immutable
+RUN corepack prepare yarn@4.18.0 --activate && yarn install --immutable
 
 # Copy app and precompile assets
 COPY . .
@@ -40,7 +40,7 @@ RUN apt-get update && apt-get install -y \
     libvips42 libvips-tools libjemalloc2 curl ca-certificates gnupg procps \
     nodejs npm \
     && npm install -g corepack \
-    && corepack prepare yarn@4.17.1 --activate \
+    && corepack prepare yarn@4.18.0 --activate \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy bundler config and gems from builder
