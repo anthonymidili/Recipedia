@@ -38,7 +38,7 @@
         .col-12.mb-3
           = label_tag :output, t("convert_image.output"), class: "form-label"
           = text_area_tag :output, nil, class: "form-control", rows: 10,
-          data: { ocr_target: 'imageDescription' }, class: "form-control"
+          data: { ocr_target: 'imageDescription' }
     .row
       .col-12.mb-3
         = f.label :description, class: "form-label", for: "recipeDescription"
