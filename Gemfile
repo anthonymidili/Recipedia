@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "4.0.6"
+ruby "4.0.7"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 8.1.1"
@@ -23,7 +23,7 @@ gem "kaminari", "~> 1.2.0"
 gem "cocoon", "~> 1.2.10"
 gem "devise", "~> 5.0.2"
 # https://github.com/kpumuk/meta-tags to make site search engine friendly.
-gem "meta-tags", "~> 2.23.0"
+gem "meta-tags", "~> 2.24.0"
 # https://github.com/kjvarga/sitemap_generator
 # run [rake sitemap:refresh] in production
 gem "sitemap_generator"
@@ -37,7 +37,7 @@ gem "aws-sdk-s3", require: false
 gem "sidekiq", "~> 8.1"
 gem "sidekiq-scheduler", "~> 6.0.1"
 # Use Redis for Action Cable
-gem "redis", "~> 5.0"
+gem "redis", "~> 6.0"
 gem "connection_pool", "~> 3.0.2"
 # CORS support for cross-domain asset requests
 # gem "rack-cors"
